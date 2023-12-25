@@ -1,0 +1,26 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.form-item__input {
+    position: relative;
+        
+    &::after {
+        content: var(--substring);
+        pointer-events: none;
+        color: variables.$color-grey;
+        background: variables.$color-white;
+        bottom: 12px;
+        position: absolute;
+        right: 10px;
+    }
+
+    .form-item__substring {
+        display: block;
+        position: absolute;
+        top: 28px;
+        right: 17px;
+        color: #8F8F8F;
+        background-color: #ffffff;
+        padding: 2px;
+    }
+}

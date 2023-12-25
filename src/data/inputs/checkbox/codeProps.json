@@ -1,0 +1,17 @@
+{
+    "item": {
+        "default": {
+            "id": 0,
+            "value": true,
+            "isHTML": false,
+            "required": true,
+            "title": "Выбрать значение",
+            "key": "checkboxKey"
+        },
+        "type": "Object" 
+    },
+    "disabled": {
+        "default": false,
+        "type": "Boolean"
+    }
+}

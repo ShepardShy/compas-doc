@@ -1,0 +1,28 @@
+{
+    "item": {
+        "default": {
+            "id": 0,
+            "required": true,
+            "substring": "руб.",
+            "type": "text",
+            "title": "Заголовок",
+            "placeholder": "Введите текст",
+            "value": "",
+            "key": "inputKey",
+            "focus": false
+        },
+        "type": "Object"
+    },
+    "mask": {
+        "default": "A###AA###",
+        "type": "String"
+    },
+    "disabled": {
+        "default": false,
+        "type": "Boolean"
+    },
+    "enabledAutocomplete": {
+        "default": true,
+        "type": "Boolean"
+    }
+}

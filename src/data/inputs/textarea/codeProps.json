@@ -1,0 +1,26 @@
+{
+    "item": {
+        "default": {
+            "id": 0,
+            "required": true,
+            "title": "Заголовок",
+            "placeholder": "Введите текст",
+            "value": "",
+            "key": "textareaKey",
+            "focus": false
+        },
+        "type": "Object"
+    },
+    "mask": {
+        "default": null,
+        "type": "String"
+    },
+    "disabled": {
+        "default": false,
+        "type": "Boolean"
+    },
+    "isUseEnter": {
+        "default": true,
+        "type": "Boolean"
+    }
+}

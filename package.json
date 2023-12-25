@@ -1,0 +1,25 @@
+{
+  "name": "compasdoc",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@mahdikhashan/vue3-click-outside": "^0.1.2",
+    "@vuepic/vue-datepicker": "^7.4.0",
+    "maska": "^2.1.10",
+    "vue": "^3.3.8",
+    "vue-the-mask": "^0.11.1",
+    "vuedraggable": "^4.1.0"
+  },
+  "devDependencies": {
+    "@originjs/vite-plugin-commonjs": "^1.0.3",
+    "@vitejs/plugin-vue": "^4.5.0",
+    "sass": "^1.69.5",
+    "vite": "^5.0.10"
+  }
+}
