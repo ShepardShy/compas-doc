@@ -5,7 +5,7 @@
             "required": true,
             "title": "Заголовок",
             "placeholder": "Введите текст",
-            "value": "",
+            "value": null,
             "key": "textareaKey",
             "focus": false
         },
@@ -21,6 +21,10 @@
     },
     "isUseEnter": {
         "default": true,
+        "type": "Boolean"
+    },
+    "isReadOnly": {
+        "default": false,
         "type": "Boolean"
     }
 }

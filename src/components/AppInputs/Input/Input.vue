@@ -1,7 +1,7 @@
 <template>
     <FormItem 
         class="form-item__input" 
-        :class="props.item.required ? 'form-item_required' : ''" 
+        :required="props.item.required"
         :style="`--substring: ${props.item.substring != undefined ? props.item.substring : ''}`"
     >
         <FormLabel
@@ -9,7 +9,14 @@
             :title="props.item.title"
         />
 
+        <FormValue 
+            v-if="props.isReadOnly"
+            :value="props.item.value"
+            :isHTML="false"
+        />
+
         <InputField
+            v-else
             ref="inputRef"
             :item="props.item"
             :mask="props.mask"
@@ -32,6 +39,7 @@
     import InputField from './InputField/InputField.vue';
     import FormItem from '@/components/AppForm/FormItem/FormItem.vue';
     import FormLabel from '@/components/AppForm/FormLabel/FormLabel.vue';
+    import FormValue from '@/components/AppForm/FormValue/FormValue.vue';
 
     const inputRef = ref(null)
 
@@ -59,6 +67,10 @@
         mask: {
             default: null,
             type: String
+        },
+        isReadOnly: {
+            default: false,
+            type: Boolean
         }
     })
 

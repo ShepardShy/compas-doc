@@ -10,7 +10,7 @@
 		:disabled="props.disabled"
 		:placeholder="props.item.placeholder"
 		:autocomplete="props.enabledAutocomplete"
-		@input="(e) => $emit('changeValue', {key: props.item.key, value: e.target.value})"
+		@maska="(e) => $emit('changeValue', {key: props.item.key, value: e.target.value})"
     />
 
     <input

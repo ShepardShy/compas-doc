@@ -10,19 +10,3 @@
         display: none;
     }
 }
-
-.form__item {
-    &.form-item_required {
-        .form-item__title {
-            display: flex;
-            align-items: center;
-
-            &::after {
-                content: url('/public/icons/require.svg');
-                bottom: 5px;
-                position: relative;
-                color: variables.$color-red;
-            }
-        }
-    }
-}

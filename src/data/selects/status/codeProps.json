@@ -1,0 +1,39 @@
+{
+    "item": {
+        "default": {
+            "id": 0,
+            "key": "selectKey",
+            "value": null,
+            "focus": false,
+            "required": false,
+            "title": "Статус",
+            "options": [
+                {
+                    "label": {
+                        "id": 0,
+                        "sort": 0,
+                        "file": null,
+                        "is_hidden": 0,
+                        "field_id": 0,
+                        "color": "#1f4fc6ff",
+                        "text": "Опция 1"
+                    },
+                    "value": 0
+                }
+            ]
+        },
+        "type": "Object"
+    },
+    "isCanCreate": {
+        "default": true,
+        "type": "Boolean"
+    },
+    "isReadOnly": {
+        "default": false,
+        "type": "Boolean"
+    },
+    "isHaveNullOption": {
+        "default": false,
+        "type": "Boolean"
+    }
+}

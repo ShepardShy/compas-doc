@@ -17,4 +17,26 @@
     &.popup__option_active {
         background: variables.$color-hover;
     }
+
+    &.popup__option-sublink {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        justify-content: space-between;
+
+        &.popup__option-sublink_back {
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+
+            .icon__arrow {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    &.popup__option_unhover {
+        &:hover {
+            background: inherit;
+        }
+    }
 }

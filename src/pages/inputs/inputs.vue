@@ -46,5 +46,6 @@
     // Локальный вывод данных в консоль
     const changeValue = (data) => {
         InputProps.item.default.value = data.value
+        console.log(data);
     }
 </script>

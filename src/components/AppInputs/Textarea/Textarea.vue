@@ -1,13 +1,20 @@
 <template>
     <FormItem 
         class="form-item__textarea" 
-        :class="props.item.required ? 'form-item_required' : ''" 
+        :required="props.item.required"
     >
         <FormLabel
             :title="props.item.title"
         />
 
+        <FormValue 
+            v-if="props.isReadOnly"
+            :value="props.item.value"
+            :isHTML="true"
+        />
+
         <TextareaField
+            v-else
             :item="props.item"
             :mask="props.mask"
             :disabled="props.disabled"
@@ -25,6 +32,7 @@
     import TextareaField from './TextareaField/TextareaField.vue';
     import FormItem from '@/components/AppForm/FormItem/FormItem.vue';
     import FormLabel from '@/components/AppForm/FormLabel/FormLabel.vue';
+    import FormValue from '@/components/AppForm/FormValue/FormValue.vue';
 
     const props = defineProps({
         item: {
@@ -50,6 +58,10 @@
         },
         isUseEnter: {
             default: true,
+            type: Boolean
+        },
+        isReadOnly: {
+            default: false,
             type: Boolean
         }
     })

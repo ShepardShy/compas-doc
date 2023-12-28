@@ -1,5 +1,5 @@
 <template>
-    <details class="popup" ref="popupRef" v-click-out-side="() => elementsDOM.hideDetails(popupRef)">
+    <details class="popup" ref="popupRef" v-click-out-side="(event) => clickOutside(event)">
         <summary class="popup__summary">
             <slot name="summary"></slot>
         </summary>
@@ -24,6 +24,16 @@
             type: Boolean
         }
     })
+
+    const emit = defineEmits([
+        'clickOutside',
+    ])
+
+    // Отслеживание вызова клика за пределами компонента
+    const clickOutside = (event) => {
+        emit('clickOutside', event)
+        elementsDOM.hideDetails(popupRef.value)
+    }
 
     defineExpose({
         popupRef

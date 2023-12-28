@@ -1,5 +1,5 @@
 <template>
-    <FormItem class="form__item_datepicker datepicker_range" :class="props.item.required ? 'form__item_required' : ''">
+    <FormItem class="form__item_datepicker datepicker_range" :required="props.item.required">
         <div class="table__item-content_title">
             {{ props.item.title }}
         </div>

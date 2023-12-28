@@ -6,142 +6,22 @@
 
 .status {
     width: max-content;
-    
-    .popup {
-        &[open] {
-            .status__option {
-                .status-option__rect {
+}
+
+.form-item_readonly {
+    &.status {
+        .status__option {
+            &.status__preview {
+                .status-option__rect {   
+                    &::before {
+                        border-radius: 5px;
+                    }
+
                     &::after {
-                        transform: rotate(180deg);    
-                        @include mixins.borderOptions(1px, solid, variables.$color-grey, 5px 0px 0px 5px);
+                        display: none;
                     }
                 }
-            }            
-        }
-
-        .popup__content {
-            top: 30px;
-        }
-    }
-}
-
-.status__option {
-    gap: 5px;
-    display: flex;
-    align-items: center;
-
-
-    &.status__preview {
-        .status-option__rect {   
-            &::before {
-                border-radius: 5px 0px 0px 5px;
             }
-
-            &::after {
-                content: url('/public/icons/selectTriangle.svg');
-                display: flex;
-                justify-content: center;
-                width: 16px;
-                height: 25px;
-                padding: 0px;
-                background-color: variables.$color-white;
-                @include mixins.borderOptions(1px, solid, variables.$color-grey, 0px 5px 5px 0px);
-            }
-        }
-    }
-   
-    .status-option__rect {
-        display: flex;
-        align-items: center;
-        position: relative;
-
-        img {
-            position: absolute;
-            object-fit: contain;
-            width: 25px;
-            height: 100%;
-            left: 0px;
-            top: 0px;
-            border-radius: 5px 0px 0px 5px;
-        }
-
-        &::before {
-            content: '';
-            border-radius: 5px;
-            background-color: var(--backgroundColor);
-            @include mixins.elemResolutionOptions(25px, 25px);
-        }
-    }
-}
-
-.select_status {
-    .select__item {
-        &.select__item_colorpicker {
-            justify-content: space-between;
-        }
-    }
-
-    .table__item-img {
-        img {
-            object-fit: contain;
-        }
-    }
-
-    .select__content {
-        &[open], &.select_open {
-            .select__value {
-                border: none;
-            }
-        }
-
-        summary {
-            gap: 25px;
-        }
-    }
-
-
-    .select__item {
-        padding: 5px 10px;
-        justify-content: flex-start;
-
-        .table__item-img {
-            figcaption {
-                display: none;
-            }
-        }
-    }
-
-    .select__value {
-        grid-template-columns: auto 1fr;
-        grid-gap: 21px;
-        color: var(--colorItem);
-        width: auto;
-        padding: 0px;
-        border: none;
-        background: none;
-        overflow: initial;
-        min-height: auto;
-        border-radius: 0px;
-
-        .table__item-img {
-
-        }
-
-        figcaption {
-            display: grid;
-            place-items: center;
-            border-image: initial;
-            width: 16px;
-            position: absolute;
-            height: 100%;
-            right: -16px;
-            top: 0px;
-            grid-template-columns: auto;
-            grid-gap: 0px;
-            overflow: initial;
-            padding: 0px;
-            background-color: variables.$color-white;
-            @include mixins.borderOptions(1px, solid, variables.$color-grey, 0px 5px 5px 0px);
-        }
+        }        
     }
 }
