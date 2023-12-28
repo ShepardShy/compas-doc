@@ -66,9 +66,8 @@
 .filter__button-save {
     &.button-text {
         margin: 15px;
-        text-decoration: underline;
-        color: variables.$color-grey;
         font-size: 13.5px;
+        text-decoration: underline;
         @include mixins.userSelect($value: none);
     }
 }

@@ -17,7 +17,7 @@
 <script setup>
     import './Filter.scss';
 
-    import { ref, onMounted, provide, onUnmounted } from 'vue'
+    import { ref, onMounted, watch, provide, onUnmounted } from 'vue'
 
     import FilterMenu from './FilterMenu/FilterMenu.vue';
     import FilterHeader from './FilterHeader/FilterHeader.vue';
@@ -57,20 +57,45 @@
         fields.value = await renderScripts('filter', JSON.parse(JSON.stringify(props.fields)))
         document.addEventListener('mousedown', (event) => toggleMenu(event))
 
+        if (saves.value.find(item => item.is_hidden) == undefined) {
+            saves.value.push({
+                id: -1,
+                title: "Фильтр",
+                is_hidden: 1,
+                sort: 0,
+                fields: []
+            })
+        }
+
         let hiddenFilter = saves.value.find(item => item.is_hidden)
+
         for (let field of hiddenFilter.fields) {
             let findedField = fields.value.find(item => item.key == field.key)
             findedField.enabled = true
-            findedField.value = props.tabs ? props.tabs[findedField.key] : null
+            findedField.value = null
         }
 
-        if (props.tabs != undefined && props.tabs.q != undefined) {
-            search.value = props.tabs.q
-        }
+        setTabsFields()
+        activeFields.value = fields.value.filter(field => field.enabled)
+    })
 
+    const setTabsFields = () => {
+        if (props.tabs != null) {
+            for (let field in props.tabs) {
+                let findedField = fields.value.find(item => item.key == field)
+                if (findedField != undefined) {
+                    findedField.enabled = true
+                    findedField.value = props.tabs[field]
+                }
+            }
+
+            if (props.tabs.q != undefined) {
+                search.value = props.tabs.q
+            }
+        }
         activeFields.value = fields.value.filter(field => field.enabled)
         actionFilter({action: 'loadTabs', value: null})
-    })
+    }
 
     // Включение и отключение меню
     const toggleMenu = (event = null) => {
@@ -246,7 +271,7 @@
                 break;
         }
     }
-
+   
     // Действия с сохраненными фильтрами
     const actionSaves = (data) => {
         let findedFilter = null
@@ -450,6 +475,12 @@
     provide('activeFields', activeFields)
 
     onUnmounted(() => {
+        saves.value = []
+        fields.value = []
         document.removeEventListener('mousedown', (event) => toggleMenu(event))
+    })
+
+    watch(() => props.tabs, () => {
+        setTabsFields()
     })
 </script>
