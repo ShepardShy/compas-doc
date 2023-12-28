@@ -10,7 +10,7 @@ export default {
         {
             id: 11,
             name: 'Селект',
-            component: ''
+            component: markRaw(defineAsyncComponent(() => import('@/pages/selects/selects.vue')))
         },
         {
             id: 12,

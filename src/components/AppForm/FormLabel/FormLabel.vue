@@ -5,8 +5,8 @@
 </template>
 
 <script setup>
-    import './InputLabel.scss';
-
+    import './FormLabel.scss';
+    
     const props = defineProps({
         title: {
             default: '',

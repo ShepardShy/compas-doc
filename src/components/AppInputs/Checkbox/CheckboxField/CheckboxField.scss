@@ -42,11 +42,4 @@
             opacity: 0;
         }
     }
-
-    &.form-item__checkbox_disabled {
-        label, .form-item__title {
-            filter: opacity(0.6)
-
-        }
-    }
 }

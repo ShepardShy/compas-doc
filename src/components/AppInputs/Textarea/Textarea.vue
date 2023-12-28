@@ -3,7 +3,7 @@
         class="form-item__textarea" 
         :class="props.item.required ? 'form-item_required' : ''" 
     >
-        <TextareaLabel
+        <FormLabel
             :title="props.item.title"
         />
 
@@ -22,9 +22,9 @@
 <script setup>
     import './Textarea.scss';
 
-    import FormItem from '@/components/AppForm/FormItem/FormItem.vue';
-    import TextareaLabel from './TextareaLabel/TextareaLabel.vue';
     import TextareaField from './TextareaField/TextareaField.vue';
+    import FormItem from '@/components/AppForm/FormItem/FormItem.vue';
+    import FormLabel from '@/components/AppForm/FormLabel/FormLabel.vue';
 
     const props = defineProps({
         item: {

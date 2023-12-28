@@ -23,7 +23,7 @@
                         <IconSettings />
                     </template>
                     <template #content>
-                        <PopupOption @click="() => hideField(field)">
+                        <PopupOption @click="() => actionFilter(field)">
                             Скрыть
                         </PopupOption>
                     </template>
@@ -61,7 +61,7 @@
     }
 
     // Скрытие поля
-    const hideField = (field) => {
+    const actionFilter = (field) => {
         emit('actionFilter', {action: 'enabledField', value: {
             value: !field.enabled, 
             key: field.key

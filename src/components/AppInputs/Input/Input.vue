@@ -4,10 +4,11 @@
         :class="props.item.required ? 'form-item_required' : ''" 
         :style="`--substring: ${props.item.substring != undefined ? props.item.substring : ''}`"
     >
-        <InputLabel
+        <FormLabel
             v-show="props.item.title != null && props.item.title != ''"
             :title="props.item.title"
         />
+
         <InputField
             ref="inputRef"
             :item="props.item"
@@ -28,9 +29,9 @@
 
     import { ref } from 'vue'
 
-    import FormItem from '@/components/AppForm/FormItem/FormItem.vue';
-    import InputLabel from './InputLabel/InputLabel.vue';
     import InputField from './InputField/InputField.vue';
+    import FormItem from '@/components/AppForm/FormItem/FormItem.vue';
+    import FormLabel from '@/components/AppForm/FormLabel/FormLabel.vue';
 
     const inputRef = ref(null)
 
