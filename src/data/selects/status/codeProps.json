@@ -33,7 +33,7 @@
         "type": "Boolean"
     },
     "isHaveNullOption": {
-        "default": false,
+        "default": true,
         "type": "Boolean"
     }
 }

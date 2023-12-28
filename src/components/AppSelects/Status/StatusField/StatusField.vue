@@ -215,7 +215,7 @@
                 if (options.value.length == 0) {
                     activeOption.value = null
                 } else {
-                    activeOption.value = options.value[0].label
+                    activeOption.value = props.isHaveNullOption ? null : options.value[0].label
                 }
             } else {
                 activeOption.value = findedOption.label

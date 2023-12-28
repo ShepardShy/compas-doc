@@ -5,6 +5,6 @@
 </template>
 
 <script setup>
-    import './AppColorPickerIcon.scss';
+    import './Color.scss';
     
 </script>
