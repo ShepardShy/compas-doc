@@ -15,6 +15,8 @@
             :enabledAutocomplete="props.codeProps.enabledAutocomplete != undefined ? props.codeProps.enabledAutocomplete.default : null"
             @changeValue="(data) => emit('changeValue', data)"
             @actionFilter="(data) => emit('actionFilter', data)"
+            @createOption="(data) => emit('createOption', data)"
+            @searchOptions="(data) => emit('searchOptions', data)"
         />
     </div>
 </template>
@@ -34,6 +36,8 @@
 
     const emit = defineEmits([
         'changeValue',
-        'actionFilter'
+        'actionFilter',
+        'createOption',
+        'searchOptions'
     ])
 </script>

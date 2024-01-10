@@ -1,0 +1,16 @@
+{
+    "@focus": "event",
+    "@blur": "event",
+    "@changeValue": {
+        "key": "key", 
+        "value": "value"
+    },
+    "@searchOptions": {
+        "key": "key", 
+        "value": "value"
+    },
+    "@createOption": {
+        "key": "key", 
+        "value": "value"
+    }
+}

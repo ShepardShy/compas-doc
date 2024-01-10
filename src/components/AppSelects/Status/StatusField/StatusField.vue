@@ -46,7 +46,7 @@
 <script setup>
     import './StatusField.scss';
 
-    import { ref, onMounted } from 'vue'
+    import { ref, onMounted, watch } from 'vue'
 
     import elementsDOM from '@/scripts/elementsDOM'
     import AppPopup from '@/components/AppPopup/Popup.vue';
@@ -206,22 +206,22 @@
         emit('changeValue', {key: props.item.key, value:  option == null ? null : option.value})
     }
 
-    onMounted(() => {
-        // Установка активной опции
-        const setActiveOption = () => {
-            let findedOption = options.value.find((option) => option.value == props.item.value)
+    // Установка активной опции
+    const setActiveOption = () => {
+        let findedOption = options.value == null ? null : options.value.find((option) => option.value == props.item.value)
 
-            if ([null, undefined].includes(findedOption)) {
-                if (options.value.length == 0) {
-                    activeOption.value = null
-                } else {
-                    activeOption.value = props.isHaveNullOption ? null : options.value[0].label
-                }
+        if ([null, undefined].includes(findedOption)) {
+            if (options.value == null || options.value.length == 0) {
+                activeOption.value = null
             } else {
-                activeOption.value = findedOption.label
+                activeOption.value = props.isHaveNullOption ? null : options.value[0].label
             }
+        } else {
+            activeOption.value = findedOption.label
         }
+    }
 
+    onMounted(() => {
         options.value = props.item.options.filter((option) => option.label.is_hidden == 0 || option.label.field_id == props.item.id)
         visibileOptions.value =options.value.filter((option) => option.label.is_hidden != 1)
 
@@ -230,5 +230,15 @@
         if (props.item.focus) {
             popupRef.value.popupRef.setAttribute('open', true)
         }
+    })
+
+    watch(() => props.item.focus, () => {
+        if (props.item.focus) {
+            popupRef.value.popupRef.setAttribute('open', true)
+        }
+    })
+
+    watch(() => props.item.value, () => {
+        setActiveOption()
     })
 </script>

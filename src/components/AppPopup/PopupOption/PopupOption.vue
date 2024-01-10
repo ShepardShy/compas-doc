@@ -1,5 +1,5 @@
 <template>
-    <div class="popup__option">
+    <div class="popup__option popup-option">
         <slot></slot>
     </div>
 </template>

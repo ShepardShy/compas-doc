@@ -15,7 +15,15 @@
     }
 
     &.popup__option_active {
-        background: variables.$color-hover;
+        &::after {
+            content: url('/public/icons/success.svg');
+        }
+    }
+
+    &.popup__option_disabled {
+        background: variables.$color-light-grey;
+        filter: opacity(0.8);
+        cursor: default;
     }
 
     &.popup__option-sublink {
@@ -37,6 +45,32 @@
     &.popup__option_unhover {
         &:hover {
             background: inherit;
+        }
+    }
+
+    &.popup__option_create {
+        color: variables.$color-blue-grey;
+
+        &:hover {
+            color: variables.$color-active;
+        }
+    }
+
+    &.popup-option__root {
+        gap: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    
+        .popup-option__substring {
+            white-space: nowrap;
+            color: variables.$color-grey;
+        }
+    
+        .popup-option__text {
+            white-space: nowrap;
+            overflow: hidden;
+            width: 100%;
         }
     }
 }

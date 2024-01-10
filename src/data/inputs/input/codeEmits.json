@@ -1,8 +1,10 @@
 {
-    "@focus": "event",
-    "@blur": "event",
     "@changeValue": {
         "key": "key", 
         "value": "value"
+    },
+    "@create": {
+        "key": "key",
+        "value": true
     }
 }

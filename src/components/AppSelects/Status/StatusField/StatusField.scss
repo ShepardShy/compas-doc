@@ -3,11 +3,16 @@
 
 .status__popup {
     &[open] {
-        .status__option {
-            .status-option__rect {
-                &::after {
-                    transform: rotate(180deg);    
-                    @include mixins.borderOptions(1px, solid, variables.$color-grey, 5px 0px 0px 5px);
+        .popup__summary {
+            .status__option {
+                .status-option__rect {
+                    outline: 1px solid variables.$color-blue;
+                    border-radius: 5px;
+    
+                    &::after {
+                        transform: rotate(180deg);    
+                        @include mixins.borderOptions(1px, solid, transparent, 5px 0px 0px 5px);
+                    }
                 }
             }
         }            

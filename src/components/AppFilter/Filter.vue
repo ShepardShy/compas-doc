@@ -79,6 +79,7 @@
         activeFields.value = fields.value.filter(field => field.enabled)
     })
 
+    // Установка активных плашек фильтра
     const setTabsFields = () => {
         if (props.tabs != null) {
             for (let field in props.tabs) {

@@ -30,10 +30,6 @@
         }
     }
 
-    .form-item__title {
-        color: variables.$color-black;
-    }
-
     .icon__draggable {
         opacity: 0;
         left: 2px;
@@ -51,6 +47,16 @@
         .icon__settings {
             svg {
                 @include mixins.elemResolutionOptions(12px, 12px);
+            }
+        }
+    }
+
+    .form__item  {
+        .form-item__title {
+            color: variables.$color-black;
+    
+            &::after {
+                content: none;
             }
         }
     }

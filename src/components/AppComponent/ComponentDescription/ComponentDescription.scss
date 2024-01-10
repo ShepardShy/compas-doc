@@ -45,7 +45,7 @@
     @include mixins.userSelect($value: none);
 
     &::after {
-        content: url('/public/icons/arrow.svg');
+        content: url('/public/icons/componentArrow.svg');
     }
 
     &:hover {

@@ -19,6 +19,11 @@ export default {
         },
         {
             id: 13,
+            name: 'Автокомплит',
+            component: markRaw(defineAsyncComponent(() => import('@/pages/autocomplete/autocomplete.vue')))
+        },
+        {
+            id: 14,
             name: 'Файл',
             component: ''
         }

@@ -27,7 +27,7 @@
             @changeValue="(data) => $emit('changeValue', data)"
         />
 
-	    <span v-if="props.item.type == 'number'" class="form-item__substring">{{ props.item.substring }}</span>
+	    <span v-if="![null, undefined].includes(props.item.substring) && props.item.substring != ''" class="form-item__substring">{{ props.item.substring }}</span>
     </FormItem>
 </template>
 
@@ -52,6 +52,7 @@
                 type: 'text',
                 focus: false,
                 placeholder: '',
+                substring: null,
                 title: 'Undefined title'
             },
             type: Object

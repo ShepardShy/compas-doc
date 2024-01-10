@@ -1,6 +1,6 @@
 <template>
     <AppComponent 
-        :title="'Чекбокс'"
+        :title="'Статус'"
         :component="AppStatus"
         :codeProps="StatusProps"
         :codeEmits="StatusEmits"

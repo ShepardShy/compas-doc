@@ -2,38 +2,33 @@
     "item": {
         "default": {
             "id": 0,
-            "key": "selectKey",
-            "value": null,
-            "focus": false,
-            "required": false,
+            "required": true,
             "title": "Заголовок",
+            "placeholder": "Введите текст",
+            "value": null,
+            "key": "autocompleteKey",
+            "focus": false,
             "options": [
                 {
                     "label": {
                         "id": 0,
                         "sort": 0,
-                        "file": null,
-                        "is_hidden": 0,
-                        "field_id": 0,
-                        "color": "#4f1fc6ff",
                         "text": "Опция 1"
                     },
                     "value": 0
                 }
-            ]
+            ],
+            "lockedOptions": []
         },
         "type": "Object"
-    },
-    "isCanCreate": {
-        "default": false,
-        "type": "Boolean"
     },
     "isReadOnly": {
         "default": false,
         "type": "Boolean"
     },
-    "isHaveNullOption": {
-        "default": false,
+    "isCanCreate": {
+        "default": true,
         "type": "Boolean"
     }
 }
+

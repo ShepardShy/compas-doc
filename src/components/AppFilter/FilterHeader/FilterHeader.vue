@@ -106,7 +106,7 @@
             let tabLength = 0
 
             for (let tab of localTabs.value) {
-                tabLength = tab.title.length + tab.value.length
+                tabLength = tab.title == null ? 0 : tab.title.length +tab.value.length
                 if (maxFieldLength == 0 || tabLength > maxFieldLength) {
                     maxField = tab
                     maxFieldLength = tabLength

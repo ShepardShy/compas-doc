@@ -9,6 +9,8 @@
             :codeProps="props.codeProps"
             @changeValue="(data) => emit('changeValue', data)"
             @actionFilter="(data) => emit('actionFilter', data)"
+            @createOption="(data) => emit('createOption', data)"
+            @searchOptions="(data) => emit('searchOptions', data)"
         />
 
         <ComponentDescription 
@@ -49,6 +51,8 @@
 
     const emit = defineEmits([
         'changeValue',
-        'actionFilter'
+        'actionFilter',
+        'createOption',
+        'searchOptions'
     ])
 </script>

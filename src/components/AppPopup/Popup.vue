@@ -1,5 +1,9 @@
 <template>
-    <details class="popup" ref="popupRef" v-click-out-side="(event) => clickOutside(event)">
+    <details class="popup" ref="popupRef" 
+        @mouseup="(event) => mouseDownEvent = null" 
+        @mousedown="(event) => mouseDownEvent = event" 
+        v-click-out-side="(event) => clickOutside(event)"
+    >
         <summary class="popup__summary">
             <slot name="summary"></slot>
         </summary>
@@ -17,6 +21,7 @@
     import elementsDOM from '@/scripts/elementsDOM'
 
     const popupRef = ref(null)
+    let mouseDownEvent = ref(null)
 
     const props = defineProps({
         closeByClick: {
@@ -31,8 +36,11 @@
 
     // Отслеживание вызова клика за пределами компонента
     const clickOutside = (event) => {
-        emit('clickOutside', event)
-        elementsDOM.hideDetails(popupRef.value)
+        if (mouseDownEvent.value == null || mouseDownEvent.value.target.closest('.popup') == null) {
+            emit('clickOutside', event)
+            elementsDOM.hideDetails(popupRef.value)
+        }
+        mouseDownEvent.value = null
     }
 
     defineExpose({
