@@ -7,6 +7,8 @@
         <ComponentField 
             :component="props.component"
             :codeProps="props.codeProps"
+            @showAll="(data) => emit('showAll', data)"
+            @openLink="(data) => emit('openLink', data)"
             @changeValue="(data) => emit('changeValue', data)"
             @actionFilter="(data) => emit('actionFilter', data)"
             @createOption="(data) => emit('createOption', data)"
@@ -50,6 +52,8 @@
     })
 
     const emit = defineEmits([
+        'showAll',
+        'openLink',
         'changeValue',
         'actionFilter',
         'createOption',

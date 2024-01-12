@@ -11,8 +11,10 @@
 
         <FormValue 
             v-if="props.isReadOnly"
-            :value="props.item.value"
             :isHTML="false"
+            :isLink="props.isLink"
+            :value="props.item.value"
+            @click="() => props.isLink ? $emit('openLink', props.item) : ''"
         />
 
         <InputField
@@ -70,6 +72,10 @@
             type: String
         },
         isReadOnly: {
+            default: false,
+            type: Boolean
+        },
+        isLink: {
             default: false,
             type: Boolean
         }

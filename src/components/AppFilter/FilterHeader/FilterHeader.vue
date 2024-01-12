@@ -78,11 +78,15 @@
         });
     })
     
-    watch(() => props.tabs, () => {
+    watch(() => props.tabs, (newVal, prevVal) => {
         hiddenTabs.value = []
         localTabs.value = props.tabs
-        setTimeout(() => {
+
+        if (newVal.length < prevVal.length) {
             inputRef.value.inputRef.inputRef.focus()
+        }
+        
+        setTimeout(() => {
             paddingInput.value = tabsRef.value.offsetWidth
         }, 50);
     })

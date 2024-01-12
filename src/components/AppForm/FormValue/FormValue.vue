@@ -17,15 +17,18 @@
         isHTML: {
             default: false,
             type: Boolean
+        },
+        isLink: {
+            default: false,
+            type: Boolean
         }
     })
 
     const setClasses = computed(() => {
-        console.log(props.value);
-
         return [
             [null, undefined].includes(props.value) || props.value == '' ? 'form-item__value_empty' : '',
-            props.isHTML ? 'form-item__value_html' : ''
+            props.isHTML ? 'form-item__value_html' : '',
+            props.isLink ? 'form-item__value_link' : ''
         ]
     })
 </script>

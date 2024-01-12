@@ -1,0 +1,164 @@
+<template>
+    <AppAutocomplete 
+        v-if="localItem != null"
+        class="relation__item"
+        :item="localItem" 
+        :isReadOnly="true"
+        :isLink="![null, undefined].includes(activeOption.id)"
+        :isCanCreate="props.isCanCreate" 
+        :class="[null, undefined].includes(activeOption.id) ? 'relation__item_empty' : ''"
+        @openLink="() => callAction({action: 'openLink', value: localItem})"
+        @createOption="(data) => emit('createOption', data)"
+        @changeValue="(data) => callAction({action: 'changeValue', value: data.value})"
+        @searchOptions="(data) => callAction({action: 'searchOptions', value: data})"
+    >
+        <template #icon>
+            <figure 
+                v-if="![null, undefined].includes(activeOption)" 
+                class='ibg relation__icon' 
+                @click="() => callAction({action: 'openLink', value: localItem})"
+            >
+                <img 
+                    v-if="![null, undefined].includes(activeOption.file) && activeOption.file != ''"
+                    :src='activeOption.file' 
+                    :alt='activeOption.text' 
+                />
+                <figcaption v-else :style="`--backgroundColor: ${activeOption.color}`">
+                    {{ activeOption.text.substring(0, 1) }}
+                </figcaption>
+            </figure>
+        </template>
+
+        <template #link>
+            <div class="relation__link" @click="(event) => {event.preventDefault(); callAction({action: 'openLink', value: localItem})}"></div>
+        </template>
+    </AppAutocomplete>
+</template>
+
+<script setup>
+    import './RelationItem.scss';
+    
+    import { ref, onMounted, watch } from 'vue'
+
+    import AppAutocomplete from '@/components/AppAutocomplete/Input/Input.vue';
+
+    let activeOption = ref(null)
+    let backupOptions = ref([])
+    let localItem = ref(null)
+
+    const nullOption = {
+        id: null,
+        sort: 0,
+        text: "Не выбрано",
+        color: "#a6b7d4",
+        file: null
+    }
+
+    const props = defineProps({
+        item: {
+            default: {
+                id: 0,
+                value: null,
+                placeholder: null,
+                focus: false,
+                key: null,
+                options: [],
+                lockedOptions: []
+            },
+            type: Object
+        },
+        isCanCreate: {
+            default: false,
+            type: Boolean
+        }
+    })
+
+    const emit = defineEmits([
+        'openLink',
+        'callAction',
+        'createOption'
+    ])
+
+    // Вызов действия
+    const callAction = (data) => {
+        // Установка выбранной опции
+        const setActiveOption = (value) => {
+            let findedOption = props.item.options.find(option => option.value == value)
+            if ([null, undefined].includes(findedOption)) {
+                activeOption.value = nullOption 
+            } else {
+                activeOption.value = findedOption.label
+            }
+        }
+
+        // Изменение значения
+        const changeValue = (value) => {
+            setActiveOption(value)
+            emit('callAction', {action: 'changeValue', value: data.value})
+        }
+
+        // Поиск опций
+        const searchOptions = (value) => {
+            /* Удалить код и вставить свой метод на поиск опций */
+
+            let findedOptions = backupOptions.value.filter(option => option.label.text.toLowerCase().includes(value.value.toLowerCase())) 
+            localItem.value.options = findedOptions
+            console.log('Поиск опций', findedOptions);
+        }
+
+        // Открытие ссылки
+        const openLink = () => {
+            if (![null, undefined].includes(activeOption.value.id)) {
+                emit('openLink', activeOption.value)
+            } else {
+                return
+            }
+        }
+
+        switch (data.action) {
+            // Установка выбранной опции
+            case 'setActiveOption':
+                setActiveOption(data.value)
+                break;
+        
+            // Изменение значения
+            case 'changeValue':
+                changeValue(data.value)
+                break;
+
+            // Поиск опций
+            case 'searchOptions':
+                searchOptions(data.value)
+                break;
+
+            // Открытие ссылки
+            case 'openLink':
+                openLink(data.value)
+            default:
+                break;
+        }
+    }
+
+    onMounted(() => {
+        localItem.value = JSON.parse(JSON.stringify(props.item))
+        backupOptions.value = JSON.parse(JSON.stringify(props.item.options))
+
+        callAction({
+            action: 'setActiveOption',
+            value: props.item.value
+        })
+    })
+
+    watch(() => props.item.value, () => {
+        localItem.value = JSON.parse(JSON.stringify(props.item))
+
+        callAction({
+            action: 'setActiveOption',
+            value: props.item.value
+        })
+    })
+
+    watch(() => props.item.lockedOptions, () => {
+        localItem.value.lockedOptions = props.item.lockedOptions
+    })
+</script>

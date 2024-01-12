@@ -1,6 +1,6 @@
 <template>
     <FormItem
-        class="form-item__relation" 
+        class="form-item__autocomplete autocomplete" 
         :required="props.item.required"
     >
         <FormLabel
@@ -9,46 +9,49 @@
         />    
 
         <AppPopup 
-            class="relation__popup" 
+            class="autocomplete__popup" 
             :closeByClick="false" 
             ref="popupRef" 
+            :isReadOnly="props.isReadOnly"
             @click="(event) => props.isReadOnly ? event.preventDefault() : null"
         >
             <template #summary> 
                 <slot name="icon"></slot>
                 <AppInput
                     :item="{
-                        id: 0,
-                        key: 'search',
-                        value: search,
+                        id: props.item.id,
+                        title: null,
                         type: 'text',
                         focus: false,
+                        key: props.item.key,
                         placeholder: null,
-                        title: null,
+                        value: props.isReadOnly ? activeOption.id == null ? null : activeOption.text : search,
                         substring: props.isReadOnly ? null : activeOption.id == null ? ' ' : `ID: ${activeOption.id}`
                     }"
                     :mask="null"
                     :disabled="false"
+                    :isLink="props.isLink"
                     :isReadOnly="props.isReadOnly"
                     :enabledAutocomplete="false"
-                    @changeValue="(data) => callACtion({action: 'searchOptions', value: data.value})"
-                    @mousedown="(event) => props.isReadOnly ? event.preventDefault() : callACtion({action: 'showContent', value: true})"
-                    @keydown.space="(event) => {event.preventDefault(); callACtion({action: 'searchOptions', value: event.target.value + ' '})}"
+                    @openLink="(item) => emit('openLink', item)"
+                    @changeValue="(data) => callAction({action: 'searchOptions', value: data.value})"
+                    @mousedown="(event) => props.isReadOnly ? event.preventDefault() : callAction({action: 'showContent', value: true})"
+                    @keydown.space="(event) => {event.preventDefault(); callAction({action: 'searchOptions', value: event.target.value + ' '})}"
                 />
                 <slot name="link"></slot>
-                <div class="relation__active-option" v-show="!props.isReadOnly && ([null, undefined].includes(search) || search == '')">
+                <div class="autocomplete__active-option" v-show="!props.isReadOnly && ([null, undefined].includes(search) || search == '')">
                     {{ activeOption.text }}
                 </div>
             </template>
             <template #content>
-                <PopupOption @click="() => callACtion({action: 'changeValue', value: null})">
+                <PopupOption @click="() => callAction({action: 'changeValue', value: null})">
                     Не выбрано
                 </PopupOption>
                 <PopupOption 
                     class="popup-option__root" 
                     v-for="option in options" 
                     :class="option.value == activeOption.id ? 'popup__option_active' : '', props.item.lockedOptions.includes(option.value) ? 'popup__option_disabled' : ''" 
-                    @click="() => callACtion({action: 'changeValue', value: option.value})"
+                    @click="() => callAction({action: 'changeValue', value: option.value})"
                 >
                     <div class="popup-option__text">
                         {{ option.label.text }}
@@ -58,7 +61,7 @@
                         ID: {{ option.label.id }}
                     </span>
                 </PopupOption>
-                <PopupOption v-if="isCanCreate" class="popup__option_create" @click="() => callACtion({action: 'createOption', value: true})">
+                <PopupOption v-if="isCanCreate" class="popup__option_create" @click="() => callAction({action: 'createOption', value: true})">
                     Создать
                 </PopupOption>
             </template>
@@ -110,17 +113,22 @@
         isCanCreate: {
             default: false,
             type: Boolean
+        },
+        isLink: {
+            default: false,
+            type: Boolean
         }
     })
 
     const emit = defineEmits([
+        'openLink',
         'changeValue',
         'createOption',
         'searchOptions',
     ])
 
     // Действия с автокомплитом
-    const callACtion = (data) => {
+    const callAction = (data) => {
         // Открытие/скрытие всплывающего окна
         const showContent = (state) => {
             if (state) {
@@ -158,7 +166,7 @@
 
         // Изменить значение поля
         const changeValue = (value) => {
-            if (!props.item.lockedOptions.includes(value)) {
+            if (value == null || !props.item.lockedOptions.includes(value)) {
                 search.value = null
                 options.value = backupOptions.value
                 setActiveOption(value)
@@ -203,7 +211,7 @@
 
     onMounted(() => {
         backupOptions.value = options.value = JSON.parse(JSON.stringify(props.item.options.sort((prev, next) => prev.label.sort - next.label.sort)))
-        callACtion({
+        callAction({
             action: 'setActiveOption',
             value: props.item.value
         })
@@ -211,5 +219,12 @@
 
     watch(() => props.item.options, () => {
         options.value = props.item.options.sort((prev, next) => prev.label.sort - next.label.sort)
+    })
+
+    watch(() => props.item.value, () => {
+        callAction({
+            action: 'setActiveOption',
+            value: props.item.value
+        })
     })
 </script>

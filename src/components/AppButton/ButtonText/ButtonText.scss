@@ -6,9 +6,9 @@
     width: max-content;
     overflow: hidden;
     white-space: nowrap;
+    @include mixins.userSelect(none);
     color: variables.$color-blue-grey;
     @include mixins.textOptions(15px, 400, normal);
-
 
     &:hover {
         color: variables.$color-active

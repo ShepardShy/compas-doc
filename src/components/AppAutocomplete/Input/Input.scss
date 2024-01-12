@@ -1,9 +1,9 @@
 @use '@/assets/variables.scss' as variables;
 @use '@/assets/mixins.scss' as mixins;
 
-.relation__popup {
+.autocomplete__popup {
     &[open] {
-        .relation__active-option {
+        .autocomplete__active-option {
             filter: opacity(0.5);
         }
 
@@ -45,22 +45,7 @@
     }
 }
 
-.relation__icon {
-    border-radius: 50%; 
-    overflow: hidden;
-    @include mixins.elemResolutionOptions(30px, 30px);
-
-    figcaption {
-        display: grid;
-        font-family: VAG;
-        place-items: center;
-        color: variables.$color-white;
-        background: var(--backgroundColor);
-        @include mixins.elemResolutionOptions(100%, 100%);
-    }
-}
-
-.relation__active-option {
+.autocomplete__active-option {
     top: 0px;
     overflow: hidden;
     position: absolute;

@@ -4,7 +4,7 @@
             "id": 0,
             "required": true,
             "substring": "руб.",
-            "type": "text",
+            "type": "number",
             "title": "Заголовок",
             "placeholder": "Введите текст",
             "value": null,
@@ -14,7 +14,7 @@
         "type": "Object"
     },
     "mask": {
-        "default": "A###AA###",
+        "default": null,
         "type": "String"
     },
     "disabled": {

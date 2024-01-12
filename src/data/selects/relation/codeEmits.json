@@ -1,0 +1,21 @@
+{
+    "@changeValue": {
+        "key": "key", 
+        "value": ["id", "id"]
+    },
+    "@createOption": {
+        "key": "key", 
+        "value": true
+    },
+    "@showAll": {
+        "key": "key", 
+        "value": true
+    },
+    "@openLink": {
+        "id": "id",
+        "sort": null,
+        "text": "text",
+        "color": "#fff",
+        "file": null
+    }
+}

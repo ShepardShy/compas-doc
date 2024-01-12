@@ -1,5 +1,6 @@
 <template>
     <details class="popup" ref="popupRef" 
+        :class="props.isReadOnly ? 'popup_readonly' : ''"
         @mouseup="(event) => mouseDownEvent = null" 
         @mousedown="(event) => mouseDownEvent = event" 
         v-click-out-side="(event) => clickOutside(event)"
@@ -25,6 +26,10 @@
 
     const props = defineProps({
         closeByClick: {
+            default: false,
+            type: Boolean
+        },
+        isReadOnly: {
             default: false,
             type: Boolean
         }
