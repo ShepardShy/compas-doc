@@ -221,9 +221,26 @@
         }
     }
 
+    // Получение опций
+    const getOptions = () => {
+        // Проверка на пустой объект
+        const isEmpty = (obj) => {
+            for (const prop in obj) {
+                if (Object.hasOwn(obj, prop)) {
+                return false;
+                }
+            }
+            return true;
+        }
+
+        let options = props.item.options == null ? [] : props.item.options.filter(p => p != null && typeof p == 'object' && !Array.isArray(p) && !isEmpty(p)).sort((prev, next) => prev.label.sort - next.label.sort)
+        return JSON.parse(JSON.stringify(options))
+    }
+
     onMounted(() => {
-        options.value = props.item.options.filter((option) => option.label.is_hidden == 0 || option.label.field_id == props.item.id)
-        visibileOptions.value =options.value.filter((option) => option.label.is_hidden != 1)
+        let localOptions = getOptions()
+        options.value = localOptions.filter((option) => option.label.is_hidden == 0 || option.label.field_id == props.item.id)
+        visibileOptions.value = options.value.filter((option) => option.label.is_hidden != 1)
 
         setActiveOption()
 

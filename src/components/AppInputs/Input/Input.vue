@@ -30,6 +30,8 @@
         />
 
 	    <span v-if="![null, undefined].includes(props.item.substring) && props.item.substring != ''" class="form-item__substring">{{ props.item.substring }}</span>
+
+        <slot></slot>
     </FormItem>
 </template>
 

@@ -1,0 +1,27 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.table__item-content_title {
+    display: none;
+    font-size: variables.$font-size-label;
+    color: variables.$color-grey;
+    margin-bottom: 5px;
+}
+
+.table__item-group {
+    & > *:not(:last-child) {
+        margin-bottom: 10px;
+    }
+}
+
+.table__item-group-title {
+    font-size: variables.$font-size-label;
+    color: var(--colorTitle);
+    margin-bottom: 5px;
+}
+
+.section_mobile {
+    .table__item-content_title {
+        display: block;
+    }
+}

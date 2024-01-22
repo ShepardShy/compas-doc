@@ -189,3 +189,11 @@
         background: variables.$color-hover;
     }
 }
+
+@mixin setSVGColor($color) {
+    svg {
+        * {
+            fill: $color
+        }
+    }
+}

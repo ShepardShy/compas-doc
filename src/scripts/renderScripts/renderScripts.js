@@ -1,4 +1,4 @@
-// import tables from "./tables";
+import table from "./table";
 import filter from "./filter";
 // import selectedTasks from "./selectedTasks";
 
@@ -7,9 +7,8 @@ export default function(page, fields) {
         // case 'selectedTasks':
         //     selectedTasks.renderElements(fields)
         //     break;
-        // case 'tables':
-        //     tables.renderElements(fields)
-        //     break
+        case 'table':
+            return table.renderElements(fields)
         case 'filter':
             return filter.renderElements(fields)
         default:

@@ -1,0 +1,74 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.table__item-content_status {
+    .table__item_details {
+        .select__options {
+            top: 45px;
+        }
+    }
+}
+
+.table__item_details {
+    @include mixins.userSelect($value: none);
+
+    &[open] {
+        summary {
+            svg {
+                transform: rotate(180deg);
+
+                path {
+                    fill: variables.$color-active;
+                }
+            }
+
+            .table__item-value {
+                color: variables.$color-grey;
+                line-height: 12px;
+                font-size: variables.$font-size-default;
+            }
+        }
+    }
+
+    summary {
+        transition: 0.3s all;
+        cursor: pointer;
+        width: max-content;
+        transition: 0.2s all;
+        font-size: variables.$font-size-default;
+        overflow: hidden;
+        @include mixins.flexBlock($horizontal: flex-start, $gap: 20px);
+    }
+
+    .select__options {
+        position: absolute;
+        overflow: hidden;
+        top: 58px;
+        width: calc(100% - 15px);
+        z-index: 2;
+        min-width: 200px;
+        background-color: variables.$color-white;
+        box-shadow: 0 0 3px variables.$color-black, inset 0 1px 2px rgba(255,255,255,.5);
+        border-radius: 5px;
+        max-height: 700px;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .select__option {
+        cursor: pointer;
+        padding: 5px 20px 5px 10px;
+        @include mixins.flexBlock($vertical: center, $gap: 5px);
+
+        &:hover {
+            background: variables.$color-hover;
+        }
+    }
+}
+
+
+.details__label {
+    font-size: variables.$font-size-label;
+    color: variables.$color-grey;
+    margin-bottom: 5px;
+}

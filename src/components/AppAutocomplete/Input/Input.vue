@@ -37,11 +37,12 @@
                     @changeValue="(data) => callAction({action: 'searchOptions', value: data.value})"
                     @mousedown="(event) => props.isReadOnly ? event.preventDefault() : callAction({action: 'showContent', value: true})"
                     @keydown.space="(event) => {event.preventDefault(); callAction({action: 'searchOptions', value: event.target.value + ' '})}"
-                />
-                <slot name="link"></slot>
-                <div class="autocomplete__active-option" v-show="!props.isReadOnly && ([null, undefined].includes(search) || search == '')">
-                    {{ activeOption.text }}
-                </div>
+                > 
+                    <slot name="link"></slot>
+                    <div class="autocomplete__active-option" v-show="!props.isReadOnly && ([null, undefined].includes(search) || search == '')">
+                        {{ activeOption.text }}
+                    </div>
+                </AppInput>
             </template>
             <template #content>
                 <PopupOption @click="() => callAction({action: 'changeValue', value: null})">
@@ -138,6 +139,22 @@
             }
         }
 
+        // Получение опций
+        const getOptions = () => {
+            // Проверка на пустой объект
+            const isEmpty = (obj) => {
+                for (const prop in obj) {
+                    if (Object.hasOwn(obj, prop)) {
+                    return false;
+                    }
+                }
+                return true;
+            }
+
+            let localOptions = props.item.options == null ? [] : props.item.options.filter(p => p != null && typeof p == 'object' && !Array.isArray(p) && !isEmpty(p)).sort((prev, next) => prev.label.sort - next.label.sort)
+            options.value = JSON.parse(JSON.stringify(localOptions))
+        }
+
         // Создание опции
         const createOption = () => {
             showContent(false)
@@ -150,7 +167,7 @@
         // Установка выбранной опции
         const setActiveOption = (value) => {
             search.value = ''
-            let findedOption = options.value.find(option => option.value == value)
+            let findedOption = options.value == null ? null : options.value.find(option => option.value == value)
             if ([null, undefined].includes(findedOption)) {
                 activeOption.value = nullOption 
             } else {
@@ -204,13 +221,21 @@
                 changeValue(data.value)
                 break;
 
+            // Получение опций
+            case 'getOptions': 
+                getOptions()
+                break;
             default:
                 break;
         }
     }
 
     onMounted(() => {
-        backupOptions.value = options.value = JSON.parse(JSON.stringify(props.item.options.sort((prev, next) => prev.label.sort - next.label.sort)))
+        callAction({
+            action: 'getOptions',
+            value: null
+        })
+        backupOptions.value = JSON.parse(JSON.stringify(options.value))
         callAction({
             action: 'setActiveOption',
             value: props.item.value
@@ -218,10 +243,16 @@
     })
 
     watch(() => props.item.options, () => {
-        options.value = props.item.options.sort((prev, next) => prev.label.sort - next.label.sort)
-    })
+        callAction({
+            action: 'getOptions',
+            value: null
+        })    })
 
     watch(() => props.item.value, () => {
+        callAction({
+            action: 'getOptions',
+            value: null
+        })
         callAction({
             action: 'setActiveOption',
             value: props.item.value

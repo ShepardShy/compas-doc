@@ -1,0 +1,54 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.table__desctop {
+    display: block;
+    min-height: 50vh;
+
+    .section_empty {
+        position: sticky;
+        width: 100%;
+        height: calc(100% - 55px);
+        left: 0px;
+        padding: 0px;
+        color: #a6b7d4;
+        display: grid;
+        place-items: center;
+    }
+}
+
+.table__template {
+    .loader {
+        position: sticky;
+        top: calc(var(--windowScroll) + 38px);
+        z-index: 800;
+        left: 0px;
+        width: 100%;
+    }
+}
+
+.table__mobile {
+    display: none;
+    overflow: hidden;
+    border-radius: 0px 0px 10px 10px;
+}
+
+@media (max-width: 648px) {
+    .table__desctop {
+        display: none;
+    }
+
+    .table__mobile {
+        display: block;
+    }
+
+    .table__template {
+        .section__footer {
+            .section__display-elems {
+                .select__list {
+                    min-width: 180px;
+                }
+            }
+        }
+    }
+}

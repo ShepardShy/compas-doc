@@ -3,9 +3,9 @@
         v-if="localItem != null"
         class="relation__item"
         :item="localItem" 
-        :isReadOnly="true"
-        :isLink="![null, undefined].includes(activeOption.id)"
+        :isReadOnly="props.isReadOnly"
         :isCanCreate="props.isCanCreate" 
+        :isLink="![null, undefined].includes(activeOption.id)"
         :class="[null, undefined].includes(activeOption.id) ? 'relation__item_empty' : ''"
         @openLink="() => callAction({action: 'openLink', value: localItem})"
         @createOption="(data) => emit('createOption', data)"
@@ -23,7 +23,7 @@
                     :src='activeOption.file' 
                     :alt='activeOption.text' 
                 />
-                <figcaption v-else :style="`--backgroundColor: ${activeOption.color}`">
+                <figcaption v-else :style="`--backgroundColor: ${[null, undefined].includes(activeOption.color) || activeOption.color == '' ? '#a6b7d4' : activeOption.color}`">
                     {{ activeOption.text.substring(0, 1) }}
                 </figcaption>
             </figure>
@@ -43,7 +43,6 @@
     import AppAutocomplete from '@/components/AppAutocomplete/Input/Input.vue';
 
     let activeOption = ref(null)
-    let backupOptions = ref([])
     let localItem = ref(null)
 
     const nullOption = {
@@ -70,6 +69,10 @@
         isCanCreate: {
             default: false,
             type: Boolean
+        },
+        isReadOnly: {
+            default: false,
+            type: Boolean
         }
     })
 
@@ -83,12 +86,35 @@
     const callAction = (data) => {
         // Установка выбранной опции
         const setActiveOption = (value) => {
-            let findedOption = props.item.options.find(option => option.value == value)
+            let findedOption = localItem.value.options == null ? null : localItem.value.options.find(option => option.value == value)
+
             if ([null, undefined].includes(findedOption)) {
-                activeOption.value = nullOption 
+                findedOption = props.item.options == null ? null : props.item.options.find(option => option.value == value)
+                if ([null, undefined].includes(findedOption)) {
+                    activeOption.value = nullOption 
+                } else {
+                    activeOption.value = findedOption.label
+                    localItem.value.options.push(findedOption)
+                }
             } else {
                 activeOption.value = findedOption.label
             }
+        }
+
+        // Получение опций
+        const getOptions = () => {
+            // Проверка на пустой объект
+            const isEmpty = (obj) => {
+                for (const prop in obj) {
+                    if (Object.hasOwn(obj, prop)) {
+                    return false;
+                    }
+                }
+                return true;
+            }
+
+            let options = props.item.options == null ? [] : props.item.options.filter(p => p != null && typeof p == 'object' && !Array.isArray(p) && !isEmpty(p)).sort((prev, next) => prev.label.sort - next.label.sort)
+            return JSON.parse(JSON.stringify(options))
         }
 
         // Изменение значения
@@ -134,6 +160,11 @@
             // Открытие ссылки
             case 'openLink':
                 openLink(data.value)
+                break;
+
+            // Получение опций
+            case 'getOptions':
+                return getOptions()
             default:
                 break;
         }
@@ -141,7 +172,10 @@
 
     onMounted(() => {
         localItem.value = JSON.parse(JSON.stringify(props.item))
-        backupOptions.value = JSON.parse(JSON.stringify(props.item.options))
+        callAction({
+            action: 'getOptions',
+            value: null
+        })
 
         callAction({
             action: 'setActiveOption',
@@ -150,7 +184,7 @@
     })
 
     watch(() => props.item.value, () => {
-        localItem.value = JSON.parse(JSON.stringify(props.item))
+        localItem.value.value = JSON.parse(JSON.stringify(props.item.value))
 
         callAction({
             action: 'setActiveOption',

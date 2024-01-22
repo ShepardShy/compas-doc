@@ -1,0 +1,203 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.table__header {
+    font-weight: 600;
+    z-index: 2;
+
+    th {
+        padding: 0px;
+        text-align: start;
+        @include mixins.userSelect($value: none);
+        position: relative;
+        font-weight: 400;
+        width: var(--defaultWidth);
+        min-width: var(--defaultWidth);
+        max-width: var(--defaultWidth);
+        background: #fff;
+
+        border: {
+            top: 1px solid variables.$color-light-grey;
+            right: 1px solid variables.$color-light-grey;
+            bottom: 1px solid variables.$color-light-grey;
+        }
+
+        &:hover {
+            overflow: initial;
+        }
+
+        &.borderVisible {
+            overflow: initial;
+
+            &.table__item {
+                .table__item-border {
+                    z-index: 22;
+                }
+            }
+        }
+
+        &.table__item_read-only {
+            color: variables.$color-grey;
+        }
+
+        &.table__item {
+            .table__item_dragging {
+                height: 100%;
+                position: absolute;
+                width: calc(100% - 10px);
+                top: 0;
+                left: 5px;
+                z-index: 3;
+            }
+
+            .table__item-border {
+                &:hover {
+                    z-index: 22;
+                }
+            }
+
+
+            &:last-child {
+                .table__item-border {
+                    right: 0px;
+                }
+            }
+
+            &.table__item_fixed {
+                z-index: 10;
+            }
+
+            &.table__item_sticky {
+                background: #f9f9fa;
+
+                .table__item_dragging {
+                    display: none;
+                }
+
+                &.table__item_sticky-last {
+                    transition: 0.5s all;
+                    box-shadow: 5px 0px 4px -3px rgba(0, 0, 0, 0.25);
+                }
+
+                &:hover, &.changeWidth {
+                    z-index: 22;
+                }
+            }
+        }
+
+        .table__item-content_header {
+            padding: 10px;
+            @include mixins.flexBlock($vertical: center, $horizontal: space-between, $gap: 5px);
+
+            .loader {
+                right: 10px;
+            }
+
+            .table__item-content_header-title {
+                position: relative;
+                z-index: 2;
+                padding: 1px 0px;
+            }
+
+            .table__item-border {
+                z-index: 2;
+            }
+
+            .table__item-content_header_checkbox {
+                z-index: 4;
+                @include mixins.textHidden();
+                @include mixins.flexBlock($vertical: center, $gap: 5px);
+
+                label, input {
+                    border-radius: 5px;
+                    @include mixins.elemResolutionOptions(17px, 17px);
+                }
+            }
+
+            &.table__item_draggable {
+                cursor: grab;
+
+                &.table__item_sticky {
+                    cursor: default;
+                }
+            }
+
+            span {
+                height: 100%;
+                display: block;
+                cursor: pointer;
+                overflow: hidden;
+                // text-overflow: ellipsis;
+            }
+
+            .table__item-sort {
+                z-index: 2;
+                min-width:  12px;
+                cursor: pointer;
+                @include mixins.userSelect($value: none);
+                @include mixins.elemResolutionOptions(12px, 12px);
+
+                &.table__item-sort_up {
+                    transform: rotate(180deg);
+                }
+
+                .table__item-sort-icon {
+                    object-fit: contain;
+                }
+            }
+
+            &.table__item-content_header-center {
+                justify-content: center;
+            }
+        }
+
+        &.sortable-ghost {
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0px;
+                left: 1px;
+                width: calc(100% - 5px);
+                height: 100%;
+                background: #fbfcfd;
+                @include mixins.borderOptions(2px, dashed, variables.$color-blue-grey, 5px 5px 0px 0px);
+                border-bottom: none;
+            }
+
+            & > * {
+                opacity: 0;
+            }
+        }
+    }
+
+    .sortable-drag {
+        overflow: initial;
+        @include mixins.borderOptions(1px, solid, variables.$color-white, 0px);
+    }
+}
+
+.selected-object__body {
+    .table__header {
+        position: relative;
+    }
+}
+.draggable {
+    cursor: move;
+    user-select: none;
+}
+.placeholder {
+    @include mixins.sortableGhost();
+}
+
+.clone-list {
+    display: flex;
+}
+.clone-table {
+    border-collapse: collapse;
+    border: none;
+}
+
+.dragging {
+    background: #fff;
+    z-index: 999;
+}

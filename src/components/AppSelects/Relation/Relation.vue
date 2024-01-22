@@ -2,6 +2,7 @@
     <FormItem
         class="form-item__relation relation" 
         :required="props.item.required"
+        :class="values.filter(p => p != null).length == 0 ? 'relation_empty' : ''"
     >
         <FormLabel
             v-show="props.item.title != null && props.item.title != ''"
@@ -19,7 +20,8 @@
                     focus: false,
                     key: props.item.key,
                     options: props.item.options,
-                    lockedOptions: lockedOptions
+                    lockedOptions: lockedOptions,
+                    related_table: props.item.related_table
                 }"
                 :isReadOnly="props.isReadOnly"
                 :isCanCreate="props.isCanCreate"

@@ -11,6 +11,7 @@
   "dependencies": {
     "@mahdikhashan/vue3-click-outside": "^0.1.2",
     "@vuepic/vue-datepicker": "^7.4.0",
+    "lodash": "^4.17.21",
     "maska": "^2.1.10",
     "vue": "^3.3.8",
     "vue-accessible-color-picker": "^4.1.3",

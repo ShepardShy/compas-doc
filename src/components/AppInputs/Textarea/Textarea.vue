@@ -16,13 +16,15 @@
         <TextareaField
             v-else
             :item="props.item"
-            :mask="props.mask"
+            :mask="props.item.type == 'number' ? '#######################' : props.mask"
             :disabled="props.disabled"
             :isUseEnter="props.isUseEnter"
             @focus="(data) => $emit('focus', data)"
             @blur="(data) => $emit('blur', data)"
             @changeValue="(data) => $emit('changeValue', data)"
         />
+
+	    <span v-if="![null, undefined].includes(props.item.substring) && props.item.substring != ''" class="form-item__substring">{{ props.item.substring }}</span>
     </FormItem>
 </template>
 

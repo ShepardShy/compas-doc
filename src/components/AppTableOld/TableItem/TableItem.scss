@@ -1,0 +1,241 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.table__row_choosen {
+    .table__item {
+        &.table__item_fixed {
+            background: variables.$color-hover;
+        }
+    }
+}
+
+.table__row_edit {
+    .table__item {
+        &.table__item_fixed {
+            background: variables.$color-row-edit;
+        }
+    }
+}
+
+.table_dragging {
+    .table__item {
+        min-width: var(--factedWidth) !important;
+    }
+}
+
+.table__item {
+    @include mixins.userSelect($value: none);
+    max-width: var(--defaultWidth);
+    width: var(--defaultWidth);
+    color: var(--colorCell);
+    position: relative;
+    margin: 0px;
+    padding: 15px 0px 15px 0px;
+    border-bottom: 1px solid variables.$color-light-grey;
+    overflow: hidden;
+
+    .form-item__title, .form-item__title {
+        display: none;
+    }
+
+    .select  {
+        .select__input {
+            input {
+                width: calc(100% - 15px);
+            }
+        }
+    }
+
+    &.table__item_file {
+        .table__item-content_file {
+            position: absolute;
+        }
+    }
+
+    &.table__item_status {
+        .select__content {
+            summary {
+                gap: 21px;
+                align-items: center;
+                justify-content: flex-start;
+            }
+        }
+    }
+
+    &.table__item_fixed {
+        position: sticky;
+        background: variables.$color-white;
+        left: var(--cellLeft);
+    }
+
+    &.table__item_sticky {
+        z-index: 20;
+        background: #f9f9fa;
+
+        &.table__item_sticky-last {
+            &::before {
+                content: "";
+                position: absolute;
+                top: -5px;
+                right: 0px;
+                width: 100%;
+                height: 110%;
+                transition: 0.5s all;
+                box-shadow: 5px 0px 4px -3px rgba(0, 0, 0, 0.25);
+            }
+        }
+    }
+
+    &.table__item_clicked {
+        overflow: initial;
+
+        .table__item-content_status,
+        .select,
+        .table__item_relation,
+        .autocomplete,
+        .table__item-content {
+            overflow: initial;
+        }
+
+        &.table__item_fixed {
+            z-index: 2;
+        }
+
+        &.table__item_sticky {
+            z-index: 21;
+        }
+    }
+
+    &.table__item_checkbox {
+        label, input {
+            border-radius: 5px;
+            @include mixins.elemResolutionOptions(17px, 17px);
+        }
+    }
+
+    &.table__item_hover {
+        .table__item-content {
+            &::before {
+                display: block;
+            }
+        }
+    }
+
+    .table__item-content {
+        position: relative;
+        @include mixins.userSelect($value: text);
+        width: fit-content;
+        padding: 0px 10px 0px 10px;
+
+        .textarea {
+            * {
+                padding: 10px 15px 5px;
+                min-height: 34px;
+
+                &.textarea__mirror {
+                    min-height: 34px;
+                }
+            }
+        }
+
+        &.form-item__checkbox {
+            width: max-content;
+        }
+
+        &::before {
+            content: '';
+            display: none;
+            position: absolute;
+            top: 0px;
+            right: 1px;
+            height: 100%;
+            border-right: 1px solid variables.$color-grey;
+        }
+
+        &.table__item-content_actions {
+            overflow: inherit;
+            width: max-content;
+        }
+
+        &.table__item-content_flex {
+            @include mixins.userSelect($value: none);
+
+            .item__value {
+
+                @include mixins.flexBlock($vertical: center, $gap: 5px)
+            }
+
+            .table__item-value {
+                @include mixins.userSelect($value: text);
+            }
+        }
+
+        &.table__item-content_status {
+            .item__value {
+                align-items: center;
+                width: max-content;
+            }
+
+            .table__item_details {
+                summary {
+                    align-items: flex-start;
+                }
+            }
+
+            .select__content {
+                width: max-content;
+            }
+        }
+    }
+
+    &.table__item_last {
+        details {
+            .select__options, .select__list {
+                left: auto;
+                right: 0px;
+            }
+
+            .table__actions-list {
+                left: var(--offsetDetails);
+            }
+        }
+    }
+}
+
+td {
+    &.table__item_overflow {
+        overflow: inherit;
+    }
+}
+
+
+
+.table__item-value {
+    display: block;
+    font-size: variables.$font-size-default;
+    line-height: 12px;
+    color: variables.$color-dark-grey;
+}
+
+summary {
+    .table__item-img {
+        border-radius: 5px 0px 0px 5px;
+
+        figcaption {
+            right: -16px;
+            background: variables.$color-white;
+            position: absolute;
+            @include mixins.gridCenter();
+            @include mixins.elemResolutionOptions(16px, 100%);
+            @include mixins.borderOptions(1px, solid, variables.$color-grey, 0px 5px 5px 0px);
+        }
+    }
+}
+
+.table__item_draggable {
+    cursor: grab;
+
+    &.table__item_sticky {
+        cursor: default;
+    }
+}

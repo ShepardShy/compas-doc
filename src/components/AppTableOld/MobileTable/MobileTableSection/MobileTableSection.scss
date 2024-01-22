@@ -1,0 +1,44 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.table-mobile__section {
+    padding: 15px;
+    border-top: solid 1px variables.$color-light-grey;
+    background-color: variables.$color-white;
+    @include mixins.sortableGhost();
+    
+    & > * {
+        &:not(:last-child) {
+            margin-bottom: 15px;
+        }
+    }
+
+    &:nth-child(even) {
+        background-color: variables.$color-light-blue;
+
+        .table-mobile__item {
+            .table__item-content {
+                .item__values {
+                    .item__value {
+                        background-color: variables.$color-pale-grey;
+                        border: 1px solid variables.$color-grey;
+                    }
+                }
+            }
+        } 
+    }
+
+    &.table-mobile__section_choosen {
+        background: variables.$color-hover;
+    }
+
+    &.table-mobile__section_edit {
+        background: variables.$color-row-edit;
+    }
+}
+
+.products__table {
+    .table-mobile__section {
+        position: relative;
+    }
+}

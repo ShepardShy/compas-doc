@@ -26,6 +26,11 @@ export default {
             id: 14,
             name: 'Файл',
             component: ''
+        },
+        {
+            id: 15,
+            name: 'Таблица',
+            component: markRaw(defineAsyncComponent(() => import('@/pages/tables/tables.vue')))
         }
     ],
 

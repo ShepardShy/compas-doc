@@ -1,0 +1,71 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+table {
+    display: inline-table;
+    font-size: variables.$font-size-default;
+    border-spacing: 0px;
+    @include mixins.userSelect($value: text);
+    @include mixins.elemResolutionOptions(max-content, max-content);
+
+    &.table__unresize {
+        .table__item-border {
+            cursor: default;
+        }
+    }
+
+    &.table_hidden {
+        z-index: 1;
+        // opacity: 0;
+    }
+
+    &.table_copy {
+        z-index: 2000;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+    }
+}
+
+.table_loading {
+    .table__body {
+        tr {
+            td {
+                .table__item-content {
+                    opacity: 0.3;
+                }
+            }
+        }
+    }
+}
+
+.objects__table {
+    .table__body {
+        z-index: 2;
+
+        .table__item {
+            color: var(--colorItem)
+        }
+    }
+}
+
+.table__body {
+    .input__file_clone {
+        &.table__item-content {
+            top: 15px;
+            padding: 0px;
+
+            .table__item-content-list {
+                .item__value, .item__value_img {
+                    @include mixins.elemResolutionOptions(100px, 100px);
+                }
+            }
+        }
+    }
+
+    .form__item-select-status {
+        & > div {
+            overflow: hidden;
+        }
+    }
+}

@@ -1,0 +1,43 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.table-top {
+    gap: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-bottom: 1px solid variables.$color-light-grey;
+}
+
+.table-top__item {
+    .popup__summary {
+        padding: 0px 5px;
+
+        figure {
+            display: flex;
+        }
+    }
+
+    .popup__content {
+        left: auto;
+        right: 0px;
+        width: 260px;
+
+        .popup-option {
+            .icon__draggable {
+                position: static;
+                @include mixins.setSVGColor(variables.$color-blue-grey);
+
+                &:hover {
+                    @include mixins.setSVGColor(variables.$color-active);
+                }
+            }
+
+            &.popup__option-sublink_back {
+                flex-direction: row;
+                justify-content: flex-start;
+            }
+        }
+    }
+}

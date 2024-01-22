@@ -5,7 +5,7 @@
             "required": true,
             "title": "Заголовок",
             "placeholder": "Введите текст",
-            "value": null,
+            "value": "asda sdasd has kd haskd has d \n\n\n\n\n\n sada sd asd asldh askda kls",
             "key": "textareaKey",
             "focus": false
         },
@@ -24,7 +24,7 @@
         "type": "Boolean"
     },
     "isReadOnly": {
-        "default": false,
+        "default": true,
         "type": "Boolean"
     }
 }

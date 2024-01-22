@@ -1,0 +1,33 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.table__action {
+    padding: 8px;
+    cursor: pointer;
+    background: variables.$color-white;
+    @include mixins.userSelect($value: none);
+
+    &:hover {
+        background: variables.$color-hover;
+    }
+
+    &.action_red {
+        color: variables.$color-red;
+    }
+
+    &.table__action_children {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &.table__action-title {
+            gap: 5px;
+            justify-content: flex-start;
+
+            .section__setting-arrow {
+                transform: rotate(180deg);
+            }
+        }
+    }
+}
+

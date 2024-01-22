@@ -73,4 +73,51 @@
             width: 100%;
         }
     }
+
+    &.sortable-ghost {
+        font-size: 0;
+
+        * {
+            opacity: 0;
+        }
+    }
+
+    &.popup__option_checkbox {
+        padding: 0px;
+
+        .form-item__checkbox {
+            padding: 10px;
+            width: 100%;
+        }
+    }
+}
+
+.popup-option__draggable {
+    &.popup-option__draggable_dragging {
+        .popup-option {
+            &:hover {
+                background: transparent;
+
+                .icon__draggable {
+                    @include mixins.setSVGColor(variables.$color-blue-grey)
+                }
+            }
+        }
+    }
+
+    .popup__option {
+        &.popup__option-sublink {
+            justify-content: flex-start;
+        }
+        
+        &.sortable-ghost {
+            @include mixins.sortableGhost();
+        
+            font-size: 0;
+    
+            * {
+                opacity: 0;
+            }
+        }
+    }
 }

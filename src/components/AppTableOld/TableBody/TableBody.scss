@@ -1,0 +1,78 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.table__body {
+    position: relative;
+    z-index: 2;
+
+    .table__row {
+        position: relative;
+
+        &.table__row_choosen {
+            background: variables.$color-hover;
+        }
+
+        &.table__row_edit {
+            background: variables.$color-row-edit;
+
+            .table__item {
+                .relation {
+                    .button-text {
+                        display: block;
+                    }
+
+                    &.relation_empty {
+                        display: block;
+                    }
+
+                    .relation__item {
+                        .form-item__input {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+
+        .table__item {
+            vertical-align: top;
+
+            &.table__item_center {
+                text-align: center;
+                vertical-align: middle;
+
+                .warning__close {
+                    position: static;
+                }
+            }
+
+            .form__item {
+                label, .details__label, .select__label, .table__item-content_title {
+                    display: none;
+                    font-size: variables.$font-size-label;
+                    color: variables.$color-grey;
+                    margin-bottom: 5px;
+                }
+            }
+
+            .form-item__checkbox {
+                label, .details__label {
+                    display: grid;
+                }
+            }
+
+            .relation {
+                .relation__item {
+                    padding: 0px 15px 10px;
+                    border-radius: 0px;
+                    background-color: transparent;
+                    border: none;
+
+                    .form-item__input {
+                        width: max-content;
+                    }
+                }
+            }
+        }
+    }
+}
