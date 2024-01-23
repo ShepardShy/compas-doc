@@ -1,5 +1,6 @@
 <template>
-    <span class="form-item__value" :class="setClasses">
+    <span class="form-item__value" :class="setClasses" v-if="props.isHTML" v-html="props.value"></span>
+    <span class="form-item__value" :class="setClasses" v-else>
         {{ props.value }}
     </span>
 </template>

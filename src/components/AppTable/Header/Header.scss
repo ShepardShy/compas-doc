@@ -1,2 +1,27 @@
 @use '@/assets/variables.scss' as variables;
 @use '@/assets/mixins.scss' as mixins;
+
+.table__header {
+    .table__item {
+        border-right: 1px solid variables.$color-light-grey;
+        border-bottom: 1px solid variables.$color-light-grey;
+
+        &.sortable-ghost {
+            border-radius:  5px 5px 0px 0px;
+            border-bottom: none;
+        }
+
+        &.table__item_resizing {
+            &.table__item {
+                .table__item-border {
+                    z-index: 22;
+                }
+            }
+        }
+
+        .form-item__checkbox {
+            position: relative;
+            z-index: 4;
+        }
+    }
+}

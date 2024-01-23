@@ -9,6 +9,7 @@ export default {
                 pageX: 0,
                 curCol: undefined,
                 nxtCol: 0,
+                index: 0,
                 curColWidth: 0
             };
     
@@ -33,9 +34,10 @@ export default {
                 }
     
                 info.curCol = e.target.closest('.table__item');
+                info.index = [...table.querySelectorAll('thead .table__item')].findIndex(p => p.getAttribute('data-key') == info.curCol.getAttribute('data-key'));
                 info.nxtCol = info.curCol.nextElementSibling;
                 info.pageX = e.pageX;
-    
+
                 table.classList.add('table_resizing')
                 let padding = paddingDiff(info.curCol);
                 info.curCol.querySelector('.table-item__border').classList.add('table-item__border_changing')
@@ -53,7 +55,7 @@ export default {
                     if (info.curCol) {
                         let diffX = info.curColWidth + e.pageX - info.pageX;
                         if ((diffX) >= 40) {
-                            onMouseMoveThrottle(table, tableHeader, sectionBody, info.curCol, diffX)
+                            onMouseMoveThrottle(table, tableHeader, sectionBody, info.curCol, diffX, info)
                         }
                     }
                 }
@@ -145,9 +147,17 @@ export default {
 }
 
 // Тротлинг для получения отступа фиксированной ячейки
-const onMouseMoveThrottle = _.throttle(async function (table, tableHeader, sectionBody, cell, width) {
+const onMouseMoveThrottle = _.throttle(async function (table, tableHeader, sectionBody, cell, width, info) {
     setCellWidth(cell, width)
     setVisibleTitle(cell)
+
+    let data = table.querySelectorAll('tbody .table__row')
+    let rowFields = []
+    data.forEach(row => {
+        rowFields = row.querySelectorAll('.table__item')
+        setCellWidth([...rowFields][info.index], width)
+    });
+
 
     if (table.offsetWidth <= sectionBody.offsetWidth) {
         setCellsWidthDefference(tableHeader, sectionBody)

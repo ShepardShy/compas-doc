@@ -58,7 +58,7 @@
                 "id": 458,
                 "title": "Ответственный",
                 "key": "user_id",
-                "width": "40px",
+                "width": "210px",
                 "enabled": true,
                 "sort_order": null,
                 "type": "relation",
@@ -549,7 +549,7 @@
                 "width": "368px",
                 "enabled": true,
                 "sort_order": "desc",
-                "type": "json",
+                "type": "text",
                 "is_plural": 0,
                 "external_link": "https://avixo.ru/logistics",
                 "is_external_link": 1,
@@ -1293,7 +1293,7 @@
                 "title": "Crm Link",
                 "key": "crm_link",
                 "width": "200px",
-                "enabled": false,
+                "enabled": true,
                 "sort_order": "",
                 "type": "text",
                 "is_plural": 0,
@@ -2844,19 +2844,294 @@
     "tableData": {
         "default": [
             {
-                "id": 130302,
-                "created_at": "2023-05-29T03:07:07.000000Z",
-                "updated_at": "2023-08-31T09:03:38.000000Z",
-                "name": "Here I have set the width to 100% because it ensures that this column will take the maximum amount of space allowed, while the columns with no defined width will reduce to fit their content and no further.",
+                "id": 1120,
+                "created_at": null,
+                "updated_at": "2024-01-12T12:23:34.000000Z",
+                "name": "Тестовая задача фывюлфоывд фоыдв лойцщшу",
+                "date": "2023-12-23",
+                "point_status": 524,
+                "products": "[{\"id\":115,\"name\":\"Стеклошарики «TechBeads» фр. 070-110 мкр, 25кг\",\"price\":\"300\",\"count\":\"21\",\"weight\":1,\"sum\":6300},{\"id\":12,\"name\":\"Стеклошарики фр. 100-200 мкр, 25кг\",\"price\":\"200\",\"count\":\"22\",\"weight\":1,\"sum\":4400},{\"id\":72,\"name\":\"Стеклошарики «DuoLux» фр. 425-850 мкр, 25кг\",\"price\":\"100\",\"count\":\"23\",\"weight\":1,\"sum\":2300}]",
+                "crm_link": null,
+                "user_id": [
+                    8
+                ],
+                "tip_deistviia": "435",
+                "tip_tk": [
+                    null,
+                    "ТК, ПЭК",
+                    "ТК, Почта России 1231"
+                ],
+                "trebovaniia_k_masine_log": [
+                    null,
+                    2,
+                    4,
+                    3
+                ],
+                "zalozeno_na_dostavku_log": {
+                    "value": "фывфывф",
+                    "external_link": "https://google.com"
+                },
+                "sklad_otgruzki": null,
+                "oplata_rub": "111118",
+                "address": {
+                    "text": "Россия, Свердловская область, посёлок городского типа Арти",
+                    "coords": [
+                        "56.416794",
+                        "58.532544"
+                    ]
+                },
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": {
+                    "value": "Крутое имя5443"
+                },
+                "telefon_proglog": "авп",
+                "primecanie": "Данный текст был введен для проверки работоспособности поля, так как является его тестом и \n\n\n\n\n\nпоказывает сохраняется ли пробел в тексте или нет asdas klajs \n\n\ndlaskd 120398120",
+                "okno_log": {
+                    "value": "123213123123123123121",
+                    "external_link": null
+                },
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [
+                    666,
+                    4700,
+                    2300,
+                    1180,
+                    6122
+                ],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": [
+                    null,
+                    1,
+                    2
+                ],
+                "fail_2249": [
+                    {
+                        "id": 1700634111214,
+                        "name": "1.2.png",
+                        "url": "https://compas.pro/storage/thumbnails/default/4g/2s/xn00ulmok0wggw444okow.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FFdsF9J6GwiVPNxad2g0kf98vytpstkoRidQzU7Ly.png&s=https",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/FdsF9J6GwiVPNxad2g0kf98vytpstkoRidQzU7Ly.png",
+                        "extension": "png",
+                        "sort": 0,
+                        "uid": "1700634111214",
+                        "status": "success"
+                    },
+                    {
+                        "id": 1700634105674,
+                        "name": "2.1.svg",
+                        "url": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kRFx3iGTKT5ix5oZwgXzSsYR25Gh1jbxtLgEKS7E.svg",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kRFx3iGTKT5ix5oZwgXzSsYR25Gh1jbxtLgEKS7E.svg",
+                        "extension": "svg",
+                        "sort": 0,
+                        "uid": "1700634105674",
+                        "status": "success"
+                    },
+                    {
+                        "id": 1703657482946,
+                        "name": "4.pdf",
+                        "url": "https://opt6.compas.pro/storage/tenantopt6/app/public/2401/conversions/gtLzTgAGu90QJ7js8SIf91VeJ1JbgBoZBfegVKjf-thumb.jpg",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/gtLzTgAGu90QJ7js8SIf91VeJ1JbgBoZBfegVKjf.pdf",
+                        "extension": "pdf",
+                        "sort": 0,
+                        "uid": "1703657482946",
+                        "status": "success"
+                    },
+                    {
+                        "id": 1703657482943,
+                        "name": "3.xlsx",
+                        "url": "/icons/new/xls.svg",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/lzOeWuGl5LEQD64lgfVKLV8NaNBrtR7mKfy88fTj.xlsx",
+                        "extension": "xlsx",
+                        "sort": 0,
+                        "uid": "1703657482943",
+                        "status": "success"
+                    },
+                    {
+                        "id": 1703830279259,
+                        "name": "5.pdf",
+                        "url": "https://opt6.compas.pro/storage/tenantopt6/app/public/2409/conversions/NFpjjRoJD6ymlpZUveu63mBWQysfWug897DAwu4L-thumb.jpg",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/NFpjjRoJD6ymlpZUveu63mBWQysfWug897DAwu4L.pdf",
+                        "extension": "pdf",
+                        "sort": 0,
+                        "uid": "1703830279259",
+                        "status": "success"
+                    }
+                ],
+                "_2250": "759",
+                "cislo_2251": "34",
+                "stroka_2301": null,
+                "1_2308": "22",
+                "23_2308": "23111",
+                "34_2308": "322112",
+                "gg_2342": "784",
+                "ll_2345": "321",
+                "testovoe_pole_1_2347": "12312",
+                "_2348": "809",
+                "ghfc_2349": "4",
+                "1_2351": "1232333",
+                "2_2351": "3214444",
+                "3_2351": "132",
+                "hfg_2356": "807",
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 132711,
+                "created_at": "2023-12-05T10:40:25.000000Z",
+                "updated_at": "2024-01-20T16:44:15.000000Z",
+                "name": "Задача #132695",
+                "date": "2023-12-21",
+                "point_status": 714,
+                "products": null,
+                "crm_link": null,
+                "user_id": [
+                    8
+                ],
+                "tip_deistviia": "526",
+                "tip_tk": [
+                    null,
+                    "ТК, Boxberry",
+                    "ТК, ПЭК",
+                    "ТК, Почта России 123",
+                    "ТК, СДЭК",
+                    "ТК, Другая"
+                ],
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": {
+                    "value": "12321",
+                    "external_link": "32131"
+                },
+                "sklad_otgruzki": null,
+                "oplata_rub": "2222",
+                "address": {
+                    "text": "Россия, Свердловская область, Екатеринбург",
+                    "coords": [
+                        "56.838011",
+                        "60.597474"
+                    ]
+                },
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": {
+                    "value": "Аркадий 111"
+                },
+                "telefon_proglog": "1231231231",
+                "primecanie": "фывфывфыв \n\n123123\n\n22",
+                "okno_log": {
+                    "value": "123",
+                    "external_link": "2222"
+                },
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [
+                    215,
+                    666,
+                    777,
+                    908
+                ],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    {
+                        "id": 1701945630821,
+                        "name": "1.1.png",
+                        "url": "https://compas.pro/storage/thumbnails/default/cy/hv/013wcls8c04c4404wcows.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FML2zNZMtoTB5hBLlVM9DavPCRepKt1aEEtKs459q.png&s=https",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/ML2zNZMtoTB5hBLlVM9DavPCRepKt1aEEtKs459q.png",
+                        "extension": "png",
+                        "sort": 0,
+                        "uid": "1701945630821",
+                        "status": "success"
+                    },
+                    {
+                        "id": 1701945630824,
+                        "name": "1.4.png",
+                        "url": "https://compas.pro/storage/thumbnails/default/5r/4k/4mqqngws8c84ws8sc8ksc.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FRfXPSw96X4Qp7ePuZcbdyksj9aRC7ANh5mG3FViK.png&s=https",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/RfXPSw96X4Qp7ePuZcbdyksj9aRC7ANh5mG3FViK.png",
+                        "extension": "png",
+                        "sort": 0,
+                        "uid": "1701945630824",
+                        "status": "success"
+                    },
+                    {
+                        "id": 1701945630826,
+                        "name": "Вадим Сыропятов (смотрит правки).jpg",
+                        "url": "https://compas.pro/storage/thumbnails/default/bt/hn/vmwfptwkww0os44gggskc.jpg?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FLJaTKvh3MQn03OJgr4jq6188VqROyZ6RmogsDq2f.jpg&s=https",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/LJaTKvh3MQn03OJgr4jq6188VqROyZ6RmogsDq2f.jpg",
+                        "extension": "jpg",
+                        "sort": 0,
+                        "uid": "1701945630826",
+                        "status": "success"
+                    },
+                    {
+                        "id": 1701945630828,
+                        "name": "Вадим Сыропятов.jpg",
+                        "url": "https://compas.pro/storage/thumbnails/default/al/fw/sfrzpggkgcgccg8g08wsw.jpg?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FhFt5LMAB2OjrWY7W2pRZINDDUdtbbTf4kvM6fwjB.jpg&s=https",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/hFt5LMAB2OjrWY7W2pRZINDDUdtbbTf4kvM6fwjB.jpg",
+                        "extension": "jpg",
+                        "sort": 0,
+                        "uid": "1701945630828",
+                        "status": "success"
+                    },
+                    {
+                        "id": 1701945630830,
+                        "name": "Крутой водитель 3000.jpg",
+                        "url": "https://compas.pro/storage/thumbnails/default/ew/qb/cztfc4084wsk4w4c0sc8c.webp?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FM1CZ453p1hyrYSDVr90VTeve8Fb6vPwM47A1Djr1.webp&s=https",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/M1CZ453p1hyrYSDVr90VTeve8Fb6vPwM47A1Djr1.webp",
+                        "extension": "webp",
+                        "sort": 0,
+                        "uid": "1701945630830",
+                        "status": "success"
+                    }
+                ],
+                "_2250": "759",
+                "cislo_2251": "11111",
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": "795",
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 130778,
+                "created_at": "2023-06-19T08:42:40.000000Z",
+                "updated_at": "2024-01-20T16:44:15.000000Z",
+                "name": "1195532",
                 "date": null,
                 "point_status": 404,
-                "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                "products": "[{\"name\":\"ПГМ -31, 20кг\",\"price\":520,\"count\":20,\"weight\":null,\"sum\":10400,\"id\":190}]",
                 "crm_link": null,
-                "user_id": null,
+                "user_id": [
+                    1
+                ],
                 "tip_deistviia": null,
                 "tip_tk": null,
-                "trebovaniia_k_masine_log": null,
-                "zalozeno_na_dostavku_log": null,
+                "trebovaniia_k_masine_log": [
+                    2
+                ],
+                "zalozeno_na_dostavku_log": "43",
                 "sklad_otgruzki": null,
                 "oplata_rub": null,
                 "address": null,
@@ -2868,11 +3143,20 @@
                 "okno_log": null,
                 "vremia_obsluzivaniia_min_log": null,
                 "kommentarii_voditelia_k_statusu_prog": null,
-                "client_id": [],
+                "client_id": [
+                    119,
+                    365,
+                    112,
+                    908
+                ],
                 "pole_spiska_2149": null,
-                "photo": null,
+                "photo": [
+                    null
+                ],
                 "mnozestvennyi_spisok_2248": null,
-                "fail_2249": null,
+                "fail_2249": [
+                    null
+                ],
                 "_2250": null,
                 "cislo_2251": null,
                 "stroka_2301": null,
@@ -2895,35 +3179,48 @@
                 "par_2394": null
             },
             {
-                "id": 130161,
-                "created_at": "2023-05-26T02:38:56.000000Z",
-                "updated_at": "2023-08-31T10:01:15.000000Z",
-                "name": "название товара: <b> 0шт. </b>",
+                "id": 132720,
+                "created_at": "2023-12-07T12:06:07.000000Z",
+                "updated_at": "2023-12-10T00:07:11.000000Z",
+                "name": "Задача #1327201",
                 "date": null,
                 "point_status": 404,
-                "products": "[{\"name\":\"Речной песок, 1т\",\"price\":1900,\"count\":4,\"weight\":null,\"sum\":7600}]",
+                "products": null,
                 "crm_link": null,
-                "user_id": null,
+                "user_id": [
+                    1
+                ],
                 "tip_deistviia": null,
                 "tip_tk": null,
-                "trebovaniia_k_masine_log": null,
-                "zalozeno_na_dostavku_log": null,
+                "trebovaniia_k_masine_log": [
+                    null,
+                    3
+                ],
+                "zalozeno_na_dostavku_log": "hjk",
                 "sklad_otgruzki": null,
                 "oplata_rub": null,
                 "address": null,
                 "obieem_gruza_l_proglog": null,
                 "ves_kg_sistlog": null,
-                "imia": null,
+                "imia": "n",
                 "telefon_proglog": null,
                 "primecanie": null,
-                "okno_log": null,
+                "okno_log": "bhjv",
                 "vremia_obsluzivaniia_min_log": null,
                 "kommentarii_voditelia_k_statusu_prog": null,
-                "client_id": [],
+                "client_id": [
+                    4700,
+                    2300,
+                    2075
+                ],
                 "pole_spiska_2149": null,
-                "photo": null,
+                "photo": [
+                    null
+                ],
                 "mnozestvennyi_spisok_2248": null,
-                "fail_2249": null,
+                "fail_2249": [
+                    null
+                ],
                 "_2250": null,
                 "cislo_2251": null,
                 "stroka_2301": null,
@@ -2946,35 +3243,64 @@
                 "par_2394": null
             },
             {
-                "id": 130163,
-                "created_at": "2023-05-26T02:38:56.000000Z",
-                "updated_at": "2023-08-31T09:03:37.000000Z",
-                "name": "128675",
+                "id": 132710,
+                "created_at": "2023-12-05T10:37:15.000000Z",
+                "updated_at": "2023-12-05T10:37:15.000000Z",
+                "name": "Задача #132698",
                 "date": null,
                 "point_status": 404,
-                "products": "[{\"name\":\"Холодный асфальт, 25кг\",\"price\":270,\"count\":46,\"weight\":null,\"sum\":12420},{\"name\":\"Эмульсия битумная катионная ЭБК-1, 20л\",\"price\":790,\"count\":16,\"weight\":null,\"sum\":12640}]",
+                "products": null,
                 "crm_link": null,
-                "user_id": null,
+                "user_id": [
+                    53
+                ],
                 "tip_deistviia": null,
-                "tip_tk": null,
+                "tip_tk": [
+                    null,
+                    "ТК, ПЭК",
+                    "ТК, Почта России 123"
+                ],
                 "trebovaniia_k_masine_log": null,
-                "zalozeno_na_dostavku_log": null,
+                "zalozeno_na_dostavku_log": {
+                    "value": "орп"
+                },
                 "sklad_otgruzki": null,
                 "oplata_rub": null,
                 "address": null,
                 "obieem_gruza_l_proglog": null,
                 "ves_kg_sistlog": null,
-                "imia": null,
+                "imia": {
+                    "value": "Петр"
+                },
                 "telefon_proglog": null,
                 "primecanie": null,
-                "okno_log": null,
+                "okno_log": {
+                    "value": "прп"
+                },
                 "vremia_obsluzivaniia_min_log": null,
                 "kommentarii_voditelia_k_statusu_prog": null,
-                "client_id": [],
+                "client_id": [
+                    1024,
+                    1201,
+                    1536
+                ],
                 "pole_spiska_2149": null,
-                "photo": null,
+                "photo": [
+                    null
+                ],
                 "mnozestvennyi_spisok_2248": null,
-                "fail_2249": null,
+                "fail_2249": [
+                    {
+                        "id": 1701754769972,
+                        "name": "mch.png",
+                        "url": "https://compas.pro/storage/thumbnails/default/8x/lg/2z2q258gkwoo0ww8owo8w.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FtLqg2diWtgy25A1BJGNwLUeburtHkdDC7xS1yPzE.png&s=https",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/tLqg2diWtgy25A1BJGNwLUeburtHkdDC7xS1yPzE.png",
+                        "extension": "png",
+                        "sort": 0,
+                        "uid": "1701754769972",
+                        "status": "success"
+                    }
+                ],
                 "_2250": null,
                 "cislo_2251": null,
                 "stroka_2301": null,
@@ -2997,35 +3323,115 @@
                 "par_2394": null
             },
             {
-                "id": 130172,
-                "created_at": "2023-05-26T02:39:01.000000Z",
-                "updated_at": "2023-08-31T10:01:15.000000Z",
-                "name": "128665",
+                "id": 132062,
+                "created_at": "2023-08-11T11:07:05.000000Z",
+                "updated_at": "2024-01-20T16:44:15.000000Z",
+                "name": "119553",
                 "date": null,
                 "point_status": 404,
-                "products": "[{\"name\":\"Кварцевый песок 0,8-1,2 мм, окатанный, 25кг\",\"price\":245,\"count\":1,\"weight\":null,\"sum\":245}]",
+                "products": "[{\"name\":\"Песчано-соляная смесь 70\\/30, 1т\",\"price\":4997,\"count\":3,\"weight\":null,\"sum\":14991,\"id\":188}]",
                 "crm_link": null,
-                "user_id": null,
+                "user_id": [
+                    8
+                ],
                 "tip_deistviia": null,
                 "tip_tk": null,
-                "trebovaniia_k_masine_log": null,
-                "zalozeno_na_dostavku_log": null,
+                "trebovaniia_k_masine_log": [
+                    3,
+                    4
+                ],
+                "zalozeno_na_dostavku_log": "321",
                 "sklad_otgruzki": null,
                 "oplata_rub": null,
                 "address": null,
                 "obieem_gruza_l_proglog": null,
                 "ves_kg_sistlog": null,
-                "imia": null,
+                "imia": {
+                    "value": "3242342"
+                },
                 "telefon_proglog": null,
                 "primecanie": null,
                 "okno_log": null,
                 "vremia_obsluzivaniia_min_log": null,
                 "kommentarii_voditelia_k_statusu_prog": null,
-                "client_id": [],
+                "client_id": [
+                    666,
+                    1234,
+                    908
+                ],
                 "pole_spiska_2149": null,
-                "photo": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": [
+                    null,
+                    1,
+                    2
+                ],
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": "123223",
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": "Q",
+                "testovoe_pole_1_2347": null,
+                "_2348": "794",
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 132628,
+                "created_at": "2023-11-22T12:02:35.000000Z",
+                "updated_at": "2023-12-01T07:40:15.000000Z",
+                "name": "12321d",
+                "date": "2023-11-26",
+                "point_status": 404,
+                "products": null,
+                "crm_link": null,
+                "user_id": [
+                    8
+                ],
+                "tip_deistviia": null,
+                "tip_tk": null,
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": "1122333",
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": null,
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": "новое имя",
+                "telefon_proglog": null,
+                "primecanie": null,
+                "okno_log": "4444",
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [
+                    188,
+                    1536,
+                    248
+                ],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
                 "mnozestvennyi_spisok_2248": null,
-                "fail_2249": null,
+                "fail_2249": [
+                    null
+                ],
                 "_2250": null,
                 "cislo_2251": null,
                 "stroka_2301": null,
@@ -3048,15 +3454,104 @@
                 "par_2394": null
             },
             {
-                "id": 130164,
-                "created_at": "2023-05-26T02:38:57.000000Z",
-                "updated_at": "2023-08-31T10:01:15.000000Z",
-                "name": "128660",
+                "id": 132632,
+                "created_at": "2023-11-23T09:09:02.000000Z",
+                "updated_at": "2023-11-28T10:32:38.000000Z",
+                "name": "1116565678",
+                "date": "2023-11-24",
+                "point_status": 405,
+                "products": null,
+                "crm_link": null,
+                "user_id": [
+                    1
+                ],
+                "tip_deistviia": null,
+                "tip_tk": [
+                    null,
+                    "ТК, Почта России 123",
+                    "ТК, Boxberry",
+                    "ТК, Другая"
+                ],
+                "trebovaniia_k_masine_log": [
+                    null,
+                    1,
+                    2,
+                    3,
+                    4
+                ],
+                "zalozeno_na_dostavku_log": {
+                    "value": "3"
+                },
+                "sklad_otgruzki": null,
+                "oplata_rub": "грпрол",
+                "address": {
+                    "text": "Россия, Московская область, Балашиха, микрорайон Железнодорожный, Советская улица, 25А",
+                    "coords": [
+                        "55.751614",
+                        "38.013406"
+                    ]
+                },
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": {
+                    "value": "33"
+                },
+                "telefon_proglog": null,
+                "primecanie": "орлшо",
+                "okno_log": {
+                    "value": "э",
+                    "external_link": ";lk;lkl;k"
+                },
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [
+                    1280,
+                    256
+                ],
+                "pole_spiska_2149": "3",
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": [
+                    1,
+                    2
+                ],
+                "fail_2249": [
+                    null
+                ],
+                "_2250": "759",
+                "cislo_2251": "990890888",
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 1125,
+                "created_at": "2023-04-14T09:22:58.000000Z",
+                "updated_at": "2023-11-08T22:00:53.000000Z",
+                "name": "127039",
                 "date": null,
                 "point_status": 404,
-                "products": "[{\"name\":\"Таблетированная соль DIESALZ, 99,87%, 25кг\",\"price\":423,\"count\":13,\"weight\":null,\"sum\":5499}]",
+                "products": "[{\"name\":\"Кварцевый песок, фр. 0,5-0,8 мм, окатанный, для фильтрации воды, Мураевня, 1т\",\"price\":6150,\"count\":10,\"weight\":null,\"sum\":61500,\"id\":11}]",
                 "crm_link": null,
-                "user_id": null,
+                "user_id": [
+                    1
+                ],
                 "tip_deistviia": null,
                 "tip_tk": null,
                 "trebovaniia_k_masine_log": null,
@@ -3065,18 +3560,24 @@
                 "oplata_rub": null,
                 "address": null,
                 "obieem_gruza_l_proglog": null,
-                "ves_kg_sistlog": null,
+                "ves_kg_sistlog": "10000",
                 "imia": null,
                 "telefon_proglog": null,
                 "primecanie": null,
                 "okno_log": null,
                 "vremia_obsluzivaniia_min_log": null,
                 "kommentarii_voditelia_k_statusu_prog": null,
-                "client_id": [],
+                "client_id": [
+                    6108
+                ],
                 "pole_spiska_2149": null,
-                "photo": null,
+                "photo": [
+                    null
+                ],
                 "mnozestvennyi_spisok_2248": null,
-                "fail_2249": null,
+                "fail_2249": [
+                    null
+                ],
                 "_2250": null,
                 "cislo_2251": null,
                 "stroka_2301": null,
@@ -3099,35 +3600,51 @@
                 "par_2394": null
             },
             {
-                "id": 130173,
-                "created_at": "2023-05-26T02:39:02.000000Z",
-                "updated_at": "2023-08-31T10:01:15.000000Z",
-                "name": "128652",
-                "date": null,
+                "id": 132605,
+                "created_at": "2023-11-17T17:26:18.000000Z",
+                "updated_at": "2023-11-24T10:07:08.000000Z",
+                "name": "132883",
+                "date": "2023-11-23",
                 "point_status": 404,
-                "products": "[{\"name\":\"Аммиачная селитра, 25кг\",\"price\":930,\"count\":2,\"weight\":null,\"sum\":1860}]",
+                "products": "[{\"name\":\"Мрамор природный галтованный фр. 20-40 мм, 25кг\",\"price\":1450,\"count\":6,\"weight\":null,\"sum\":8700,\"id\":17},{\"name\":\"Техническая соль Илецкая, 25кг\",\"price\":280,\"count\":4,\"weight\":null,\"sum\":1120,\"id\":304}]",
                 "crm_link": null,
-                "user_id": null,
+                "user_id": [
+                    1
+                ],
                 "tip_deistviia": null,
                 "tip_tk": null,
-                "trebovaniia_k_masine_log": null,
+                "trebovaniia_k_masine_log": [
+                    null
+                ],
                 "zalozeno_na_dostavku_log": null,
                 "sklad_otgruzki": null,
                 "oplata_rub": null,
-                "address": null,
+                "address": {
+                    "text": "Россия, Москва, Красная площадь, 5",
+                    "coords": [
+                        "55.752572",
+                        "37.62413"
+                    ]
+                },
                 "obieem_gruza_l_proglog": null,
                 "ves_kg_sistlog": null,
-                "imia": null,
+                "imia": "9",
                 "telefon_proglog": null,
                 "primecanie": null,
                 "okno_log": null,
                 "vremia_obsluzivaniia_min_log": null,
                 "kommentarii_voditelia_k_statusu_prog": null,
-                "client_id": [],
+                "client_id": [
+                    5614
+                ],
                 "pole_spiska_2149": null,
-                "photo": null,
+                "photo": [
+                    null
+                ],
                 "mnozestvennyi_spisok_2248": null,
-                "fail_2249": null,
+                "fail_2249": [
+                    null
+                ],
                 "_2250": null,
                 "cislo_2251": null,
                 "stroka_2301": null,
@@ -3150,15 +3667,17 @@
                 "par_2394": null
             },
             {
-                "id": 130166,
-                "created_at": "2023-05-26T02:38:57.000000Z",
-                "updated_at": "2023-08-31T10:01:15.000000Z",
-                "name": "128649",
+                "id": 130112,
+                "created_at": null,
+                "updated_at": "2023-11-13T11:31:25.000000Z",
+                "name": "127614 А",
                 "date": null,
-                "point_status": 404,
-                "products": "[{\"name\":\"Таблетированная соль DIESALZ, 99,87%, 25кг\",\"price\":423,\"count\":4,\"weight\":null,\"sum\":1692}]",
+                "point_status": 15,
+                "products": "[{\"name\":\"Мрамор природный галтованный фр. 20-40 мм, 25кг\",\"price\":1450,\"count\":2,\"weight\":null,\"sum\":2900,\"id\":17}]",
                 "crm_link": null,
-                "user_id": null,
+                "user_id": [
+                    8
+                ],
                 "tip_deistviia": null,
                 "tip_tk": null,
                 "trebovaniia_k_masine_log": null,
@@ -3174,11 +3693,17 @@
                 "okno_log": null,
                 "vremia_obsluzivaniia_min_log": null,
                 "kommentarii_voditelia_k_statusu_prog": null,
-                "client_id": [],
+                "client_id": [
+                    1565
+                ],
                 "pole_spiska_2149": null,
-                "photo": null,
+                "photo": [
+                    null
+                ],
                 "mnozestvennyi_spisok_2248": null,
-                "fail_2249": null,
+                "fail_2249": [
+                    null
+                ],
                 "_2250": null,
                 "cislo_2251": null,
                 "stroka_2301": null,
@@ -3201,35 +3726,51 @@
                 "par_2394": null
             },
             {
-                "id": 130165,
-                "created_at": "2023-05-26T02:38:57.000000Z",
-                "updated_at": "2023-08-31T10:01:15.000000Z",
-                "name": "128634",
-                "date": null,
+                "id": 132629,
+                "created_at": "2023-11-22T12:04:55.000000Z",
+                "updated_at": "2023-11-30T04:29:20.000000Z",
+                "name": "2222222",
+                "date": "2023-11-24",
                 "point_status": 404,
-                "products": "[{\"name\":\"Кварцевый песок 0,4-0,8 мм, окатанный, 25кг\",\"price\":205,\"count\":200,\"weight\":null,\"sum\":41000}]",
+                "products": null,
                 "crm_link": null,
                 "user_id": null,
                 "tip_deistviia": null,
                 "tip_tk": null,
-                "trebovaniia_k_masine_log": null,
-                "zalozeno_na_dostavku_log": null,
+                "trebovaniia_k_masine_log": [
+                    1,
+                    2,
+                    3
+                ],
+                "zalozeno_na_dostavku_log": {
+                    "value": "3"
+                },
                 "sklad_otgruzki": null,
                 "oplata_rub": null,
                 "address": null,
                 "obieem_gruza_l_proglog": null,
                 "ves_kg_sistlog": null,
-                "imia": null,
+                "imia": {
+                    "value": "33"
+                },
                 "telefon_proglog": null,
                 "primecanie": null,
-                "okno_log": null,
+                "okno_log": {
+                    "value": "1"
+                },
                 "vremia_obsluzivaniia_min_log": null,
                 "kommentarii_voditelia_k_statusu_prog": null,
-                "client_id": [],
-                "pole_spiska_2149": null,
-                "photo": null,
+                "client_id": [
+                    1467
+                ],
+                "pole_spiska_2149": "1",
+                "photo": [
+                    null
+                ],
                 "mnozestvennyi_spisok_2248": null,
-                "fail_2249": null,
+                "fail_2249": [
+                    null
+                ],
                 "_2250": null,
                 "cislo_2251": null,
                 "stroka_2301": null,
@@ -3252,19 +3793,26 @@
                 "par_2394": null
             },
             {
-                "id": 130160,
-                "created_at": "2023-05-26T02:38:53.000000Z",
-                "updated_at": "2023-08-31T10:01:15.000000Z",
-                "name": "128633",
+                "id": 132769,
+                "created_at": "2024-01-13T18:58:44.000000Z",
+                "updated_at": "2024-01-20T16:44:15.000000Z",
+                "name": {
+                    "value": "123488"
+                },
                 "date": null,
                 "point_status": 404,
-                "products": "[{\"name\":\"Стеклошарики «TechBeads» фр. 040-070 мкр, 25кг\",\"price\":891,\"count\":2,\"weight\":null,\"sum\":1782},{\"name\":\"Стеклошарики «TechBeads» фр. 200-300 мкр, 25кг\",\"price\":1018,\"count\":1,\"weight\":null,\"sum\":1018}]",
+                "products": "[{\"name\":\"Таблетированная соль DIESALZ, 99,87%, 25кг\",\"price\":461.5,\"count\":1000,\"weight\":null,\"sum\":461500,\"id\":18}]",
                 "crm_link": null,
-                "user_id": null,
+                "user_id": [
+                    8
+                ],
                 "tip_deistviia": null,
                 "tip_tk": null,
-                "trebovaniia_k_masine_log": null,
-                "zalozeno_na_dostavku_log": null,
+                "trebovaniia_k_masine_log": [
+                    null,
+                    4
+                ],
+                "zalozeno_na_dostavku_log": "23",
                 "sklad_otgruzki": null,
                 "oplata_rub": null,
                 "address": null,
@@ -3276,11 +3824,17 @@
                 "okno_log": null,
                 "vremia_obsluzivaniia_min_log": null,
                 "kommentarii_voditelia_k_statusu_prog": null,
-                "client_id": [],
+                "client_id": [
+                    1328
+                ],
                 "pole_spiska_2149": null,
-                "photo": null,
+                "photo": [
+                    null
+                ],
                 "mnozestvennyi_spisok_2248": null,
-                "fail_2249": null,
+                "fail_2249": [
+                    null
+                ],
                 "_2250": null,
                 "cislo_2251": null,
                 "stroka_2301": null,
@@ -3303,17 +3857,24 @@
                 "par_2394": null
             },
             {
-                "id": 130152,
-                "created_at": "2023-05-26T02:38:05.000000Z",
-                "updated_at": "2023-08-31T10:01:15.000000Z",
-                "name": "128630",
+                "id": 132771,
+                "created_at": "2024-01-13T18:59:03.000000Z",
+                "updated_at": "2024-01-20T16:33:26.000000Z",
+                "name": {
+                    "value": "123488hg"
+                },
                 "date": null,
                 "point_status": 404,
-                "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 25кг\",\"price\":195,\"count\":4,\"weight\":null,\"sum\":780},{\"name\":\"Портландцемент М-500 Д-20, 50кг\",\"price\":340,\"count\":1,\"weight\":null,\"sum\":340}]",
+                "products": "[{\"name\":\"Таблетированная соль DIESALZ, 99,87%, 25кг\",\"price\":461.5,\"count\":1000,\"weight\":null,\"sum\":461500,\"id\":18}]",
                 "crm_link": null,
-                "user_id": null,
+                "user_id": [
+                    8
+                ],
                 "tip_deistviia": null,
-                "tip_tk": null,
+                "tip_tk": [
+                    null,
+                    "ТК, ПЭК"
+                ],
                 "trebovaniia_k_masine_log": null,
                 "zalozeno_na_dostavku_log": null,
                 "sklad_otgruzki": null,
@@ -3321,17 +3882,84 @@
                 "address": null,
                 "obieem_gruza_l_proglog": null,
                 "ves_kg_sistlog": null,
-                "imia": null,
+                "imia": {
+                    "value": "hj34e666"
+                },
                 "telefon_proglog": null,
                 "primecanie": null,
                 "okno_log": null,
                 "vremia_obsluzivaniia_min_log": null,
                 "kommentarii_voditelia_k_statusu_prog": null,
-                "client_id": [],
+                "client_id": [
+                    1328
+                ],
                 "pole_spiska_2149": null,
-                "photo": null,
+                "photo": [
+                    null
+                ],
                 "mnozestvennyi_spisok_2248": null,
-                "fail_2249": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": "795",
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 132096,
+                "created_at": "2023-08-14T09:38:10.000000Z",
+                "updated_at": "2023-12-05T05:56:38.000000Z",
+                "name": "ijijijijij щлощу плащ леща лщщш лущл злу злзл зал злуаз лузл зулз л узалзл зщлуа зщлщлщ щощлщ л",
+                "date": "2023-08-18",
+                "point_status": 404,
+                "products": null,
+                "crm_link": null,
+                "user_id": [
+                    8
+                ],
+                "tip_deistviia": null,
+                "tip_tk": null,
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": "3",
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": null,
+                "obieem_gruza_l_proglog": "23",
+                "ves_kg_sistlog": null,
+                "imia": "1",
+                "telefon_proglog": null,
+                "primecanie": null,
+                "okno_log": "2",
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [
+                    1201
+                ],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
                 "_2250": null,
                 "cislo_2251": null,
                 "stroka_2301": null,
@@ -3354,35 +3982,177 @@
                 "par_2394": null
             },
             {
-                "id": 130151,
-                "created_at": "2023-05-26T02:38:05.000000Z",
-                "updated_at": "2023-08-31T10:01:15.000000Z",
-                "name": "128625",
-                "date": null,
-                "point_status": 404,
-                "products": "[{\"name\":\"Кварцевый песок Ratmix, фр. 0,1-0,2 мм, окатанный, 25кг\",\"price\":205,\"count\":1,\"weight\":null,\"sum\":205},{\"name\":\"Стеклошарики «DuoLux» фр. 425-850 мкр, 25кг\",\"price\":1400,\"count\":1,\"weight\":null,\"sum\":1400}]",
+                "id": 132581,
+                "created_at": "2023-11-09T04:57:04.000000Z",
+                "updated_at": "2023-12-27T11:35:13.000000Z",
+                "name": {
+                    "value": "Тестовая задача",
+                    "external_link": "https://translate.yandex.ru/"
+                },
+                "date": "2023-10-02",
+                "point_status": 524,
+                "products": "[{\"id\":54,\"name\":\"Стеклошарики «TechBeads» фр. 0-050 мкр, 25кг\",\"price\":\"11\",\"count\":\"22\",\"weight\":1,\"sum\":242},{\"id\":9,\"name\":\"Речной песок, 25кг\",\"price\":\"22\",\"count\":\"11\",\"weight\":1,\"sum\":242}]",
                 "crm_link": null,
-                "user_id": null,
-                "tip_deistviia": null,
-                "tip_tk": null,
-                "trebovaniia_k_masine_log": null,
-                "zalozeno_na_dostavku_log": null,
-                "sklad_otgruzki": null,
-                "oplata_rub": null,
-                "address": null,
-                "obieem_gruza_l_proglog": null,
-                "ves_kg_sistlog": null,
-                "imia": null,
-                "telefon_proglog": null,
-                "primecanie": null,
-                "okno_log": null,
-                "vremia_obsluzivaniia_min_log": null,
-                "kommentarii_voditelia_k_statusu_prog": null,
-                "client_id": [],
-                "pole_spiska_2149": null,
-                "photo": null,
+                "user_id": [
+                    1
+                ],
+                "tip_deistviia": "436",
+                "tip_tk": [
+                    null,
+                    "ТК, ПЭК",
+                    "ТК, СДЭК",
+                    "ТК, Boxberry"
+                ],
+                "trebovaniia_k_masine_log": [
+                    null,
+                    0,
+                    1,
+                    4,
+                    2,
+                    3
+                ],
+                "zalozeno_na_dostavku_log": {
+                    "value": "1112311",
+                    "external_link": null
+                },
+                "sklad_otgruzki": "От поставщика",
+                "oplata_rub": "200",
+                "address": {
+                    "text": "Россия, Москва, улица Бутлерова, 38к4",
+                    "coords": [
+                        "55.642606",
+                        "37.547414"
+                    ]
+                },
+                "obieem_gruza_l_proglog": "1231",
+                "ves_kg_sistlog": "112232131",
+                "imia": "Крутое имя",
+                "telefon_proglog": "321123",
+                "primecanie": "Мне нужно посмотреть на щебень в реальном времени, не на картинке в интернете! Если есть такая возможность, я лучше воспользуюсь ею и  ооо есл.  большой объём, мне нужно больше 300 кг.",
+                "okno_log": "asas",
+                "vremia_obsluzivaniia_min_log": "1231",
+                "kommentarii_voditelia_k_statusu_prog": "Тестовый комментарий для проверки работоспособности поля",
+                "client_id": [
+                    1201
+                ],
+                "pole_spiska_2149": "2",
+                "photo": [
+                    {
+                        "id": 1698823074691,
+                        "name": "Вадим Сыропятов (смотрит правки).jpg",
+                        "url": "https://compas.pro/storage/thumbnails/default/dg/sh/yz8r7xkok8o4k8kso0cog.jpg?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FmoENJLrMklk70YnI5LSwh3qXHOsKQfWROi1gz8mI.jpg&s=https",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/moENJLrMklk70YnI5LSwh3qXHOsKQfWROi1gz8mI.jpg",
+                        "extension": "jpg",
+                        "sort": 0,
+                        "uid": "1698823074691",
+                        "status": "success"
+                    }
+                ],
                 "mnozestvennyi_spisok_2248": null,
-                "fail_2249": null,
+                "fail_2249": [
+                    {
+                        "id": 1703676899767,
+                        "name": "photo_2023-11-22_10-07-21.jpg",
+                        "url": "https://compas.pro/storage/thumbnails/default/1w/37/iiyhms74woos8c8g8k804.jpg?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2Fh7oMdY6GDHQqI8HWAoqeUR3CjLmdY7UEK5ThI3LS.jpg&s=https",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/h7oMdY6GDHQqI8HWAoqeUR3CjLmdY7UEK5ThI3LS.jpg",
+                        "extension": "jpg",
+                        "sort": 0,
+                        "uid": "1703676899767",
+                        "status": "success"
+                    }
+                ],
+                "_2250": null,
+                "cislo_2251": "6",
+                "stroka_2301": null,
+                "1_2308": "1",
+                "23_2308": "2",
+                "34_2308": "3",
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": "5",
+                "_2348": null,
+                "ghfc_2349": "4",
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 132587,
+                "created_at": "2023-11-09T13:00:24.000000Z",
+                "updated_at": "2023-11-09T13:00:24.000000Z",
+                "name": {
+                    "value": "Тестовая задача",
+                    "external_link": "https://translate.yandex.ru/"
+                },
+                "date": "2023-10-02",
+                "point_status": 524,
+                "products": "[{\"id\":54,\"name\":\"Стеклошарики «TechBeads» фр. 0-050 мкр, 25кг\",\"price\":\"11\",\"count\":\"22\",\"weight\":1,\"sum\":242},{\"id\":9,\"name\":\"Речной песок, 25кг\",\"price\":\"22\",\"count\":\"11\",\"weight\":1,\"sum\":242}]",
+                "crm_link": null,
+                "user_id": [
+                    1
+                ],
+                "tip_deistviia": "436",
+                "tip_tk": [
+                    null,
+                    "ТК, ПЭК",
+                    "ТК, СДЭК",
+                    "ТК, Boxberry"
+                ],
+                "trebovaniia_k_masine_log": [
+                    null,
+                    0,
+                    1,
+                    4,
+                    2,
+                    3
+                ],
+                "zalozeno_na_dostavku_log": {
+                    "value": "1112311",
+                    "external_link": null
+                },
+                "sklad_otgruzki": "От поставщика",
+                "oplata_rub": "200",
+                "address": {
+                    "text": "Россия, Москва, улица Бутлерова, 38к4",
+                    "coords": [
+                        "55.642606",
+                        "37.547414"
+                    ]
+                },
+                "obieem_gruza_l_proglog": "1231",
+                "ves_kg_sistlog": "112232131",
+                "imia": "Крутое имя",
+                "telefon_proglog": "321123",
+                "primecanie": "Мне нужно посмотреть на щебень в реальном времени, не на картинке в интернете! Если есть такая возможность, я лучше воспользуюсь ею и  ооо есл.  большой объём, мне нужно больше 300 кг.",
+                "okno_log": "asas",
+                "vremia_obsluzivaniia_min_log": "1231",
+                "kommentarii_voditelia_k_statusu_prog": "Тестовый комментарий для проверки работоспособности поля",
+                "client_id": [
+                    1201
+                ],
+                "pole_spiska_2149": "2",
+                "photo": [
+                    {
+                        "id": 1698823074691,
+                        "name": "Вадим Сыропятов (смотрит правки).jpg",
+                        "url": "https://compas.pro/storage/thumbnails/default/dg/sh/yz8r7xkok8o4k8kso0cog.jpg?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FmoENJLrMklk70YnI5LSwh3qXHOsKQfWROi1gz8mI.jpg&s=https",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/moENJLrMklk70YnI5LSwh3qXHOsKQfWROi1gz8mI.jpg",
+                        "extension": "jpg",
+                        "sort": 0,
+                        "uid": "1698823074691",
+                        "status": "success"
+                    }
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
                 "_2250": null,
                 "cislo_2251": null,
                 "stroka_2301": null,
@@ -3405,35 +4175,155 @@
                 "par_2394": null
             },
             {
-                "id": 130150,
-                "created_at": "2023-05-26T02:38:05.000000Z",
-                "updated_at": "2023-08-31T10:01:15.000000Z",
-                "name": "128591",
+                "id": 132595,
+                "created_at": "2023-11-13T06:59:24.000000Z",
+                "updated_at": "2023-12-26T06:34:23.000000Z",
+                "name": "Тестовая задача",
+                "date": "2023-10-02",
+                "point_status": 524,
+                "products": "[{\"id\":54,\"name\":\"Стеклошарики «TechBeads» фр. 0-050 мкр, 25кг\",\"price\":\"11\",\"count\":\"22\",\"weight\":1,\"sum\":242},{\"id\":9,\"name\":\"Речной песок, 25кг\",\"price\":\"22\",\"count\":\"11\",\"weight\":1,\"sum\":242}]",
+                "crm_link": null,
+                "user_id": [
+                    1
+                ],
+                "tip_deistviia": "436",
+                "tip_tk": [
+                    null,
+                    "ТК, ПЭК",
+                    "ТК, СДЭК",
+                    "ТК, Boxberry"
+                ],
+                "trebovaniia_k_masine_log": [
+                    null,
+                    0,
+                    1,
+                    4,
+                    2,
+                    3
+                ],
+                "zalozeno_na_dostavku_log": {
+                    "value": "1112311",
+                    "external_link": null
+                },
+                "sklad_otgruzki": "От поставщика",
+                "oplata_rub": "200",
+                "address": {
+                    "text": "Россия, Москва, Красная площадь",
+                    "coords": [
+                        "55.753544",
+                        "37.621202"
+                    ]
+                },
+                "obieem_gruza_l_proglog": "1231",
+                "ves_kg_sistlog": "112232131",
+                "imia": "Крутое имя",
+                "telefon_proglog": "321123",
+                "primecanie": "Мне нужно посмотреть на щебень в реальном времени, не на картинке в интернете! Если есть такая возможность, я лучше воспользуюсь ею и  ооо есл.  большой объём, мне нужно больше 300 кг.",
+                "okno_log": "asas",
+                "vremia_obsluzivaniia_min_log": "1231",
+                "kommentarii_voditelia_k_statusu_prog": "Тестовый комментарий для проверки работоспособности поля",
+                "client_id": [
+                    1201
+                ],
+                "pole_spiska_2149": "2",
+                "photo": [
+                    {
+                        "id": 1698823074691,
+                        "name": "Вадим Сыропятов (смотрит правки).jpg",
+                        "url": "https://compas.pro/storage/thumbnails/default/dg/sh/yz8r7xkok8o4k8kso0cog.jpg?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FmoENJLrMklk70YnI5LSwh3qXHOsKQfWROi1gz8mI.jpg&s=https",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/moENJLrMklk70YnI5LSwh3qXHOsKQfWROi1gz8mI.jpg",
+                        "extension": "jpg",
+                        "sort": 0,
+                        "uid": "1698823074691",
+                        "status": "success"
+                    }
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    {
+                        "id": 1703572354588,
+                        "name": "2.4.svg",
+                        "url": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/29IB3OmTT04DLvum3DLd3SmPgygZv3kmLpgegbIn.svg",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/29IB3OmTT04DLvum3DLd3SmPgygZv3kmLpgegbIn.svg",
+                        "extension": "svg",
+                        "sort": 0,
+                        "uid": "1703572354588",
+                        "status": "success"
+                    }
+                ],
+                "_2250": null,
+                "cislo_2251": "121",
+                "stroka_2301": null,
+                "1_2308": "11",
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": "123",
+                "_2348": null,
+                "ghfc_2349": "4",
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 132676,
+                "created_at": "2023-12-01T12:30:52.000000Z",
+                "updated_at": "2023-12-04T04:58:13.000000Z",
+                "name": {
+                    "value": "Задача #132676 о"
+                },
                 "date": null,
                 "point_status": 404,
-                "products": "[{\"name\":\"Кварцевый песок, фр. 0,5-0,8 мм, окатанный, для фильтрации воды, Мураевня, 25кг\",\"price\":235,\"count\":1,\"weight\":null,\"sum\":235}]",
+                "products": null,
                 "crm_link": null,
-                "user_id": null,
+                "user_id": [
+                    8
+                ],
                 "tip_deistviia": null,
                 "tip_tk": null,
                 "trebovaniia_k_masine_log": null,
-                "zalozeno_na_dostavku_log": null,
+                "zalozeno_na_dostavku_log": {
+                    "value": "hfgtfghgh"
+                },
                 "sklad_otgruzki": null,
                 "oplata_rub": null,
-                "address": null,
+                "address": {
+                    "text": "Россия, Москва, улица Бутлерова, 17",
+                    "coords": [
+                        "55.65015",
+                        "37.539626"
+                    ]
+                },
                 "obieem_gruza_l_proglog": null,
                 "ves_kg_sistlog": null,
-                "imia": null,
+                "imia": {
+                    "value": "hghfhg"
+                },
                 "telefon_proglog": null,
                 "primecanie": null,
-                "okno_log": null,
+                "okno_log": {
+                    "value": "hgffg"
+                },
                 "vremia_obsluzivaniia_min_log": null,
                 "kommentarii_voditelia_k_statusu_prog": null,
-                "client_id": [],
+                "client_id": [
+                    1024
+                ],
                 "pole_spiska_2149": null,
-                "photo": null,
+                "photo": [
+                    null
+                ],
                 "mnozestvennyi_spisok_2248": null,
-                "fail_2249": null,
+                "fail_2249": [
+                    null
+                ],
                 "_2250": null,
                 "cislo_2251": null,
                 "stroka_2301": null,
@@ -3456,17 +4346,209 @@
                 "par_2394": null
             },
             {
-                "id": 130148,
-                "created_at": "2023-05-26T02:38:04.000000Z",
-                "updated_at": "2023-08-31T10:01:15.000000Z",
-                "name": "128582",
-                "date": null,
+                "id": 132535,
+                "created_at": "2023-09-26T21:03:51.000000Z",
+                "updated_at": "2023-12-26T10:22:33.000000Z",
+                "name": "Задача #132535",
+                "date": "2023-12-30",
                 "point_status": 404,
-                "products": "[{\"name\":\"Мраморный щебень фр. 10-20 мм, 1т\",\"price\":6984,\"count\":1,\"weight\":null,\"sum\":6984},{\"name\":\"Почвогрунт \\\"Эконом\\\", 1000л\",\"price\":2300,\"count\":9,\"weight\":null,\"sum\":20700}]",
+                "products": null,
+                "crm_link": null,
+                "user_id": [
+                    1
+                ],
+                "tip_deistviia": null,
+                "tip_tk": [
+                    null,
+                    "ТК, ПЭК"
+                ],
+                "trebovaniia_k_masine_log": [
+                    null,
+                    4
+                ],
+                "zalozeno_na_dostavku_log": {
+                    "value": "hejsm"
+                },
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": null,
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": null,
+                "telefon_proglog": null,
+                "primecanie": "Djdjrjsue",
+                "okno_log": null,
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [
+                    666
+                ],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    {
+                        "id": 1703585914803,
+                        "name": "@fan_9ice6hot=8946d7.mp4",
+                        "url": "/icons/new/undefinedFile.svg",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/bMdR4oicBUvnaq41PSamp66yTEmqx319vTlLwTtd.mp4",
+                        "extension": "mp4",
+                        "sort": 0,
+                        "uid": "1703585914803",
+                        "status": "success"
+                    },
+                    {
+                        "id": 1703585969461,
+                        "name": "1.1.png",
+                        "url": "https://compas.pro/storage/thumbnails/default/31/oc/f3u3if8ks4cw4kwksgo88.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FhOyJI0aZvcm19Jub2IqvWJNg7iFuUXmMkdl0T8vE.png&s=https",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/hOyJI0aZvcm19Jub2IqvWJNg7iFuUXmMkdl0T8vE.png",
+                        "extension": "png",
+                        "sort": 0,
+                        "uid": "1703585969461",
+                        "status": "success"
+                    },
+                    {
+                        "id": 1703586086533,
+                        "name": "@hzvmmnts=cd50a3.mp4",
+                        "url": "/icons/new/undefinedFile.svg",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/wvTAFMX92fdDV2UXvxYWXgRiek5vZycDKjonTvcI.mp4",
+                        "extension": "mp4",
+                        "sort": 0,
+                        "uid": "1703586086533",
+                        "status": "success"
+                    }
+                ],
+                "_2250": null,
+                "cislo_2251": "66",
+                "stroka_2301": null,
+                "1_2308": "cxcv",
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": "Dhdjs",
+                "_2348": null,
+                "ghfc_2349": "4",
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 132728,
+                "created_at": "2023-12-09T23:46:39.000000Z",
+                "updated_at": "2023-12-29T10:41:53.000000Z",
+                "name": "54545856",
+                "date": "2023-12-20",
+                "point_status": 404,
+                "products": null,
+                "crm_link": null,
+                "user_id": [
+                    46
+                ],
+                "tip_deistviia": null,
+                "tip_tk": [
+                    null,
+                    "ТК, ПЭК"
+                ],
+                "trebovaniia_k_masine_log": [
+                    2
+                ],
+                "zalozeno_na_dostavku_log": {
+                    "value": "23"
+                },
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": {
+                    "search": "Россия, Москва, улица Бутлерова, 38к4",
+                    "text": "Россия, Москва, улица Бутлерова, 38к4",
+                    "coords": [
+                        "55.642606",
+                        "37.547414"
+                    ]
+                },
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": "ы",
+                "telefon_proglog": null,
+                "primecanie": "11111",
+                "okno_log": "ы",
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [
+                    365
+                ],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    {
+                        "id": 1702391558374,
+                        "name": "thumbnail.png",
+                        "url": "https://compas.pro/storage/thumbnails/default/4o/aq/ome83uo0wksc4ckssw0o0.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FqP3dNvTDkEJii9TiUJ9HpxJN4K8O1LHIS8tdhgRV.png&s=https",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/qP3dNvTDkEJii9TiUJ9HpxJN4K8O1LHIS8tdhgRV.png",
+                        "extension": "png",
+                        "sort": 0,
+                        "uid": "1702391558374",
+                        "status": "success"
+                    },
+                    {
+                        "id": 1703587371758,
+                        "name": "5.pdf",
+                        "url": "https://opt6.compas.pro/storage/tenantopt6/app/public/2394/conversions/z4nnWUptLo4CypiwXPoeNHWHcMlCQbJZpSJryfjn-thumb.jpg",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/z4nnWUptLo4CypiwXPoeNHWHcMlCQbJZpSJryfjn.pdf",
+                        "extension": "pdf",
+                        "sort": 0,
+                        "uid": "1703587371758",
+                        "status": "success"
+                    }
+                ],
+                "_2250": null,
+                "cislo_2251": "34434",
+                "stroka_2301": null,
+                "1_2308": "1",
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": "783",
+                "ll_2345": "22",
+                "testovoe_pole_1_2347": "11",
+                "_2348": "800",
+                "ghfc_2349": "4",
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 132602,
+                "created_at": "2023-11-15T05:23:23.000000Z",
+                "updated_at": "2023-11-18T19:11:27.000000Z",
+                "name": {
+                    "value": "129090 проверка длины заголовка интересно насколько длинным его можно написать, исходя из того что в заголовке очень удобно писать какие то задачу, проверка длины заголовка интересно насколько длинным его можно написать123 23"
+                },
+                "date": null,
+                "point_status": 524,
+                "products": "[{\"name\":\"Аммиачная селитра, 25кг\",\"price\":930,\"count\":2,\"weight\":null,\"sum\":1860,\"id\":46}]",
                 "crm_link": null,
                 "user_id": null,
                 "tip_deistviia": null,
-                "tip_tk": null,
+                "tip_tk": [
+                    null
+                ],
                 "trebovaniia_k_masine_log": null,
                 "zalozeno_na_dostavku_log": null,
                 "sklad_otgruzki": null,
@@ -3480,11 +4562,17 @@
                 "okno_log": null,
                 "vremia_obsluzivaniia_min_log": null,
                 "kommentarii_voditelia_k_statusu_prog": null,
-                "client_id": [],
+                "client_id": [
+                    256
+                ],
                 "pole_spiska_2149": null,
-                "photo": null,
+                "photo": [
+                    null
+                ],
                 "mnozestvennyi_spisok_2248": null,
-                "fail_2249": null,
+                "fail_2249": [
+                    null
+                ],
                 "_2250": null,
                 "cislo_2251": null,
                 "stroka_2301": null,
@@ -3507,35 +4595,43 @@
                 "par_2394": null
             },
             {
-                "id": 130162,
-                "created_at": "2023-05-26T02:38:56.000000Z",
-                "updated_at": "2023-08-31T10:01:15.000000Z",
-                "name": "128578",
+                "id": 132621,
+                "created_at": "2023-11-22T10:46:45.000000Z",
+                "updated_at": "2023-11-28T14:26:02.000000Z",
+                "name": "129090 проверка длины заголовка интересно насколько длинным его можно написать, исходя из того что в заголовке очень удобно писать какие то",
                 "date": null,
-                "point_status": 404,
-                "products": "[{\"name\":\"Керамзит фр. 5-10 мм, 50л\",\"price\":155,\"count\":60,\"weight\":null,\"sum\":9300}]",
+                "point_status": 524,
+                "products": "[{\"name\":\"Аммиачная селитра, 25кг\",\"price\":930,\"count\":2,\"weight\":null,\"sum\":1860,\"id\":46}]",
                 "crm_link": null,
                 "user_id": null,
                 "tip_deistviia": null,
-                "tip_tk": null,
+                "tip_tk": [
+                    null
+                ],
                 "trebovaniia_k_masine_log": null,
-                "zalozeno_na_dostavku_log": null,
+                "zalozeno_na_dostavku_log": "gfdg",
                 "sklad_otgruzki": null,
                 "oplata_rub": null,
                 "address": null,
                 "obieem_gruza_l_proglog": null,
                 "ves_kg_sistlog": null,
-                "imia": null,
+                "imia": "gfdgdf",
                 "telefon_proglog": null,
                 "primecanie": null,
-                "okno_log": null,
+                "okno_log": "gf",
                 "vremia_obsluzivaniia_min_log": null,
                 "kommentarii_voditelia_k_statusu_prog": null,
-                "client_id": [],
+                "client_id": [
+                    256
+                ],
                 "pole_spiska_2149": null,
-                "photo": null,
+                "photo": [
+                    null
+                ],
                 "mnozestvennyi_spisok_2248": null,
-                "fail_2249": null,
+                "fail_2249": [
+                    null
+                ],
                 "_2250": null,
                 "cislo_2251": null,
                 "stroka_2301": null,
@@ -3558,17 +4654,21 @@
                 "par_2394": null
             },
             {
-                "id": 130250,
-                "created_at": "2023-05-26T05:49:22.000000Z",
-                "updated_at": "2023-08-31T10:01:15.000000Z",
-                "name": "128566",
+                "id": 132622,
+                "created_at": "2023-11-22T10:47:01.000000Z",
+                "updated_at": "2023-11-22T10:47:01.000000Z",
+                "name": {
+                    "value": "129090 проверка длины заголовка интересно насколько длинным его можно написать, исходя из того что в заголовке очень удобно писать какие то задачу, проверка длины заголовка интересно насколько длинным его можно написать123 23"
+                },
                 "date": null,
-                "point_status": 404,
-                "products": "[{\"name\":\"Техническая соль ПГМ -15, 25кг\",\"price\":335,\"count\":1,\"weight\":null,\"sum\":335}]",
+                "point_status": 524,
+                "products": "[{\"name\":\"Аммиачная селитра, 25кг\",\"price\":930,\"count\":2,\"weight\":null,\"sum\":1860,\"id\":46}]",
                 "crm_link": null,
                 "user_id": null,
                 "tip_deistviia": null,
-                "tip_tk": null,
+                "tip_tk": [
+                    null
+                ],
                 "trebovaniia_k_masine_log": null,
                 "zalozeno_na_dostavku_log": null,
                 "sklad_otgruzki": null,
@@ -3582,11 +4682,17 @@
                 "okno_log": null,
                 "vremia_obsluzivaniia_min_log": null,
                 "kommentarii_voditelia_k_statusu_prog": null,
-                "client_id": [],
+                "client_id": [
+                    256
+                ],
                 "pole_spiska_2149": null,
-                "photo": null,
+                "photo": [
+                    null
+                ],
                 "mnozestvennyi_spisok_2248": null,
-                "fail_2249": null,
+                "fail_2249": [
+                    null
+                ],
                 "_2250": null,
                 "cislo_2251": null,
                 "stroka_2301": null,
@@ -3609,17 +4715,21 @@
                 "par_2394": null
             },
             {
-                "id": 130149,
-                "created_at": "2023-05-26T02:38:04.000000Z",
-                "updated_at": "2023-08-31T10:01:15.000000Z",
-                "name": "128562",
+                "id": 132623,
+                "created_at": "2023-11-22T10:51:43.000000Z",
+                "updated_at": "2023-12-01T06:49:05.000000Z",
+                "name": {
+                    "value": "129090 проверка длины заголовка интересно насколько длинным его можно написать, исходя из того что в заголовке очень удобно писать какие то задачу, проверка длины заголовка интересно насколько длинным его можно написать123 23"
+                },
                 "date": null,
-                "point_status": 404,
-                "products": "[{\"name\":\"Кварцевый песок 0,4-0,8 мм, окатанный, 25кг\",\"price\":210,\"count\":2,\"weight\":null,\"sum\":420}]",
+                "point_status": 524,
+                "products": "[{\"name\":\"Аммиачная селитра, 25кг\",\"price\":930,\"count\":2,\"weight\":null,\"sum\":1860,\"id\":46}]",
                 "crm_link": null,
                 "user_id": null,
                 "tip_deistviia": null,
-                "tip_tk": null,
+                "tip_tk": [
+                    null
+                ],
                 "trebovaniia_k_masine_log": null,
                 "zalozeno_na_dostavku_log": null,
                 "sklad_otgruzki": null,
@@ -3633,11 +4743,17 @@
                 "okno_log": null,
                 "vremia_obsluzivaniia_min_log": null,
                 "kommentarii_voditelia_k_statusu_prog": null,
-                "client_id": [],
+                "client_id": [
+                    256
+                ],
                 "pole_spiska_2149": null,
-                "photo": null,
+                "photo": [
+                    null
+                ],
                 "mnozestvennyi_spisok_2248": null,
-                "fail_2249": null,
+                "fail_2249": [
+                    null
+                ],
                 "_2250": null,
                 "cislo_2251": null,
                 "stroka_2301": null,
@@ -3660,35 +4776,47 @@
                 "par_2394": null
             },
             {
-                "id": 130291,
-                "created_at": "2023-05-26T10:29:21.000000Z",
-                "updated_at": "2023-08-31T10:01:15.000000Z",
-                "name": "128561",
+                "id": 132624,
+                "created_at": "2023-11-22T10:53:50.000000Z",
+                "updated_at": "2023-12-01T07:54:23.000000Z",
+                "name": {
+                    "value": "129090 проверка длины заголовка интересно насколько длинным его можно написать, исходя из того что в заголовке очень удобно писать какие то задачу, проверка длины заголовка интересно насколько длинным его можно написать123 23"
+                },
                 "date": null,
-                "point_status": 404,
-                "products": "[{\"name\":\"Стеклошарики «TechBeads» фр. 200-300 мкр, 25кг\",\"price\":1200,\"count\":1,\"weight\":null,\"sum\":1200}]",
+                "point_status": 524,
+                "products": "[{\"name\":\"Аммиачная селитра, 25кг\",\"price\":930,\"count\":2,\"weight\":null,\"sum\":1860,\"id\":46}]",
                 "crm_link": null,
-                "user_id": null,
+                "user_id": [
+                    1
+                ],
                 "tip_deistviia": null,
-                "tip_tk": null,
+                "tip_tk": [
+                    null
+                ],
                 "trebovaniia_k_masine_log": null,
-                "zalozeno_na_dostavku_log": null,
+                "zalozeno_na_dostavku_log": "3",
                 "sklad_otgruzki": null,
                 "oplata_rub": null,
                 "address": null,
                 "obieem_gruza_l_proglog": null,
                 "ves_kg_sistlog": null,
-                "imia": null,
+                "imia": "2",
                 "telefon_proglog": null,
                 "primecanie": null,
-                "okno_log": null,
+                "okno_log": "2",
                 "vremia_obsluzivaniia_min_log": null,
                 "kommentarii_voditelia_k_statusu_prog": null,
-                "client_id": [],
+                "client_id": [
+                    256
+                ],
                 "pole_spiska_2149": null,
-                "photo": null,
+                "photo": [
+                    null
+                ],
                 "mnozestvennyi_spisok_2248": null,
-                "fail_2249": null,
+                "fail_2249": [
+                    null
+                ],
                 "_2250": null,
                 "cislo_2251": null,
                 "stroka_2301": null,
@@ -3711,13 +4839,324 @@
                 "par_2394": null
             },
             {
-                "id": 130146,
-                "created_at": "2023-05-26T02:37:57.000000Z",
-                "updated_at": "2023-08-31T10:01:15.000000Z",
-                "name": "128559",
+                "id": 132640,
+                "created_at": "2023-11-28T13:18:06.000000Z",
+                "updated_at": "2023-12-01T09:36:45.000000Z",
+                "name": "Задача #1326402",
                 "date": null,
                 "point_status": 404,
-                "products": "[{\"name\":\"Тент водоупорный 10х6 м, с усилением и люверсами\",\"price\":4389,\"count\":1,\"weight\":null,\"sum\":4389}]",
+                "products": null,
+                "crm_link": null,
+                "user_id": null,
+                "tip_deistviia": null,
+                "tip_tk": null,
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": "3",
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": null,
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": "1",
+                "telefon_proglog": null,
+                "primecanie": null,
+                "okno_log": "2",
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [
+                    256
+                ],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 132565,
+                "created_at": "2023-10-31T06:56:28.000000Z",
+                "updated_at": "2023-11-06T09:15:03.000000Z",
+                "name": "Задача #132565 D",
+                "date": null,
+                "point_status": 404,
+                "products": null,
+                "crm_link": null,
+                "user_id": [
+                    1
+                ],
+                "tip_deistviia": null,
+                "tip_tk": null,
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": null,
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": {
+                    "text": "Россия, Москва, Профсоюзная улица, 144",
+                    "coords": [
+                        "55.624352",
+                        "37.508292"
+                    ]
+                },
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": null,
+                "telefon_proglog": null,
+                "primecanie": null,
+                "okno_log": null,
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [
+                    29
+                ],
+                "pole_spiska_2149": null,
+                "photo": [
+                    {
+                        "id": 1698773066811,
+                        "name": "21Artboard.png",
+                        "url": "https://compas.pro/storage/thumbnails/default/7g/do/fwvn120w8g0ko8ksoow4s.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FqRL5yGvBQ7g4nWzBvAAVsh9yG3dGWMR2LqUCWJcj.png&s=https",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/qRL5yGvBQ7g4nWzBvAAVsh9yG3dGWMR2LqUCWJcj.png",
+                        "extension": "png",
+                        "sort": 0,
+                        "uid": "1698773066811",
+                        "status": "success"
+                    },
+                    {
+                        "id": 1698773066814,
+                        "name": "26342be3-83c3-4aa5-b8d4-f3e9beb0ad88.jpg",
+                        "url": "https://compas.pro/storage/thumbnails/default/c6/lp/cq0yzs8osw8wsk4ks04wk.jpg?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FNsREyykXHxXdmG9n2D5Q1OgPAwPLU5LCexVzdr7T.jpg&s=https",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/NsREyykXHxXdmG9n2D5Q1OgPAwPLU5LCexVzdr7T.jpg",
+                        "extension": "jpg",
+                        "sort": 0,
+                        "uid": "1698773066814",
+                        "status": "success"
+                    },
+                    {
+                        "id": 1698773066816,
+                        "name": "213123.png",
+                        "url": "https://compas.pro/storage/thumbnails/default/5u/tv/ilnvc0g808g00gwkc8w4c.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FLENMHkRmW6loKFPbVkiQGirwvcSofMsf8vChRNF2.png&s=https",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/LENMHkRmW6loKFPbVkiQGirwvcSofMsf8vChRNF2.png",
+                        "extension": "png",
+                        "sort": 0,
+                        "uid": "1698773066816",
+                        "status": "success"
+                    },
+                    {
+                        "id": 1698773066817,
+                        "name": "prepayment_invoice_1%D0%A4%D0%A2%D0%A4-1707394_for_b24-7644-1615875100.pdf",
+                        "url": "https://opt6.compas.pro/storage/tenantopt6/app/public/1844/conversions/7dFoSQtxn4kSRjpJSVQMdVs7gd40D4ctQ23BiUND-thumb.jpg",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/7dFoSQtxn4kSRjpJSVQMdVs7gd40D4ctQ23BiUND.pdf",
+                        "extension": "pdf",
+                        "sort": 0,
+                        "uid": "1698773066817",
+                        "status": "success"
+                    },
+                    {
+                        "id": 1698773066819,
+                        "name": "sms4b.ru-bill-beznal-ÐÐÐ-0162736.xls",
+                        "url": "/icons/new/xls.svg",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/zT0n4vh7sXD8Wm380PTIgYMDJwb26pE0sg15tJnR.xls",
+                        "extension": "xls",
+                        "sort": 0,
+                        "uid": "1698773066819",
+                        "status": "success"
+                    },
+                    {
+                        "id": 1698773066820,
+                        "name": "youtube-compas.sketch",
+                        "url": "/icons/new/undefinedFile.svg",
+                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/FaHIKn9TmaVjbdoWjQXIk3sxb4e5nblhIFXoas7C.zip",
+                        "extension": "zip",
+                        "sort": 0,
+                        "uid": "1698773066820",
+                        "status": "success"
+                    }
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 132566,
+                "created_at": "2023-10-31T11:01:31.000000Z",
+                "updated_at": "2023-11-02T18:58:00.000000Z",
+                "name": "Задача #132566",
+                "date": null,
+                "point_status": 404,
+                "products": null,
+                "crm_link": null,
+                "user_id": [
+                    1
+                ],
+                "tip_deistviia": "437",
+                "tip_tk": null,
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": null,
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": {
+                    "text": "Россия, Ростовская область",
+                    "coords": [
+                        "47.728738",
+                        "41.268137"
+                    ]
+                },
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": null,
+                "telefon_proglog": null,
+                "primecanie": null,
+                "okno_log": null,
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [
+                    18
+                ],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 132563,
+                "created_at": "2023-10-31T06:33:25.000000Z",
+                "updated_at": "2023-11-02T09:27:37.000000Z",
+                "name": "Задача #132563",
+                "date": null,
+                "point_status": 404,
+                "products": null,
+                "crm_link": "321",
+                "user_id": [
+                    1
+                ],
+                "tip_deistviia": null,
+                "tip_tk": null,
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": null,
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": {
+                    "text": "Россия, Республика Башкортостан, Уфа",
+                    "coords": [
+                        "54.735152",
+                        "55.958736"
+                    ]
+                },
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": null,
+                "telefon_proglog": null,
+                "primecanie": null,
+                "okno_log": null,
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [
+                    12
+                ],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 322,
+                "created_at": null,
+                "updated_at": "2023-11-02T18:20:33.000000Z",
+                "name": null,
+                "date": null,
+                "point_status": 404,
+                "products": null,
                 "crm_link": null,
                 "user_id": null,
                 "tip_deistviia": null,
@@ -3737,9 +5176,1145 @@
                 "kommentarii_voditelia_k_statusu_prog": null,
                 "client_id": [],
                 "pole_spiska_2149": null,
-                "photo": null,
+                "photo": [
+                    null
+                ],
                 "mnozestvennyi_spisok_2248": null,
-                "fail_2249": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 130115,
+                "created_at": null,
+                "updated_at": "2023-11-11T09:25:08.000000Z",
+                "name": "129090 проверка длины заголовка интересно насколько длинным его можно написать, исходя из того что в заголовке очень удобно писать какие то задачу, проверка длины заголовка интересно насколько длинным его можно написать123",
+                "date": null,
+                "point_status": 524,
+                "products": "[{\"name\":\"Аммиачная селитра, 25кг\",\"price\":930,\"count\":2,\"weight\":null,\"sum\":1860,\"id\":46}]",
+                "crm_link": null,
+                "user_id": null,
+                "tip_deistviia": null,
+                "tip_tk": [
+                    null
+                ],
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": null,
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": null,
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": null,
+                "telefon_proglog": null,
+                "primecanie": null,
+                "okno_log": null,
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 130304,
+                "created_at": "2023-05-29T03:18:13.000000Z",
+                "updated_at": "2024-01-18T09:47:38.000000Z",
+                "name": "3333333 пример",
+                "date": "2023-08-24",
+                "point_status": 404,
+                "products": "[{\"name\":\"Купершлак 0,5-2,5 мм, 1т\",\"price\":6050,\"count\":20,\"weight\":null,\"sum\":121000,\"id\":113}]",
+                "crm_link": null,
+                "user_id": [
+                    8
+                ],
+                "tip_deistviia": "435",
+                "tip_tk": null,
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": "3333333",
+                "sklad_otgruzki": null,
+                "oplata_rub": "1",
+                "address": {
+                    "text": "Россия, Свердловская область, Екатеринбург",
+                    "coords": [
+                        "56.838011",
+                        "60.597474"
+                    ]
+                },
+                "obieem_gruza_l_proglog": "3333333",
+                "ves_kg_sistlog": "3333333",
+                "imia": "3333333",
+                "telefon_proglog": "3333333",
+                "primecanie": "3333333",
+                "okno_log": "3333333",
+                "vremia_obsluzivaniia_min_log": "3333333",
+                "kommentarii_voditelia_k_statusu_prog": "3333333 3",
+                "client_id": [],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 130305,
+                "created_at": "2023-05-29T03:20:40.000000Z",
+                "updated_at": "2023-12-05T05:56:33.000000Z",
+                "name": "фывфывф",
+                "date": "2023-08-26",
+                "point_status": 402,
+                "products": "[{\"name\":\"Мраморный щебень фр. 7-12 мм, 5кг\",\"price\":120,\"count\":3,\"weight\":null,\"sum\":360,\"id\":114}]",
+                "crm_link": null,
+                "user_id": [
+                    8
+                ],
+                "tip_deistviia": "435",
+                "tip_tk": null,
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": "фывфывф",
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": null,
+                "obieem_gruza_l_proglog": "фывфывф",
+                "ves_kg_sistlog": "фывфывф",
+                "imia": "фывфывф",
+                "telefon_proglog": "фывфывф",
+                "primecanie": "фывфывф",
+                "okno_log": "фывфывф",
+                "vremia_obsluzivaniia_min_log": "фывфывф",
+                "kommentarii_voditelia_k_statusu_prog": "фывфывф",
+                "client_id": [],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 130561,
+                "created_at": "2023-06-08T03:25:49.000000Z",
+                "updated_at": "2023-12-05T05:56:34.000000Z",
+                "name": "129694",
+                "date": "2023-08-26",
+                "point_status": 402,
+                "products": "[{\"name\":\"Каустическая сода, 98,4%, 25кг\",\"price\":2950,\"count\":4,\"weight\":null,\"sum\":11800,\"id\":28}]",
+                "crm_link": null,
+                "user_id": [
+                    8
+                ],
+                "tip_deistviia": "435",
+                "tip_tk": null,
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": "2",
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": null,
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": "2",
+                "telefon_proglog": null,
+                "primecanie": null,
+                "okno_log": {
+                    "value": "1231231",
+                    "external_link": null
+                },
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 130783,
+                "created_at": "2023-06-19T10:49:08.000000Z",
+                "updated_at": "2024-01-20T16:44:00.000000Z",
+                "name": "125536",
+                "date": null,
+                "point_status": 404,
+                "products": "[{\"name\":\"Гранитный щебень 2-5 мм, 25кг\",\"price\":177,\"count\":10,\"weight\":null,\"sum\":1770}]",
+                "crm_link": null,
+                "user_id": null,
+                "tip_deistviia": null,
+                "tip_tk": null,
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": null,
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": null,
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": null,
+                "telefon_proglog": null,
+                "primecanie": null,
+                "okno_log": null,
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 130816,
+                "created_at": "2023-06-20T07:44:00.000000Z",
+                "updated_at": "2023-12-05T05:56:34.000000Z",
+                "name": "лоев",
+                "date": "2023-08-09",
+                "point_status": 402,
+                "products": null,
+                "crm_link": null,
+                "user_id": [
+                    8
+                ],
+                "tip_deistviia": "435",
+                "tip_tk": null,
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": "4343",
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": null,
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": "1",
+                "telefon_proglog": null,
+                "primecanie": null,
+                "okno_log": "1",
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 130817,
+                "created_at": "2023-06-20T09:41:23.000000Z",
+                "updated_at": "2023-12-05T05:56:34.000000Z",
+                "name": "13031211",
+                "date": "2023-08-25",
+                "point_status": 402,
+                "products": "[{\"name\":\"Холодный асфальт, 25кг\",\"price\":275,\"count\":20,\"weight\":null,\"sum\":5500,\"id\":20}]",
+                "crm_link": null,
+                "user_id": [
+                    8
+                ],
+                "tip_deistviia": "437",
+                "tip_tk": null,
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": "321312",
+                "sklad_otgruzki": null,
+                "oplata_rub": "3213121",
+                "address": {
+                    "text": "Россия, Республика Башкортостан, Уфа",
+                    "coords": [
+                        "54.735152",
+                        "55.958736"
+                    ]
+                },
+                "obieem_gruza_l_proglog": "3213121",
+                "ves_kg_sistlog": "3213123",
+                "imia": "3213121",
+                "telefon_proglog": "321312",
+                "primecanie": "321312",
+                "okno_log": "32131211",
+                "vremia_obsluzivaniia_min_log": "321312",
+                "kommentarii_voditelia_k_statusu_prog": "321312",
+                "client_id": [],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 131072,
+                "created_at": "2023-07-03T03:04:31.000000Z",
+                "updated_at": "2023-12-05T05:56:35.000000Z",
+                "name": "13081333",
+                "date": null,
+                "point_status": 402,
+                "products": "[{\"id\":72,\"name\":\"Стеклошарики «DuoLux» фр. 425-850 мкр, 25кг\",\"price\":1400,\"count\":1,\"weight\":null,\"sum\":1400},{\"id\":20,\"name\":\"Холодный асфальт, 25кг\",\"price\":\"12\",\"count\":\"12\",\"weight\":1,\"sum\":144}]",
+                "crm_link": "321",
+                "user_id": [
+                    8
+                ],
+                "tip_deistviia": "526",
+                "tip_tk": null,
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": "2",
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": null,
+                "obieem_gruza_l_proglog": "1",
+                "ves_kg_sistlog": null,
+                "imia": "1",
+                "telefon_proglog": null,
+                "primecanie": null,
+                "okno_log": "222",
+                "vremia_obsluzivaniia_min_log": "111",
+                "kommentarii_voditelia_k_statusu_prog": "2",
+                "client_id": [],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 131073,
+                "created_at": "2023-07-03T03:11:48.000000Z",
+                "updated_at": "2024-01-18T09:51:04.000000Z",
+                "name": "1337",
+                "date": "2023-08-30",
+                "point_status": 402,
+                "products": "[{\"name\":\"Таблетированная соль Мозырьсоль, 99,7%, 25кг\",\"price\":455,\"count\":8,\"weight\":null,\"sum\":3640,\"id\":7}]",
+                "crm_link": null,
+                "user_id": [
+                    8
+                ],
+                "tip_deistviia": "435",
+                "tip_tk": null,
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": "1337",
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": {
+                    "text": "Россия, Москва, улица Бутлерова, 29Ас1",
+                    "coords": [
+                        "55.642032",
+                        "37.550935"
+                    ]
+                },
+                "obieem_gruza_l_proglog": "1337",
+                "ves_kg_sistlog": "1337",
+                "imia": "1337",
+                "telefon_proglog": "1337",
+                "primecanie": "1337",
+                "okno_log": "1337",
+                "vremia_obsluzivaniia_min_log": "1337",
+                "kommentarii_voditelia_k_statusu_prog": "1337",
+                "client_id": [],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 131840,
+                "created_at": "2023-08-02T06:12:47.000000Z",
+                "updated_at": "2023-12-05T05:56:36.000000Z",
+                "name": {
+                    "value": "__131840__",
+                    "external_link": "https://avixo.ru/logistics"
+                },
+                "date": "2023-08-17",
+                "point_status": 525,
+                "products": "[{\"name\":\"Керамзит фр. 10-20 мм, 50л\",\"price\":110,\"count\":8,\"weight\":null,\"sum\":880,\"id\":129}]",
+                "crm_link": null,
+                "user_id": [
+                    8
+                ],
+                "tip_deistviia": "435",
+                "tip_tk": null,
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": "1231231231231",
+                "sklad_otgruzki": null,
+                "oplata_rub": "1",
+                "address": {
+                    "text": "Россия, Москва, улица Бутлерова, 40к1",
+                    "coords": [
+                        "55.642636",
+                        "37.548779"
+                    ]
+                },
+                "obieem_gruza_l_proglog": "1111",
+                "ves_kg_sistlog": "1111",
+                "imia": "1111",
+                "telefon_proglog": "1111",
+                "primecanie": "1111",
+                "okno_log": "1111",
+                "vremia_obsluzivaniia_min_log": "1111",
+                "kommentarii_voditelia_k_statusu_prog": "1111",
+                "client_id": [],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 132097,
+                "created_at": "2023-08-14T09:45:40.000000Z",
+                "updated_at": "2023-12-05T05:56:38.000000Z",
+                "name": "1",
+                "date": "2023-08-26",
+                "point_status": 404,
+                "products": null,
+                "crm_link": null,
+                "user_id": [
+                    8
+                ],
+                "tip_deistviia": null,
+                "tip_tk": null,
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": "4",
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": null,
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": "2",
+                "telefon_proglog": null,
+                "primecanie": null,
+                "okno_log": "3",
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 132352,
+                "created_at": "2023-08-24T09:09:04.000000Z",
+                "updated_at": "2023-12-05T05:56:39.000000Z",
+                "name": {
+                    "value": "тест поля",
+                    "external_link": "https://translate.yandex.ru/"
+                },
+                "date": null,
+                "point_status": 404,
+                "products": null,
+                "crm_link": null,
+                "user_id": [
+                    8
+                ],
+                "tip_deistviia": null,
+                "tip_tk": null,
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": "3",
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": null,
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": "1",
+                "telefon_proglog": null,
+                "primecanie": null,
+                "okno_log": "2",
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 132353,
+                "created_at": "2023-08-24T10:51:58.000000Z",
+                "updated_at": "2023-12-05T05:56:39.000000Z",
+                "name": "133143",
+                "date": null,
+                "point_status": 404,
+                "products": "[{\"name\":\"Холодный асфальт, 25кг\",\"price\":275,\"count\":12,\"weight\":null,\"sum\":3300}]",
+                "crm_link": null,
+                "user_id": [
+                    8
+                ],
+                "tip_deistviia": null,
+                "tip_tk": null,
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": "2",
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": null,
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": "2",
+                "telefon_proglog": null,
+                "primecanie": null,
+                "okno_log": "3",
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 132508,
+                "created_at": "2023-09-12T13:46:14.000000Z",
+                "updated_at": "2023-11-18T22:05:25.000000Z",
+                "name": "Задача #132508",
+                "date": null,
+                "point_status": 404,
+                "products": null,
+                "crm_link": null,
+                "user_id": [
+                    1
+                ],
+                "tip_deistviia": null,
+                "tip_tk": null,
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": null,
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": null,
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": null,
+                "telefon_proglog": null,
+                "primecanie": null,
+                "okno_log": null,
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 132597,
+                "created_at": "2023-11-14T12:41:50.000000Z",
+                "updated_at": "2023-11-14T12:41:50.000000Z",
+                "name": "129090 проверка длины заголовка интересно насколько длинным его можно написать, исходя из того что в заголовке очень удобно писать какие то задачу, проверка длины заголовка интересно насколько длинным его можно написать123",
+                "date": null,
+                "point_status": 524,
+                "products": "[{\"name\":\"Аммиачная селитра, 25кг\",\"price\":930,\"count\":2,\"weight\":null,\"sum\":1860,\"id\":46}]",
+                "crm_link": null,
+                "user_id": null,
+                "tip_deistviia": null,
+                "tip_tk": [
+                    null
+                ],
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": null,
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": null,
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": null,
+                "telefon_proglog": null,
+                "primecanie": null,
+                "okno_log": null,
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 132599,
+                "created_at": "2023-11-15T05:17:16.000000Z",
+                "updated_at": "2023-11-15T05:17:16.000000Z",
+                "name": "129090 проверка длины заголовка интересно насколько длинным его можно написать, исходя из того что в заголовке очень удобно писать какие то задачу, проверка длины заголовка интересно насколько длинным его можно написать123",
+                "date": null,
+                "point_status": 524,
+                "products": "[{\"name\":\"Аммиачная селитра, 25кг\",\"price\":930,\"count\":2,\"weight\":null,\"sum\":1860,\"id\":46}]",
+                "crm_link": null,
+                "user_id": null,
+                "tip_deistviia": null,
+                "tip_tk": [
+                    null
+                ],
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": null,
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": null,
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": null,
+                "telefon_proglog": null,
+                "primecanie": null,
+                "okno_log": null,
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 132600,
+                "created_at": "2023-11-15T05:19:16.000000Z",
+                "updated_at": "2023-11-15T05:19:16.000000Z",
+                "name": "129090 проверка длины заголовка интересно насколько длинным его можно написать, исходя из того что в заголовке очень удобно писать какие то задачу, проверка длины заголовка интересно насколько длинным его можно написать123",
+                "date": null,
+                "point_status": 524,
+                "products": "[{\"name\":\"Аммиачная селитра, 25кг\",\"price\":930,\"count\":2,\"weight\":null,\"sum\":1860,\"id\":46}]",
+                "crm_link": null,
+                "user_id": null,
+                "tip_deistviia": null,
+                "tip_tk": [
+                    null
+                ],
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": null,
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": null,
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": null,
+                "telefon_proglog": null,
+                "primecanie": null,
+                "okno_log": null,
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 132601,
+                "created_at": "2023-11-15T05:21:48.000000Z",
+                "updated_at": "2023-11-15T05:21:48.000000Z",
+                "name": "129090 проверка длины заголовка интересно насколько длинным его можно написать, исходя из того что в заголовке очень удобно писать какие то задачу, проверка длины заголовка интересно насколько длинным его можно написать123",
+                "date": null,
+                "point_status": 524,
+                "products": "[{\"name\":\"Аммиачная селитра, 25кг\",\"price\":930,\"count\":2,\"weight\":null,\"sum\":1860,\"id\":46}]",
+                "crm_link": null,
+                "user_id": null,
+                "tip_deistviia": null,
+                "tip_tk": [
+                    null
+                ],
+                "trebovaniia_k_masine_log": null,
+                "zalozeno_na_dostavku_log": null,
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": null,
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": null,
+                "telefon_proglog": null,
+                "primecanie": null,
+                "okno_log": null,
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
+                "_2250": null,
+                "cislo_2251": null,
+                "stroka_2301": null,
+                "1_2308": null,
+                "23_2308": null,
+                "34_2308": null,
+                "gg_2342": null,
+                "ll_2345": null,
+                "testovoe_pole_1_2347": null,
+                "_2348": null,
+                "ghfc_2349": null,
+                "1_2351": null,
+                "2_2351": null,
+                "3_2351": null,
+                "hfg_2356": null,
+                "gog_2357": null,
+                "yjdjt_2358": null,
+                "gh_2360": null,
+                "pole_2385": null,
+                "par_2394": null
+            },
+            {
+                "id": 132608,
+                "created_at": "2023-11-20T09:11:09.000000Z",
+                "updated_at": "2023-12-05T05:56:39.000000Z",
+                "name": {
+                    "value": "23565545445454прпп",
+                    "external_link": null
+                },
+                "date": null,
+                "point_status": 404,
+                "products": null,
+                "crm_link": null,
+                "user_id": [
+                    8
+                ],
+                "tip_deistviia": null,
+                "tip_tk": [
+                    null,
+                    "ТК, Почта России 123",
+                    "ТК, ПЭК",
+                    "ТК, Boxberry"
+                ],
+                "trebovaniia_k_masine_log": [
+                    null,
+                    2,
+                    1,
+                    4
+                ],
+                "zalozeno_na_dostavku_log": {
+                    "value": "hgfhfg",
+                    "external_link": null
+                },
+                "sklad_otgruzki": null,
+                "oplata_rub": null,
+                "address": null,
+                "obieem_gruza_l_proglog": null,
+                "ves_kg_sistlog": null,
+                "imia": {
+                    "value": "парффф"
+                },
+                "telefon_proglog": null,
+                "primecanie": null,
+                "okno_log": "111",
+                "vremia_obsluzivaniia_min_log": null,
+                "kommentarii_voditelia_k_statusu_prog": null,
+                "client_id": [],
+                "pole_spiska_2149": null,
+                "photo": [
+                    null
+                ],
+                "mnozestvennyi_spisok_2248": null,
+                "fail_2249": [
+                    null
+                ],
                 "_2250": null,
                 "cislo_2251": null,
                 "stroka_2301": null,
@@ -3766,9 +6341,9 @@
     },
     "tableFooter": {
         "default": {
-            "pages": 25,
-            "activePage": 1,
-            "count": 25
+            "pages": 10,
+            "activePage": 3,
+            "count": 50
         },
         "type": "Object"
     }

@@ -8039,5 +8039,13 @@
             }
         ],
         "type": "Array"
+    },
+    "tableFooter": {
+        "default": {
+            "pages": 3,
+            "activePage": 1,
+            "count": 100
+        },
+        "type": "Object"
     }
 }

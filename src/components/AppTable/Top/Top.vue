@@ -28,7 +28,7 @@
                 <IconDots />
             </template>
             <template #content>
-                <PopupOption>
+                <PopupOption @click="() => callAction({action: 'downloadExcel', value: null})">
                     Скачать Excel
                 </PopupOption>
             </template>
@@ -116,7 +116,7 @@
     const fields = inject('fields')
 
     const emit = defineEmits([
-        'saveFields'
+        'callAction'
     ])
 
     // Действия с шапкой
@@ -153,7 +153,13 @@
 
                 if (tab != null && tab.key != 'roles') {
                     showSaves(false)
-                    emit('saveFields', tab.key)
+                    emit('callAction', {
+                        action: 'saveFields',
+                        value: {
+                            role: tab.key,
+                            fields: fields.value
+                        }
+                    })
                     popupSavesRef.value.popupRef.removeAttribute('open')
                 }
             }, 10);
@@ -162,6 +168,14 @@
         // Открытие/скрытие окна сохранения
         const showSaves = (state) => {
             menu.value.saves.isShow = state
+        }
+
+        // Скачивание экселя
+        const downloadExcel = () => {
+            emit('callAction', {
+                action: 'downloadExcel',
+                value: fields.value
+            })
         }
 
         switch (data.action) {
@@ -193,6 +207,11 @@
             // Открытие/скрытие окна сохранения
             case "showSaves":
                 showSaves(data.value)
+                break;
+
+            // Скачивание экселя
+            case 'downloadExcel':
+                downloadExcel()
                 break;
             default:
                 break;

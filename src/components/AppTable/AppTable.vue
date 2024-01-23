@@ -1,92 +1,27 @@
 <template>
-    <AppSection ref="sectionRef" class="section__table table-template">
+    <AppSection 
+        ref="sectionRef" 
+        class="section__table table-template" 
+        :style="`--stickyTop: ${scrollPosition}px`" 
+        :class="loaderState == 'loading' ? 'table-template_loading' : loaderState == 'filtering' ? 'table-template_filtering' : ''"
+    >
         <TableTop 
-            @saveFields="(data) => saveFields(data)"
+            @callAction="(data) => emit('callAction', data)"
         />
 
         <div class="table-template__body">
             <table class="table" ref="tableRef">
                 <TableHeader />
-                <tbody class="table__body">
-                    <tr class="table__row" v-for="row in data">
-                        <td class="table__item" v-for="item in fields" :data-key="item.key" :class="[item.fixed ? 'table__item_fixed' : '', !item.enabled ? 'table__item_hidden' : '']" :style="`--colorItem: ${item.color};`">
-                            <AppCheckbox 
-                                v-if="item.type == 'checkbox'"
-                                :item="{
-                                    key: item.key,
-                                    type: item.type,
-                                    id: row.id.value,
-                                    title: item.title,
-                                    substring: item.unit,
-                                    value: row[item.key],
-                                    is_link: item.is_link,
-                                    is_plural: item.is_plural,
-                                    hiddenOptions: item.choosed,
-                                    related_table: item.related_table,
-                                    is_external_link: item.is_external_link,
-                                    options: ['status', 'relation'].includes(item.type) ? item.options : null,
-                                    external_link: row[item.key] != undefined ? row[item.key].external_link : null,
-                                }"
-                                :isCanCreate="true"
-                                :isUseEnter="false"
-                                :enabledAutocomplete="false"
-                                :isReadOnly="Boolean(item.read_only || row.state == null)"
-                                :isCanAdd="Boolean(item.is_plural)"
-                            />
-                            <AppRelation 
-                                v-else-if="item.type == 'relation'"
-                                :item="{
-                                    key: item.key,
-                                    type: item.type,
-                                    id: row.id.value,
-                                    title: item.title,
-                                    substring: item.unit,
-                                    value: row[item.key],
-                                    is_link: item.is_link,
-                                    is_plural: item.is_plural,
-                                    hiddenOptions: item.choosed,
-                                    related_table: item.related_table,
-                                    is_external_link: item.is_external_link,
-                                    options: ['status', 'relation'].includes(item.type) ? item.options : null,
-                                    external_link: row[item.key] != undefined ? row[item.key].external_link : null,
-                                }"
-                                :isCanCreate="true"
-                                :isUseEnter="false"
-                                :enabledAutocomplete="false"
-                                :isReadOnly="Boolean(item.read_only || row.state == null)"
-                                :isCanAdd="Boolean(item.is_plural)"
-                            />
-                            <AppTextarea 
-                                v-else-if="['number', 'password', 'text'].includes(item.type)"
-                                :item="{
-                                    key: item.key,
-                                    type: item.type,
-                                    id: row.id.value,
-                                    title: item.title,
-                                    substring: item.unit,
-                                    value: [null, undefined].includes(row[item.key]) ? null : String(row[item.key]),
-                                    is_link: item.is_link,
-                                    is_plural: item.is_plural,
-                                    hiddenOptions: item.choosed,
-                                    related_table: item.related_table,
-                                    is_external_link: item.is_external_link,
-                                    options: ['status', 'relation'].includes(item.type) ? item.options : null,
-                                    external_link: row[item.key] != undefined ? row[item.key].external_link : null,
-                                }"
-                                :isCanCreate="true"
-                                :isUseEnter="false"
-                                :enabledAutocomplete="false"
-                                :isReadOnly="Boolean(item.read_only || row.state == null)"
-                                :isCanAdd="Boolean(item.is_plural)"
-                            />
-                        </td>
-                    </tr>
-                </tbody>
+                <TableBody 
+                    @callAction="(data) => emit('callAction', data)"
+                />
             </table>
+            <ScrollButtons />
         </div>
-        <div class="table-template__footer">
 
-        </div>
+        <TableFooter 
+            @callAction="(data) => emit('callAction', data)"
+        />
     </AppSection>
 </template>
 
@@ -95,17 +30,23 @@
     
     import { ref, onMounted, provide } from 'vue'
 
+    import _ from 'lodash'
     import TableTop from './Top/Top.vue'
+    import TableBody from './Body/Body.vue'
     import TableHeader from './Header/Header.vue'
+    import TableFooter from './Footer/Footer.vue'
+    import ScrollButtons from './ScrollButtons/ScrollButtons.vue';
     import AppSection from '@/components/AppSection/AppSection.vue';
-    import AppCheckbox from "@/components/AppInputs/Checkbox/Checkbox.vue"
-    import AppRelation from "@/components/AppSelects/Relation/Relation.vue"
-    import AppTextarea from "@/components/AppInputs/Textarea/Textarea.vue"
-    
+
     let fields = ref([])
-    let data = ref([])
+    let bodyData = ref([])
+    let footerData = ref({})
+
     const tableRef = ref(null)
+    const sectionRef = ref(null)
+
     let selectAll = ref(false)
+    let scrollPosition = ref(0)
     let sortItem = ref({
         key: 'id',
         order: 'asc'
@@ -193,25 +134,38 @@
         tableData: {
             default: [],
             type: Array
+        },
+        tableFooter: {
+            default: {
+                pages: 0,
+                activePage: 0,
+                count: 25
+            },
+            type: Object
+        },
+        loaderState: {
+            default: null,
+            type: String
         }
     })
+
+    const emit = defineEmits([
+        'callAction'
+    ])
 
     provide('menu', menu)
     provide('fields', fields)
     provide('sortItem', sortItem)
     provide('tableRef', tableRef)
+    provide('bodyData', bodyData)
     provide('selectAll', selectAll)
+    provide('sectionRef', sectionRef)
+    provide('footerData', footerData)
+    provide('scrollPosition', scrollPosition)
     
     onMounted(async () => {
+        footerData.value = JSON.parse(JSON.stringify(props.tableFooter))
         fields.value = JSON.parse(JSON.stringify(props.tableKeys))
-        data.value = JSON.parse(JSON.stringify(props.tableData))
+        bodyData.value = JSON.parse(JSON.stringify(props.tableData))
     })
-
-    // Сохранение шапки таблицы
-    const saveFields = (data) => {
-        console.log('Сохранение шапки таблицы', {
-            role: data,
-            fields: fields.value
-        });
-    }
 </script>

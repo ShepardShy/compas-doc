@@ -23,6 +23,7 @@
                 :enabledAutocomplete="false"
                 :isReadOnly="false"
                 :isCanAdd="false"
+                @changeValue="(data) => selectAllRows(data)"
             />
             
             <div 
@@ -66,7 +67,9 @@
     const tableItemRef = ref(null)
     const menu = inject('menu')
     const sortItem = inject('sortItem')
+    const bodyData = inject('bodyData')
     const selectAll = inject('selectAll')
+    const footerData = inject('footerData')
 
     let clickSetting = ref({
         id: -1,
@@ -109,6 +112,7 @@
                     order: sortItem.value.key == props.item.key ? (sortItem.value.order == 'desc' ? 'asc' : 'desc') : 'desc'
                 }
                 menu.value.saves.isShow = true
+                footerData.value.activePage = 1
             }
             window.getSelection().empty();
             clearTimeout(clickSetting.value.timer);  
@@ -116,4 +120,12 @@
         }   
         clickSetting.value.id = props.item.id
     } 
+
+    // Выбор всех строк
+    const selectAllRows = (data) => {
+        selectAll.value = data.value
+        bodyData.value.forEach(row => {
+            row.isChoose = selectAll.value
+        });
+    }
 </script>
