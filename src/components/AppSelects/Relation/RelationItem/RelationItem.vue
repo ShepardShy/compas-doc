@@ -5,6 +5,7 @@
         :item="localItem" 
         :isReadOnly="props.isReadOnly"
         :isCanCreate="props.isCanCreate" 
+        :isShowId="true"
         :isLink="![null, undefined].includes(activeOption.id)"
         :class="[null, undefined].includes(activeOption.id) ? 'relation__item_empty' : ''"
         @openLink="() => callAction({action: 'openLink', value: localItem})"

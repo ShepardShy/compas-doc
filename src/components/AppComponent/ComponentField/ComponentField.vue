@@ -11,6 +11,7 @@
             :isCanAdd="props.codeProps.isCanAdd != undefined ? props.codeProps.isCanAdd.default : null"
             :isUseEnter="props.codeProps.isUseEnter != undefined ? props.codeProps.isUseEnter.default : null"
             :isReadOnly="props.codeProps.isReadOnly != undefined ? props.codeProps.isReadOnly.default : null"
+            :isMultiply="props.codeProps.isMultiply != undefined ? props.codeProps.isMultiply.default : null"
             :isCanCreate="props.codeProps.isCanCreate != undefined ? props.codeProps.isCanCreate.default : null"
             :isHaveNullOption="props.codeProps.isHaveNullOption != undefined ? props.codeProps.isHaveNullOption.default : null"
             :enabledAutocomplete="props.codeProps.enabledAutocomplete != undefined ? props.codeProps.enabledAutocomplete.default : null"

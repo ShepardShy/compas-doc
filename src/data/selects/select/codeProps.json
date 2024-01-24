@@ -1,0 +1,48 @@
+{
+    "item": {
+        "default": {
+            "id": 0,
+            "key": "selectKey",
+            "value": null,
+            "focus": false,
+            "required": false,
+            "title": "Заголовок",
+            "lockedOptions": [],
+            "options": [
+                {
+                    "label": "Опция 1",
+                    "value": 0
+                },
+                {
+                    "label": "Опция 2",
+                    "value": 1
+                },
+                {
+                    "label": "Опция 3",
+                    "value": 2
+                },
+                {
+                    "label": "Опция 4",
+                    "value": 3
+                },
+                {
+                    "label": "Опция 5",
+                    "value": 4
+                }
+            ]
+        },
+        "type": "Object"
+    },
+    "isReadOnly": {
+        "default": true,
+        "type": "Boolean"
+    },
+    "isHaveNullOption": {
+        "default": false,
+        "type": "Boolean"
+    },
+    "isMultiply": {
+        "default": false,
+        "type": "Boolean"
+    }
+}

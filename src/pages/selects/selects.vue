@@ -8,6 +8,14 @@
     /> 
 
     <AppComponent 
+        :title="'Селект'"
+        :component="AppSelect"
+        :codeProps="SelectProps"
+        :codeEmits="SelectEmits"
+        @changeValue="(data) => changeValue(data)"
+    /> 
+
+    <AppComponent 
         :title="'Ответственный'"
         :component="AppRelation"
         :codeProps="RelationProps"
@@ -31,6 +39,10 @@
     import AppStatus from '@/components/AppSelects/Status/Status.vue';
     import StatusProps from '@/data/selects/status/codeProps.json';
     import StatusEmits from '@/data/selects/status/codeEmits.json';
+
+    import AppSelect from '@/components/AppSelects/Select/Select.vue';
+    import SelectProps from '@/data/selects/select/codeProps.json';
+    import SelectEmits from '@/data/selects/select/codeEmits.json';
 
     // Изменение значения
     const changeValue = (data) => {

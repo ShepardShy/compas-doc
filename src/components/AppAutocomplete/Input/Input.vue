@@ -51,7 +51,7 @@
                 <PopupOption 
                     class="popup-option__root" 
                     v-for="option in options" 
-                    :class="option.value == activeOption.id ? 'popup__option_active' : '', props.item.lockedOptions.includes(option.value) ? 'popup__option_disabled' : ''" 
+                    :class="option.value == activeOption.id ? 'popup__option_active' : '', ![null, undefined].includes(props.item.lockedOptions) && props.item.lockedOptions.includes(option.value) ? 'popup__option_disabled' : ''" 
                     @click="() => callAction({action: 'changeValue', value: option.value})"
                 >
                     <div class="popup-option__text">
@@ -116,6 +116,10 @@
             type: Boolean
         },
         isLink: {
+            default: false,
+            type: Boolean
+        },
+        isShowId: {
             default: false,
             type: Boolean
         }
@@ -183,7 +187,7 @@
 
         // Изменить значение поля
         const changeValue = (value) => {
-            if (value == null || !props.item.lockedOptions.includes(value)) {
+            if (value == null || (![null, undefined].includes(props.item.lockedOptions) && !props.item.lockedOptions.includes(value))) {
                 search.value = null
                 options.value = backupOptions.value
                 setActiveOption(value)
