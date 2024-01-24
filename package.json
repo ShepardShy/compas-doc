@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fancyapps/ui": "^5.0.33",
     "@mahdikhashan/vue3-click-outside": "^0.1.2",
     "@vuepic/vue-datepicker": "^7.4.0",
     "lodash": "^4.17.21",

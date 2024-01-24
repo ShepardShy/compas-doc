@@ -1,0 +1,12 @@
+<template>
+    <figure class="icon__select-status" id="arrowStatus">
+        <figcaption>
+            <svg width="4" height="3" viewBox="0 0 4 3" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M0 0H4L2 3L0 0Z" fill="#888888"/> </svg>
+        </figcaption>
+    </figure>
+</template>
+
+<script setup>
+    import './IconSelectStatusArrow.scss';
+    
+</script>

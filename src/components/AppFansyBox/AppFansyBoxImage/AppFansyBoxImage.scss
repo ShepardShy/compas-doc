@@ -1,0 +1,39 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.table__item_images {
+    .item__value {
+        height: auto;
+
+        &.item__value--high {
+            height: 142px;
+        }
+    }
+}
+
+.fancybox__slide  {
+    &.has-html5video {
+        .fancybox__content {
+            margin: 0 auto;
+            background: inherit;
+            height: 80vh !important;
+            width: max-content !important;
+            aspect-ratio: auto !important;
+        }
+
+        .fancybox__html5video {
+            max-width: 100%;
+            object-fit: contain;
+            width: 100%;
+            margin: 0 auto;
+        }
+    }
+}
+.progress-ring__circle {
+    stroke-width: 4;
+    stroke: #2f8cff;
+    fill: none;
+    transform-origin: center;
+    transform: rotate(-90deg);
+    z-index: 999;
+}

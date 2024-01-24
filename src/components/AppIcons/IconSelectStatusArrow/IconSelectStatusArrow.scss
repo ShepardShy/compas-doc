@@ -1,0 +1,19 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.icon__select-status {
+    border-radius: 5px 0px 0px 5px;
+
+    figcaption {
+        right: -15px;
+        background: variables.$color-white;
+        position: absolute;
+        @include mixins.gridCenter();
+        @include mixins.elemResolutionOptions(16px, 100%);
+        @include mixins.borderOptions(1px, solid, variables.$color-grey, 0px 5px 5px 0px);
+
+        svg {
+            @include mixins.elemResolutionOptions(4px, 3px);
+        }
+    }
+}

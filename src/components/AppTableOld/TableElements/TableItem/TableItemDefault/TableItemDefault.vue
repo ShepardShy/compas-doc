@@ -63,8 +63,8 @@
     const saveValueForCopy = ref(props.item.value)
 
     const setLinkClasses = computed(() => {
-		return [props.item.external_link != '' && props.item.external_link != null ? 'item__value item__value_link' : '',
-			props.item.value == 'не заполнено' ? 'item__value_link-empty' : '']
+		return [props.item.external_link != '' && props.item.external_link != null ? 'item__value item__value-link' : '',
+			props.item.value == 'не заполнено' ? 'item__value-link--empty' : '']
     })
 
     const setClasses = computed(() => {

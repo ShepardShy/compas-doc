@@ -1,0 +1,12 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.icon__check {
+    @include mixins.elemResolutionOptions(18px, 18px);
+
+    svg {
+        * {
+            fill: #0584fe;
+        }
+    }
+}

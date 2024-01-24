@@ -29,7 +29,7 @@
         return [
             [null, undefined].includes(props.value) || props.value == '' ? 'form-item__value_empty' : '',
             props.isHTML ? 'form-item__value_html' : '',
-            props.isLink ? 'form-item__value_link' : ''
+            props.isLink ? 'form-item__value-link' : ''
         ]
     })
 </script>

@@ -29,7 +29,7 @@
     cursor: text;
 }
 
-.item__value_link {
+.item__value-link {
     cursor: pointer;
     text-decoration: underline;
     color: variables.$color-active;
@@ -49,7 +49,7 @@
 }
 
 .selected-object__order .order__content.table__item-content {
-    .item__value_link-empty {
+    .item__value-link--empty {
         color: variables.$color-grey;
     }
 }

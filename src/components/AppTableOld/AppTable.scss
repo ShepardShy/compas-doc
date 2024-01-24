@@ -50,13 +50,13 @@ table {
 }
 
 .table__body {
-    .input__file_clone {
+    .input__file-clone {
         &.table__item-content {
             top: 15px;
             padding: 0px;
 
             .table__item-content-list {
-                .item__value, .item__value_img {
+                .item__value, .item__value-img {
                     @include mixins.elemResolutionOptions(100px, 100px);
                 }
             }

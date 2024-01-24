@@ -25,7 +25,7 @@ export default {
         {
             id: 14,
             name: 'Файл',
-            component: ''
+            component: markRaw(defineAsyncComponent(() => import('@/pages/file/file.vue')))
         },
         {
             id: 15,

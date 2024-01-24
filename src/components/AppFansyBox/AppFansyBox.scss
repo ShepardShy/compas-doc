@@ -1,0 +1,82 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.table__item-content-list {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+
+    .item__value {
+        position: relative;
+        @include mixins.sortableGhost;
+        display: flex;
+        flex-direction: column;
+        width: 100px;
+
+        .item__value-link {
+            .item__value-img {
+                border-radius: 5px;
+                border: 1px solid variables.$color-grey;
+                background: variables.$color-white;
+                overflow: hidden;
+                @include mixins.elemResolutionOptions(100px, 100px);
+                
+                img {
+                    object-fit: contain !important;
+                }
+            }
+        }
+        
+        .item__value-description {
+            margin-top: 5px;
+            color: variables.$color-grey;
+            @include mixins.textVerticalHidden()
+        }
+        
+        .item__value-img-details {
+            position: absolute;
+            @include mixins.elemPositionOptions(35px, 35px);
+            @include mixins.elemResolutionOptions(30px, 30px);
+            display: none;
+            
+            &.item__value-img-details_open {
+                display: block;
+            }
+
+            summary {
+                cursor: pointer;
+                display: grid;
+                place-items: center;
+                grid-template-columns: 1fr;
+                border-radius: 50%;
+                border: solid 1px #4e4e4e;
+                background-color: rgba(246, 245, 243, 0.6);
+                @include mixins.elemResolutionOptions(30px, 30px);
+
+                svg {
+                    g {
+                        g {
+                            fill: #4e4e4e;
+                        }
+                    }
+                }
+            }
+
+            .section__settings-list {
+                right: auto;
+                @include mixins.elemPositionOptions(70px, 35px);
+            }
+        }
+
+        &:hover {
+            .item__value-img-details {
+                display: grid;
+            }
+
+            .item__value-description {
+                color: variables.$color-black;
+            }
+        }
+    }
+}

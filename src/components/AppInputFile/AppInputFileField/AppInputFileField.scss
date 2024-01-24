@@ -1,0 +1,190 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.input__file-list {
+    position: relative;
+    height: var(--inputFileHeight);
+
+    .el-upload-list--picture-card {
+        .el-upload-list__item-actions {
+            display: none;
+        }
+
+        .el-upload--picture-card {
+            border: 0px;
+            z-index: 1;
+            position: relative;
+            @include mixins.elemResolutionOptions(100px, 100px);
+
+
+            .input__file-button-title {
+                width: 100%;
+                height: auto;
+                white-space: normal;
+                line-height: normal;
+                word-break: break-word;
+            }
+        }
+    }
+
+
+    &.input__file-list--desc {
+        height: auto;
+
+        .el-upload-list__item {
+            &.is-ready {
+                opacity: 0;
+            }
+        }
+    }
+
+    .el-upload-dragger {
+        padding: 0px;
+        width: 100%;
+        height: 100%;
+        border: 0px;
+
+        &.is-dragover {
+            .input__file-button {
+                border: 2px dashed variables.$color-active;
+
+                .input__file-button-title {
+                    color: variables.$color-black;
+                }
+
+                svg {
+                    g {
+                        fill: variables.$color-active;
+                    }
+                }
+            }
+        }
+    }
+
+    &.input__file--empty {
+        .el-upload--picture {
+            order: 0;
+        }
+    }
+
+    .el-upload-list {
+        gap: 8px;
+
+        .el-upload-list__item-status-label {
+            background: none !important;
+        }
+
+        .el-upload-list__item {
+            width: 100px;
+            height: 100%;
+            padding: 0px;
+            margin: 0px;
+            border: 0px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+
+            .el-upload-list__item-thumbnail {
+                object-fit: cover;
+                border-radius: 5px;
+                border: 1px solid #bcbcbc;
+                @include mixins.elemResolutionOptions(100px, 100px);
+            }
+
+            .item__value-description_mirror {
+                margin-top: 5px;
+                height: 100%;
+                color: #bcbcbc;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                word-break: break-all;
+                visibility: hidden;
+                font-size: 15px;
+            }
+
+            .el-upload-list__item-info {
+                display: none;
+            }
+
+            .el-icon--upload-success {
+                display: none;
+            }
+            .el-icon--close {
+                display: none;
+
+                svg {
+                    position: relative;
+                    right: 1px;
+                    top: -1px;
+                }
+            }
+        }
+    }
+
+    .icon__load {
+        @include mixins.elemResolutionOptions(10px, 15px)
+    }
+
+    .input__file-button {
+        margin: 0px;
+        padding: 0px;
+        background: variables.$color-white;
+        z-index: 1;
+        font-family: 'PT Sans';
+        font-size: variables.$font-size-default;
+        @include mixins.hoverElem();
+        @include mixins.elemResolutionOptions(100%, 100%);
+        border: 2px dashed variables.$color-blue-grey;
+
+        svg {
+            @include mixins.elemResolutionOptions(35px, 27px);
+        }
+
+
+        &:focus, &:hover {
+            background: transparent;
+            border: 2px dashed variables.$color-active;
+
+            .input__file-button-title {
+                color: variables.$color-black;
+            }
+
+            svg {
+                g {
+                    fill: variables.$color-active;
+                }
+            }
+        }
+
+        & > span {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        &.input__file-button_hidden {
+            opacity: 0;
+            z-index: 0;
+        }
+
+        .input__file-button-title {
+            color: variables.$color-grey;
+            height: 40px;
+            @include mixins.textVerticalHidden()
+        }
+    }
+
+    .el-upload-list__item {
+        transition: none;
+    }
+}
+
+@keyframes button-loading-spinner {
+    from {
+      transform: rotate(0turn);
+    }
+
+    to {
+      transform: rotate(1turn);
+    }
+}

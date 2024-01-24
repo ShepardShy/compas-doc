@@ -1,0 +1,93 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+
+.input__file-dragger {
+    width: 100px;
+    height: 100px;
+    background: #fff;
+    display: block;
+}
+
+.input__file-dragger {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background: #fff;
+    display: inline-flex;
+    margin: 0px;
+    padding: 0px;
+    background: variables.$color-white;
+    z-index: 1;
+    font-family: 'PT Sans';
+    font-size: variables.$font-size-default;
+    @include mixins.hoverElem();
+    border: 2px dashed variables.$color-blue-grey;
+    border-radius: 6px;
+
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input__file {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    transform: scale(1.1);
+    z-index: 1;
+    cursor: pointer;
+    font-size: 0;
+}
+
+#file-upload-button {
+    cursor: pointer;
+}
+
+.input__file-button {
+    svg {
+        @include mixins.elemResolutionOptions(35px, 27px);
+    }
+
+    & > span {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &.input__file-button_hidden {
+        opacity: 0;
+        z-index: 0;
+    }
+
+    .input__file-button-title {
+        color: variables.$color-grey;
+        height: 40px;
+        @include mixins.textVerticalHidden()
+    }
+
+    .input__file-button-title {
+        height: unset;
+    }
+}
+
+
+.input__file-dragger:focus, .input__file-dragger:hover, .input__file-dragover {
+    background: transparent;
+    border: 2px dashed variables.$color-active;
+
+    .input__file-button-title {
+        color: variables.$color-black;
+    }
+
+    svg {
+        g {
+            fill: variables.$color-active;
+        }
+    }
+}

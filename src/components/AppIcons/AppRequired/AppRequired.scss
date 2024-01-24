@@ -1,0 +1,9 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.icon__required {
+    top: -5px;
+    position: relative;
+    min-width: 7px;
+    min-height: 7px;
+}

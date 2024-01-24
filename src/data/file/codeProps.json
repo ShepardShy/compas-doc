@@ -1,0 +1,234 @@
+{
+  "id": 2082,
+  "title": "Фото",
+  "key": "photo",
+  "type": "file",
+  "visible_always": 1,
+  "is_hidden": 0,
+  "is_plural": 0,
+  "show_file_name": 1,
+  "is_external_link": 0,
+  "is_link": 0,
+  "external_link": "",
+  "required": 0,
+  "read_only": 0,
+  "permanent_required": 0,
+  "permanent_name": 1,
+  "is_permanent": 1,
+  "can_edit": 0,
+  "color": null,
+  "group_id": null,
+  "button_name": "Загрузить",
+  "value": [
+    {
+      "id": 1696445350884,
+      "name": "Group 6 Copy 2.png",
+      "url": "https://compas.pro/storage/thumbnails/default/9k/oh/2sx8nf8ckw08oo0c8oo0w.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FkxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png&s=https",
+      "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png",
+      "extension": "png",
+      "sort": 0,
+      "uid": "1696445350884",
+      "status": "loading"
+    },
+    {
+      "id": 1703288857529,
+      "name": "1f8bd513218e333c88fa7ebc6587d.jpg",
+      "url": "https://compas.pro/storage/thumbnails/default/70/5z/3va9uyo00o88ss440w0kw.jpg?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FJAYODBoFUB3jgk1F8Qow5wskMUmykGe3DyRh6ldT.jpg&s=https",
+      "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/JAYODBoFUB3jgk1F8Qow5wskMUmykGe3DyRh6ldT.jpg",
+      "extension": "jpg",
+      "sort": 0,
+      "uid": "1703288857529",
+      "status": "success"
+    },
+    {
+      "id": 1703288857531,
+      "name": "3e070cdb9a2cd7ba4facaec99c780.jpg",
+      "url": "https://compas.pro/storage/thumbnails/default/d9/uf/cxfojp4w4cook8o4sgc4g.jpg?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2Ft6xnkYJwGrOIsTntGpvhFelf37xYqRM1lU6zThrp.jpg&s=https",
+      "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/t6xnkYJwGrOIsTntGpvhFelf37xYqRM1lU6zThrp.jpg",
+      "extension": "jpg",
+      "sort": 0,
+      "uid": "1703288857531",
+      "status": "success"
+    },
+    {
+      "id": 1703288857532,
+      "name": "ГРАНИТНЫЙ ЩЕБЕНЬ RATMIX 1 Copy.pdf",
+      "url": "https://opt6.compas.pro/storage/tenantopt6/app/public/2375/conversions/vFlwW5fZKZDVzmwZ7mny1SjUkkNSJzmtIhQ8mvCU-thumb.jpg",
+      "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/vFlwW5fZKZDVzmwZ7mny1SjUkkNSJzmtIhQ8mvCU.pdf",
+      "extension": "pdf",
+      "sort": 0,
+      "uid": "1703288857532",
+      "status": "success"
+    },
+    {
+      "id": 1703373771849,
+      "name": "ОПТ6-6.xlsx",
+      "url": "/icons/new/xls.svg",
+      "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/tmOtPTVOBpMo2RPfpLWWwURg4Sh5QEiTe3T5jo6d.xlsx",
+      "extension": "xlsx",
+      "sort": 0,
+      "uid": "1703373771849",
+      "status": "success"
+    },
+    {
+      "id": 1703373788966,
+      "name": "IMG_2343.MOV",
+      "url": "/icons/new/undefinedFile.svg",
+      "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/YEaXi9ndhQV9fA0DrSSAjqkWoglbAaohCKbnDC1b.mp4",
+      "extension": "mp4",
+      "sort": 0,
+      "uid": "1703373788966",
+      "status": "success"
+    },
+    {
+      "id": 1703978125537,
+      "name": "IMG_7423.MOV",
+      "url": "/icons/new/undefinedFile.svg",
+      "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/FXaAwdsbuKZOItMTvdbI3rIwtSpw2TV7USnXIMne.mov",
+      "extension": "mov",
+      "sort": 0,
+      "uid": "1703978125537",
+      "status": "success"
+    },
+    {
+      "id": 1705777455495,
+      "name": "Lab. 2, 4 (1).pdf",
+      "url": "https://opt6.compas.pro/storage/tenantopt6/app/public/2445/conversions/N9IjIY6k406yMuTvKic8gOX7twc44vyqem4F04a3-thumb.jpg",
+      "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/N9IjIY6k406yMuTvKic8gOX7twc44vyqem4F04a3.pdf",
+      "extension": "pdf",
+      "sort": 0,
+      "uid": "1705777455495",
+      "status": "success"
+    }
+  ],
+  "sort": 1,
+  "unit": "",
+  "module": null,
+  "used_in_modules": [],
+  "mask": null,
+  "comparison": null,
+  "editableFields": {
+    "id": 2082,
+    "model": "companies",
+    "title": "Фото",
+    "type": "file",
+    "is_plural": 0,
+    "show_file_name": 1,
+    "is_external_link": 0,
+    "is_link": 0,
+    "external_link": "",
+    "required": 0,
+    "permanent_required": 0,
+    "permanent_name": 1,
+    "visible_always": 1,
+    "section_id": 274,
+    "module_section_id": null,
+    "values": [
+      {
+        "value": 0,
+        "label": ""
+      }
+    ],
+    "set_color": 0,
+    "color": "#000",
+    "button_name": "Загрузить",
+    "has_roles_read": 0,
+    "has_roles_write": 0,
+    "roles_read": [],
+    "roles_write": [],
+    "show_in_mobile": 0,
+    "blocked_changes": 0,
+    "mobile_pages": [],
+    "unit": "",
+    "statuses": []
+  },
+  "component": {
+    "name": "AsyncComponentWrapper"
+  },
+  "editComponent": {
+    "name": "AsyncComponentWrapper"
+  },
+  "focus": false,
+  "preview": [
+    {
+      "id": 1696445350884,
+      "name": "Group 6 Copy 2.png",
+      "url": "https://compas.pro/storage/thumbnails/default/9k/oh/2sx8nf8ckw08oo0c8oo0w.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FkxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png&s=https",
+      "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png",
+      "extension": "png",
+      "sort": 0,
+      "uid": "1696445350884",
+      "status": "success"
+    },
+    {
+      "id": 1703288857529,
+      "name": "1f8bd513218e333c88fa7ebc6587d.jpg",
+      "url": "https://compas.pro/storage/thumbnails/default/70/5z/3va9uyo00o88ss440w0kw.jpg?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FJAYODBoFUB3jgk1F8Qow5wskMUmykGe3DyRh6ldT.jpg&s=https",
+      "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/JAYODBoFUB3jgk1F8Qow5wskMUmykGe3DyRh6ldT.jpg",
+      "extension": "jpg",
+      "sort": 0,
+      "uid": "1703288857529",
+      "status": "success"
+    },
+    {
+      "id": 1703288857531,
+      "name": "3e070cdb9a2cd7ba4facaec99c780.jpg",
+      "url": "https://compas.pro/storage/thumbnails/default/d9/uf/cxfojp4w4cook8o4sgc4g.jpg?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2Ft6xnkYJwGrOIsTntGpvhFelf37xYqRM1lU6zThrp.jpg&s=https",
+      "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/t6xnkYJwGrOIsTntGpvhFelf37xYqRM1lU6zThrp.jpg",
+      "extension": "jpg",
+      "sort": 0,
+      "uid": "1703288857531",
+      "status": "success"
+    },
+    {
+      "id": 1703288857532,
+      "name": "ГРАНИТНЫЙ ЩЕБЕНЬ RATMIX 1 Copy.pdf",
+      "url": "https://opt6.compas.pro/storage/tenantopt6/app/public/2375/conversions/vFlwW5fZKZDVzmwZ7mny1SjUkkNSJzmtIhQ8mvCU-thumb.jpg",
+      "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/vFlwW5fZKZDVzmwZ7mny1SjUkkNSJzmtIhQ8mvCU.pdf",
+      "extension": "pdf",
+      "sort": 0,
+      "uid": "1703288857532",
+      "status": "success"
+    },
+    {
+      "id": 1703373771849,
+      "name": "ОПТ6-6.xlsx",
+      "url": "/icons/new/xls.svg",
+      "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/tmOtPTVOBpMo2RPfpLWWwURg4Sh5QEiTe3T5jo6d.xlsx",
+      "extension": "xlsx",
+      "sort": 0,
+      "uid": "1703373771849",
+      "status": "success"
+    },
+    {
+      "id": 1703373788966,
+      "name": "IMG_2343.MOV",
+      "url": "/icons/new/undefinedFile.svg",
+      "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/YEaXi9ndhQV9fA0DrSSAjqkWoglbAaohCKbnDC1b.mp4",
+      "extension": "mp4",
+      "sort": 0,
+      "uid": "1703373788966",
+      "status": "success"
+    },
+    {
+      "id": 1703978125537,
+      "name": "IMG_7423.MOV",
+      "url": "/icons/new/undefinedFile.svg",
+      "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/FXaAwdsbuKZOItMTvdbI3rIwtSpw2TV7USnXIMne.mov",
+      "extension": "mov",
+      "sort": 0,
+      "uid": "1703978125537",
+      "status": "success"
+    },
+    {
+      "id": 1705777455495,
+      "name": "Lab. 2, 4 (1).pdf",
+      "url": "https://opt6.compas.pro/storage/tenantopt6/app/public/2445/conversions/N9IjIY6k406yMuTvKic8gOX7twc44vyqem4F04a3-thumb.jpg",
+      "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/N9IjIY6k406yMuTvKic8gOX7twc44vyqem4F04a3.pdf",
+      "extension": "pdf",
+      "sort": 0,
+      "uid": "1705777455495",
+      "status": "success"
+    }
+  ]
+}
