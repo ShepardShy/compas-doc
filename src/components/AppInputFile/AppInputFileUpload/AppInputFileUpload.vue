@@ -97,19 +97,12 @@
                 console.log('uid', uid)
                 console.log('response', response)
                 // response.file.status = 'success'
+                localItem.status = 'success'
                 // emit('changeValue', response)
             };
 
             // let response = await request.json()
             // return response[0]
-
-            // let request = await fetch('https://opt6.compas.pro/api/files/store', {
-            //     method: 'POST',
-            //     body: data,
-            //     headers: {
-            //         Authorization: `Bearer 8XiiS7rvZ5Yus8jxIB8eRyvgFNsYC6JrknnHPO72Lvfukkg3luwBo5lS9kbL`
-            //     }
-            // })
         } catch (error) {
             console.log(error);
         } finally {

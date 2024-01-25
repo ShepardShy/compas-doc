@@ -1,189 +1,155 @@
 @use '@/assets/variables.scss' as variables;
 @use '@/assets/mixins.scss' as mixins;
 
-.input__file-list {
-    position: relative;
-    height: var(--inputFileHeight);
+.input__file-wrapper {
+    &.form__item-content {
+        //position: absolute;
+        top: 0px;
 
-    .el-upload-list--picture-card {
-        .el-upload-list__item-actions {
-            display: none;
-        }
+        .form__item-content-list {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        
+            .item__value {
+                position: relative;
+                @include mixins.sortableGhost;
+                display: flex;
+                flex-direction: column;
 
-        .el-upload--picture-card {
-            border: 0px;
-            z-index: 1;
-            position: relative;
-            @include mixins.elemResolutionOptions(100px, 100px);
-
-
-            .input__file-button-title {
-                width: 100%;
-                height: auto;
-                white-space: normal;
-                line-height: normal;
-                word-break: break-word;
-            }
-        }
-    }
-
-
-    &.input__file-list_desc {
-        height: auto;
-
-        .el-upload-list__item {
-            &.is-ready {
-                opacity: 0;
-            }
-        }
-    }
-
-    .el-upload-dragger {
-        padding: 0px;
-        width: 100%;
-        height: 100%;
-        border: 0px;
-
-        &.is-dragover {
-            .input__file-button {
-                border: 2px dashed variables.$color-active;
-
-                .input__file-button-title {
-                    color: variables.$color-black;
+                &.sortable-ghost {
+                    border: none;
+                    outline: 2px dashed variables.$color-blue-grey;
+                }
+        
+                .item__value, .item__value-img {
+                    border-radius: 5px;
+                    background: #fff;
+                    overflow: hidden;
+                    border: 1px solid variables.$color-grey;
+                    @include mixins.elemResolutionOptions(100px, 100px);
+                    
+                    img {
+                        object-fit: cover !important;
+                    }
                 }
 
-                svg {
-                    g {
-                        fill: variables.$color-active;
+                .item__value-description {
+                    margin-top: 5px;
+                    height: 100%;
+                    color: variables.$color-grey;
+                    @include mixins.textVerticalHidden()
+                }
+                
+                .item__value-img-details {
+                    position: absolute;
+                    @include mixins.elemPositionOptions(35px, 35px);
+                    @include mixins.elemResolutionOptions(30px, 30px);
+                    display: none;
+
+                    &[open] {
+                        display: grid !important;
+                    }
+
+                    summary {
+                        cursor: pointer;
+                        display: grid;
+                        place-items: center;
+                        grid-template-columns: 1fr;
+                        border-radius: 50%;
+                        border: solid 1px #4e4e4e;
+                        background-color: rgba(246, 245, 243, 0.6);
+                        @include mixins.elemResolutionOptions(30px, 30px);
+                        @include mixins.elemPositionOptions(35px, 35px);
+        
+                        svg {
+                            g {
+                                g {
+                                    fill: #4e4e4e;
+                                }
+                            }
+                        }
+                    }
+        
+                    .popup__content {
+                        right: auto;
+                        @include mixins.elemPositionOptions(35px, 5px);
+                    }
+                }
+        
+                &:hover {
+                    .item__value-img-details {
+                        display: grid;
+                    }
+
+                    .item__value-description {
+                        color: variables.$color-black;
                     }
                 }
             }
         }
-    }
+        
+        .item__value {
+            @include mixins.sortableGhost;
 
-    &.input__file--empty {
-        .el-upload--picture {
-            order: 0;
-        }
-    }
+            &.item__value_loading {
+                pointer-events: none;
 
-    .el-upload-list {
-        gap: 8px;
-
-        .el-upload-list__item-status-label {
-            background: none !important;
-        }
-
-        .el-upload-list__item {
-            width: 100px;
-            height: 100%;
-            padding: 0px;
-            margin: 0px;
-            border: 0px;
-            border-radius: 5px;
-            display: flex;
-            flex-direction: column;
-
-            .el-upload-list__item-thumbnail {
-                object-fit: cover;
-                border-radius: 5px;
-                border: 1px solid #bcbcbc;
-                @include mixins.elemResolutionOptions(100px, 100px);
-            }
-
-            .item__value-description_mirror {
-                margin-top: 5px;
-                height: 100%;
-                color: #bcbcbc;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-                word-break: break-all;
-                visibility: hidden;
-                font-size: 15px;
-            }
-
-            .el-upload-list__item-info {
-                display: none;
-            }
-
-            .el-icon--upload-success {
-                display: none;
-            }
-            .el-icon--close {
-                display: none;
-
-                svg {
+                a {
                     position: relative;
-                    right: 1px;
-                    top: -1px;
+                    
+                    //&::before {
+                    //    content: '';
+                    //    position: absolute;
+                    //    width: 16px;
+                    //    height: 16px;
+                    //    top: 40px;
+                    //    left: 0;
+                    //    right: 0;
+                    //    bottom: auto;
+                    //    z-index: 2;
+                    //    margin: auto;
+                    //    border: 4px solid #2f8cff;
+                    //    border-top-color: variables.$color-white;
+                    //    border-radius: 50%;
+                    //    animation: button-loading-spinner 1s ease infinite;
+                    //}
                 }
-            }
-        }
-    }
 
-    .icon__load {
-        @include mixins.elemResolutionOptions(10px, 15px)
-    }
+                .item__value-img-details {
+                    display: none;
+                }
 
-    .input__file-button {
-        margin: 0px;
-        padding: 0px;
-        background: variables.$color-white;
-        z-index: 1;
-        font-family: 'PT Sans';
-        font-size: variables.$font-size-default;
-        @include mixins.hoverElem();
-        @include mixins.elemResolutionOptions(100%, 100%);
-        border: 2px dashed variables.$color-blue-grey;
+                .item__value-img {
+                    background: #fff;
+                    
+                    img {
+                        visibility: hidden;
+                    }
+                }
 
-        svg {
-            @include mixins.elemResolutionOptions(35px, 27px);
-        }
-
-
-        &:focus, &:hover {
-            background: transparent;
-            border: 2px dashed variables.$color-active;
-
-            .input__file-button-title {
-                color: variables.$color-black;
-            }
-
-            svg {
-                g {
-                    fill: variables.$color-active;
+                .item__value-description {
+                    text-align: center;
                 }
             }
         }
 
-        & > span {
-            flex-direction: column;
-            gap: 10px;
+        &.input__file-list_desc {
+            .item__value {
+                height: 140px;
+                width: 100px;
+            }
         }
-
-        &.input__file-button_hidden {
-            opacity: 0;
-            z-index: 0;
-        }
-
-        .input__file-button-title {
-            color: variables.$color-grey;
-            height: 40px;
-            @include mixins.textVerticalHidden()
-        }
-    }
-
-    .el-upload-list__item {
-        transition: none;
     }
 }
+
 
 @keyframes button-loading-spinner {
     from {
       transform: rotate(0turn);
     }
-
+  
     to {
       transform: rotate(1turn);
     }

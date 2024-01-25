@@ -1,6 +1,6 @@
 <template>
     <AppFansyBoxContainer>
-        <div class="table__item-content-list" v-if="props.item.value.length > 0">
+        <div class="form__item-content-list" v-if="props.item.value.length > 0">
             <AppFansyBoxImage
                 v-for="image in props.item.value"
 				:key="image.id"

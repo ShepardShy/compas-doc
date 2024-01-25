@@ -7,7 +7,7 @@
             @click="() => callAction(props.image)"
         >
             <figure  class='ibg item__value-img'>
-                <img :src="props.image.url" width="200" height="150" />
+                <img :src="props.image.url" width="200" height="150"  :alt="props.item.show_file_name"/>
             </figure>
 
             <div class="progress-ring__wrapper" v-if="props.loading || true">
@@ -24,12 +24,12 @@
         />
 
         <div class="item__value-description" v-if="props.item.show_file_name && props.image.name != undefined">
-            <span v-if="props.image.progress == undefined || props.image.status != 'loading'">
+            <span v-if="props.image.status != 'loading'">
                 {{ setName }}
             </span>
-            <span v-else>
-                {{props.image.progress.loaded}}кб /  {{ props.image.progress.total }}кб
-            </span>
+<!--            <span v-else>-->
+<!--                {{props.image.progress.loaded}}кб /  {{ props.image.progress.total }}кб-->
+<!--            </span>-->
         </div>
     </div>
 </template>

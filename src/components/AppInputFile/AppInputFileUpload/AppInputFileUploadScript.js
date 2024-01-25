@@ -3,14 +3,14 @@ export default {
         // Добавление изображения
         const addImage = () => {
             let downloadingItem = {
-                "id": uid,
-                "name": "Загрузка",
-                "url": null,
-                "file": null,
-                "extension": '',
-                "sort": 0,
-                "uid": uid,
-                "status": 'loading'
+                id: uid,
+                name: "Загрузка",
+                url: null,
+                file: null,
+                extension: '',
+                sort: 0,
+                uid: uid,
+                status: 'loading'
             }
 
             // Вставляем новый элемент перед последним элементом

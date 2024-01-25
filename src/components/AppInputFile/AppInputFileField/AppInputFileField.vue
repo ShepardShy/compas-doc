@@ -1,93 +1,73 @@
 <template>
-    <el-upload
-        v-model:file-list="fileList"
-        class="input__file-list"
-        :class="[fileList.length == 0 ? 'input__file--empty' : '', props.item.show_file_name ? 'input__file_list_desc' : '']"
-        :drag="true"
-        list-type="picture-card"
-        :multiple="true"
-        :http-request="(e) => uploadFile(e)"
-        :on-change="(e) => changeValue(e)"
+    <AppFansyBoxContainer
+        class="input__file-list form__item-content input__file-wrapper"
+        :class="[props.item.show_file_name ? 'input__file-list_desc' : '']"
     >
-        <el-button class="input__file-button" type="primary">
-            <IconLoadFile />
-            <span class="input__file-button-title">
-                {{ props.buttonTitle }}
-            </span>
-        </el-button>
-    </el-upload>
+        <draggable
+            tag="div"
+            v-model="localItems"
+            class="form__item-content-list"
+            :forceFallback="true"
+            handle=".item__value"
+            draggable=".item__value:not(.item__value_undraggable)"
+            :itemKey="'inputFields'"
+            v-if="props.item.value != 'не заполнено'"
+            @end="() => emit('changeValue', {id: props.item.id, key: props.item.key, value: {type: 'sort', arr: localItems}})"
+        >
+            <template #item="{ element: item }" >
+                <AppFansyBoxImage
+                    v-if="Object.keys(item).length !== 0"
+                    :image="item"
+                    :item="props.item"
+                    :loading="item.status == 'loading'"
+                    :class="item.status == 'loading' ? 'item__value_loading' : ''"
+                    @callAction="(data) => $emit('callAction', data)"
+                />
+
+                <AppInputFileUpload v-else />
+            </template>
+        </draggable>
+        <span class="item__value" v-else>
+            {{ props.item.value }}
+        </span>
+    </AppFansyBoxContainer>
+
 </template>
 
 <script setup>
     import './AppInputFileField.scss';
-    import IconLoadFile from '@/components/AppIcons/IconLoadFile/IconLoadFile.vue';
 
-    import selectedObjectOther from '@/stores/selectedObjectScripts/selectedObjectOther';
+    import draggable from 'vuedraggable'
+    import {provide, ref, watch} from "vue";
 
-    let fileList = ref([]);
-
-    const uploadFile = async (event) => {
-        let formData = new FormData()
-        formData.append('files[]', event.file)
-        formData.append('uid', event.file.uid)
-        let response = await selectedObjectOther.uploadFile(formData)
-        response.file.status = 'success'
-        emit('changeValue', response)
-    }
-
-    // Локальный вывод данных в консоль
-    const changeValue = (event) => {
-        if (event.status == 'success') {
-        } else {
-            emit('changeValue', event)
-        }
-    }
+    import AppFansyBoxContainer from '@/components/AppFansyBox/AppFansyBoxContainer/AppFansyBoxContainer.vue';
+    import AppFansyBoxImage from '@/components/AppFansyBox/AppFansyBoxImage/AppFansyBoxImage.vue';
+    import AppInputFileUpload from "@/components/AppInputFile/AppInputFileUpload/AppInputFileUpload.vue";
 
     const emit = defineEmits([
-        'changeValue',
-        'callAction'
+        'callAction',
+        'changeValue'
     ])
-
-    onMounted(() => {
-        if (props.value == null || props.value == undefined || props.value == '' || props.value.length == 0) {
-            fileList.value = []
-        } else {
-            fileList.value = props.value
-        }
-    })
-
-    watch(() => props.value, () => {
-        if (props.value && props.value.length == 0 || props.value == null) {
-            fileList.value = []
-        } else {
-            fileList.value = props.value
-        }
-    })
 
     const props = defineProps({
         item: {
-            default: {},
+            default: {
+                id: 0,
+                title: "Undefined title",
+                typeComponent: "",
+                type: "text",
+                value: null,
+                key: ""
+            },
             type: Object
-        },
-        value: {
-            default: {},
-            type: Object
-        },
-        buttonTitle: {
-            default: "",
-            type: String
-        },
-        limit: {
-            default: 1,
-            type: Number
         }
     })
 
-    const transformWeight = (weight) => {
-        return (weight / 1024).toFixed(0)
-    }
+    let localItems = ref([...props.item.value, {}])
+
+    provide('localItems', localItems.value)
+
+    watch(() => props.item.value, () => {
+        localItems.value = props.item.value
+    })
 </script>
-
-
-
-

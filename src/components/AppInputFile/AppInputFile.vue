@@ -30,7 +30,7 @@
     import './AppInputFile.scss';
 
     import AppInputFileLabel from './AppInputFileLabel/AppInputFileLabel.vue'
-    import AppInputFileFieldClone from './AppInputFileFieldClone/AppInputFileFieldClone.vue'
+    import AppInputFileFieldClone from './AppInputFileField/AppInputFileField.vue'
     import codeProps from '@/data/file/codeProps.json'
 
     import {ref} from "vue";
