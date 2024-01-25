@@ -1,7 +1,7 @@
 <template>
     <AppFansyBoxContainer
-        class="input__file-list table__item-content input__file-clone"
-        :class="[props.item.show_file_name ? 'input__file-list--desc' : '']"
+        class="input__file-list table__item-content input__file-wrapper"
+        :class="[props.item.show_file_name ? 'input__file-list_desc' : '']"
     >
         <draggable
             tag="div"
@@ -9,7 +9,7 @@
             class="table__item-content-list"
             :forceFallback="true"
             handle=".item__value"
-            draggable=".item__value:not(.item__value--undraggable)"
+            draggable=".item__value:not(.item__value_undraggable)"
             :itemKey="'inputFields'"
             v-if="props.item.value != 'не заполнено'"
             @end="() => emit('changeValue', {id: props.item.id, key: props.item.key, value: {type: 'sort', arr: localItems}})"
@@ -20,7 +20,7 @@
                     :image="item"
                     :item="props.item"
                     :loading="item.status == 'loading'"
-                    :class="item.status == 'loading' ? 'item__value--loading' : ''"
+                    :class="item.status == 'loading' ? 'item__value_loading' : ''"
                     @callAction="(data) => $emit('callAction', data)"
                 />
 
@@ -64,7 +64,7 @@
 
     let localItems = ref([...props.item.value, {}])
 
-    provide('localItems', localItems)
+    provide('localItems', localItems.value)
 
     watch(() => props.item.value, () => {
         localItems.value = props.item.value

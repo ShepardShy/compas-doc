@@ -12,7 +12,7 @@
             class="table__item-content-list"
             :forceFallback="true"
             handle=".item__value"
-            draggable=".item__value:not(.item__value--undraggable)"
+            draggable=".item__value:not(.item__value_undraggable)"
             :itemKey="'inputFields'"
             v-else-if="props.item.value != 'не заполнено'"
             @end="() => changeValue()"

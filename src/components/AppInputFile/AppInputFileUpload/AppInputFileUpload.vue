@@ -29,6 +29,8 @@
     import IconLoadFile from "@/components/AppIcons/IconLoadFile/IconLoadFile.vue";
     import Input from "@/components/AppAutocomplete/Input/Input.vue";
 
+    import AppInputFileUploadScript from './AppInputFileUploadScript.js'
+
     import {computed, inject, ref} from "vue";
 
     const dragover = ref(false)
@@ -54,46 +56,53 @@
 
         event.target.files.forEach(async (file) => {
             let formData = new FormData()
-            console.log('file', file)
+            const uid = generateUid()
             formData.append('files[]', file)
-            formData.append('uid', generateUid())
+            formData.append('uid', uid)
 
-            let response = await uploadFile(formData)
-            response.file.status = 'success'
-            emit('changeValue', response)
+            await uploadFile(formData, file, uid)
+            //response.file.status = 'success'
+            //emit('changeValue', response)
         })
 
         console.log('files', event.target.files)
     }
 
     // Загрузка файла на сервер
-    const uploadFile = async (data) => {
+    const uploadFile = async (data, file,uid) => {
         try {
+            AppInputFileUploadScript.changeFile(uid, localItems, 'ready');
 
-            let ajax = new XMLHttpRequest();
+            const ajax = new XMLHttpRequest();
+            const localItem = localItems.find(item => item.uid == uid)
 
-            ajax.open("POST", "https://opt6.compas.pro/api/files/store", {
-                method: 'POST',
-                body: data,
-                headers: {
-                    Authorization: `Bearer 8XiiS7rvZ5Yus8jxIB8eRyvgFNsYC6JrknnHPO72Lvfukkg3luwBo5lS9kbL`
-                }
-            });
+            ajax.open('POST', 'https://opt6.compas.pro/api/files/store', true);
+            ajax.setRequestHeader("Authorization", "Bearer 8XiiS7rvZ5Yus8jxIB8eRyvgFNsYC6JrknnHPO72Lvfukkg3luwBo5lS9kbL");
 
             ajax.send(data);
 
             ajax.onprogress = function(event) {
+                if (event.lengthComputable) {
+                    const percentComplete = (event.loaded / event.total) * 100;
+                    localItem.progress = percentComplete
+                    console.log('Прогресс загрузки: ' + percentComplete.toFixed(2) + '%');
+                } else {
+                    console.log('Невозможно вычислить прогресс загрузки, так как размер файла неизвестен.');
+                }
                 console.log('event', event)
             };
 
-            ajax.onload = function(event) {
-                console.log('event', event)
+
+            ajax.onload = function(response) {
+                console.log('uid', uid)
+                console.log('response', response)
+                // response.file.status = 'success'
+                // emit('changeValue', response)
             };
 
             // let response = await request.json()
             // return response[0]
 
-            console.log('data', data)
             // let request = await fetch('https://opt6.compas.pro/api/files/store', {
             //     method: 'POST',
             //     body: data,

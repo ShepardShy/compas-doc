@@ -5,7 +5,7 @@
     .item__value {
         height: auto;
 
-        &.item__value--high {
+        &.item__value_high {
             height: 142px;
         }
     }
@@ -29,11 +29,23 @@
         }
     }
 }
-.progress-ring__circle {
-    stroke-width: 4;
-    stroke: #2f8cff;
-    fill: none;
-    transform-origin: center;
-    transform: rotate(-90deg);
-    z-index: 999;
+
+.progress-ring__wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .progress-ring__circle {
+        stroke-width: 4;
+        stroke: #2f8cff;
+        fill: none;
+        transform-origin: center;
+        transform: rotate(-90deg);
+        z-index: 999;
+    }
 }

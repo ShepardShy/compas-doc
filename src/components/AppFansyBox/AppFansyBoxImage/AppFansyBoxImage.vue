@@ -1,5 +1,5 @@
 <template>
-    <div class="item__value" @mouseover ="(event) => checkingBlock(event)" :class="props.item.show_file_name ? 'item__value--high' : ''">
+    <div class="item__value" @mouseover ="(event) => checkingBlock(event)" :class="props.item.show_file_name ? 'item__value_high' : ''">
         <a
             :data-fancybox="`galleryClick_${props.item.id}`"
             :href="['png', 'svg', 'jpeg', 'jpg', 'webp', 'pdf', 'gif', 'mp4', 'mov', 'mp3'].includes(props.image.extension) ? props.image.file : props.image.url"
@@ -9,6 +9,12 @@
             <figure  class='ibg item__value-img'>
                 <img :src="props.image.url" width="200" height="150" />
             </figure>
+
+            <div class="progress-ring__wrapper" v-if="props.loading || true">
+                <svg class="progress-ring" width="24" height="24">
+                    <circle class="progress-ring__circle" cx="12" cy="12" r="10" :style="`stroke-dasharray: 62.8, 62.8; stroke-dashoffset: ${progressImage};`"></circle>
+                </svg>
+            </div>
         </a>
 
         <FansyBoxDetails 
@@ -25,16 +31,8 @@
                 {{props.image.progress.loaded}}кб /  {{ props.image.progress.total }}кб
             </span>
         </div>
-
-        <div v-if="props.loading || true">
-            <svg class="progress-ring" width="24" height="24">
-                <circle class="progress-ring__circle" cx="12" cy="12" r="10" style="stroke-dasharray: 62.8, 62.8; stroke-dashoffset: 32.8;"></circle>
-            </svg>
-        </div>
     </div>
 </template>
-
-
 
 <script setup>
     import './AppFansyBoxImage.scss';
@@ -102,9 +100,9 @@
 
     const checkingBlock = (event) => {
         if (event.target.closest('.item__value-img-details')) {
-            event.target.closest('.item__value').classList.add('item__value--undraggable')
+            event.target.closest('.item__value').classList.add('item__value_undraggable')
         } else {
-            event.target.closest('.item__value').classList.remove('item__value--undraggable')
+            event.target.closest('.item__value').classList.remove('item__value_undraggable')
         }
     }
 
@@ -124,4 +122,8 @@
             }, 1000);
         }
     }
+
+    const progressImage = computed(() => {
+        return props.image.progress ? 62.8 - props.image.progress / 100 * 62.8 : 62.8
+    })
 </script>

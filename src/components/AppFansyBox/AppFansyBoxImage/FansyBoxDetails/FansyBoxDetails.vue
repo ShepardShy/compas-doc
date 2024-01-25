@@ -1,31 +1,49 @@
 <template>
-    <details class="item__value-img-details" ref="fansyBoxRef" v-click-out-side="(event) => hideDetails(event)">
-        <summary @click="(event) => openDetails(event, true)">
+    <AppPopup class="item__value-img-details popup_actions" :closeByClick="true">
+        <template #summary>
             <IconDots />
-        </summary>
-        <div class="section__settings-list" @click="() => hideDetailsElement(fansyBoxRef)">
-            <div class="section__setting-options">
-                <a
-                    class="section__setting-option"
-                    v-if="findImage"
-                    data-fancybox="gallery"
-                    :href="props.image.file"
-                    @click="() => callActionDetails(null)"
-                >
-                    Посмотреть
-                </a>
-                <div class="section__setting-option" @click="() => callActionDetails('downloadFile')">
-                    Скачать
-                </div>
-                <div
-                    class="section__setting-option section__setting-option_red"
-                    @click="() => callActionDetails('deleteFile')"
-                >
-                    Удалить
-                </div>
-            </div>
-        </div>
-    </details>
+        </template>
+        <template #content>
+            <PopupOption class="popup__option-open__fancyBox" data-fancybox="gallery" :href="props.image.file">
+                Посмотреть
+            </PopupOption>
+            <PopupOption @click="() => callActionDetails('downloadFile')">
+                Скачать
+            </PopupOption>
+            <PopupOption class="action_red" @click="() => callActionDetails('deleteFile')">
+                Удалить
+            </PopupOption>
+        </template>
+    </AppPopup>
+
+
+<!--    <details class="item__value-img-details" ref="fansyBoxRef" v-click-out-side="(event) => hideDetails(event)">-->
+<!--        <summary @click="(event) => openDetails(event, true)">-->
+<!--            <IconDots />-->
+<!--        </summary>-->
+<!--        <div class="section__settings-list" @click="() => hideDetailsElement(fansyBoxRef)">-->
+<!--            <div class="section__setting-options">-->
+<!--                <a-->
+<!--                    class="section__setting-option"-->
+<!--                    v-if="findImage"-->
+<!--                    data-fancybox="gallery"-->
+<!--                    :href="props.image.file"-->
+<!--                    @click="() => callActionDetails(null)"-->
+<!--                >-->
+<!--                    Посмотреть-->
+<!--                </a>-->
+<!--                <div class="section__setting-option" @click="() => callActionDetails('downloadFile')">-->
+<!--                    Скачать-->
+<!--                </div>-->
+<!--                <div-->
+<!--                    class="section__setting-option section__setting-option_red"-->
+<!--                    @click="() => callActionDetails('deleteFile')"-->
+<!--                >-->
+<!--                    Удалить-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </details>-->
 </template>
 
 <script setup>
@@ -34,6 +52,8 @@
     import IconDots from '@/components/AppIcons/IconDots/IconDots.vue'
     import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside'
     import {computed, ref} from "vue";
+    import PopupOption from "@/components/AppPopup/PopupOption/PopupOption.vue";
+    import AppPopup from "@/components/AppPopup/Popup.vue";
 
     const emit = defineEmits([
         'callAction'
