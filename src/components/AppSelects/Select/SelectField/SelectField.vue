@@ -20,6 +20,7 @@
         :class="props.isMultiply ? 'select__popup_multiply' : ''"
         :isReadOnly="props.isReadOnly"
         @click="(event) => props.isReadOnly ? event.preventDefault() : null"
+        @clickOutside="() => emit('clickOutside', true)"
     >
         <template #summary> 
             <AppInput
@@ -34,6 +35,7 @@
                     value: props.isReadOnly ? activeOptions == null ? null : activeOptions.label : search,
                     substring: props.isReadOnly ? null : ' '
                 }"
+                :disabled="!props.isFiltered"
                 :isReadOnly="props.isReadOnly"
                 :enabledAutocomplete="false"
                 @changeValue="(data) => callAction({action: 'searchOptions', value: data.value})"
@@ -58,6 +60,7 @@
                                 ref="mirrorRef" 
                                 type="text" 
                                 :value="search"
+                                :disabled="!props.isFiltered"
                                 @input="(e) => callAction({action: 'searchOptions', value: e.target.value})"
                             >
                         </div>
@@ -69,7 +72,7 @@
             </AppInput>
         </template>
         <template #content>
-            <PopupOption v-show="!props.isMultiply || options.length == 0" @click="() => callAction({action: 'changeValue', value: null})">
+            <PopupOption v-show="props.isHaveNullOption & !props.isMultiply || options.length == 0" @click="() => callAction({action: 'changeValue', value: null})">
                 Не выбрано
             </PopupOption>
             <PopupOption 
@@ -122,11 +125,16 @@
         isHaveNullOption: {
             default: true,
             type: Boolean
+        },
+        isFiltered: {
+            default: false,
+            type: Boolean
         }
     })
     
     const emit = defineEmits([
         'changeValue',
+        'clickOutside'
     ])
     
     const popupRef = ref(null)
@@ -305,10 +313,19 @@
     })
 
     watch(() => props.item.value, () => {
+        if (props.isMultiply) {
+            if ([null, undefined].includes(props.item.value) || typeof props.item.value == 'string') {
+                multiplyValues.value = []
+            } else {
+                multiplyValues.value = [...new Set(props.item.value)]
+            }
+        }
+
         callAction({
             action: 'getOptions',
             value: null
         })
+
         callAction({
             action: 'setActiveOptions',
             value: props.item.value

@@ -1,7 +1,7 @@
 <template>
     <th class="table__item table-item" ref="tableItemRef">
 
-        <div class="table-item__content" v-if="props.item.type == 'checkbox'">
+        <div class="table-item__content" v-if="props.item.key == 'isChoose'">
             <AppCheckbox 
                 :item="{
                     id: props.item.id,
@@ -70,6 +70,7 @@
     const bodyData = inject('bodyData')
     const selectAll = inject('selectAll')
     const footerData = inject('footerData')
+    const actionState = inject('actionState')
 
     let clickSetting = ref({
         id: -1,
@@ -95,6 +96,10 @@
         },
         headerRef: {
             default: null,
+        },
+        isTrash: {
+            default: false,
+            type: Boolean
         }
     })
 
@@ -127,5 +132,11 @@
         bodyData.value.forEach(row => {
             row.isChoose = selectAll.value
         });
+
+        if (data.value) {
+            actionState.value = props.isTrash ? 'restoring' : 'editting'
+        } else {
+            actionState.value = null
+        }
     }
 </script>

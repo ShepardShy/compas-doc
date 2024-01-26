@@ -12,7 +12,9 @@
             :item="props.item"
             :isReadOnly="props.isReadOnly"
             :isMultiply="props.isMultiply"
+            :isFiltered="props.isFiltered"
             :isHaveNullOption="props.isHaveNullOption"
+            @clickOutside="() => emit('clickOutside', true)"
             @changeValue="(data) => emit('changeValue', data)"
         />
     </FormItem>
@@ -50,10 +52,15 @@
         isHaveNullOption: {
             default: true,
             type: Boolean
+        },
+        isFiltered: {
+            default: false,
+            type: Boolean
         }
     })
 
     const emit = defineEmits([
         'changeValue',
+        'clickOutside'
     ])
 </script>

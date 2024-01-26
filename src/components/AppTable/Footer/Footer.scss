@@ -27,4 +27,38 @@
 .table-footer__pagination {
 }
 .table-footer__visible-elems {
+    .form-item__select {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+
+        .form-item__title {
+            color: #bcbcbc;
+            font-size: 15px;
+            margin-bottom: 0;
+        }
+
+        .select__popup {
+            width: 100px;
+
+            .form-item__input {
+                min-width: auto;
+
+                input {
+                    padding: 10px 10px 10px 15px;
+                }
+            }
+            
+            .select__active-option  {
+                width: 100%;
+            }
+
+            .popup__content {
+                top: auto;
+                bottom: 50px;
+                right: 0px;
+                left: auto
+            }
+        }
+    }
 }

@@ -5,7 +5,7 @@
         @mousedown="(event) => mouseDownEvent = event" 
         v-click-out-side="(event) => clickOutside(event)"
     >
-        <summary class="popup__summary">
+        <summary class="popup__summary" @click="() => showDetail()">
             <slot name="summary"></slot>
         </summary>
         <div class="popup__content" @click="() => props.closeByClick ? elementsDOM.hideDetails(popupRef) : ''">
@@ -46,6 +46,10 @@
             elementsDOM.hideDetails(popupRef.value)
         }
         mouseDownEvent.value = null
+    }
+
+    const showDetail = () => {
+        elementsDOM.setDropdownPosition(popupRef.value)
     }
 
     defineExpose({

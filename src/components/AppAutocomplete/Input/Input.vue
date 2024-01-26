@@ -13,6 +13,7 @@
             :closeByClick="false" 
             ref="popupRef" 
             :isReadOnly="props.isReadOnly"
+            @clickOutside="() => emit('clickOutside', true)"
             @click="(event) => props.isReadOnly ? event.preventDefault() : null"
         >
             <template #summary> 
@@ -129,6 +130,7 @@
         'openLink',
         'changeValue',
         'createOption',
+        'clickOutside',
         'searchOptions',
     ])
 

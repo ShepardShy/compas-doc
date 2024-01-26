@@ -6,7 +6,7 @@
             </template>
             <template #content>
                 <template v-if="menu.saves.activeTab != null && menu.saves.activeTab.tab == 'roles'">
-                    <PopupOption class="popup__option-sublink popup__option-sublink_back" @click="() => callAction({action: 'changeSaveTab', value: null})">
+                    <PopupOption class="popup-option__sublink popup-option__sublink_back" @click="() => callAction({action: 'changeSaveTab', value: null})">
                         <IconArrow />
                         
                         {{ menu.saves.activeTab.title }}
@@ -16,7 +16,7 @@
                     </PopupOption>
                 </template>
                 <template v-else>
-                    <PopupOption :class="option.tab == 'roles' ? 'popup__option-sublink': ''" v-for="option in menu.saves.tabs" @click="() => callAction({action: 'changeSaveTab', value: option})">
+                    <PopupOption :class="option.tab == 'roles' ? 'popup-option__sublink': ''" v-for="option in menu.saves.tabs" @click="() => callAction({action: 'changeSaveTab', value: option})">
                         {{ option.title }}
                         <IconArrow v-show="option.tab == 'roles'"/>
                     </PopupOption>
@@ -39,14 +39,14 @@
             </template>
             <template #content>
                 <template v-if="menu.activeTab == null">
-                    <PopupOption class="popup__option-sublink" v-for="tab in menu.tabs" @click="() => callAction({action: 'changeTab', value: tab})">
+                    <PopupOption class="popup-option__sublink" v-for="tab in menu.tabs" @click="() => callAction({action: 'changeTab', value: tab})">
                         {{ tab.title }} 
 
                         <IconArrow />
                     </PopupOption>
                 </template>
                 <template v-else>
-                    <PopupOption class="popup__option-sublink popup__option-sublink_back" @click="() => callAction({action: 'changeTab', value: null})">
+                    <PopupOption class="popup-option__sublink popup-option__sublink_back" @click="() => callAction({action: 'changeTab', value: null})">
                         <IconArrow />
                         
                         {{ menu.activeTab.title }}
@@ -64,7 +64,7 @@
                             @start="(event) => callAction({action: 'dragStart', value: event})" 
                         >
                             <template #item="{ element: option }">
-                                <PopupOption class="popup__option-sublink" v-show="option.enabled">
+                                <PopupOption class="popup-option__sublink" v-show="option.enabled">
                                     <IconDrag /> 
                                     {{ option.title }}
                                 </PopupOption>

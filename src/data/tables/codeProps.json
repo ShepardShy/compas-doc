@@ -24,7 +24,7 @@
                 "hover": false,
                 "sort_order": null,
                 "type": "actions",
-                "fixed": true,
+                "fixed": false,
                 "index": 1,
                 "fixTarget": "44px",
                 "isSticky": false
@@ -53,238 +53,6 @@
                 "is_hidden": 0,
                 "visible_always": 1,
                 "options": []
-            },
-            {
-                "id": 458,
-                "title": "Ответственный",
-                "key": "user_id",
-                "width": "40px",
-                "enabled": true,
-                "sort_order": null,
-                "type": "relation",
-                "is_plural": 0,
-                "external_link": "",
-                "is_external_link": 0,
-                "is_link": 1,
-                "required": 0,
-                "fixed": true,
-                "index": 3,
-                "fixTarget": "88px",
-                "read_only": 0,
-                "unit": "",
-                "mask": null,
-                "can_edit": 0,
-                "color": "",
-                "is_hidden": 0,
-                "visible_always": 1,
-                "options": [
-                    {
-                        "label": {
-                            "id": 8,
-                            "sort": 0,
-                            "file": "https://compas.pro/storage/thumbnails/default/53/ia/suxqumo80ok8w4cww8owc.jpg?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FsfuLyUVw2OPSwyNVn7YBRQawJ0F2vEIJx4iqJajO.jpg&s=https",
-                            "is_hidden": 0,
-                            "field_id": 458,
-                            "color": "linear-gradient(to bottom, #aeee90 2%, #48b85a 99%)",
-                            "text": "Вадим Сыропятов"
-                        },
-                        "value": 8
-                    },
-                    {
-                        "label": {
-                            "id": 46,
-                            "sort": 1,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 458,
-                            "color": "linear-gradient(to bottom, #9ce1ff 2%, #6dc2ff 100%)",
-                            "text": "Пользователь #46"
-                        },
-                        "value": 46
-                    },
-                    {
-                        "label": {
-                            "id": 1,
-                            "sort": 2,
-                            "file": "https://compas.pro/storage/thumbnails/default/i0/t4/ekc3cm8gw8ogcs0s40wo.jpg?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FAlNOaEeDiyvNjmnY5LbirUlCYfcAfflwOm8SfBg5.jpg&s=https",
-                            "is_hidden": 0,
-                            "field_id": 458,
-                            "color": "linear-gradient(to bottom, #ee9090 2%, #6765dd 100%)",
-                            "text": "Денис Потемкин"
-                        },
-                        "value": 1
-                    },
-                    {
-                        "label": {
-                            "id": 41,
-                            "sort": 3,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 458,
-                            "color": "",
-                            "text": "Пользователь #41"
-                        },
-                        "value": 41
-                    },
-                    {
-                        "label": {
-                            "id": 53,
-                            "sort": 4,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 458,
-                            "color": "linear-gradient(to bottom, #f1c3ff 2%, #a8c7ff)",
-                            "text": "Михаил Филимон"
-                        },
-                        "value": 53
-                    },
-                    {
-                        "label": {
-                            "id": 5,
-                            "sort": 5,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 458,
-                            "color": "linear-gradient(to bottom, #ffdc96 2%, #ff8d8d 100%)",
-                            "text": "Пользователь #5"
-                        },
-                        "value": 5
-                    },
-                    {
-                        "label": {
-                            "id": 45,
-                            "sort": 6,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 458,
-                            "color": "linear-gradient(to bottom, #aeee90 2%, #65dd78 100%)",
-                            "text": "Пользователь #45"
-                        },
-                        "value": 45
-                    },
-                    {
-                        "label": {
-                            "id": 47,
-                            "sort": 7,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 458,
-                            "color": "linear-gradient(to bottom, #5ef9e2 2%, #50e2d2 100%)",
-                            "text": "Пользователь #47"
-                        },
-                        "value": 47
-                    },
-                    {
-                        "label": {
-                            "id": 43,
-                            "sort": 8,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 458,
-                            "color": "linear-gradient(to bottom, #ee90d2 4%, #dd6565 100%)",
-                            "text": "Пользователь #43"
-                        },
-                        "value": 43
-                    },
-                    {
-                        "label": {
-                            "id": 51,
-                            "sort": 9,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 458,
-                            "color": "linear-gradient(to bottom, #9390ee 2%, #dd65d5)",
-                            "text": "Пользователь #51"
-                        },
-                        "value": 51
-                    },
-                    {
-                        "label": {
-                            "id": 52,
-                            "sort": 10,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 458,
-                            "color": "linear-gradient(to bottom, #ffdc96 2%, #ffc28d)",
-                            "text": "Пользователь #52 ловило"
-                        },
-                        "value": 52
-                    },
-                    {
-                        "label": {
-                            "id": 38,
-                            "sort": 11,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 458,
-                            "color": "",
-                            "text": "Пользователь #38"
-                        },
-                        "value": 38
-                    },
-                    {
-                        "label": {
-                            "id": 42,
-                            "sort": 12,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 458,
-                            "color": "",
-                            "text": "Пользователь #42"
-                        },
-                        "value": 42
-                    },
-                    {
-                        "label": {
-                            "id": 44,
-                            "sort": 13,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 458,
-                            "color": "",
-                            "text": "Пользователь #44"
-                        },
-                        "value": 44
-                    },
-                    {
-                        "label": {
-                            "id": 59,
-                            "sort": 14,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 458,
-                            "color": "linear-gradient(to bottom, #5ef9e2 2%, #50e2d2 100%)",
-                            "text": "Пользователь #59"
-                        },
-                        "value": 59
-                    },
-                    {
-                        "label": {
-                            "id": 60,
-                            "sort": 15,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 458,
-                            "color": "linear-gradient(to bottom, #aeee90 2%, #65dd78 100%)",
-                            "text": "Пользователь #60"
-                        },
-                        "value": 60
-                    },
-                    {
-                        "label": {
-                            "id": 62,
-                            "sort": 16,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 458,
-                            "color": "",
-                            "text": "Пользователь #62"
-                        },
-                        "value": 62
-                    }
-                ],
-                "related_table": "users",
-                "can_create": 1
             },
             {
                 "id": 842,
@@ -543,13 +311,245 @@
                 "can_create": 1
             },
             {
+                "id": 458,
+                "title": "Ответственный",
+                "key": "user_id",
+                "width": "120px",
+                "enabled": true,
+                "sort_order": null,
+                "type": "relation",
+                "is_plural": 0,
+                "external_link": "",
+                "is_external_link": 0,
+                "is_link": 1,
+                "required": 0,
+                "fixed": true,
+                "index": 3,
+                "fixTarget": "0px",
+                "read_only": 0,
+                "unit": "",
+                "mask": null,
+                "can_edit": 0,
+                "color": "",
+                "is_hidden": 0,
+                "visible_always": 1,
+                "options": [
+                    {
+                        "label": {
+                            "id": 8,
+                            "sort": 0,
+                            "file": "https://compas.pro/storage/thumbnails/default/53/ia/suxqumo80ok8w4cww8owc.jpg?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FsfuLyUVw2OPSwyNVn7YBRQawJ0F2vEIJx4iqJajO.jpg&s=https",
+                            "is_hidden": 0,
+                            "field_id": 458,
+                            "color": "linear-gradient(to bottom, #aeee90 2%, #48b85a 99%)",
+                            "text": "Вадим Сыропятов"
+                        },
+                        "value": 8
+                    },
+                    {
+                        "label": {
+                            "id": 46,
+                            "sort": 1,
+                            "file": "",
+                            "is_hidden": 0,
+                            "field_id": 458,
+                            "color": "linear-gradient(to bottom, #9ce1ff 2%, #6dc2ff 100%)",
+                            "text": "Пользователь #46"
+                        },
+                        "value": 46
+                    },
+                    {
+                        "label": {
+                            "id": 1,
+                            "sort": 2,
+                            "file": "https://compas.pro/storage/thumbnails/default/i0/t4/ekc3cm8gw8ogcs0s40wo.jpg?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FAlNOaEeDiyvNjmnY5LbirUlCYfcAfflwOm8SfBg5.jpg&s=https",
+                            "is_hidden": 0,
+                            "field_id": 458,
+                            "color": "linear-gradient(to bottom, #ee9090 2%, #6765dd 100%)",
+                            "text": "Денис Потемкин"
+                        },
+                        "value": 1
+                    },
+                    {
+                        "label": {
+                            "id": 41,
+                            "sort": 3,
+                            "file": "",
+                            "is_hidden": 0,
+                            "field_id": 458,
+                            "color": "",
+                            "text": "Пользователь #41"
+                        },
+                        "value": 41
+                    },
+                    {
+                        "label": {
+                            "id": 53,
+                            "sort": 4,
+                            "file": "",
+                            "is_hidden": 0,
+                            "field_id": 458,
+                            "color": "linear-gradient(to bottom, #f1c3ff 2%, #a8c7ff)",
+                            "text": "Михаил Филимон"
+                        },
+                        "value": 53
+                    },
+                    {
+                        "label": {
+                            "id": 5,
+                            "sort": 5,
+                            "file": "",
+                            "is_hidden": 0,
+                            "field_id": 458,
+                            "color": "linear-gradient(to bottom, #ffdc96 2%, #ff8d8d 100%)",
+                            "text": "Пользователь #5"
+                        },
+                        "value": 5
+                    },
+                    {
+                        "label": {
+                            "id": 45,
+                            "sort": 6,
+                            "file": "",
+                            "is_hidden": 0,
+                            "field_id": 458,
+                            "color": "linear-gradient(to bottom, #aeee90 2%, #65dd78 100%)",
+                            "text": "Пользователь #45"
+                        },
+                        "value": 45
+                    },
+                    {
+                        "label": {
+                            "id": 47,
+                            "sort": 7,
+                            "file": "",
+                            "is_hidden": 0,
+                            "field_id": 458,
+                            "color": "linear-gradient(to bottom, #5ef9e2 2%, #50e2d2 100%)",
+                            "text": "Пользователь #47"
+                        },
+                        "value": 47
+                    },
+                    {
+                        "label": {
+                            "id": 43,
+                            "sort": 8,
+                            "file": "",
+                            "is_hidden": 0,
+                            "field_id": 458,
+                            "color": "linear-gradient(to bottom, #ee90d2 4%, #dd6565 100%)",
+                            "text": "Пользователь #43"
+                        },
+                        "value": 43
+                    },
+                    {
+                        "label": {
+                            "id": 51,
+                            "sort": 9,
+                            "file": "",
+                            "is_hidden": 0,
+                            "field_id": 458,
+                            "color": "linear-gradient(to bottom, #9390ee 2%, #dd65d5)",
+                            "text": "Пользователь #51"
+                        },
+                        "value": 51
+                    },
+                    {
+                        "label": {
+                            "id": 52,
+                            "sort": 10,
+                            "file": "",
+                            "is_hidden": 0,
+                            "field_id": 458,
+                            "color": "linear-gradient(to bottom, #ffdc96 2%, #ffc28d)",
+                            "text": "Пользователь #52 ловило"
+                        },
+                        "value": 52
+                    },
+                    {
+                        "label": {
+                            "id": 38,
+                            "sort": 11,
+                            "file": "",
+                            "is_hidden": 0,
+                            "field_id": 458,
+                            "color": "",
+                            "text": "Пользователь #38"
+                        },
+                        "value": 38
+                    },
+                    {
+                        "label": {
+                            "id": 42,
+                            "sort": 12,
+                            "file": "",
+                            "is_hidden": 0,
+                            "field_id": 458,
+                            "color": "",
+                            "text": "Пользователь #42"
+                        },
+                        "value": 42
+                    },
+                    {
+                        "label": {
+                            "id": 44,
+                            "sort": 13,
+                            "file": "",
+                            "is_hidden": 0,
+                            "field_id": 458,
+                            "color": "",
+                            "text": "Пользователь #44"
+                        },
+                        "value": 44
+                    },
+                    {
+                        "label": {
+                            "id": 59,
+                            "sort": 14,
+                            "file": "",
+                            "is_hidden": 0,
+                            "field_id": 458,
+                            "color": "linear-gradient(to bottom, #5ef9e2 2%, #50e2d2 100%)",
+                            "text": "Пользователь #59"
+                        },
+                        "value": 59
+                    },
+                    {
+                        "label": {
+                            "id": 60,
+                            "sort": 15,
+                            "file": "",
+                            "is_hidden": 0,
+                            "field_id": 458,
+                            "color": "linear-gradient(to bottom, #aeee90 2%, #65dd78 100%)",
+                            "text": "Пользователь #60"
+                        },
+                        "value": 60
+                    },
+                    {
+                        "label": {
+                            "id": 62,
+                            "sort": 16,
+                            "file": "",
+                            "is_hidden": 0,
+                            "field_id": 458,
+                            "color": "",
+                            "text": "Пользователь #62"
+                        },
+                        "value": 62
+                    }
+                ],
+                "related_table": "users",
+                "can_create": 1
+            },
+            {
                 "id": 105,
                 "title": "Название",
                 "key": "name",
                 "width": "368px",
                 "enabled": true,
                 "sort_order": "desc",
-                "type": "json",
+                "type": "text",
                 "is_plural": 0,
                 "external_link": "https://avixo.ru/logistics",
                 "is_external_link": 1,
@@ -646,7 +646,7 @@
                 "is_external_link": 0,
                 "is_link": 0,
                 "required": 0,
-                "fixed": null,
+                "fixed": true,
                 "index": 8,
                 "fixTarget": "0px",
                 "read_only": 0,
@@ -2348,7 +2348,7 @@
                 "is_external_link": 0,
                 "is_link": 0,
                 "required": 0,
-                "fixed": true,
+                "fixed": false,
                 "index": 38,
                 "fixTarget": "298px",
                 "read_only": 0,

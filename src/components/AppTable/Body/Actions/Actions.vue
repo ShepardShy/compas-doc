@@ -6,7 +6,7 @@
             <template #content>
                 <template v-if="menu.activeTab == null">
                     <PopupOption 
-                        class="popup__option-sublink" 
+                        class="popup-option__sublink" 
                         v-for="tab in actions[props.slug]" 
                         :class="tab.class"
                         @click="() => tab.children.length > 0 ? 
@@ -21,7 +21,7 @@
                 </template>
 
                 <template v-else>
-                    <PopupOption class="popup__option-sublink popup__option-sublink_back" @click="() => callAction({action: 'changeTab', value: null})">
+                    <PopupOption class="popup-option__sublink popup-option__sublink_back" @click="() => callAction({action: 'changeTab', value: null})">
                         <IconArrow />
                         
                         {{ menu.activeTab.title }}

@@ -24,6 +24,12 @@ button {
     &.button_blue {
         background: variables.$color-blue;
         color: variables.$color-white;
+
+        svg {
+            * {
+                fill: variables.$color-white;
+            }
+        }
     }
 
     &.button_orange {
@@ -52,7 +58,7 @@ button {
         }
     }
 
-    &.button_delete {
+    &.button_red {
         color: variables.$color-red;
 
         svg {

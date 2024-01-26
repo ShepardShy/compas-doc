@@ -23,6 +23,10 @@
                     width: 100%;
                 }
 
+                .form-item__value_empty {
+                    display: none;
+                }
+
                 .form-item__relation {
                     .relation__item {
                         &.relation__item_empty {
@@ -43,6 +47,14 @@
                     border-radius: 0px 0px 5px 5px;
                     border-bottom: 2px dashed variables.$color-blue-grey;
                 }
+            }
+        }
+
+        &.table__row_updated {
+            background: #fffbe2;
+            
+            .table__item {
+                background: #fffbe2;
             }
         }
 
@@ -68,6 +80,11 @@
                     }
                 }
             }
+        }
+
+        &.table_row_clicked {
+            z-index: 30;
+            position: relative;
         }
     }
 }

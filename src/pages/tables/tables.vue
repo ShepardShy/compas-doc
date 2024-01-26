@@ -4,6 +4,7 @@
         :tableData="tablesProps.tableData.default"
         :tableFooter="tablesProps.tableFooter.default"
         :loaderState="null"
+        :isTrash="false"
         @callAction="(data) => callAction(data)"
     />
 </template>

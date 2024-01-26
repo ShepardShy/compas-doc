@@ -27,6 +27,7 @@
                 :isCanCreate="props.isCanCreate"
                 @openLink="(item) => emit('openLink', item)"
                 @callAction="(data) => callAction(data, index)"
+                @clickOutside="() => emit('clickOutside', true)"
                 @createOption="(data) => emit('createOption', data)"
             />
         </div>
@@ -90,6 +91,7 @@
         'openLink',
         'changeValue',
         'createOption',
+        'clickOutside'
     ])
 
     // Вызов действия

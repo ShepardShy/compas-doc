@@ -7,7 +7,8 @@
 
     position: relative;
     width: 100%;
-
+    margin-bottom: 70px;
+    
     &.table-template_loading, &.table-template_filtering {
         .table {
             pointer-events: none;
@@ -91,6 +92,7 @@
 
 .table-template__body {
     overflow: auto;
+    overflow-y: hidden;
 }
 
 .table {
@@ -108,6 +110,10 @@
         top: 0px;
         left: 0px;
         background: variables.$color-white;
+    }
+
+    &.table_empty {
+        
     }
 
     &.table_transfer {
@@ -160,13 +166,14 @@
         color: variables.$color-grey;
     }
 
-    &.table__item_sticky {
-        background: #f9f9fa;
-    }
-
     &.table__item_clicked {
         z-index: 10;
         overflow: visible;
+    }
+
+    &.table__item_sticky {
+        z-index: 20;
+        background: #f9f9fa;
     }
 
     .table-item__content {

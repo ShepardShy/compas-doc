@@ -20,21 +20,13 @@
                 {
                     "label": "Опция 3",
                     "value": 2
-                },
-                {
-                    "label": "Опция 4",
-                    "value": 3
-                },
-                {
-                    "label": "Опция 5",
-                    "value": 4
                 }
             ]
         },
         "type": "Object"
     },
     "isReadOnly": {
-        "default": true,
+        "default": false,
         "type": "Boolean"
     },
     "isHaveNullOption": {
@@ -42,7 +34,11 @@
         "type": "Boolean"
     },
     "isMultiply": {
-        "default": false,
+        "default": true,
+        "type": "Boolean"
+    },
+    "isFiltered": {
+        "default": true,
         "type": "Boolean"
     }
 }

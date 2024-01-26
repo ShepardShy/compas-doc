@@ -21,6 +21,26 @@
             cursor: default;
         }
     }
+
+    &.popup_up {
+        .popup__content {
+            top: auto;
+            bottom: 30px;
+        }
+    }
+
+    &.popup_right {
+        .popup__content {
+            left: auto;
+            right: 0px;
+        }
+    }
+    
+    &.popup_hidden {
+        .popup__content {
+            opacity: 0;
+        }
+    }
 }
 
 .popup__summary {

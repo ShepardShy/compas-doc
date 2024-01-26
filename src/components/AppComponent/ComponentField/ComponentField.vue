@@ -9,6 +9,7 @@
             :disabled="props.codeProps.mask != undefined ? props.codeProps.disabled.default : null"
             :mask="props.codeProps.mask != undefined ? props.codeProps.mask.default : null"
             :isCanAdd="props.codeProps.isCanAdd != undefined ? props.codeProps.isCanAdd.default : null"
+            :isFiltered="props.codeProps.isFiltered != undefined ? props.codeProps.isFiltered.default : null"
             :isUseEnter="props.codeProps.isUseEnter != undefined ? props.codeProps.isUseEnter.default : null"
             :isReadOnly="props.codeProps.isReadOnly != undefined ? props.codeProps.isReadOnly.default : null"
             :isMultiply="props.codeProps.isMultiply != undefined ? props.codeProps.isMultiply.default : null"

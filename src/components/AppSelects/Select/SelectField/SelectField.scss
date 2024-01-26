@@ -8,7 +8,7 @@
         position: absolute;
         white-space: nowrap;
         padding: 10px 15px 10px 15px;
-        @include mixins.elemResolutionOptions(calc(100% - 90px), 40px);
+        @include mixins.elemResolutionOptions(calc(100% - 30px), 40px);
         @include mixins.flexBlock($vertical: center, $horizontal: flex-start, $gap: 5px);
     }
     
@@ -35,6 +35,11 @@
 
 .select__popup {
     &[open] {
+        input[disabled] {
+            opacity: 1;
+            @include mixins.borderOptions(1px, solid, variables.$color-blue, 5px);
+        }
+
         .form-item__substring {
             &::after {
                 transform: rotate(180deg);
@@ -54,11 +59,19 @@
                 filter: opacity(1);
             }     
         }
+
+        .popup__summary {
+            margin-bottom: 5px;
+        }
     }
 
     &.select__popup_multiply {
         .popup__summary {
             @include mixins.borderOptions(1px, solid, variables.$color-grey, 5px);
+        }
+
+        .popup__option_active {
+            background: variables.$color-light-grey;
         }
     
         .select__active-option {
@@ -114,7 +127,8 @@
 
     .popup__summary {
         width: 100%;
-        margin-bottom: 5px;
+        border-radius: 5px;
+        background: variables.$color-white;
         @include mixins.flexBlock($vertical: center, $horizontal: flex-start, $gap: 10px);
 
         .form-item__input {
@@ -135,7 +149,7 @@
             }
 
             & > input {
-                padding: 10px 90px 10px 15px;
+                padding: 10px 30px 10px 15px;
             }
         }
 

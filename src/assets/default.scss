@@ -47,6 +47,10 @@ body {
     font-family: Comfortaa;
     overflow-x: hidden;
     min-height: 100vh;
+    
+    &.body_uncscroll {
+        overflow: hidden;
+    }
 }
 
 html {

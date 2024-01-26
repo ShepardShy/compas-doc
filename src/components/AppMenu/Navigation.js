@@ -31,6 +31,11 @@ export default {
             id: 15,
             name: 'Таблица',
             component: markRaw(defineAsyncComponent(() => import('@/pages/tables/tables.vue')))
+        },
+        {
+            id: 16,
+            name: 'Меню ошибки',
+            component: markRaw(defineAsyncComponent(() => import('@/pages/warning/warning.vue')))
         }
     ],
 

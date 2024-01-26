@@ -8,8 +8,9 @@
         :isShowId="true"
         :isLink="![null, undefined].includes(activeOption.id)"
         :class="[null, undefined].includes(activeOption.id) ? 'relation__item_empty' : ''"
-        @openLink="() => callAction({action: 'openLink', value: localItem})"
+        @clickOutside="() => emit('clickOutside', true)"
         @createOption="(data) => emit('createOption', data)"
+        @openLink="() => callAction({action: 'openLink', value: localItem})"
         @changeValue="(data) => callAction({action: 'changeValue', value: data.value})"
         @searchOptions="(data) => callAction({action: 'searchOptions', value: data})"
     >
@@ -80,7 +81,8 @@
     const emit = defineEmits([
         'openLink',
         'callAction',
-        'createOption'
+        'createOption',
+        'clickOutside'
     ])
 
     // Вызов действия

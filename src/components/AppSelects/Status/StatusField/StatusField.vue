@@ -3,7 +3,7 @@
         class="status__popup" 
         :class="colorPicker.state ? 'status__popup_colorpicker' : ''" 
         :closeByClick="false" ref="popupRef" 
-        @clickOutside="() => callActionColorPicker({action: 'toggleColorPicker', data: false})"
+        @clickOutside="() => {emit('clickOutside', true); callActionColorPicker({action: 'toggleColorPicker', data: false})}"
         @click="(event) => props.isReadOnly ? event.preventDefault() : null"
     >
         <template #summary> 
@@ -25,8 +25,8 @@
 
             <PopupOption 
                 v-if="props.isCanCreate"
-                class="popup__option-sublink" 
-                :class="colorPicker.state ? 'popup__option-sublink_back' : ''"
+                class="popup-option__sublink" 
+                :class="colorPicker.state ? 'popup-option__sublink_back' : ''"
                 @click="() => callActionColorPicker({action: 'toggleColorPicker', data: !colorPicker.state})" 
             >
                 Палитра цветов <IconArrow />
@@ -106,6 +106,7 @@
 
     const emit = defineEmits([
         'changeValue',
+        'clickOutside'
     ])
 
     // Действия с колорпикером

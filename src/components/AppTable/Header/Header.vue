@@ -6,6 +6,7 @@
                 :item="item"
                 :headerRef="headerRef"
                 :data-key="item.key"
+                :isTrash="props.isTrash"
                 :class="[item.fixed ? 'table__item_fixed' : '', !item.enabled ? 'table__item_hidden' : '', item.required ? 'table__item_required' : '', item.read_only ? 'table__item_readonly' : '']" 
                 :style="`--defaultWidth: ${item.width};`"
                 @dragStart="(event) => dragColumn({action: 'dragStart', value: {event, key: item.key}})"
@@ -33,6 +34,14 @@
     let draggingItem = ref(null)
     let tableCopy = ref(null)
     let prevMouseCoords = ref(null)
+    let mouseDown = ref(null)
+
+    const props = defineProps({
+        isTrash: {
+            default: false,
+            type: Boolean
+        }
+    })
 
     // Движение мыши
     const onMouseMove = (e) => {
@@ -60,7 +69,7 @@
                 return posX >= coord && posX <= endCoord
             })
 
-            if (stopDrag || hoverElementIndex === -1) return
+            if (stopDrag || [null, undefined, -1].includes(hoverElementIndex) || itemList[hoverElementIndex].classList.contains('table__item_sticky')) return
 
             if (fromIndex > hoverElementIndex) {
                 itemListParent.insertBefore(itemList[fromIndex], itemList[hoverElementIndex]);
@@ -181,7 +190,7 @@
                         } else {
                             let findedRow = [...backupRows][index]
                             if (findedRow != undefined) {
-                                if (Number(item.style.getPropertyValue("--defaultWidth").replace("px", "")) >= 300) {
+                                if (item.offsetWidth >= 300) {
                                     item.style.setProperty("--defaultWidth", "300px")
                                 }
                                 item.style.height = `${ findedRow.offsetHeight}px`
@@ -223,9 +232,11 @@
     }
 
     // Отображение сохранения после ресайза колонки
-    const updateTableHeader = () => {
+    const updateTableHeader = (e) => {
         if (tableRef.value.classList.contains('table_resizing')) {
             menu.value.saves.isShow = true
+            let findedIndex = fields.value.findIndex(p => p.key == mouseDown.value.closest('.table__item').getAttribute('data-key')) 
+            fields.value[findedIndex].width = `${mouseDown.value.closest('.table__item').offsetWidth}px`
         }
     }
 
@@ -238,6 +249,9 @@
             resizeTable.resizableGrid(tableRef.value)
             tableRef.value.parentNode.addEventListener('scroll', scrollTable)
             document.addEventListener('mouseup', updateTableHeader)
+            document.addEventListener('mousedown', (e) => {
+                mouseDown.value = e.target
+            })
         }, 100);
     })
 
@@ -255,5 +269,8 @@
     onUnmounted(() => {
         document.removeEventListener("dragover", onMouseMove);
         document.removeEventListener('mouseup', updateTableHeader)
+        document.removeEventListener('mousedown', (e) => {
+            mouseDown.value = e.target
+        })
     })
 </script>
