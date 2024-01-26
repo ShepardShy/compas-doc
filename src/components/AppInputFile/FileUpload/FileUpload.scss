@@ -1,15 +1,7 @@
 @use '@/assets/variables.scss' as variables;
 @use '@/assets/mixins.scss' as mixins;
 
-
-.input__file-dragger {
-    width: 100px;
-    height: 100px;
-    background: #fff;
-    display: block;
-}
-
-.input__file-dragger {
+.file-upload {
     position: relative;
     width: 100px;
     height: 100px;
@@ -31,7 +23,7 @@
     gap: 10px;
 }
 
-.input__file {
+.file-upload__input {
     position: absolute;
     top: 0;
     left: 0;
@@ -50,7 +42,10 @@
     cursor: pointer;
 }
 
-.input__file-button {
+.file-upload__button {
+    @include mixins.flexBlock($vertical: center, $gap: 10px);
+    flex-direction: column;
+
     svg {
         @include mixins.elemResolutionOptions(35px, 27px);
     }
@@ -60,28 +55,25 @@
         gap: 10px;
     }
 
-    &.input__file-button_hidden {
+    &.file-upload_hidden {
         opacity: 0;
         z-index: 0;
     }
 
-    .input__file-button-title {
+    .file-upload__button-title {
         color: variables.$color-grey;
-        height: 40px;
-        @include mixins.textVerticalHidden()
-    }
-
-    .input__file-button-title {
         height: unset;
+        padding: 0 10px;
+        @include mixins.textVerticalHidden()
     }
 }
 
 
-.input__file-dragger:focus, .input__file-dragger:hover, .input__file-dragover {
+.file-upload:focus, .file-upload:hover, .file-upload_dragover {
     background: transparent;
     border: 2px dashed variables.$color-active;
 
-    .input__file-button-title {
+    .file-upload__button-title {
         color: variables.$color-black;
     }
 

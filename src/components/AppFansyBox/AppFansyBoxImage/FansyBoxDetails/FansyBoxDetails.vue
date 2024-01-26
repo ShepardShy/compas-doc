@@ -1,5 +1,5 @@
 <template>
-    <AppPopup class="item__value-img-details popup_actions" :closeByClick="true">
+    <AppPopup class="fancybox-item__details popup_actions" :closeByClick="true">
         <template #summary>
             <IconDots />
         </template>
@@ -10,48 +10,19 @@
             <PopupOption @click="() => callActionDetails('downloadFile')">
                 Скачать
             </PopupOption>
-            <PopupOption class="action_red" @click="() => callActionDetails('deleteFile')">
+            <PopupOption class="popup__option_red" @click="() => callActionDetails('deleteFile')">
                 Удалить
             </PopupOption>
         </template>
     </AppPopup>
-
-
-<!--    <details class="item__value-img-details" ref="fansyBoxRef" v-click-out-side="(event) => hideDetails(event)">-->
-<!--        <summary @click="(event) => openDetails(event, true)">-->
-<!--            <IconDots />-->
-<!--        </summary>-->
-<!--        <div class="section__settings-list" @click="() => hideDetailsElement(fansyBoxRef)">-->
-<!--            <div class="section__setting-options">-->
-<!--                <a-->
-<!--                    class="section__setting-option"-->
-<!--                    v-if="findImage"-->
-<!--                    data-fancybox="gallery"-->
-<!--                    :href="props.image.file"-->
-<!--                    @click="() => callActionDetails(null)"-->
-<!--                >-->
-<!--                    Посмотреть-->
-<!--                </a>-->
-<!--                <div class="section__setting-option" @click="() => callActionDetails('downloadFile')">-->
-<!--                    Скачать-->
-<!--                </div>-->
-<!--                <div-->
-<!--                    class="section__setting-option section__setting-option_red"-->
-<!--                    @click="() => callActionDetails('deleteFile')"-->
-<!--                >-->
-<!--                    Удалить-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </details>-->
 </template>
 
 <script setup>
     import './FansyBoxDetails.scss';
-    
-    import IconDots from '@/components/AppIcons/IconDots/IconDots.vue'
-    import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside'
+
     import {computed, ref} from "vue";
+
+    import IconDots from '@/components/AppIcons/Dots/Dots.vue'
     import PopupOption from "@/components/AppPopup/PopupOption/PopupOption.vue";
     import AppPopup from "@/components/AppPopup/Popup.vue";
 
@@ -86,13 +57,13 @@
                 "options": null,
                 "value": [
                     {
-                    "id": 0,
-                    "url": "/",
-                    "file": "/",
-                    "extension": "svg",
-                    "sort": 0,
-                    "uid": 0,
-                    "status": "success"
+                        "id": 0,
+                        "url": "/",
+                        "file": "/",
+                        "extension": "svg",
+                        "sort": 0,
+                        "uid": 0,
+                        "status": "success"
                     }
                 ],
                 "limit": 15,

@@ -1,35 +1,27 @@
 <template>
-    <div class="item__value" @mouseover ="(event) => checkingBlock(event)" :class="props.item.show_file_name ? 'item__value_high' : ''">
-        <a
-            :data-fancybox="`galleryClick_${props.item.id}`"
-            :href="['png', 'svg', 'jpeg', 'jpg', 'webp', 'pdf', 'gif', 'mp4', 'mov', 'mp3'].includes(props.image.extension) ? props.image.file : props.image.url"
-            class="item__value-link"
-            @click="() => callAction(props.image)"
-        >
-            <figure  class='ibg item__value-img'>
-                <img :src="props.image.url" width="200" height="150"  :alt="props.item.show_file_name"/>
+    <div class="fancybox-item fancybox__item" @mouseover="(event) => checkingBlock(event)" :class="props.item.show_file_name ? 'fancybox-item_show-title' : ''">
+        <a class="fancybox-item__container" :data-fancybox="`galleryClick_${props.item.id}`" :href="setHref">
+            <figure class="ibg fancybox-item__img">
+                <img :src="props.image.url" width="200" height="150" :alt="props.item.show_file_name"/>
             </figure>
 
-            <div class="progress-ring__wrapper" v-if="props.loading || true">
-                <svg class="progress-ring" width="24" height="24">
-                    <circle class="progress-ring__circle" cx="12" cy="12" r="10" :style="`stroke-dasharray: 62.8, 62.8; stroke-dashoffset: ${progressImage};`"></circle>
-                </svg>
-            </div>
+            <LoaderProgress
+                v-if="props.loading"
+                :progressImage="progressImage"
+            />
         </a>
 
         <FansyBoxDetails 
             :item="props.item"
             :image="props.image"
-            @callAction="(data) => $emit('callAction', data)"
+            @callAction="(data) => emit('callAction', data)"
         />
 
-        <div class="item__value-description" v-if="props.item.show_file_name && props.image.name != undefined">
-            <span v-if="props.image.status != 'loading'">
-                {{ setName }}
-            </span>
-<!--            <span v-else>-->
-<!--                {{props.image.progress.loaded}}кб /  {{ props.image.progress.total }}кб-->
-<!--            </span>-->
+        <div
+            v-if="props.item.show_file_name && ![null, undefined].includes(props.image.name)"
+            class="fancybox-item__title"
+        >
+            {{ setName }}
         </div>
     </div>
 </template>
@@ -37,8 +29,9 @@
 <script setup>
     import './AppFansyBoxImage.scss';
 
-    import FansyBoxDetails from './FansyBoxDetails/FansyBoxDetails.vue';
     import {computed} from "vue";
+    import FansyBoxDetails from './FansyBoxDetails/FansyBoxDetails.vue';
+    import LoaderProgress from "@/components/AppIcons/LoaderProgress/LoaderProgress.vue";
     
     const props = defineProps({
         image: {
@@ -65,13 +58,13 @@
                 "options": null,
                 "value": [
                     {
-                    "id": 0,
-                    "url": "/",
-                    "file": "/",
-                    "extension": "svg",
-                    "sort": 0,
-                    "uid": 0,
-                    "status": "success"
+                        "id": 0,
+                        "url": "/",
+                        "file": "/",
+                        "extension": "svg",
+                        "sort": 0,
+                        "uid": 0,
+                        "status": "success"
                     }
                 ],
                 "limit": 15,
@@ -86,6 +79,10 @@
         }
     })
 
+    const emit = defineEmits([
+        'callAction'
+    ])
+
     const setName = computed(() => {
         if (props.item != undefined && props.image.name != undefined) {
             if (props.image.name.length > 22) {
@@ -98,28 +95,15 @@
         }
     })
 
+    const setHref = computed(() => {
+        return ['png', 'svg', 'jpeg', 'jpg', 'webp', 'pdf', 'gif', 'mp4', 'mov', 'mp3'].includes(props.image.extension) ? props.image.file : props.image.url
+    })
+
     const checkingBlock = (event) => {
-        if (event.target.closest('.item__value-img-details')) {
-            event.target.closest('.item__value').classList.add('item__value_undraggable')
+        if (event.target.closest('.fancybox__item-details')) {
+            event.target.closest('.form-item__file').classList.add('file-list__item_undraggable')
         } else {
-            event.target.closest('.item__value').classList.remove('item__value_undraggable')
-        }
-    }
-
-    const callAction = (image) => {
-        const pauseVideo = () => {
-            let video = document.querySelector(".fancybox__html5video")
-            video.pause();
-            video.currentTime = 0;
-        }
-
-        if (image.extension == 'mp4') {
-            setTimeout(() => {
-                pauseVideo()
-            }, 400);
-            setTimeout(() => {
-                pauseVideo()
-            }, 1000);
+            event.target.closest('.form-item__file').classList.remove('file-list__item_undraggable')
         }
     }
 

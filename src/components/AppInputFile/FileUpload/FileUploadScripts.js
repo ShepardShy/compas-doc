@@ -19,15 +19,6 @@ export default {
             // field.preview = await valuesScripts(null, field)
         }
 
-        // Изменение позиций картинок
-        const changePositionImage = () => {
-            // let section = selectedObjectOther.findSection(localStore, 'id', data.section.id)
-            // selectedObjectOther.addSelectedItems(localStore, 'selectedItems', 'id', field)
-            //
-            // field.value = data.value.value.arr
-            // field.state = section.state = localStore.state = 'edit'
-        }
-
         // Удаление изображения
         const deleteImage = () => {
             localItems = localItems.filter(image => image.uid != data.value.uid)

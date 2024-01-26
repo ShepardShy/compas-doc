@@ -8,6 +8,6 @@
 </template>
 
 <script setup>
-    import './IconLoadFile.scss';
+    import './LoadFile.scss';
     
 </script>

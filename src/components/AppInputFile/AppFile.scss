@@ -1,0 +1,11 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.file {
+    &.file_empty {
+        &::after {
+            content: 'не заполнено';
+            color: variables.$color-grey;
+        }
+    }
+}
