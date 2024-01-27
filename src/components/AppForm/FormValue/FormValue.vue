@@ -1,7 +1,7 @@
 <template>
-    <span class="form-item__value" :class="setClasses" v-if="props.isHTML" v-html="typeof props.value == 'object' && props.value != null ? props.value.value : props.value"></span>
-    <span class="form-item__value" :class="setClasses" v-else>
-        {{ typeof props.value == 'object' && props.value != null ? props.value.value : props.value }}
+    <span class="form-item__value" @click="() => openLink()" :class="setClasses" v-if="props.isHTML" v-html="props.value"></span>
+    <span class="form-item__value" @click="() => openLink()" :class="setClasses" v-else>
+        {{ props.value }}
     </span>
 </template>
 
@@ -21,9 +21,14 @@
         isLink: {
             default: false,
             type: Boolean
+        },
+        link: {
+            default: null,
+            type: String
         }
     })
 
+    // Установка CSS-классов
     const setClasses = computed(() => {
         return [
             [null, undefined].includes(props.value) || props.value == '' ? 'form-item__value_empty' : '',
@@ -31,4 +36,11 @@
             props.isLink ? 'form-item__value_link' : ''
         ]
     })
+
+    // Открытие ссылки в новой вкладке
+    const openLink = () => {
+        if (![null, undefined].includes(props.link)) {
+            window.open(props.link, '_blank')
+        }
+    }
 </script>

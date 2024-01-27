@@ -2,16 +2,13 @@
 @use '@/assets/mixins.scss' as mixins;
 
 .table-template__footer {
-    align-items: center;
-    border-radius: 0 0 10px 10px;
-    border-top: 1px solid #eeeff1;
-    display: flex;
-    gap: 10px;
-    justify-content: space-between;
+    z-index: 2;
     min-height: 55px;
     padding: 10px 15px;
     position: relative;
-    z-index: 2;
+    border-radius: 0 0 10px 10px;
+    border-top: 1px solid #eeeff1;
+    @include mixins.flexBlock($vertical: center, $horizontal: space-between, $gap: 10px);
 }
 
 .table-footer__count-selected {
@@ -24,13 +21,9 @@
     margin-right: 10px;
 }
 
-.table-footer__pagination {
-}
 .table-footer__visible-elems {
     .form-item__select {
-        display: flex;
-        align-items: center;
-        gap: 15px;
+        @include mixins.flexBlock($vertical: center, $horizontal: flex-start, $gap: 15px);
 
         .form-item__title {
             color: #bcbcbc;
@@ -55,9 +48,9 @@
 
             .popup__content {
                 top: auto;
+                left: auto;
                 bottom: 50px;
                 right: 0px;
-                left: auto
             }
         }
     }

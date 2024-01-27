@@ -45,7 +45,6 @@
     
     onUnmounted(() => {
         window.removeEventListener('scroll', throt_funScroll)
-        tableRef.value.parentNode.removeEventListener('scroll', scrollXThrottling)
     })
 
     // Скролл таблицы и кнопок
@@ -152,6 +151,7 @@
         scrollPosition.value = actionScroll({action: 'setPosition', value: null})
     }
 
+    // Троттлинг скролла по горизонтали
     const scrollXThrottling = _.throttle(() => {
         actionScroll({action: 'setButtonsVisible', value: tableRef.value.parentNode})
     }, 20)

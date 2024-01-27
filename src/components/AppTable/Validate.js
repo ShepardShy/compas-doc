@@ -178,8 +178,6 @@ const validateField = (field, fieldValue) => {
     }
 }
 
-
-
 // Проверка поля address на пустоту
 const checkingAddress = (field, value, elemId) => {
     let element = document.getElementById(elemId);

@@ -36,7 +36,7 @@
             <ButtonText v-show="values.length >= 5" @click="() => callAction({action: 'showAll', value: true})"> 
                 Всего {{ values.length }}, посмотреть все 
             </ButtonText>
-            <ButtonText v-if="props.isCanAdd" @click="() => callAction({action: 'changeValue', value: {value: null, isNew: true}})"> 
+            <ButtonText v-if="props.isMultiple" @click="() => callAction({action: 'changeValue', value: {value: null, isNew: true}})"> 
                 + Добавить 
             </ButtonText>
         </div>
@@ -80,7 +80,7 @@
             default: true,
             type: Boolean
         },
-        isCanAdd: {
+        isMultiple: {
             default: true,
             type: Boolean
         }

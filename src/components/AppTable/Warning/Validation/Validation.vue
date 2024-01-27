@@ -34,7 +34,7 @@
                         :isUseEnter="false"
                         :enabledAutocomplete="false"
                         :isReadOnly="false"
-                        :isCanAdd="Boolean(item.is_plural)"
+                        :isMultiple="Boolean(item.is_plural)"
                         @changeValue="(data) => changeValue(activeRow.id, data)"
                     />
                     <AppTextarea 
@@ -58,7 +58,7 @@
                         :isUseEnter="false"
                         :enabledAutocomplete="false"
                         :isReadOnly="false"
-                        :isCanAdd="Boolean(item.is_plural)"
+                        :isMultiple="Boolean(item.is_plural)"
                         @changeValue="(data) => changeValue(activeRow.id, data)"
                     />
                     <AppStatus 
@@ -83,7 +83,7 @@
                             :isUseEnter="false"
                             :enabledAutocomplete="false"
                             :isReadOnly="false"
-                            :isCanAdd="Boolean(item.is_plural)"
+                            :isMultiple="Boolean(item.is_plural)"
                             @changeValue="(data) => changeValue(activeRow.id, data)"
                     />
                     <AppSelect 

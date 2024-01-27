@@ -9,8 +9,8 @@
     @include mixins.flexBlock($vertical: center, $horizontal: center, $gap: 10px);
 
     .button-text {
-        color: variables.$color-active;
         text-decoration: underline;
+        color: variables.$color-active;
 
         &:hover {
             text-decoration: none;

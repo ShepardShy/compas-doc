@@ -1,119 +1,98 @@
 <template>
-    <td class="table__item" ref="itemRef" @click="(event) => doubleClick(event, props.row)" :data-key="props.item.key" :class="[props.item.fixed ? 'table__item_fixed' : '', !props.item.enabled ? 'table__item_hidden' : '']" :style="`--colorItem: ${props.item.color};`">
+    <td 
+        ref="itemRef" 
+        class="table__item"
+        :style="`--colorItem: ${props.item.color};`"
+        :class="[props.item.fixed ? 'table__item_fixed' : '', !props.item.enabled ? 'table__item_hidden' : '']" 
+        @click="(event) => doubleClick(event, props.row)" :data-key="props.item.key" 
+    >
         <div class="table-item__content">
                 <AppCheckbox 
                     v-if="props.item.type == 'checkbox'"
                     :item="{
-                        key: props.item.key,
-                        type: props.item.type,
+                        isHTML: false,
                         id: props.row.id,
+                        key: props.item.key,
                         title: props.item.title,
-                        substring: props.item.unit,
                         value: props.row[props.item.key],
-                        is_link: props.item.is_link,
-                        is_plural: props.item.is_plural,
-                        hiddenOptions: props.item.choosed,
-                        related_table: props.item.related_table,
-                        is_external_link: props.item.is_external_link,
-                        options: ['status', 'relation'].includes(props.item.type) ? props.item.options : null,
-                        external_link: props.row[props.item.key] != undefined ? props.row[props.item.key].external_link : null,
+                        required: Boolean(props.item.required)
                     }"
-                    :isCanCreate="true"
-                    :isUseEnter="false"
-                    :enabledAutocomplete="false"
-                    :isReadOnly="Boolean(props.item.read_only || !props.row.isEdit)"
-                    :isCanAdd="Boolean(props.item.is_plural)"
+                    :disabled="actionState == 'saving'"
                     @changeValue="(data) => changeValue(props.row.id, data)"
                 />
                 <AppRelation 
                     v-else-if="props.item.type == 'relation'"
                     :item="{
-                        key: props.item.key,
-                        type: props.item.type,
+                        focus: false,
                         id: props.row.id,
+                        placeholder: null,
+                        key: props.item.key,
                         title: props.item.title,
-                        substring: props.item.unit,
                         value: props.row[props.item.key],
-                        is_link: props.item.is_link,
-                        is_plural: props.item.is_plural,
-                        hiddenOptions: props.item.choosed,
-                        related_table: props.item.related_table,
-                        is_external_link: props.item.is_external_link,
+                        required: Boolean(props.item.required),
                         options: ['status', 'relation'].includes(props.item.type) ? props.item.options : null,
-                        external_link: props.row[props.item.key] != undefined ? props.row[props.item.key].external_link : null,
+                        lockedOptions: props.item.choosed,
                     }"
                     :isCanCreate="true"
-                    :isUseEnter="false"
-                    :enabledAutocomplete="false"
+                    :isMultiple="Boolean(props.item.is_plural)"
                     :isReadOnly="Boolean(props.item.read_only || !props.row.isEdit)"
-                    :isCanAdd="Boolean(props.item.is_plural)"
-                    @openLink="(data) => openLink(data, props.item.related_table)"
-                    @click="() => openPopup(true)"
-                    @clickOutside="() => openPopup(false)"
+                    @click="() => callAction({action: 'openPopup', value: true})"
                     @changeValue="(data) => changeValue(props.row.id, data)"
+                    @openLink="(data) => callAction({action: 'openLink', value: {id: data.id, slug: props.item.related_table}})"
+                    @showAll="() => callAction({action: 'openLink', value: {id: props.row.id, slug: props.slug, tab: props.item.related_table}})"
+                    @createOption="() => emit('callAction', {action: 'createOption', value: props.item.related_table})"
                 />
                 <AppTextarea 
                     v-else-if="['number', 'password', 'text'].includes(props.item.type)"
                     :item="{
+                        focus: false,
+                        id: props.row.id,
+                        placeholder: null,
                         key: props.item.key,
                         type: props.item.type,
-                        id: props.row.id,
                         title: props.item.title,
                         substring: props.item.unit,
-                        value: [null, undefined].includes(props.row[props.item.key]) ? null : typeof props.row[props.item.key] == 'object' ? props.row[props.item.key] : String(props.row[props.item.key]),
-                        is_link: props.item.is_link,
-                        is_plural: props.item.is_plural,
-                        hiddenOptions: props.item.choosed,
-                        related_table: props.item.related_table,
-                        is_external_link: props.item.is_external_link,
-                        options: ['status', 'relation'].includes(props.item.type) ? props.item.options : null,
-                        external_link: props.row[props.item.key] != undefined ? props.row[props.item.key].external_link : null,
+                        required: Boolean(props.item.required),
+                        external_link: ![null, undefined].includes(props.row[props.item.key]) && props.row[props.item.key] != '' ? props.row[props.item.key].external_link : null,
+                        value: [null, undefined].includes(props.row[props.item.key]) ? null : typeof props.row[props.item.key] == 'object' ? String(props.row[props.item.key].value) : String(props.row[props.item.key]),
                     }"
-                    :isCanCreate="true"
+                    :disabled="false"
                     :isUseEnter="false"
-                    :enabledAutocomplete="false"
-                    :isCanAdd="Boolean(props.item.is_plural)"
+                    :mask="props.item.mask"
                     :isLink="Boolean(props.item.is_external_link)"
                     :isReadOnly="Boolean(props.item.read_only || !props.row.isEdit)"
                     @changeValue="(data) => changeValue(props.row.id, data)"
                 />
                 <FormValue 
                     v-else-if="item.type == 'json'"
-                    :value="props.row[props.item.key]"
                     :isHTML="true"
+                    :value="props.row[props.item.key]"
                     :isLink="Boolean(props.item.is_external_link)"
+                    :link="typeof props.row[props.item.key] == 'object' && props.row[props.item.key] != null ? props.row[props.item.key].external_link : null"
                 />
                 <AppActions 
                     v-else-if="item.type == 'actions'"
-                    :slug="props.row.isEdit ? 'edit' : 'routes'"
-                    @callAction="(data) => data.value == 'showModal' ? openLink(props.row, props.slug) : emit('callAction', {action: data.value, value: props.row})"
+                    :slug="props.row.isEdit ? 'edit' : 'view'"
+                    :disabled="!props.row.isChoose && actionState == 'saving'"
+                    @callAction="(data) => callAction(data)"
                 />
                 <AppStatus 
                     v-else-if="props.item.type == 'status'"
                     :item="{
-                            key: props.item.key,
-                            type: props.item.type,
-                            id: props.row.id,
-                            title: props.item.title,
-                            substring: props.item.unit,
-                            value: props.row[props.item.key],
-                            is_link: props.item.is_link,
-                            is_plural: props.item.is_plural,
-                            hiddenOptions: props.item.choosed,
-                            related_table: props.item.related_table,
-                            is_external_link: false,
-                            options: props.item.options,
-                            external_link: null,
-                        }"
-                        :isCanCreate="false"
-                        :isHaveNullOption="false"
-                        :isUseEnter="false"
-                        :enabledAutocomplete="false"
-                        :isReadOnly="Boolean(props.item.read_only || !props.row.isEdit)"
-                        :isCanAdd="Boolean(props.item.is_plural)"
-                        @click="() => openPopup(true)"
-                        @clickOutside="() => openPopup(false)"
-                        @changeValue="(data) => changeValue(props.row.id, data)"
+                        focus: false,
+                        id: props.row.id,
+                        key: props.item.key,
+                        title: props.item.title,
+                        options: props.item.options,
+                        value: props.row[props.item.key],
+                        required: Boolean(props.item.required),
+                    }"
+                    :isCanCreate="false"
+                    :isHaveNullOption="false"
+                    :isReadOnly="Boolean(props.item.read_only || !props.row.isEdit)"
+                    @click="() => callAction({action: 'openPopup', value: true})"
+                    @clickOutside="() => callAction({action: 'openPopup', value: false})"
+                    @changeValue="(data) => changeValue(props.row.id, data)"
                 />
                 <AppSelect 
                     v-else-if="props.item.type == 'select_dropdown'"
@@ -131,8 +110,8 @@
                     :isHaveNullOption="true"
                     :isMultiply="Boolean(props.item.is_plural)"
                     :isFiltered="true"
-                    @click="() => openPopup(true)"
-                    @clickOutside="() => openPopup(false)"
+                    @click="() => callAction({action: 'openPopup', value: true})"
+                    @clickOutside="() => callAction({action: 'openPopup', value: false})"
                     @changeValue="(data) => changeValue(props.row.id, data)"
                 />
         </div>
@@ -145,16 +124,17 @@
     import { inject, ref } from 'vue'
 
     import AppActions from '../Actions/Actions.vue'
+    import AppStatus from '@/components/AppSelects/Status/Status.vue'
+    import AppSelect from '@/components/AppSelects/Select/Select.vue'
     import FormValue from '@/components/AppForm/FormValue/FormValue.vue'
     import AppCheckbox from "@/components/AppInputs/Checkbox/Checkbox.vue"
     import AppTextarea from "@/components/AppInputs/Textarea/Textarea.vue"
     import AppRelation from "@/components/AppSelects/Relation/Relation.vue"
-    import AppStatus from '@/components/AppSelects/Status/Status.vue'
-    import AppSelect from '@/components/AppSelects/Select/Select.vue'
 
-    const actionState = inject('actionState')
     const itemRef = ref(null)
     const bodyData = inject('bodyData')
+    const actionState = inject('actionState')
+    const backupValues = inject('backupValues')
     
     let clickSetting = ref({
         id: -1,
@@ -206,14 +186,6 @@
         'callAction'
     ])
 
-    const openPopup = (state) => {
-        if (state) {
-            itemRef.value.closest('.table__item').classList.add('table__item_clicked')
-        } else {
-            itemRef.value.closest('.table__item').classList.remove('table__item_clicked')
-        }
-    }
-
     // Изменение значения в поле
     const changeValue = (id, data) => {
         let findedRow = bodyData.value.find(row => row.id == id)
@@ -228,16 +200,6 @@
         }
     }
 
-    const openLink = (data, slug) => {
-        emit('callAction', {
-            action: 'showModal',
-            value: {
-                id: data.id,
-                slug: slug
-            }
-        })
-    }
-
     // Симуляция двойного клика
     const doubleClick = (event) => {
         clickSetting.value.clicks++;
@@ -248,12 +210,75 @@
         } else {
             let regexp = /<\/?[a-z][\s\S]*>/i
             if (!props.row.isEdit && props.item.key != 'actions' && regexp.test(event.target.innerHTML)) {
-                openLink(props.row, props.slug)
+                callAction({action: 'showModal', value: null})
             }
             window.getSelection().empty();
             clearTimeout(clickSetting.value.timer);  
             clickSetting.value.clicks = 0;
         }   
         clickSetting.value.id = props.item.id
+    }
+
+    // Вызов действия в ячейке
+    const callAction = (data) => {
+        // Открытие ссылок
+        const openLink = (value) => {
+            emit('callAction', {
+                action: 'showModal',
+                value: {
+                    id: value.id,
+                    slug: value.slug,
+                    tab: [null, undefined].includes(value.tab) ? null : value.tab
+                }
+            })
+        }
+       
+        // Редактирование строки
+        const editRow = () => {
+            let findedIndex = bodyData.value.findIndex(row => row.id == props.row.id)
+            backupValues.value.push(JSON.parse(JSON.stringify(bodyData.value[findedIndex])))
+            bodyData.value[findedIndex].isEdit = true
+            bodyData.value[findedIndex].isChoose = true
+            actionState.value = 'saving'
+        }
+
+        // Открытие попапа
+        const openPopup = (state) => {
+            if (state) {
+                itemRef.value.closest('.table__item').classList.add('table__item_clicked')
+            } else {
+                itemRef.value.closest('.table__item').classList.remove('table__item_clicked')
+            }
+        }
+
+        switch (data.action) {
+            // Открытие модального окна
+            case 'showModal':
+                openLink({
+                    id: props.row.id,
+                    slug: props.slug,
+                    tab: null
+                })
+                break;
+
+            // Редактирование строки
+            case 'edit':
+                editRow()
+                break;
+
+            // Открытие ссылки
+            case 'openLink':
+                openLink(data.value)
+                break;
+
+            // Открытие попапа
+            case 'openPopup':
+                openPopup(data.value)
+                break;
+
+            default:
+                emit('callAction', {action: data.value, value: props.row})
+                break;
+        }
     }
 </script>

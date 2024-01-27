@@ -22,7 +22,6 @@
                 :isUseEnter="false"
                 :enabledAutocomplete="false"
                 :isReadOnly="false"
-                :isCanAdd="false"
                 @changeValue="(data) => selectAllRows(data)"
             />
             

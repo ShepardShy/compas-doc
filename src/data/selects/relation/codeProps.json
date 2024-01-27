@@ -32,7 +32,7 @@
         "default": true,
         "type": "Boolean"
     },
-    "isCanAdd": {
+    "isMultiple": {
         "default": true,
         "type": "Boolean"
     }

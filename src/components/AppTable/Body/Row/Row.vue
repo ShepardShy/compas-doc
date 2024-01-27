@@ -1,5 +1,11 @@
 <template>
-    <tr class="table__row" ref="rowRef" @click="() => clickRow(true)" v-click-out-side="(event) => clickRow(false)" :class="props.row.isEdit ? 'table__row_edit' : props.row.isChoose ? 'table__row_choosed' : '', props.row.isUpdated ? 'table__row_updated' : ''">
+    <tr 
+        ref="rowRef"
+        class="table__row" 
+        @click="() => clickRow(true)"
+        v-click-out-side="(event) => clickRow(false)" 
+        :class="props.row.isEdit ? 'table__row_edit' : props.row.isChoose ? 'table__row_choosed' : '', props.row.isUpdated ? 'table__row_updated' : ''"
+    >
         <TableItem 
             v-for="item in fields"
             :row="props.row"
@@ -19,8 +25,8 @@
 
     import TableItem from '../Item/Item.vue'
 
-    const fields = inject('fields')
     const rowRef = ref(null)
+    const fields = inject('fields')
 
     const props = defineProps({
         isTrash: {
@@ -38,6 +44,7 @@
         'callAction'
     ])
 
+    // Добавление классов приоритета при клике на строку
     const clickRow = (state) => {
         if (state) {
             rowRef.value.classList.add('table_row_clicked')

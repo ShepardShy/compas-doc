@@ -1,5 +1,11 @@
 <template>
-        <AppPopup class="popup_actions" ref="popupRef" :closeByClick="false" @click="() => openPopup(true)" @clickOutside="() => openPopup(false)">
+        <AppPopup 
+            class="popup_actions" 
+            ref="popupRef" 
+            :closeByClick="false" 
+            @click="(e) => props.disabled ? e.preventDefault() : openPopup(true)" 
+            @clickOutside="() => openPopup(false)"
+        >
             <template #summary>
                 <IconDots />
             </template>
@@ -21,13 +27,19 @@
                 </template>
 
                 <template v-else>
-                    <PopupOption class="popup-option__sublink popup-option__sublink_back" @click="() => callAction({action: 'changeTab', value: null})">
+                    <PopupOption 
+                        class="popup-option__sublink popup-option__sublink_back" 
+                        @click="() => callAction({action: 'changeTab', value: null})"
+                    >
                         <IconArrow />
                         
                         {{ menu.activeTab.title }}
                     </PopupOption>
 
-                    <PopupOption v-for="option in menu.activeTab.children" @click="() => callAction({action: 'callAction', value: option.action})">
+                    <PopupOption 
+                        v-for="option in menu.activeTab.children" 
+                        @click="() => callAction({action: 'callAction', value: option.action})"
+                    >
                         {{ option.title }}
                     </PopupOption>
                 </template>
@@ -58,6 +70,10 @@
         slug: {
             default: "view",
             type: String
+        },
+        disabled: {
+            default: false,
+            type: Boolean
         }
     })
 
@@ -81,6 +97,7 @@
         }
     }
 
+    // Открыть попап
     const openPopup = (state) => {
         if (state) {
             popupRef.value.popupRef.closest('.table__item').classList.add('table__item_clicked')

@@ -23,7 +23,7 @@
                 <TableBody 
                     :slug="props.slug"
                     :isTrash="props.isTrash"
-                    @callAction="(data) => emit('callAction', data)"
+                    @callAction="(data) => callAction(data)"
                 />
             </table>
             <ScrollButtons />
@@ -205,6 +205,7 @@
     provide('footerData', footerData)
     provide('actionState', actionState)
     provide('invalidRows', invalidRows)
+    provide('backupValues', backupValues)
     provide('scrollPosition', scrollPosition)
     
     onMounted(async () => {
@@ -213,6 +214,7 @@
         bodyData.value = JSON.parse(JSON.stringify(props.tableData))
     })
 
+    // Вызов действия в таблице
     const callAction = (data) => {
         // Редактирование строк
         const editRows = () => {
@@ -464,6 +466,7 @@
                 break;
 
             default:
+                emit('callAction', data)
                 break;
         }
     }

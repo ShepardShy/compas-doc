@@ -7,7 +7,10 @@
             "placeholder": "Введите текст",
             "value": "asda sdasd has kd haskd has d \n\n\n\n\n\n sada sd asd asldh askda kls",
             "key": "textareaKey",
-            "focus": false
+            "focus": false,
+            "type": "text",
+            "substring": null,
+            "external_link": null
         },
         "type": "Object"
     },
@@ -25,6 +28,10 @@
     },
     "isReadOnly": {
         "default": true,
+        "type": "Boolean"
+    },
+    "isLink": {
+        "default": false,
         "type": "Boolean"
     }
 }
