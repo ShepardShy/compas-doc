@@ -1,14 +1,9 @@
 <template>
-<!--    <AppComponent-->
-<!--        :title="'Поле файлов'"-->
-<!--        :component="AppInputFile"-->
-<!--        :codeProps="InputProps"-->
-<!--        :codeEmits="inputEmits"-->
-<!--        @changeValue="(data) => changeValue(data)"-->
-<!--    />-->
-
-    <AppFile
-        :item="inputProps"
+    <AppComponent
+        :title="'Поле файлов'"
+        :component="AppFile"
+        :codeProps="codeProps"
+        :codeEmits="codeEmits"
         @changeValue="(data) => changeValue(data)"
     />
 
@@ -17,10 +12,11 @@
 <script setup>
     import './file.scss';
 
-    import inputProps from "@/data/inputs/file/codeProps.json";
-    // import inputEmits from "@/data/inputs/file/codeEmits.json";
+    import codeProps from "@/data/inputs/file/codeProps.json";
+    import codeEmits from "@/data/inputs/file/codeEmits.json";
 
     import AppFile from "@/components/AppInputFile/AppFile.vue";
+    import AppComponent from "@/components/AppComponent/AppComponent.vue";
 
     const changeValue = (data) => {
         console.log('data', data)
