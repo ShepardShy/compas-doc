@@ -1,13 +1,13 @@
 <template>
     <div
         class="file-upload"
-        :class="setClasses"
+        :class="dragover.value ? 'file-upload_dragover' : ''"
     >
         <input
             ref="inputFile"
             type="file"
             class="file-upload__input"
-            :multiple="props.isMultiple"
+            :multiple="props.isMultiple || true"
             @dragover="dragover = true"
             @dragenter="dragover = true"
             @dragleave="dragover = false"
@@ -26,7 +26,7 @@
 <script setup>
     import './FileUpload.scss';
 
-    import {computed, inject, ref} from "vue";
+    import {computed, inject, ref, watch} from "vue";
 
     import FileUploadScripts from './FileUploadScripts.js'
 
@@ -35,7 +35,7 @@
 
     const dragover = ref(false)
     const inputFile = ref(null)
-    const values = inject('values')
+    const values = inject('values').value
 
     const props = defineProps({
         isMultiple: {
@@ -47,25 +47,20 @@
         }
     })
 
-    const setClasses = computed(() => {
-        return [
-            dragover.value ? 'file-upload_dragover' : ''
-        ]
-    })
-
     function generateUid() {
         return 'xxxxxxxxxxxxx'.replace(/[xy]/g, function(item) {
             const radnom = Math.random() * 10 | 0;
-            const replace = item === 'x' ? radnom : 4; // Заменяем 'y' на 4
-            return replace.toString();
+            const replace = item === 'x' ? radnom : 4;
+            return +replace.toString();
         });
     }
 
+    // Добавление файлов
     const changeValue = (event) => {
         dragover.value = false
 
         event.target.files.forEach(async (file) => {
-            let formData = new FormData()
+            const formData = new FormData()
             const uid = generateUid()
             formData.append('files[]', file)
             formData.append('uid', uid)
@@ -75,7 +70,7 @@
     }
 
     const uploadFile = async (data, file, uid) => {
-        FileUploadScripts.changeFile(uid, values, 'ready');
+        FileUploadScripts(uid, values, 'ready');
 
         const ajax = new XMLHttpRequest();
         const localItem = values.find(item => item.uid == uid)

@@ -2,7 +2,7 @@
     <div class="fancybox-item fancybox__item" @mouseover="(event) => checkingBlock(event)" :class="props.item.show_file_name ? 'fancybox-item_show-title' : ''">
         <a class="fancybox-item__container" :data-fancybox="`galleryClick_${props.item.id}`" :href="setHref">
             <figure class="ibg fancybox-item__img">
-                <img :src="props.image.url" width="200" height="150" :alt="props.item.show_file_name"/>
+                <img :src="props.image.url" :alt="props.item.show_file_name"/>
             </figure>
 
             <LoaderProgress
@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-    import './AppFansyBoxImage.scss';
+    import './FansyBoxImage.scss';
 
     import {computed} from "vue";
     import FansyBoxDetails from './FansyBoxDetails/FansyBoxDetails.vue';

@@ -1,5 +1,5 @@
 <template>
-    <AppFansyBoxContainer
+    <FansyBox
         class="file__container"
         :class="props.item.show_file_name ? 'file-list_show-title' : ''"
     >
@@ -11,10 +11,11 @@
             v-model="values"
             :forceFallback="true"
             :itemKey="'fileFields'"
-            @end="() => changeValue()"
+            @end="() => changeValue(null)"
+            :key="values.length"
         >
             <template #item="{ element: item }" >
-                <AppFansyBoxImage
+                <FansyBoxImage
                     v-if="Object.keys(item).length !== 0"
                     class="file-list__item"
                     :image="item"
@@ -27,7 +28,7 @@
                 <FileUpload :buttonTitle="props.item.button_name" v-else />
             </template>
         </draggable>
-    </AppFansyBoxContainer>
+    </FansyBox>
 
 </template>
 
@@ -37,9 +38,9 @@
     import draggable from 'vuedraggable'
     import {provide, ref, watch} from "vue";
 
-    import AppFansyBoxContainer from '@/components/AppFansyBox/AppFansyBoxContainer/AppFansyBoxContainer.vue';
-    import AppFansyBoxImage from '@/components/AppFansyBox/AppFansyBoxImage/AppFansyBoxImage.vue';
-    import FileUpload from "@/components/AppInputFile/FileUpload/FileUpload.vue";
+    import FansyBox from '@/components/AppFansyBox/FansyBox.vue';
+    import FansyBoxImage from '@/components/AppFansyBox/FansyBoxImage/FansyBoxImage.vue';
+    import FileUpload from "@/components/AppInputs/File/FileUpload/FileUpload.vue";
 
     const emit = defineEmits([
         'changeValue'
@@ -53,6 +54,17 @@
     })
 
     const values = ref([...props.item.value, {}])
+
+    const changeValue = (data) => {
+        if (data && data.action == 'deleteImage') {
+            values.value = values.value.filter(item => Object.keys(item).length === 0 || item.id !== data.item.elem.id)
+        }
+
+        const field = props.item
+        field.value = values.value
+
+        emit('changeValue', field)
+    }
 
     // Получение опций
     const getValues = () => {
@@ -70,14 +82,7 @@
         values.value = JSON.parse(JSON.stringify([...localValues, {}]))
     }
 
-    const changeValue = (data = null) => {
-        // emit('changeValue', {
-        //     id:
-        //     value: values.value
-        // })
-    }
-
-    provide('values', values.value)
+    provide('values', values)
 
     watch(() => props.item.value, () => {
         getValues()

@@ -1,7 +1,7 @@
 <template>
     <AppComponent
         :title="'Поле файлов'"
-        :component="AppFile"
+        :component="File"
         :codeProps="codeProps"
         :codeEmits="codeEmits"
         @changeValue="(data) => changeValue(data)"
@@ -15,7 +15,7 @@
     import codeProps from "@/data/inputs/file/codeProps.json";
     import codeEmits from "@/data/inputs/file/codeEmits.json";
 
-    import AppFile from "@/components/AppInputFile/AppFile.vue";
+    import File from "@/components/AppInputs/File/File.vue";
     import AppComponent from "@/components/AppComponent/AppComponent.vue";
 
     const changeValue = (data) => {

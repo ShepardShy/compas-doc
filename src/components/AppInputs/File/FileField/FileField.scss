@@ -1,5 +1,5 @@
-@use '@/assets/variables.scss' as variables;
-@use '@/assets/mixins.scss' as mixins;
+@use '@/assets/variables' as variables;
+@use '@/assets/mixins' as mixins;
 
 .file {
     .file-list {
@@ -83,29 +83,27 @@
                     }
                 }
             }
-        }
-    }
 
-    .file-list__item {
-        @include mixins.sortableGhost;
+            &.file-list__item_loading {
+                pointer-events: none;
 
-        &.file-list__item_loading {
-            pointer-events: none;
-
-            .fancybox-item__details {
-                display: none;
-            }
-
-            .fancybox-item__img {
-                background: #fff;
-
-                img {
-                    visibility: hidden;
+                .fancybox-item__details {
+                    display: none;
                 }
-            }
 
-            .fancybox-item__title {
-                text-align: center;
+                .fancybox-item__img {
+                    background: #fff;
+
+                    img {
+                        width: 200px;
+                        height: 150px;
+                        visibility: hidden;
+                    }
+                }
+
+                .fancybox-item__title {
+                    text-align: center;
+                }
             }
         }
     }

@@ -5,21 +5,21 @@
 </template>
 
 <script setup>
-    import './AppFansyBoxContainer.scss';
-    
-    import { Fancybox } from "@fancyapps/ui";
+    import './FansyBox.scss';
     import '@fancyapps/ui/dist/fancybox/fancybox.css';
+
+    import {Fancybox} from "@fancyapps/ui";
     import {onMounted, ref} from "vue";
 
     const options = {
         Carousel: {
-          infinite: false,
+            infinite: false,
         },
         idle: false
     }
-    
+
     const container = ref(null);
-    
+
     onMounted(() => {
         Fancybox.bind(container.value, '[data-fancybox]', {
             ...(options || {}),

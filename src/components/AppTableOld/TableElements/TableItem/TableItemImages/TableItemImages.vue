@@ -34,8 +34,8 @@
 
     import _ from 'lodash'
     import draggable from 'vuedraggable'
-    import AppFansyBoxContainer from '@/components/AppFansyBox/AppFansyBoxContainer/AppFansyBoxContainer.vue';
-    import AppFansyBoxImage from '@/components/AppFansyBox/AppFansyBoxImage/AppFansyBoxImage.vue';
+    import AppFansyBoxContainer from '@/components/AppFansyBox/FansyBoxContainer/FansyBoxContainer.vue';
+    import AppFansyBoxImage from '@/components/AppFansyBox/FansyBoxImage/FansyBoxImage.vue';
     import TableItemScripts from '@/components/AppTable/TableItemScripts';
 
     const setClasses = computed(() => {

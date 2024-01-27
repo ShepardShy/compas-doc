@@ -1,5 +1,5 @@
 <template>
-    <AppFansyBoxContainer class="table__item-content table__item-content_file">
+    <FansyBox class="table__item-content table__item-content_file">
         <div class="table__item-content_title">
             {{ props.item.title }}
         </div>
@@ -8,7 +8,7 @@
         </div>
         <div class="table__item-content-slot" v-else>
             <div class="table__item-content-list table__item-content-list_only" >
-                <AppFansyBoxImage
+                <FansyBoxImage
                     v-for="(item) in props.item.value"
                     :image="item"
                     :item="props.item"
@@ -19,14 +19,14 @@
                 {{ setLength }}
             </div>
         </div>
-    </AppFansyBoxContainer>
+    </FansyBox>
 </template>
 
 <script setup>
     import './TableItemImagesOne.scss';
 
-    import AppFansyBoxContainer from '@/components/AppFansyBox/AppFansyBoxContainer/AppFansyBoxContainer.vue';
-    import AppFansyBoxImage from '@/components/AppFansyBox/AppFansyBoxImage/AppFansyBoxImage.vue';
+    import FansyBox from '@/components/AppFansyBox/FansyBox.vue';
+    import FansyBoxImage from '@/components/AppFansyBox/FansyBoxImage/FansyBoxImage.vue';
 
     const emit = defineEmits([
         'callAction',

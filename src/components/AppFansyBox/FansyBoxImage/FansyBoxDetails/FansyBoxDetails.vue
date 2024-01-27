@@ -4,13 +4,13 @@
             <IconDots />
         </template>
         <template #content>
-            <PopupOption class="popup__option-open__fancyBox" data-fancybox="gallery" :href="props.image.file">
+            <PopupOption data-fancybox="gallery" :href="props.image.file">
                 Посмотреть
             </PopupOption>
-            <PopupOption @click="() => callActionDetails('downloadFile')">
+            <PopupOption @click="() => callAction('downloadFile')">
                 Скачать
             </PopupOption>
-            <PopupOption class="popup__option_red" @click="() => callActionDetails('deleteFile')">
+            <PopupOption class="popup__option_red" @click="() => callAction('deleteFile')">
                 Удалить
             </PopupOption>
         </template>
@@ -29,8 +29,6 @@
     const emit = defineEmits([
         'callAction'
     ])
-
-    const fansyBoxRef = ref()
 
     const props = defineProps({
         image: {
@@ -74,58 +72,30 @@
         }
     })
 
-    const hideDetailsElement = (element) => {
-        if (element != null) {
-            element.removeAttribute('open')
+    const callAction = (action) => {
+        const downloadFile = async (imageSrc, nameOfDownload = 'my-image.png') => {
+            const response = await fetch(imageSrc, {
+                method: 'GET',
+                headers: {
+                    accept: 'application/json',
+                },
+            });
+
+            const blobImage = await response.blob();
+
+            const href = URL.createObjectURL(blobImage);
+
+            const anchorElement = document.createElement('a');
+            anchorElement.href = href;
+            anchorElement.download = nameOfDownload;
+
+            document.body.appendChild(anchorElement);
+            anchorElement.click();
+
+            document.body.removeChild(anchorElement);
+            window.URL.revokeObjectURL(href);
         }
-    }
 
-    // Закрытие модалки
-    const hideDetails = (event) => {
-        hideDetailsElement(fansyBoxRef.value)
-        openDetails(event, false)
-    }
-
-    const openDetails = (event, status) => {
-        if (status) {
-            setTimeout(() => {
-                event.target.closest('.item__value-img-details').classList.add('item__value-img-details_open')
-            }, 100);
-        } else {
-            document.querySelectorAll('.item__value-img-details_open').forEach(elem => {
-                elem.classList.remove('item__value-img-details_open')
-            })
-        }
-    }
-
-    const downloadFile = async (imageSrc, nameOfDownload = 'my-image.png') => {
-        const response = await fetch(imageSrc, {
-            method: 'GET',
-            headers: {
-                accept: 'application/json',
-            },
-        });
-
-        const blobImage = await response.blob();
-
-        const href = URL.createObjectURL(blobImage);
-
-        const anchorElement = document.createElement('a');
-        anchorElement.href = href;
-        anchorElement.download = nameOfDownload;
-
-        document.body.appendChild(anchorElement);
-        anchorElement.click();
-
-        document.body.removeChild(anchorElement);
-        window.URL.revokeObjectURL(href);
-    }
-
-    const findImage = computed(() => {
-        return ['png', 'svg', 'jpeg', 'jpg', 'webp', 'pdf', 'gif'].includes(props.image.extension)
-    })
-
-    const callActionDetails = (action) => {
         switch (action) {
             case 'downloadFile':
                 downloadFile(props.image.file)
@@ -134,8 +104,6 @@
                 emit('callAction', {action: 'deleteImage', item: {item: props.item, elem: props.image}})
                 break
         }
-
-        fansyBoxRef.value.classList.remove('item__value-img-details_open')
     }
 
 </script>

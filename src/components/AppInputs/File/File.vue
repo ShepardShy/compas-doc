@@ -2,7 +2,7 @@
     <FormItem
         class="file form-item__file"
         :class="[null, undefined].includes(props.item.value) || props.item.value == '' || props.item.value.length == 0 ? 'file_empty' : ''"
-        :required="props.item.required"
+        :required="!!props.item.required"
     >
         <FormLabel
             v-show="props.item.title != null && props.item.title != ''"
@@ -18,14 +18,13 @@
 </template>
 
 <script setup>
-    import './AppFile.scss';
+    import './File.scss';
 
-    import FileField from './FileField/FileField.vue'
     import FormItem from "@/components/AppForm/FormItem/FormItem.vue";
     import FormLabel from "@/components/AppForm/FormLabel/FormLabel.vue";
+    import FileField from './FileField/FileField.vue'
 
     const props = defineProps({
-        // Сравнить данные
         item: {
             default: {
                 id: 1517,

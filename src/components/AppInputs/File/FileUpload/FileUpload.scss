@@ -1,26 +1,19 @@
-@use '@/assets/variables.scss' as variables;
-@use '@/assets/mixins.scss' as mixins;
+@use '@/assets/variables' as variables;
+@use '@/assets/mixins' as mixins;
 
 .file-upload {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    background: #fff;
-    display: inline-flex;
-    margin: 0px;
-    padding: 0px;
-    background: variables.$color-white;
-    z-index: 1;
-    font-family: 'PT Sans';
-    font-size: variables.$font-size-default;
     @include mixins.hoverElem();
-    border: 2px dashed variables.$color-blue-grey;
-    border-radius: 6px;
-
-    align-items: center;
-    justify-content: center;
+    @include mixins.borderOptions(2px, dashed, variables.$color-blue-grey, 6px);
+    @include mixins.elemResolutionOptions(100px, 100px);
+    @include mixins.flexBlock($vertical: center, $horizontal: center, $gap: 10px);
     flex-direction: column;
-    gap: 10px;
+    position: relative;
+    background: variables.$color-white;
+    margin: 0;
+    padding: 0;
+    font-family: 'PT Sans', serif;
+    font-size: variables.$font-size-default;
+    z-index: 1;
 }
 
 .file-upload__input {
@@ -30,16 +23,11 @@
     bottom: 0;
     right: 0;
     opacity: 0;
-    width: 100%;
-    height: 100%;
+    @include mixins.elemResolutionOptions(100%, 100%);
     transform: scale(1.1);
-    z-index: 1;
     cursor: pointer;
     font-size: 0;
-}
-
-#file-upload-button {
-    cursor: pointer;
+    z-index: 1;
 }
 
 .file-upload__button {
