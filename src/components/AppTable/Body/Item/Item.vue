@@ -47,6 +47,7 @@
                     :enabledAutocomplete="false"
                     :isReadOnly="Boolean(props.item.read_only || !props.row.isEdit)"
                     :isCanAdd="Boolean(props.item.is_plural)"
+                    @openLink="(data) => openLink(data, props.item.related_table)"
                     @click="() => openPopup(true)"
                     @clickOutside="() => openPopup(false)"
                     @changeValue="(data) => changeValue(props.row.id, data)"
@@ -59,7 +60,7 @@
                         id: props.row.id,
                         title: props.item.title,
                         substring: props.item.unit,
-                        value: [null, undefined].includes(props.row[props.item.key]) ? null : String(props.row[props.item.key]),
+                        value: [null, undefined].includes(props.row[props.item.key]) ? null : typeof props.row[props.item.key] == 'object' ? props.row[props.item.key] : String(props.row[props.item.key]),
                         is_link: props.item.is_link,
                         is_plural: props.item.is_plural,
                         hiddenOptions: props.item.choosed,
@@ -71,20 +72,21 @@
                     :isCanCreate="true"
                     :isUseEnter="false"
                     :enabledAutocomplete="false"
-                    :isReadOnly="Boolean(props.item.read_only || !props.row.isEdit)"
                     :isCanAdd="Boolean(props.item.is_plural)"
+                    :isLink="Boolean(props.item.is_external_link)"
+                    :isReadOnly="Boolean(props.item.read_only || !props.row.isEdit)"
                     @changeValue="(data) => changeValue(props.row.id, data)"
                 />
                 <FormValue 
                     v-else-if="item.type == 'json'"
                     :value="props.row[props.item.key]"
                     :isHTML="true"
-                    :isLink="false"
+                    :isLink="Boolean(props.item.is_external_link)"
                 />
                 <AppActions 
                     v-else-if="item.type == 'actions'"
                     :slug="props.row.isEdit ? 'edit' : 'routes'"
-                    @callAction="(data) => emit('callAction', {action: data.value, value: props.row})"
+                    @callAction="(data) => data.value == 'showModal' ? openLink(props.row, props.slug) : emit('callAction', {action: data.value, value: props.row})"
                 />
                 <AppStatus 
                     v-else-if="props.item.type == 'status'"
@@ -193,6 +195,10 @@
         isTrash: {
             default: false,
             type: Boolean
+        },
+        slug: {
+            default: '',
+            type: String
         }
     })
 
@@ -222,6 +228,16 @@
         }
     }
 
+    const openLink = (data, slug) => {
+        emit('callAction', {
+            action: 'showModal',
+            value: {
+                id: data.id,
+                slug: slug
+            }
+        })
+    }
+
     // Симуляция двойного клика
     const doubleClick = (event) => {
         clickSetting.value.clicks++;
@@ -232,7 +248,7 @@
         } else {
             let regexp = /<\/?[a-z][\s\S]*>/i
             if (!props.row.isEdit && props.item.key != 'actions' && regexp.test(event.target.innerHTML)) {
-                emit('callAction', {action: 'showModal', value: props.row})
+                openLink(props.row, props.slug)
             }
             window.getSelection().empty();
             clearTimeout(clickSetting.value.timer);  

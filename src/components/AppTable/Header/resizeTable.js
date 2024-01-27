@@ -108,6 +108,10 @@ export default {
         setFixedCellsWidth(table)
         this.setCellsWidth(table)
     
+        if (tableHeader.offsetWidth + 10 <= sectionBody.offsetWidth) {
+            setCellsWidthDefference(tableHeader, sectionBody)    
+        }
+
         for (let i = 0; i < cols.length; i++) {
             let div = cols[i].querySelector('.table-item__border');
             setListeners(div);
@@ -116,14 +120,8 @@ export default {
 
     // Установка изначального положения ячеек если ширина таблицы меньше секции
     setCellsWidth(table) {
-        let tableHeader = table.querySelector('.table__header')
-        let sectionBody = table.parentNode
         setFixedCellsWidth(table)
         this.setStickyClass(table)
-
-        if (tableHeader.offsetWidth + 10 <= sectionBody.offsetWidth) {
-            setCellsWidthDefference(tableHeader, sectionBody)    
-        }
     },
 
     // Установка цвета у зафиксированного столбца

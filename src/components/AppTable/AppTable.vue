@@ -3,7 +3,7 @@
         ref="sectionRef" 
         class="section__table table-template" 
         :style="`--stickyTop: ${scrollPosition}px`" 
-        :class="loaderState == 'loading' ? 'table-template_loading' : loaderState == 'filtering' ? 'table-template_filtering' : ''"
+        :class="props.loaderState == 'loading' ? 'table-template_loading' : props.loaderState == 'filtering' ? 'table-template_filtering' : ''"
     >
         <TableTop 
             @callAction="(data) => emit('callAction', data)"
@@ -21,6 +21,7 @@
                     :isTrash="props.isTrash"
                 />
                 <TableBody 
+                    :slug="props.slug"
                     :isTrash="props.isTrash"
                     @callAction="(data) => emit('callAction', data)"
                 />
@@ -182,6 +183,10 @@
         isTrash: {
             default: false,
             type: Boolean
+        },
+        slug: {
+            default: '',
+            type: String
         }
     })
 

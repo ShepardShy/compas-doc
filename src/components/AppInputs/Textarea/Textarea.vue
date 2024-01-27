@@ -9,8 +9,9 @@
 
         <FormValue 
             v-if="props.isReadOnly"
+            :isHTML="false"
             :value="props.item.value"
-            :isHTML="true"
+            :isLink="props.isLink && props.item.value != null && typeof props.item.value == 'object' && ![null, undefined].includes(props.item.value.external_link) && props.item.value.external_link != ''"
         />
 
         <TextareaField
@@ -63,6 +64,10 @@
             type: Boolean
         },
         isReadOnly: {
+            default: false,
+            type: Boolean
+        },
+        isLink: {
             default: false,
             type: Boolean
         }

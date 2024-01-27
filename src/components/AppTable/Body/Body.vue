@@ -3,6 +3,8 @@
         <TableRow 
             v-for="row in bodyData" 
             :row="row"
+            :slug="props.slug"
+            @callAction="(data) => emit('callAction', data)"
         />
     </tbody>
 </template>
@@ -20,6 +22,10 @@
         isTrash: {
             default: false,
             type: Boolean
+        },
+        slug: {
+            default: '',
+            type: String
         }
     })
 

@@ -136,12 +136,30 @@
         resize()
     }
 
-    onMounted(() => {
-        if (!props.isUseEnter) {
-            mirrorText.value = props.item.value != null ? String(props.item.value).replaceAll('\n', '') : props.item.value
+    // Получить изначальное значение поля
+    const getValue = () => {
+        if (![null, undefined].includes(props.item.value)) {
+            if (typeof props.item.value == 'object') {
+                if (props.isUseEnter) {
+                    return String(props.item.value.value).replaceAll('\n', '')
+                } else {
+                    return props.item.value.value
+                }
+            } else {
+                if (props.isUseEnter) {
+                    return String(props.item.value).replaceAll('\n', '')
+                } else {
+                    return props.item.value
+                }
+            }
         } else {
-            mirrorText.value = props.item.value
+            return ''
         }
+    }
+
+    onMounted(() => {
+        mirrorText.value = getValue()
+
         new ResizeObserver(resize).observe(textareaRef.value)
 
         if (props.item.focus) {
@@ -158,11 +176,7 @@
     }
 
     watch(() => props.item.value, () => {
-        if (!props.isUseEnter) {
-            mirrorText.value = props.item.value != null ? String(props.item.value).replaceAll('\n', '') : props.item.value
-        } else {
-            mirrorText.value = props.item.value
-        }
+        mirrorText.value = getValue()
     })
 
     watch(() => props.item.focus, () => {

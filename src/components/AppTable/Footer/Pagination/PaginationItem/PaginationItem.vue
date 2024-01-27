@@ -32,7 +32,7 @@
         if (item != props.activePage) {
             footerData.value.activePage = item
             emit('callAction', {
-                key: 'changePage',
+                action: 'changePage',
                 value: item
             })
         }

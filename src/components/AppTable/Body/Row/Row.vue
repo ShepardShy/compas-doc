@@ -4,7 +4,9 @@
             v-for="item in fields"
             :row="props.row"
             :item="item"
+            :slug="props.slug"
             :isTrash="isTrash"
+            @callAction="(data) => emit('callAction', data)"
         />
     </tr>
 </template>
@@ -25,8 +27,16 @@
             default: false,
             type: Boolean
         },
-        row: {}
+        row: {},
+        slug: {
+            default: '',
+            type: String
+        }
     })
+
+    const emit = defineEmits([
+        'callAction'
+    ])
 
     const clickRow = (state) => {
         if (state) {

@@ -1,7 +1,7 @@
 <template>
-    <span class="form-item__value" :class="setClasses" v-if="props.isHTML" v-html="props.value"></span>
+    <span class="form-item__value" :class="setClasses" v-if="props.isHTML" v-html="typeof props.value == 'object' && props.value != null ? props.value.value : props.value"></span>
     <span class="form-item__value" :class="setClasses" v-else>
-        {{ props.value }}
+        {{ typeof props.value == 'object' && props.value != null ? props.value.value : props.value }}
     </span>
 </template>
 
@@ -12,8 +12,7 @@
     
     const props = defineProps({
         value: {
-            default: null,
-            type: String
+            default: null
         },
         isHTML: {
             default: false,
