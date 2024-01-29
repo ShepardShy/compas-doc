@@ -12,7 +12,7 @@
             :forceFallback="true"
             :itemKey="'fileFields'"
             @end="() => callAction(null)"
-            :key="props.item.key"
+            :key="values.length"
         >
             <template #item="{ element: item }" >
                 <FansyBoxImage
