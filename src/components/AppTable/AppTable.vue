@@ -15,7 +15,7 @@
             @callAction="(data) => callAction(data)"
         />
         
-        <div class="table-template__body section__scroll-area">
+        <div v-if="false" class="table-template__body section__scroll-area">
             <table class="table" ref="tableRef" :class="bodyData.length == 0 ? 'table_empty' : ''">
                 <TableHeader 
                     :isTrash="props.isTrash"
@@ -28,6 +28,13 @@
             </table>
             <ScrollButtons />
         </div>
+
+        <TableMobile 
+            v-else 
+            :slug="props.slug"
+            :isTrash="props.isTrash"
+            @callAction="(data) => callAction(data)"
+        />
 
         <TableFooter 
             @callAction="(data) => emit('callAction', data)"
@@ -56,6 +63,7 @@
     import TableHeader from './Header/Header.vue'
     import TableFooter from './Footer/Footer.vue'
     import TableSocket from './Socket/Socket.vue'
+    import TableMobile from './Mobile/Mobile.vue'
     import TableWarning from './Warning/Warning.vue';
     import ScrollButtons from './ScrollButtons/ScrollButtons.vue';
     import AppSection from '@/components/AppSection/AppSection.vue';
@@ -350,7 +358,10 @@
         }
 
         // Инициализация удаления строк таблицы
-        const initDeleteRows = () => {
+        const initDeleteRows = (value) => {
+            let findedIndex = bodyData.value.findIndex(row => row.id == value.id)
+            bodyData.value[findedIndex].isChoose = true
+
             isShow.value = {
                 state: true,
                 type: 'delete'
@@ -442,7 +453,7 @@
 
             // Инициализация удаления строк таблицы
             case 'initDelete':
-                initDeleteRows()
+                initDeleteRows(data.value)
                 break;
 
             // Удаление строк в таблице

@@ -1,4 +1,12 @@
 <template>
+    <FormItem 
+        class="form-item__action" 
+    >
+        <FormLabel
+            v-show="props.item.title != null && props.item.title != ''"
+            :title="props.item.title"
+        />
+
         <AppPopup 
             class="popup_actions" 
             ref="popupRef" 
@@ -13,7 +21,7 @@
                 <template v-if="menu.activeTab == null">
                     <PopupOption 
                         class="popup-option__sublink" 
-                        v-for="tab in actions[props.slug]" 
+                        v-for="tab in actions[props.item.slug]" 
                         :class="tab.class"
                         @click="() => tab.children.length > 0 ? 
                             callAction({action: 'changeTab', value: tab}) : 
@@ -45,6 +53,7 @@
                 </template>
             </template>
         </AppPopup>
+    </FormItem>
 </template>
 
 <script setup>
@@ -56,6 +65,8 @@
     import IconArrow from '@/components/AppIcons/Arrow/Arrow.vue'
 
     import AppPopup from '@/components/AppPopup/Popup.vue';
+    import FormItem from '@/components/AppForm/FormItem/FormItem.vue';
+    import FormLabel from '@/components/AppForm/FormLabel/FormLabel.vue';
     import PopupOption from '@/components/AppPopup/PopupOption/PopupOption.vue';
 
     import actions from './actions.json'
@@ -67,9 +78,12 @@
     const popupRef = ref(null)
 
     const props = defineProps({
-        slug: {
-            default: "view",
-            type: String
+        item: {
+            default: {
+                title: 'Действие',
+                slug: 'views',
+            },
+            type: Object
         },
         disabled: {
             default: false,

@@ -3,8 +3,9 @@
         ref="itemRef" 
         class="table__item"
         :style="`--colorItem: ${props.item.color};`"
+        :data-key="props.item.key" 
         :class="[props.item.fixed ? 'table__item_fixed' : '', !props.item.enabled ? 'table__item_hidden' : '']" 
-        @click="(event) => doubleClick(event, props.row)" :data-key="props.item.key" 
+        @click="(event) => doubleClick(event, props.row)" 
     >
         <div class="table-item__content">
                 <AppCheckbox 
