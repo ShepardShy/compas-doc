@@ -8,7 +8,6 @@ export default (uid, localItems, status) => {
             url: null,
             file: null,
             extension: '',
-            sort: 0,
             uid: uid,
             status: 'loading'
         }

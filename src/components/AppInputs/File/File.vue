@@ -1,8 +1,8 @@
 <template>
     <FormItem
         class="file form-item__file"
-        :class="[null, undefined].includes(props.item.value) || props.item.value == '' || props.item.value.length == 0 ? 'file_empty' : ''"
-        :required="!!props.item.required"
+        :class="props.isReadOnly ? 'file_empty' : ''"
+        :required="props.item.required"
     >
         <FormLabel
             v-show="props.item.title != null && props.item.title != ''"
@@ -10,7 +10,7 @@
         />
 
         <FileField
-            v-if="![null, undefined].includes(props.item.value) && props.item.value != '' && props.item.value.length != 0"
+            v-if="!props.isReadOnly"
             :item="props.item"
             @changeValue="(data) => emit('changeValue', data)"
         />
@@ -30,18 +30,23 @@
                 id: 1517,
                 title: "Undefined title",
                 type: "file",
-                isMobile: true,
                 key: "",
-                limit: 1,
-                required: 0,
+                required: false,
                 options: null,
                 focus: true,
                 value: null,
                 button_name: "",
-                subfields: null
             },
             type: Object
-        }
+        },
+        disabled: {
+            default: false,
+            type: Boolean
+        },
+        isReadOnly: {
+            default: false,
+            type: Boolean
+        },
     })
 
     const emit = defineEmits([

@@ -3,16 +3,13 @@
 
 .file {
     .file-list {
-        display: flex;
-        gap: 8px;
+        @include mixins.flexBlock($vertical: flex-start, $gap: 8px);
         flex-wrap: wrap;
-        align-items: flex-start;
 
         .file-list__item {
             position: relative;
             @include mixins.sortableGhost;
-            display: flex;
-            flex-direction: column;
+            @include mixins.flexColumn();
 
             &.sortable-ghost {
                 border: none;
@@ -22,9 +19,9 @@
             &.fancybox-item {
                 .fancybox-item__img {
                     border-radius: 5px;
-                    background: #fff;
+                    background: variables.$color-white;
                     overflow: hidden;
-                    border: 1px solid variables.$color-grey;
+                    @include mixins.borderOptions(1px, solid, variables.$color-grey, 5px);
                     @include mixins.elemResolutionOptions(100px, 100px);
 
                     img {
@@ -34,10 +31,10 @@
 
                 .fancybox-item__title {
                     margin-top: 5px;
-                    height: 100%;
                     color: variables.$color-grey;
-                    width: 100px;
-                    @include mixins.textVerticalHidden()
+                    @include mixins.elemResolutionOptions(100px, 100%);
+                    @include mixins.textVerticalHidden();
+                    display: none;
                 }
 
                 .fancybox-item__details {
@@ -56,14 +53,13 @@
                         display: grid;
                         place-items: center;
                         grid-template-columns: 1fr;
-                        border-radius: 50%;
-                        border: solid 1px #4e4e4e;
                         background-color: rgba(246, 245, 243, 0.6);
+                        @include mixins.borderOptions(1px, solid, variables.$color-darkest-gray, 50%);
                         @include mixins.elemResolutionOptions(30px, 30px);
                         @include mixins.elemPositionOptions(35px, 35px);
 
                         svg {
-                            fill: #4e4e4e;
+                            fill: variables.$color-darkest-gray;
                         }
                     }
 
@@ -92,11 +88,10 @@
                 }
 
                 .fancybox-item__img {
-                    background: #fff;
+                    background: variables.$color-white;
 
                     img {
-                        width: 200px;
-                        height: 150px;
+                        @include mixins.elemPositionOptions(200px, 150px);
                         visibility: hidden;
                     }
                 }
@@ -107,14 +102,14 @@
             }
         }
     }
-}
 
-@keyframes button-loading-spinner {
-    from {
-      transform: rotate(0turn);
-    }
-  
-    to {
-      transform: rotate(1turn);
+    .file-list_show-title {
+        .file-list {
+            .file-list__item {
+                .fancybox-item__title {
+                    display: -webkit-box;
+                }
+            }
+        }
     }
 }

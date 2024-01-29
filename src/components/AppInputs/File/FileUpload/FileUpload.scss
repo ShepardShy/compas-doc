@@ -2,28 +2,21 @@
 @use '@/assets/mixins' as mixins;
 
 .file-upload {
+    position: relative;
     @include mixins.hoverElem();
     @include mixins.borderOptions(2px, dashed, variables.$color-blue-grey, 6px);
     @include mixins.elemResolutionOptions(100px, 100px);
     @include mixins.flexBlock($vertical: center, $horizontal: center, $gap: 10px);
     flex-direction: column;
-    position: relative;
     background: variables.$color-white;
-    margin: 0;
-    padding: 0;
-    font-family: 'PT Sans', serif;
     font-size: variables.$font-size-default;
     z-index: 1;
 }
 
 .file-upload__input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    opacity: 0;
+    @include mixins.absoluteCenter();
     @include mixins.elemResolutionOptions(100%, 100%);
+    opacity: 0;
     transform: scale(1.1);
     cursor: pointer;
     font-size: 0;
@@ -39,8 +32,7 @@
     }
 
     & > span {
-        flex-direction: column;
-        gap: 10px;
+        @include mixins.textVerticalHidden();
     }
 
     &.file-upload_hidden {
@@ -50,7 +42,6 @@
 
     .file-upload__button-title {
         color: variables.$color-grey;
-        height: unset;
         padding: 0 10px;
         @include mixins.textVerticalHidden()
     }

@@ -14,37 +14,3 @@
         }
     }
 }
-
-.fancybox__slide  {
-    &.has-html5video {
-        .fancybox__content {
-            margin: 0 auto;
-            background: inherit;
-            height: 80vh !important;
-            width: max-content !important;
-            aspect-ratio: auto !important;
-        }
-
-        .fancybox__html5video {
-            max-width: 100%;
-            object-fit: contain;
-            width: 100%;
-            margin: 0 auto;
-        }
-    }
-}
-
-.fancybox-item__container {
-    position: relative;
-
-    .icon__loader-progress {
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-}

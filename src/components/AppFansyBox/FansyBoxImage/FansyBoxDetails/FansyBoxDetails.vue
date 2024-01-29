@@ -20,11 +20,10 @@
 <script setup>
     import './FansyBoxDetails.scss';
 
-    import {computed, ref} from "vue";
-
     import IconDots from '@/components/AppIcons/Dots/Dots.vue'
     import PopupOption from "@/components/AppPopup/PopupOption/PopupOption.vue";
     import AppPopup from "@/components/AppPopup/Popup.vue";
+    import {inject} from "vue";
 
     const emit = defineEmits([
         'callAction'
@@ -37,41 +36,20 @@
                 "url": "/",
                 "file": "/",
                 "extension": "png",
-                "sort": 0,
                 "uid": 0,
                 "status": "success"
             },
             type: Object
         },
-        item: {
-            default: {
-                "id": 0,
-                "title": "Undefined title",
-                "typeComponent": "file",
-                "type": "file",
-                "isMobile": true,
-                "key": "",
-                "focus": false,
-                "options": null,
-                "value": [
-                    {
-                        "id": 0,
-                        "url": "/",
-                        "file": "/",
-                        "extension": "svg",
-                        "sort": 0,
-                        "uid": 0,
-                        "status": "success"
-                    }
-                ],
-                "limit": 15,
-                "subfields": null,
-                "otherTitle": "Undefined title"
-                },
-            type: Object
+        id: {
+            default: 0,
+            type: Number
         }
     })
 
+    let values = inject('values')
+
+    // Вызов действия
     const callAction = (action) => {
         const downloadFile = async (imageSrc, nameOfDownload = 'my-image.png') => {
             const response = await fetch(imageSrc, {
@@ -97,12 +75,15 @@
         }
 
         switch (action) {
+            // Скачивание файла
             case 'downloadFile':
                 downloadFile(props.image.file)
-                break
+                break;
+
+            // Локальное удаление эллемента
             case 'deleteFile':
-                emit('callAction', {action: 'deleteImage', item: {item: props.item, elem: props.image}})
-                break
+                emit('callAction', { action: 'deleteImage', item: { id: props.id, image: props.image } })
+                break;
         }
     }
 

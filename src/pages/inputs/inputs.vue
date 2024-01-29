@@ -1,5 +1,13 @@
 <template>
-    <AppComponent 
+    <AppComponent
+        :title="'Поле файлов'"
+        :component="File"
+        :codeProps="FileProps"
+        :codeEmits="FileEmits"
+        @changeValue="(data) => changeValueFile(data)"
+    />
+
+    <AppComponent
         :title="'Стандартный инпут'"
         :component="AppInput"
         :codeProps="InputProps"
@@ -20,7 +28,7 @@
         :component="AppCheckbox"
         :codeProps="checkboxProps"
         :codeEmits="checkboxEmits"
-    /> 
+    />
     <!-- <AppDateInput /> -->
 </template>
 
@@ -41,6 +49,10 @@
     import textareaProps from '@/data/inputs/textarea/codeProps.json';
     import textareaEmits from '@/data/inputs/textarea/codeEmits.json';
 
+    import File from "@/components/AppInputs/File/File.vue";
+    import FileProps from "@/data/inputs/file/FileProps.json";
+    import FileEmits from "@/data/inputs/file/FileEmits.json";
+
     // import AppDateInput from '@/components/AppInputs/Date/AppDateInput/AppDateInput.vue';
 
     // Локальный вывод данных в консоль
@@ -48,4 +60,9 @@
         InputProps.item.default.value = data.value
         console.log(data);
     }
+
+    const changeValueFile = (data) => {
+        console.log(data);
+    }
+
 </script>

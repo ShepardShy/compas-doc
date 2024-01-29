@@ -1,7 +1,7 @@
 <template>
     <div
         class="file-upload"
-        :class="dragover.value ? 'file-upload_dragover' : ''"
+        :class="dragover ? 'file-upload_dragover' : ''"
     >
         <input
             ref="inputFile"
@@ -11,7 +11,7 @@
             @dragover="dragover = true"
             @dragenter="dragover = true"
             @dragleave="dragover = false"
-            @change="changeValue"
+            @change="(event) => changeValue(event)"
         >
 
         <div class="file-upload__button">
@@ -44,16 +44,9 @@
         },
         buttonTitle: {
             default: 'Загрузить',
+            type: String
         }
     })
-
-    function generateUid() {
-        return 'xxxxxxxxxxxxx'.replace(/[xy]/g, function(item) {
-            const radnom = Math.random() * 10 | 0;
-            const replace = item === 'x' ? radnom : 4;
-            return +replace.toString();
-        });
-    }
 
     // Добавление файлов
     const changeValue = (event) => {
@@ -61,7 +54,7 @@
 
         event.target.files.forEach(async (file) => {
             const formData = new FormData()
-            const uid = generateUid()
+            const uid = new Date().getTime()
             formData.append('files[]', file)
             formData.append('uid', uid)
 
