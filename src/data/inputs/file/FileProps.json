@@ -6,7 +6,6 @@
             "key": "photo",
             "show_file_name": 1,
             "required": false,
-            "read_only": 0,
             "button_name": "Загрузить",
             "value": [
                 {

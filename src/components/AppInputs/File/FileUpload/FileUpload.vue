@@ -4,10 +4,9 @@
         :class="dragover ? 'file-upload_dragover' : ''"
     >
         <input
-            ref="inputFile"
             type="file"
             class="file-upload__input"
-            :multiple="props.isMultiple || true"
+            :multiple="props.isMultiple"
             @dragover="dragover = true"
             @dragenter="dragover = true"
             @dragleave="dragover = false"
@@ -34,7 +33,6 @@
     import Input from "@/components/AppAutocomplete/Input/Input.vue";
 
     const dragover = ref(false)
-    const inputFile = ref(null)
     const values = inject('values').value
 
     const props = defineProps({
@@ -62,12 +60,14 @@
         })
     }
 
+    // Загрузка файлов
     const uploadFile = async (data, file, uid) => {
         FileUploadScripts(uid, values, 'ready');
 
         const ajax = new XMLHttpRequest();
         const localItem = values.find(item => item.uid == uid)
 
+        // Событие процесса загрузки файла
         ajax.upload.onprogress = function(event) {
             if (event.lengthComputable) {
                 localItem.progress = (event.loaded / event.total) * 100;
@@ -76,6 +76,7 @@
             }
         };
 
+        // Событие окончания загрузки файла
         ajax.onloadend = function() {
             if (ajax.status == 200) {
                 const responseObj = JSON.parse(ajax.response)[0];

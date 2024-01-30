@@ -1,12 +1,12 @@
 <template>
     <FansyBox
         class="file__container"
-        :class="props.item.show_file_name ? 'file-list_show-title' : ''"
     >
         <draggable
             tag="div"
             class="file__list file-list"
-            handle=".fancybox-item__container"
+            :class="props.item.show_file_name ? 'file-list_show-title' : ''"
+            handle=".fancybox-item__link"
             draggable=".file-list__item:not(.file-list__item_undraggable)"
             v-model="values"
             :forceFallback="true"
@@ -21,12 +21,12 @@
                     :id="props.item.id"
                     :isShowFileName="props.item.show_file_name"
                     :image="item"
-                    :loading="item.status == 'loading'"
-                    :class="item.status == 'loading' ? 'file-list__item_loading' : ''"
+                    :loading="item.status && item.status == 'loading'"
+                    :class="item.status && item.status == 'loading' ? 'file-list__item_loading' : ''"
                     @callAction="(data) => callAction(data)"
                 />
 
-                <FileUpload v-else :buttonTitle="props.item.button_name"/>
+                <FileUpload v-else-if="!props.isReadOnly" :buttonTitle="props.item.button_name"/>
             </template>
         </draggable>
     </FansyBox>
@@ -61,6 +61,10 @@
                 button_name: "",
             },
             type: Object
+        },
+        isReadOnly: {
+            default: false,
+            type: Boolean
         }
     })
 
@@ -69,7 +73,7 @@
         if ([null, undefined].includes(props.item.value) || !Array.isArray(props.item.value)) {
             return [{}]
         } else {
-            const localValues = props.item.value == null ? [] : props.item.value.filter(p => ![null, undefined].includes(p) && !Array.isArray(p) && Object.keys(p).length !== 0)
+            const localValues = props.item.value == null ? [] : props.item.value.filter(p => ![null, undefined].includes(p) && !Array.isArray(p) && Object.keys(p).length !== 0 && typeof p != 'string')
             return JSON.parse(JSON.stringify([...localValues, {}]))
         }
     }

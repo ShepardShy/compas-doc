@@ -1,6 +1,6 @@
 <template>
     <div class="fancybox-item fancybox__item" @mouseover="(event) => checkingBlock(event)">
-        <a class="fancybox-item__container" :data-fancybox="`galleryClick_${props.id}`" :href="setHref">
+        <a class="fancybox-item__link" :data-fancybox="`galleryClick_${props.id}`" :href="setHref">
             <figure class="ibg fancybox-item__img">
                 <img :src="props.image.url" :alt="props.image.name"/>
             </figure>
@@ -45,12 +45,11 @@
         },
         image: {
             default: {
-                "id": 1649,
-                "url": "/",
-                "file": "/",
-                "extension": "png",
-                "uid": 0,
-                "status": "success"
+                id: 1649,
+                url: "/",
+                file: "/",
+                extension: "png",
+                uid: 0
             },
             type: Object
         },
@@ -64,6 +63,7 @@
         'callAction'
     ])
 
+    // Задаем название файла
     const setName = computed(() => {
         if (props.id != undefined && props.image.name != undefined) {
             let name = props.image.name
@@ -85,6 +85,7 @@
         }
     })
 
+    // Задаем ссылку
     const setHref = computed(() => {
         return ['png', 'svg', 'jpeg', 'jpg', 'webp', 'pdf', 'gif', 'mp4', 'mov', 'mp3'].includes(props.image.extension) ? props.image.file : props.image.url
     })
@@ -98,6 +99,7 @@
         }
     }
 
+    // Задаем прогресс загрузки
     const progressImage = computed(() => {
         return props.image.progress ? 62.8 - props.image.progress / 100 * 62.8 : 62.8
     })

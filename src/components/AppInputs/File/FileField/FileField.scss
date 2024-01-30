@@ -71,7 +71,7 @@
 
                 &:hover {
                     .fancybox-item__details {
-                        display: grid;
+                        display: block;
                     }
 
                     .fancybox-item__title {
@@ -101,10 +101,8 @@
                 }
             }
         }
-    }
 
-    .file-list_show-title {
-        .file-list {
+        &.file-list_show-title {
             .file-list__item {
                 .fancybox-item__title {
                     display: -webkit-box;

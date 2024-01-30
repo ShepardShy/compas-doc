@@ -4,7 +4,7 @@
             <IconDots />
         </template>
         <template #content>
-            <PopupOption data-fancybox="gallery" :href="props.image.file">
+            <PopupOption :data-fancybox="`galleryClick_${props.id}`" :href="props.image.file">
                 Посмотреть
             </PopupOption>
             <PopupOption @click="() => callAction('downloadFile')">
@@ -23,7 +23,6 @@
     import IconDots from '@/components/AppIcons/Dots/Dots.vue'
     import PopupOption from "@/components/AppPopup/PopupOption/PopupOption.vue";
     import AppPopup from "@/components/AppPopup/Popup.vue";
-    import {inject} from "vue";
 
     const emit = defineEmits([
         'callAction'
@@ -32,12 +31,11 @@
     const props = defineProps({
         image: {
             default: {
-                "id": 1649,
-                "url": "/",
-                "file": "/",
-                "extension": "png",
-                "uid": 0,
-                "status": "success"
+                id: 1649,
+                url: "/",
+                file: "/",
+                extension: "png",
+                uid: 0
             },
             type: Object
         },
@@ -46,8 +44,6 @@
             type: Number
         }
     })
-
-    let values = inject('values')
 
     // Вызов действия
     const callAction = (action) => {

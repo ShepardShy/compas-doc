@@ -1,7 +1,7 @@
 <template>
     <FormItem
         class="file form-item__file"
-        :class="props.isReadOnly ? 'file_empty' : ''"
+        :class="setClasses"
         :required="props.item.required"
     >
         <FormLabel
@@ -10,8 +10,8 @@
         />
 
         <FileField
-            v-if="!props.isReadOnly"
             :item="props.item"
+            :isReadOnly="props.isReadOnly"
             @changeValue="(data) => emit('changeValue', data)"
         />
     </FormItem>
@@ -19,6 +19,8 @@
 
 <script setup>
     import './File.scss';
+
+    import {computed} from "vue";
 
     import FormItem from "@/components/AppForm/FormItem/FormItem.vue";
     import FormLabel from "@/components/AppForm/FormLabel/FormLabel.vue";
@@ -52,4 +54,15 @@
     const emit = defineEmits([
         'changeValue'
     ])
+
+    const setClasses = computed(() => {
+        return [
+            ([null, undefined].includes(props.item.value) ||
+                typeof props.item.value == 'string' ||
+                !Array.isArray(props.item.value) ||
+                props.item.value.filter(p => ![null, undefined].includes(p) && !Array.isArray(p) && Object.keys(p).length !== 0 && typeof p != 'string').length === 0 ||
+                props.item.value.length === 0) &&
+            props.isReadOnly ? 'file_empty' : ''
+        ]
+    })
 </script>
