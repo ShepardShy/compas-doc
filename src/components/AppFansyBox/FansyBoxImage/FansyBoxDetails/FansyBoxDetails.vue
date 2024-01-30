@@ -34,8 +34,7 @@
                 id: 1649,
                 url: "/",
                 file: "/",
-                extension: "png",
-                uid: 0
+                extension: "png"
             },
             type: Object
         },

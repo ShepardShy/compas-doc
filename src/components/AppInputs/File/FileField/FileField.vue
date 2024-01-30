@@ -4,15 +4,15 @@
     >
         <draggable
             tag="div"
+            v-model="values"
             class="file__list file-list"
             :class="props.item.show_file_name ? 'file-list_show-title' : ''"
-            handle=".fancybox-item__link"
-            draggable=".file-list__item:not(.file-list__item_undraggable)"
-            v-model="values"
             :forceFallback="true"
             :itemKey="'fileFields'"
+            :key="props.item.key"
+            handle=".fancybox-item__link"
+            draggable=".file-list__item:not(.file-list__item_undraggable)"
             @end="() => callAction(null)"
-            :key="values.length"
         >
             <template #item="{ element: item }" >
                 <FansyBoxImage

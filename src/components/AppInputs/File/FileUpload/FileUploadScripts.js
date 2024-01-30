@@ -1,14 +1,13 @@
 // Добавление\Удаление изображения
-export default (uid, localItems, status) => {
+export default (id, localItems, status) => {
     // Добавление изображения
     const addImage = () => {
         let downloadingItem = {
-            id: uid,
+            id: id,
             name: "Загрузка",
             url: null,
             file: null,
             extension: '',
-            uid: uid,
             status: 'loading'
         }
 
@@ -17,7 +16,7 @@ export default (uid, localItems, status) => {
 
     // Удаление изображения
     const deleteImage = () => {
-        localItems = localItems.filter(image => Object.keys(image).length === 0 || image.uid !== uid)
+        localItems = localItems.filter(image => Object.keys(image).length === 0 || image.id !== id)
     }
 
     switch (status) {

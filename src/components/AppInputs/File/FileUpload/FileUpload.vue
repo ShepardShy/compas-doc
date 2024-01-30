@@ -32,9 +32,6 @@
     import LoadFile from "@/components/AppIcons/LoadFile/LoadFile.vue";
     import Input from "@/components/AppAutocomplete/Input/Input.vue";
 
-    const dragover = ref(false)
-    const values = inject('values').value
-
     const props = defineProps({
         isMultiple: {
             default: false,
@@ -46,26 +43,29 @@
         }
     })
 
+    const dragover = ref(false)
+    const values = inject('values')
+
     // Добавление файлов
     const changeValue = (event) => {
         dragover.value = false
 
         event.target.files.forEach(async (file) => {
             const formData = new FormData()
-            const uid = new Date().getTime()
+            const id = new Date().getTime()
             formData.append('files[]', file)
-            formData.append('uid', uid)
+            formData.append('uid', id)
 
-            await uploadFile(formData, file, uid)
+            await uploadFile(formData, file, id)
         })
     }
 
     // Загрузка файлов
-    const uploadFile = async (data, file, uid) => {
-        FileUploadScripts(uid, values, 'ready');
+    const uploadFile = async (data, file, id) => {
+        FileUploadScripts(id, values.value, 'ready');
 
         const ajax = new XMLHttpRequest();
-        const localItem = values.find(item => item.uid == uid)
+        const localItem = values.value.find(item => item.id == id)
 
         // Событие процесса загрузки файла
         ajax.upload.onprogress = function(event) {
@@ -88,7 +88,6 @@
                 localItem.name = responseObj.file.name;
                 localItem.sort = responseObj.file.sort;
                 localItem.url = responseObj.file.url;
-                localItem.uid = responseObj.uid;
             } else {
                 console.log('error', ajax.response);
             }
