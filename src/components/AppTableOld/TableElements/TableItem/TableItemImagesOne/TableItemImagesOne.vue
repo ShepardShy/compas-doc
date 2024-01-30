@@ -26,7 +26,7 @@
     import './TableItemImagesOne.scss';
 
     import FansyBox from '@/components/AppFansyBox/FansyBox.vue';
-    import FansyBoxImage from '@/components/AppFansyBox/FansyBoxImage/FansyBoxImage.vue';
+    import FansyBoxImage from '@/components/AppFansyBox/Image/Image.vue';
 
     const emit = defineEmits([
         'callAction',

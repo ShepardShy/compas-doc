@@ -1,6 +1,7 @@
 <template>
     <FansyBox
         class="file__container"
+        :class="values.length === 1 && props.isReadOnly ? 'file__container_empty' : ''"
     >
         <draggable
             tag="div"
@@ -15,18 +16,22 @@
             @end="() => callAction(null)"
         >
             <template #item="{ element: item }" >
-                <FansyBoxImage
+                <Image
                     v-if="Object.keys(item).length !== 0"
                     class="file-list__item"
                     :id="props.item.id"
                     :isShowFileName="props.item.show_file_name"
                     :image="item"
-                    :loading="item.status && item.status == 'loading'"
-                    :class="item.status && item.status == 'loading' ? 'file-list__item_loading' : ''"
+                    :loading="item.status == 'loading'"
+                    :class="item.status == 'loading' ? 'file-list__item_loading' : ''"
                     @callAction="(data) => callAction(data)"
                 />
 
-                <FileUpload v-else-if="!props.isReadOnly" :buttonTitle="props.item.button_name"/>
+                <Upload
+                    v-else-if="!props.isReadOnly"
+                    :buttonTitle="props.item.button_name"
+                    :isMultiple="props.item.is_multiple"
+                />
             </template>
         </draggable>
     </FansyBox>
@@ -34,14 +39,14 @@
 </template>
 
 <script setup>
-    import './FileField.scss';
+    import './Field.scss';
 
     import draggable from 'vuedraggable'
-    import {onMounted, provide, ref, watch} from "vue";
+    import {inject, provide, ref, watch} from "vue";
 
     import FansyBox from '@/components/AppFansyBox/FansyBox.vue';
-    import FansyBoxImage from '@/components/AppFansyBox/FansyBoxImage/FansyBoxImage.vue';
-    import FileUpload from "@/components/AppInputs/File/FileUpload/FileUpload.vue";
+    import Image from '@/components/AppFansyBox/Image/Image.vue';
+    import Upload from "@/components/AppInputs/File/Upload/Upload.vue";
 
     const emit = defineEmits([
         'changeValue'
@@ -79,6 +84,7 @@
     }
 
     const values = ref(getValues())
+    const isReadOnly = inject('isReadOnly')
 
     // Вызов деиствий и изменение значений
     const callAction = (data) => {
@@ -86,13 +92,14 @@
             switch (data.action) {
                 // Локальное удаление эллемента
                 case 'deleteImage':
-                    values.value = values.value.filter(item => Object.keys(item).length === 0 || item.id !== data.item.image.id)
+                    values.value = values.value.filter(item => Object.keys(item).length === 0 || item.id !== data.value.id)
                     break;
                 default:
                     break;
             }
         }
 
+        isReadOnly.value = false
         emit('changeValue', { key: props.item.key, value: values.value.filter(item => Object.keys(item).length !== 0) })
     }
 

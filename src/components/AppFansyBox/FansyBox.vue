@@ -18,10 +18,10 @@
         idle: false
     }
 
-    const container = ref(null);
+    const containerRef = ref(null);
 
     onMounted(() => {
-        Fancybox.bind(container.value, '[data-fancybox]', {
+        Fancybox.bind(containerRef.value, '[data-fancybox]', {
             ...(options || {}),
         });
     });

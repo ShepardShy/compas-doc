@@ -41,6 +41,7 @@
     }
 
     .file-upload__button-title {
+        text-align: center;
         color: variables.$color-grey;
         padding: 0 10px;
         @include mixins.textVerticalHidden()

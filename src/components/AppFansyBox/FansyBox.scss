@@ -34,11 +34,10 @@
       transform: none !important;
     }
 
-    .f-thumbs__slide{
+    .f-thumbs__slide {
       -webkit-clip-path: none;
       clip-path: none;
-      height: 48px;
-      width: 48px;
+      @include mixins.elemResolutionOptions(48px, 48px);
       transform: none;
 
       & > * {

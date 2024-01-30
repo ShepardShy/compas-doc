@@ -4,46 +4,37 @@
             "id": 0,
             "title": "Фото",
             "key": "photo",
-            "show_file_name": 1,
+            "show_file_name": true,
             "required": false,
             "button_name": "Загрузить",
+            "is_multiple": true,
             "value": [
                 {
                     "id": 1696445350884,
                     "name": "Group 6 Copy 2.png",
                     "url": "https://compas.pro/storage/thumbnails/default/9k/oh/2sx8nf8ckw08oo0c8oo0w.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FkxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png&s=https",
                     "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png",
-                    "extension": "png",
-                    "uid": "1696445350884",
-                    "status": "success"
+                    "extension": "png"
                 },
                 {
                     "id": 1703373788966,
                     "name": "IMG_2343.MOV",
                     "url": "/icons/new/undefinedFile.svg",
                     "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/YEaXi9ndhQV9fA0DrSSAjqkWoglbAaohCKbnDC1b.mp4",
-                    "extension": "mp4",
-                    "uid": "1703373788966",
-                    "status": "success"
+                    "extension": "mp4"
                 },
                 {
                     "id": 1703978125537,
                     "name": "IMG_7423.MOV",
                     "url": "/icons/new/undefinedFile.svg",
                     "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/FXaAwdsbuKZOItMTvdbI3rIwtSpw2TV7USnXIMne.mov",
-                    "extension": "mov",
-                    "uid": "1703978125537",
-                    "status": "success"
+                    "extension": "mov"
                 }
             ]
         }
     },
-    "disabled": {
-        "default": false,
-        "type": "Boolean"
-    },
     "isReadOnly": {
-        "default": false,
+        "default": true,
         "type": "Boolean"
     }
 }

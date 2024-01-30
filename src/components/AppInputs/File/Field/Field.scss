@@ -2,6 +2,15 @@
 @use '@/assets/mixins' as mixins;
 
 .file {
+    .file__container {
+        &.file__container_empty {
+            &::after {
+                content: 'не заполнено';
+                color: variables.$color-grey;
+            }
+        }
+    }
+
     .file-list {
         @include mixins.flexBlock($vertical: flex-start, $gap: 8px);
         flex-wrap: wrap;

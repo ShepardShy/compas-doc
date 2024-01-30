@@ -11,12 +11,12 @@ export default (id, localItems, status) => {
             status: 'loading'
         }
 
-        localItems.splice(localItems.length - 1, 0, downloadingItem);
+        localItems.value.splice(localItems.value.length - 1, 0, downloadingItem);
     }
 
     // Удаление изображения
     const deleteImage = () => {
-        localItems = localItems.filter(image => Object.keys(image).length === 0 || image.id !== id)
+        localItems.value = localItems.value.filter(image => Object.keys(image).length === 0 || image.id !== id)
     }
 
     switch (status) {

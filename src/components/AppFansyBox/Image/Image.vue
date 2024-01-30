@@ -2,7 +2,7 @@
     <div class="fancybox-item fancybox__item" @mouseover="(event) => checkingBlock(event)">
         <a class="fancybox-item__link" :data-fancybox="`galleryClick_${props.id}`" :href="setHref">
             <figure class="ibg fancybox-item__img">
-                <img :src="props.image.url" :alt="props.image.name"/>
+                <img :src="props.image.url" :alt="props.image.name" :title="props.image.name" />
             </figure>
 
             <LoaderProgress
@@ -11,7 +11,7 @@
             />
         </a>
 
-        <FansyBoxDetails 
+        <Details
             :id="props.id"
             :image="props.image"
             @callAction="(data) => emit('callAction', data)"
@@ -27,11 +27,11 @@
 </template>
 
 <script setup>
-    import './FansyBoxImage.scss';
+    import './Image.scss';
 
     import {computed} from "vue";
 
-    import FansyBoxDetails from './FansyBoxDetails/FansyBoxDetails.vue';
+    import Details from './Details/Details.vue';
     import LoaderProgress from "@/components/AppIcons/LoaderProgress/LoaderProgress.vue";
     
     const props = defineProps({
@@ -69,7 +69,7 @@
 
             // Проверка на присутствие расширения в названии и добавление в случае его отсутствия
             const regExp = new RegExp(`\\.${props.image.extension.toLowerCase()}$`)
-            if (!regExp.test(name.toLowerCase())) {
+            if (props.image.extension !== '' && !regExp.test(name.toLowerCase())) {
                 name += `.${props.image.extension}`
             }
 

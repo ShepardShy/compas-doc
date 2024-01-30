@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-    import './FansyBoxDetails.scss';
+    import './Details.scss';
 
     import IconDots from '@/components/AppIcons/Dots/Dots.vue'
     import PopupOption from "@/components/AppPopup/PopupOption/PopupOption.vue";
@@ -47,26 +47,30 @@
     // Вызов действия
     const callAction = (action) => {
         const downloadFile = async (imageSrc, nameOfDownload = 'my-image.png') => {
-            const response = await fetch(imageSrc, {
-                method: 'GET',
-                headers: {
-                    accept: 'application/json',
-                },
-            });
+            try {
+                const response = await fetch(imageSrc, {
+                    method: 'GET',
+                    headers: {
+                        accept: 'application/json',
+                    },
+                });
 
-            const blobImage = await response.blob();
+                const blobImage = await response.blob();
 
-            const href = URL.createObjectURL(blobImage);
+                const href = URL.createObjectURL(blobImage);
 
-            const anchorElement = document.createElement('a');
-            anchorElement.href = href;
-            anchorElement.download = nameOfDownload;
+                const anchorElement = document.createElement('a');
+                anchorElement.href = href;
+                anchorElement.download = nameOfDownload;
 
-            document.body.appendChild(anchorElement);
-            anchorElement.click();
+                document.body.appendChild(anchorElement);
+                anchorElement.click();
 
-            document.body.removeChild(anchorElement);
-            window.URL.revokeObjectURL(href);
+                document.body.removeChild(anchorElement);
+                window.URL.revokeObjectURL(href);
+            } catch (error) {
+                console.log(error);
+            }
         }
 
         switch (action) {
@@ -77,7 +81,7 @@
 
             // Локальное удаление эллемента
             case 'deleteFile':
-                emit('callAction', { action: 'deleteImage', item: { id: props.id, image: props.image } })
+                emit('callAction', { action: 'deleteImage', value: props.image })
                 break;
         }
     }

@@ -12,6 +12,7 @@
     "@fancyapps/ui": "^5.0.33",
     "@mahdikhashan/vue3-click-outside": "^0.1.2",
     "@vuepic/vue-datepicker": "^7.4.0",
+    "dotenv": "^16.4.1",
     "lodash": "^4.17.21",
     "maska": "^2.1.10",
     "vue": "^3.3.8",
