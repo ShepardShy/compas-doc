@@ -71,7 +71,9 @@
         }
 
         .popup__option_active {
-            background: variables.$color-light-grey;
+            .popup-option__text {
+                filter: opacity(0.5);
+            }
         }
     
         .select__active-option {

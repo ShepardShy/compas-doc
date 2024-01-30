@@ -1,5 +1,26 @@
 <template>
     <div class="table-template__header table-top">
+
+        <AppSelect 
+            class="table-top__item table-top__select"
+            :class="sortItem.order == 'asc' ? 'table-top__select_up' : ''"
+            :item="{
+                id: 0,
+                key: 'sortTable',
+                value: sortItem.key,
+                focus: false,
+                required: false,
+                title: null,
+                lockedOptions: [],
+                options: options
+            }"
+            :isFiltered="false"
+            :isMultiple="false"
+            :isReadOnly="false"
+            :isHaveNullOption="true"
+            @changeValue="(data) => sortTable(data)"
+        />
+
         <AppPopup v-show="menu.saves.isShow" class="table-top__item" ref="popupSavesRef" :closeByClick="false" @clickOutside="() => callAction({action: 'changeSaveTab', value: null})">
             <template #summary>
                 <IconSave />
@@ -96,7 +117,7 @@
 <script setup>
     import './Top.scss';
     
-    import { ref, inject } from 'vue'
+    import { ref, inject, onMounted } from 'vue'
 
     import IconDots from '@/components/AppIcons/Dots/Dots.vue'
     import IconDrag from '@/components/AppIcons/Drag/Drag.vue'
@@ -104,7 +125,9 @@
     import IconArrow from '@/components/AppIcons/Arrow/Arrow.vue'
     
     import draggable from 'vuedraggable'
+    import resizeTable from '../Header/resizeTable.js'
     import AppPopup from '@/components/AppPopup/Popup.vue';
+    import AppSelect from '@/components/AppSelects/Select/Select.vue'
     import IconSettings from '@/components/AppIcons/Settings/Settings.vue'
     import AppCheckbox from '@/components/AppInputs/Checkbox/Checkbox.vue';
     import PopupOption from '@/components/AppPopup/PopupOption/PopupOption.vue';
@@ -112,12 +135,20 @@
     const draggableRef = ref(null)
     const popupSavesRef = ref(null)
     
+    let options = ref([])
+    
     const menu = inject('menu')
     const fields = inject('fields')
-
+    const sortItem = inject('sortItem')
+    const tableRef = inject('tableRef')
+    
     const emit = defineEmits([
         'callAction'
     ])
+
+    onMounted(() => {
+        setOptions()
+    })
 
     // Действия с шапкой
     const callAction = (data) => {
@@ -133,6 +164,12 @@
             let findedOption = fields.value.find(option => option.key == data.key)
             findedOption[menu.value.activeTab.tab] = data.value
             showSaves(true)
+
+            if (menu.value.activeTab.tab == 'enabled') {
+                setTimeout(() => {
+                    resizeTable.resizableGrid(tableRef.value, fields.value)
+                }, 100);
+            }
         }
 
         // Начало перетаскивания опции
@@ -217,4 +254,33 @@
                 break;
         }
     }
+
+    const sortTable = (data) => {
+        if (data.value == sortItem.value.key) {
+            sortItem.value.order = sortItem.value.order == 'asc' ? 'desc' : 'asc'
+        } else {
+            sortItem.value.key = data.value
+            sortItem.value.order = 'desc'
+        }
+
+        emit('callAction', {
+            action: 'getTableData',
+            value: null
+        })
+    }
+
+    const setOptions = () => {
+        let localFields = JSON.parse(JSON.stringify(fields.value))
+        let localOptions = []
+
+        for (let field of localFields) {
+            localOptions.push({
+                label: field.title,
+                value: field.key
+            })
+        }
+
+        options.value = localOptions 
+    }
+
 </script>

@@ -16,23 +16,24 @@ export default {
                 data.forEach(element => {
                     element.classList.remove('popup_up')
                     element.removeAttribute('open')
+                    element.classList.remove('popup_visible')
                 });
                 break
             // Удаление у определенного элемента 
             default:
                 element.classList.remove('popup_up')
                 element.removeAttribute('open')
+                    element.classList.remove('popup_visible')
             break;
         }
     },
 
+    // Установка позиции выплывающего списка
     setDropdownPosition(element) {
         let scrollBlock = null
         scrollBlock = element.closest('.section__scroll-area')
 
         if (element != null) {
-            element.classList.add('popup_hidden')
-
             setTimeout(() => {
                 let dropdown = element.querySelector('.popup__content')
                 let dropdownRect = dropdown.getBoundingClientRect()
@@ -61,7 +62,7 @@ export default {
                     }
                 }
 
-                element.classList.remove('popup_hidden')
+                element.classList.add('popup_visible')
             }, 10);
         }
     }

@@ -8,7 +8,7 @@
             :totalPages="footerData.pages"
             :activePage="footerData.activePage"
             class="table-footer__pagination" 
-            @callAction="(data) => $emit('callAction', data)"
+            @callAction="(data) => callAction({action: 'changePage', value: data.value})"
         />
 
         <div class="table-footer__visible-elems">
@@ -38,7 +38,7 @@
                 }"
                 :isFiltered="false"
                 :isHaveNullOption="false"
-                @changeValue="(data) => $emit('callAction', {action: 'changeVisibleElems', value: data.value})"
+                @changeValue="(data) => callAction({action: 'changeVisibleElems', value: data.value})"
             />
         </div>
     </div>
@@ -54,4 +54,36 @@
 
     const bodyData = inject('bodyData')
     const footerData = inject('footerData')
+
+    const emit = defineEmits([
+        'callAction'
+    ])
+
+    // Вызов действия для футера
+    const callAction = (data) => {
+        // Изменение количества отображаемых элементов
+        const changeVisibleElems = (value) => {
+            footerData.value.count = value
+            emit('callAction', {action: 'getTableData', value: null})
+        }
+
+        // Изменение активной страницы
+        const changePage = (value) => {
+            footerData.value.activePage = value
+            emit('callAction', {action: 'getTableData', value: null})
+        }
+
+        switch (data.action) {
+            // Изменение количества отображаемых элементов
+            case 'changeVisibleElems':
+                changeVisibleElems(data.value)
+                break;
+            // Изменение активной страницы
+            case 'changePage':
+                changePage(data.value)
+                break;
+            default:
+                break;
+        }
+    }
 </script>

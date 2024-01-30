@@ -3,7 +3,7 @@
         "default": {
             "id": 0,
             "key": "selectKey",
-            "value": null,
+            "value": [null],
             "focus": false,
             "required": false,
             "title": "Заголовок",
@@ -33,7 +33,7 @@
         "default": false,
         "type": "Boolean"
     },
-    "isMultiply": {
+    "isMultiple": {
         "default": true,
         "type": "Boolean"
     },

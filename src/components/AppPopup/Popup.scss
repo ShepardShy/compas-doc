@@ -36,9 +36,9 @@
         }
     }
     
-    &.popup_hidden {
+    &.popup_visible {
         .popup__content {
-            opacity: 0;
+            opacity: 1;
         }
     }
 }
@@ -61,6 +61,7 @@
 .popup__content {
     top: 20px;
     left: 0px;
+    opacity: 0;
     z-index: 9999;
     min-width: 200px;
     overflow-y: auto;

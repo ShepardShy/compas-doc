@@ -1,6 +1,6 @@
 <template>
     <div class="table-template__body_mobile">
-        <div class="table-mobile">
+        <div class="table-mobile" :class="bodyData.length == 0 ? 'table-mobile_empty' : ''">
             <div 
                 v-for="row in bodyData" 
                 class="table-mobile__row table__row" 
@@ -123,7 +123,7 @@
                         }"
                         :isReadOnly="Boolean(item.read_only || !row.isEdit)"
                         :isHaveNullOption="true"
-                        :isMultiply="Boolean(item.is_plural)"
+                        :isMultiple="Boolean(item.is_plural)"
                         :isFiltered="true"
                         @changeValue="(data) => changeValue(row.id, data)"
                     />
@@ -227,7 +227,6 @@
         // Редактирование строки
         const editRow = (value) => {
             let findedIndex = bodyData.value.findIndex(row => row.id == value.id)
-            console.log(findedIndex);
             backupValues.value.push(JSON.parse(JSON.stringify(bodyData.value[findedIndex])))
             bodyData.value[findedIndex].isEdit = true
             bodyData.value[findedIndex].isChoose = true

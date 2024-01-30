@@ -11,7 +11,7 @@
         <SelectField 
             :item="props.item"
             :isReadOnly="props.isReadOnly"
-            :isMultiply="props.isMultiply"
+            :isMultiple="props.isMultiple"
             :isFiltered="props.isFiltered"
             :isHaveNullOption="props.isHaveNullOption"
             @clickOutside="() => emit('clickOutside', true)"
@@ -45,7 +45,7 @@
             default: false,
             type: Boolean
         },
-        isMultiply: {
+        isMultiple: {
             default: false,
             type: Boolean
         },

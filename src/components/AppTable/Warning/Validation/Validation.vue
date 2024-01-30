@@ -100,7 +100,7 @@
                         }"
                         :isReadOnly="false"
                         :isHaveNullOption="true"
-                        :isMultiply="Boolean(item.is_plural)"
+                        :isMultiple="Boolean(item.is_plural)"
                         :isFiltered="true"
                         @changeValue="(data) => changeValue(activeRow.id, data)"
                     />

@@ -2,14 +2,33 @@
 @use '@/assets/mixins.scss' as mixins;
 
 .table-mobile {
-    .form-item__checkbox {
-        flex-direction: column;
-        align-items: flex-start;
+    min-height: 70vh;
 
-        .form-item__title {
-            font-size: 12px;
+    &.table-mobile_empty {
+        &::after {
+            content: 'Нет данных';
+            position: absolute;
+            display: grid;
+            place-items: center;
+            color: variables.$color-blue-grey;
+            @include mixins.elemPositionOptions(0px, 0px);
+            @include mixins.elemResolutionOptions(100%, 100%);
         }
     }
+
+    .table__item {
+        overflow: visible;
+
+        .form-item__checkbox {
+            flex-direction: column;
+            align-items: flex-start;
+    
+            .form-item__title {
+                font-size: 12px;
+            }
+        }
+    }
+    
 }
 
 .table-mobile__row {

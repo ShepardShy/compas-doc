@@ -3,20 +3,28 @@
         ref="sectionRef" 
         class="section__table table-template" 
         :style="`--stickyTop: ${scrollPosition}px`" 
-        :class="props.loaderState == 'loading' ? 'table-template_loading' : props.loaderState == 'filtering' ? 'table-template_filtering' : ''"
+        :class="props.table.loaderState == 'loading' ? 'table-template_loading' : props.table.loaderState == 'filtering' ? 'table-template_filtering' : ''"
     >
         <TableTop 
-            @callAction="(data) => emit('callAction', data)"
+            v-if="fields.length > 0"
+            @callAction="(data) => callAction(data)"
         />
-
+ 
         <TableSocket 
             v-show="socketRows.length > 0"
             :socketRows="socketRows"
             @callAction="(data) => callAction(data)"
         />
+
+        <TableMobile 
+            v-if="isMobile"
+            :slug="props.slug"
+            :isTrash="props.isTrash"
+            @callAction="(data) => callAction(data)"
+        />
         
-        <div v-if="false" class="table-template__body section__scroll-area">
-            <table class="table" ref="tableRef" :class="bodyData.length == 0 ? 'table_empty' : ''">
+        <div v-else class="table-template__body section__scroll-area">
+            <table class="table" ref="tableRef" :class="fields.length == 0 || bodyData.length == 0 ? 'table_empty' : ''">
                 <TableHeader 
                     :isTrash="props.isTrash"
                 />
@@ -29,15 +37,8 @@
             <ScrollButtons />
         </div>
 
-        <TableMobile 
-            v-else 
-            :slug="props.slug"
-            :isTrash="props.isTrash"
-            @callAction="(data) => callAction(data)"
-        />
-
         <TableFooter 
-            @callAction="(data) => emit('callAction', data)"
+            @callAction="(data) => callAction(data)"
         />
 
         <SectionActions 
@@ -54,7 +55,7 @@
 <script setup>
     import './AppTable.scss';
     
-    import { ref, onMounted, provide } from 'vue'
+    import { ref, onMounted, provide, watch } from 'vue'
 
     import _ from 'lodash'
     import TableTop from './Top/Top.vue'
@@ -79,6 +80,7 @@
     const tableRef = ref(null)
     const sectionRef = ref(null)
 
+    let isMobile = ref(false)
     let updatedRows = ref([])
     let invalidRows = ref([])
     let selectAll = ref(false)
@@ -156,44 +158,25 @@
     })
 
     const props = defineProps({
-        tableKeys: {
-            default: [
-                {
-                    id: 0,
-                    index: 0,
-                    key: "key",
-                    title: null,
-                    type: "text",
-                    width: "0px",
-                    fixed: false,
-                    enabled: true,
-                    sort_order: null
-                }
-            ],
-            type: Array
-        },
-        tableData: {
-            default: [],
-            type: Array
-        },
-        tableFooter: {
+        table: {
             default: {
-                pages: 0,
-                activePage: 0,
-                count: 25
+                tableKeys: [],
+                tableData: [],
+                tableFooter: {
+                    pages: 0,
+                    activePage: 0,
+                    count: 25
+                },
+                loaderState: null
             },
             type: Object
-        },
-        loaderState: {
-            default: null,
-            type: String
         },
         isTrash: {
             default: false,
             type: Boolean
         },
         slug: {
-            default: '',
+            default: 'undefined',
             type: String
         }
     })
@@ -217,13 +200,32 @@
     provide('scrollPosition', scrollPosition)
     
     onMounted(async () => {
-        footerData.value = JSON.parse(JSON.stringify(props.tableFooter))
-        fields.value = JSON.parse(JSON.stringify(props.tableKeys))
-        bodyData.value = JSON.parse(JSON.stringify(props.tableData))
+        isMobile.value = window.innerWidth <= 660
+        window.addEventListener('resize', checkingWindowWidth);
+
+        console.log('tableKeys', props.table.tableKeys);
+        console.log('tableData', props.table.tableData);
+        footerData.value = JSON.parse(JSON.stringify(props.table.tableFooter))
+        fields.value = callAction({action: 'setPropsValues', value: props.table.tableKeys})
+        bodyData.value = callAction({action: 'setPropsValues', value: props.table.tableData})
     })
+
+    // Проверка был ли уменьшен размер окна
+    const checkingWindowWidth = _.throttle(() => {
+        isMobile.value = window.innerWidth <= 660
+    }, 100)
 
     // Вызов действия в таблице
     const callAction = (data) => {
+        // Установка значений по умолчанию
+        const setPropsValues = (data) => {
+            if ([null, undefined].includes(data) || !Array.isArray(data)) {
+                return []
+            } else {
+                return JSON.parse(JSON.stringify(data.filter(p => ![null, undefined].includes(p) && typeof p == 'object' && !Array.isArray(p))))
+            }
+        }
+
         // Редактирование строк
         const editRows = () => {
             actionState.value = 'saving'
@@ -435,7 +437,19 @@
             }
         }
 
+        // Получить данные таблицы
+        const getTableData = () => {
+            emit('callAction', {action: 'getTableData', value: {
+                sortItem: sortItem.value,
+                footerData: footerData.value
+            }})
+        }
+
         switch (data.action) {
+            // Установка значений по умолчанию
+            case 'setPropsValues':
+                return setPropsValues(data.value)
+
             // Редактирование полей
             case 'edit':
                 editRows()
@@ -476,9 +490,21 @@
                 socketUpdate()
                 break;
 
+            // Получение информации для тела таблицы
+            case 'getTableData':
+                getTableData()
+                break;
+
             default:
                 emit('callAction', data)
                 break;
         }
     }
+
+    watch(() => props.table.tableData, () => {
+        footerData.value = JSON.parse(JSON.stringify(props.table.tableFooter))
+        bodyData.value = callAction({action: 'setPropsValues', value: props.table.tableData})
+    }, {
+        deep: true
+    })
 </script>

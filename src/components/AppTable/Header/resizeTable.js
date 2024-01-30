@@ -2,7 +2,7 @@ import _ from 'lodash'
 
 export default {
     // Ресайз таблицы
-    resizableGrid(table) {
+    resizableGrid(table, fields) {
         // Установка слушателей на движение мышкой с бордером
         const setListeners = (div) => {
             let info = {
@@ -106,6 +106,7 @@ export default {
         if (!cols) return;
     
         setFixedCellsWidth(table)
+        this.setDefaultWidth(cols, fields)
         this.setCellsWidth(table)
     
         if (tableHeader.offsetWidth + 10 <= sectionBody.offsetWidth) {
@@ -146,6 +147,17 @@ export default {
                 }
             }
         }
+    },
+
+    // Установить значения ширин при импорте
+    setDefaultWidth(cells, fields) {
+        let width = null
+
+        for (let cell of cells) {
+            width = fields.find(p => p.key == cell.getAttribute('data-key')).width
+            setCellWidth(cell, width)
+            setVisibleTitle(cell)    
+        }
     }
 }
 
@@ -164,7 +176,6 @@ const onMouseMoveThrottle = _.throttle(async function (table, tableHeader, secti
         rowFields = row.querySelectorAll('.table__item')
         setCellWidth([...rowFields][info.index], width)
     });
-
 
     if (table.offsetWidth <= sectionBody.offsetWidth) {
         setCellsWidthDefference(tableHeader, sectionBody)

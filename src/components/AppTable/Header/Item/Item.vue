@@ -44,7 +44,7 @@
 
             <div 
                 class="table-item__drag-area"
-                :draggable="true"
+                :draggable="!props.headerRef.parentNode.classList.contains('table_resizing')"
                 @dragover.prevent
                 @dragenter.prevent
                 @dragstart="(event) => $emit('dragStart', event)"
@@ -117,6 +117,11 @@
                 }
                 menu.value.saves.isShow = true
                 footerData.value.activePage = 1
+          
+                emit('callAction', {
+                    action: 'getTableData',
+                    value: null
+                })
             }
             window.getSelection().empty();
             clearTimeout(clickSetting.value.timer);  

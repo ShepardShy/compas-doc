@@ -8,7 +8,6 @@
                 :data-key="item.key"
                 :isTrash="props.isTrash"
                 :class="[item.fixed ? 'table__item_fixed' : '', !item.enabled ? 'table__item_hidden' : '', item.required ? 'table__item_required' : '', item.read_only ? 'table__item_readonly' : '']" 
-                :style="`--defaultWidth: ${item.width};`"
                 @dragStart="(event) => dragColumn({action: 'dragStart', value: {event, key: item.key}})"
                 @dragEnd="() => dragColumn({action: 'dragEnd', value: null})"
             />
@@ -167,6 +166,11 @@
             document.removeEventListener("dragover", onMouseMove);
             menu.value.saves.isShow = true
             tableRef.value.closest(".section__table").style.removeProperty("overflow")
+            
+            setTimeout(() => {
+                let cells = headerRef.value.querySelector('tr').children
+                resizeTable.setDefaultWidth(cells, fields.value)
+            }, 10);
         }
 
         // Создание колонки для дататрансфера
@@ -246,7 +250,7 @@
 
     onMounted(() => {
         setTimeout(() => {
-            resizeTable.resizableGrid(tableRef.value)
+            resizeTable.resizableGrid(tableRef.value, fields.value)
             tableRef.value.parentNode.addEventListener('scroll', scrollTable)
             document.addEventListener('mouseup', updateTableHeader)
             document.addEventListener('mousedown', (e) => {

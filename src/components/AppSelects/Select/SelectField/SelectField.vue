@@ -1,5 +1,5 @@
 <template>
-    <div class="form-item__value form-item__value_multiply" :class="activeOptions == null || activeOptions.length == 0 ? 'form-item__value_empty' : ''" v-if="props.isMultiply && props.isReadOnly">
+    <div class="form-item__value form-item__value_multiply" :class="activeOptions == null || activeOptions.length == 0 ? 'form-item__value_empty' : ''" v-if="props.isMultiple && props.isReadOnly">
         <div class="select__active-option-tab" v-for="tab in activeOptions">
             {{ tab.label }}
         </div>
@@ -17,7 +17,7 @@
         class="select__popup" 
         :closeByClick="false" 
         ref="popupRef" 
-        :class="props.isMultiply ? 'select__popup_multiply' : ''"
+        :class="props.isMultiple ? 'select__popup_multiply' : ''"
         :isReadOnly="props.isReadOnly"
         @click="(event) => props.isReadOnly ? event.preventDefault() : null"
         @clickOutside="() => emit('clickOutside', true)"
@@ -42,8 +42,8 @@
                 @mousedown="(event) => props.isReadOnly ? event.preventDefault() : callAction({action: 'showContent', value: true})"
                 @keydown.space="(event) => {event.preventDefault(); callAction({action: 'searchOptions', value: event.target.value + ' '})}"
             > 
-                <div class="select__active-option active-option" v-show="!props.isReadOnly && (props.isMultiply || ([null, undefined].includes(search) || search == ''))">
-                    <template v-if="props.isMultiply && activeOptions != null">
+                <div class="select__active-option active-option" v-show="!props.isReadOnly && (props.isMultiple || ([null, undefined].includes(search) || search == ''))">
+                    <template v-if="props.isMultiple && activeOptions != null">
                         <div class="select__active-option-tab" v-for="tab in activeOptions">
                             {{ tab.label }}
 
@@ -72,7 +72,7 @@
             </AppInput>
         </template>
         <template #content>
-            <PopupOption v-show="props.isHaveNullOption & !props.isMultiply || options.length == 0" @click="() => callAction({action: 'changeValue', value: null})">
+            <PopupOption v-show="props.isHaveNullOption & !props.isMultiple || options.length == 0" @click="() => callAction({action: 'changeValue', value: null})">
                 Не выбрано
             </PopupOption>
             <PopupOption 
@@ -118,7 +118,7 @@
             default: false,
             type: Boolean
         },
-        isMultiply: {
+        isMultiple: {
             default: false,
             type: Boolean
         },
@@ -149,15 +149,15 @@
     let search = ref(null)
     let backupOptions = ref([])
     let multiplyValues = ref([])
-    let activeOptions = ref(null)
+    let activeOptions = ref(props.isMultiple ? [] : nullOption)
 
     // Действия с автокомплитом
-    const callAction = (data) => {
+    const callAction = async (data) => {
         // Открытие/скрытие всплывающего окна
         const showContent = (state) => {
             if (state) {
                 setTimeout(() => {
-                    if (props.isMultiply) {
+                    if (props.isMultiple) {
                         mirrorRef.value.focus()
                     } else {
                         inputRef.value.inputRef.inputRef.focus()
@@ -169,7 +169,7 @@
         }
 
         // Получение опций
-        const getOptions = () => {
+        const getOptions = async () => {
             // Проверка на пустой объект
             const isEmpty = (obj) => {
                 for (const prop in obj) {
@@ -180,12 +180,12 @@
                 return true;
             }
 
-            let localOptions = props.item.options == null ? [] : props.item.options.filter(p => p != null && typeof p == 'object' && !Array.isArray(p) && !isEmpty(p)).sort((prev, next) => prev.label.sort - next.label.sort)
+            let localOptions = props.item.options == null ? [] : props.item.options.filter(p => p != null && typeof p == 'object' && !Array.isArray(p) && !isEmpty(p))
             options.value = JSON.parse(JSON.stringify(localOptions))
         }
 
         // Установка выбранной опции
-        const setActiveOptions = (value) => {
+        const setActiveOptions = async (value) => {
             search.value = ''
 
             // Нахождение выбранной опции
@@ -198,7 +198,7 @@
                 }
             }
 
-            if (props.isMultiply) {
+            if (props.isMultiple) {
                 let data = []
 
                 for (let item of multiplyValues.value) {
@@ -221,9 +221,12 @@
         const changeValue = (value, event = null) => {
             if (value == null || (![null, undefined].includes(props.item.lockedOptions) && !props.item.lockedOptions.includes(value))) {
                 search.value = null
-                options.value = backupOptions.value
+
+                if (props.isFiltered) {
+                    options.value = backupOptions.value
+                }
                 
-                if (props.isMultiply) {
+                if (props.isMultiple) {
                     if (multiplyValues.value.includes(value)) {
                         multiplyValues.value = multiplyValues.value.filter(option => option != value)
                         showContent(true)
@@ -261,7 +264,7 @@
 
             // Установка выбранной опции
             case 'setActiveOptions':
-                setActiveOptions(data.value)
+                await setActiveOptions(data.value)
                 break;
 
             // Поиск опций
@@ -276,7 +279,7 @@
 
             // Получение опций
             case 'getOptions': 
-                getOptions()
+                await getOptions()
                 break;
 
             default:
@@ -284,14 +287,14 @@
         }
     }
 
-    onMounted(() => {
-        callAction({
+    onMounted(async () => {
+        await callAction({
             action: 'getOptions',
             value: null
         })
         backupOptions.value = JSON.parse(JSON.stringify(options.value))
 
-        if (props.isMultiply) {
+        if (props.isMultiple) {
             if ([null, undefined].includes(props.item.value) || typeof props.item.value == 'string') {
                 multiplyValues.value = []
             } else {
@@ -299,7 +302,7 @@
             }
         }
 
-        callAction({
+        await callAction({
             action: 'setActiveOptions',
             value: props.item.value
         })
@@ -313,7 +316,7 @@
     })
 
     watch(() => props.item.value, () => {
-        if (props.isMultiply) {
+        if (props.isMultiple) {
             if ([null, undefined].includes(props.item.value) || typeof props.item.value == 'string') {
                 multiplyValues.value = []
             } else {

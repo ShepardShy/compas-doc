@@ -20,6 +20,7 @@
                     }"
                     :disabled="actionState == 'saving'"
                     @changeValue="(data) => changeValue(props.row.id, data)"
+                    @clickOutside="() => callAction({action: 'openPopup', value: false})"
                 />
                 <AppRelation 
                     v-else-if="props.item.type == 'relation'"
@@ -42,6 +43,7 @@
                     @openLink="(data) => callAction({action: 'openLink', value: {id: data.id, slug: props.item.related_table}})"
                     @showAll="() => callAction({action: 'openLink', value: {id: props.row.id, slug: props.slug, tab: props.item.related_table}})"
                     @createOption="() => emit('callAction', {action: 'createOption', value: props.item.related_table})"
+                    @clickOutside="() => callAction({action: 'openPopup', value: false})"
                 />
                 <AppTextarea 
                     v-else-if="['number', 'password', 'text'].includes(props.item.type)"
@@ -63,6 +65,7 @@
                     :isLink="Boolean(props.item.is_external_link)"
                     :isReadOnly="Boolean(props.item.read_only || !props.row.isEdit)"
                     @changeValue="(data) => changeValue(props.row.id, data)"
+                    @clickOutside="() => callAction({action: 'openPopup', value: false})"
                 />
                 <FormValue 
                     v-else-if="item.type == 'json'"
@@ -73,9 +76,13 @@
                 />
                 <AppActions 
                     v-else-if="item.type == 'actions'"
-                    :slug="props.row.isEdit ? 'edit' : 'view'"
+                    :item="{
+                        title: 'Действие',
+                        slug: props.row.isEdit ? 'edit' : 'view'
+                    }"
                     :disabled="!props.row.isChoose && actionState == 'saving'"
-                    @callAction="(data) => callAction(data)"
+                    @clickOutside="() => callAction({action: 'openPopup', value: false})"
+                    @callAction="(data) => callAction({action: data.value, value: row})"
                 />
                 <AppStatus 
                     v-else-if="props.item.type == 'status'"
@@ -109,7 +116,7 @@
                     }"
                     :isReadOnly="Boolean(props.item.read_only || !props.row.isEdit)"
                     :isHaveNullOption="true"
-                    :isMultiply="Boolean(props.item.is_plural)"
+                    :isMultiple="Boolean(props.item.is_plural)"
                     :isFiltered="true"
                     @click="() => callAction({action: 'openPopup', value: true})"
                     @clickOutside="() => callAction({action: 'openPopup', value: false})"
@@ -235,8 +242,8 @@
         }
        
         // Редактирование строки
-        const editRow = () => {
-            let findedIndex = bodyData.value.findIndex(row => row.id == props.row.id)
+        const editRow = (value) => {
+            let findedIndex = bodyData.value.findIndex(row => row.id == value.id)
             backupValues.value.push(JSON.parse(JSON.stringify(bodyData.value[findedIndex])))
             bodyData.value[findedIndex].isEdit = true
             bodyData.value[findedIndex].isChoose = true
@@ -264,7 +271,7 @@
 
             // Редактирование строки
             case 'edit':
-                editRow()
+                editRow(data.value)
                 break;
 
             // Открытие ссылки
@@ -278,7 +285,7 @@
                 break;
 
             default:
-                emit('callAction', {action: data.value, value: props.row})
+                emit('callAction', {action: data.action, value: data.value})
                 break;
         }
     }
