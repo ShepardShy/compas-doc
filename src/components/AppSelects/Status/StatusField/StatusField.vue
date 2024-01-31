@@ -17,7 +17,12 @@
                 Не выбрано
             </PopupOption>
 
-            <PopupOption v-show="!colorPicker.state" v-for="option in visibileOptions" @click="() => changeValue(option)">
+            <PopupOption 
+                v-show="!colorPicker.state" 
+                v-for="option in visibileOptions" 
+                :class="activeOption != null && activeOption.id == option.value ? 'popup__option_active' : ''" 
+                @click="() => changeValue(option)"
+            >
                 <StatusOption 
                     :option="option.label"
                 />

@@ -50,6 +50,12 @@
             filter: opacity(0.5);
         }        
 
+        .popup__option_active {
+            .popup-option__text {
+                filter: opacity(0.5);
+            }
+        }
+
         &.select__popup_multiply {
             .popup__summary {
                 @include mixins.borderOptions(1px, solid, variables.$color-blue, 5px);
@@ -60,20 +66,14 @@
             }     
         }
 
-        .popup__summary {
-            margin-bottom: 5px;
+        .popup__content {
+            margin-top: 5px;
         }
     }
 
     &.select__popup_multiply {
         .popup__summary {
             @include mixins.borderOptions(1px, solid, variables.$color-grey, 5px);
-        }
-
-        .popup__option_active {
-            .popup-option__text {
-                filter: opacity(0.5);
-            }
         }
     
         .select__active-option {
