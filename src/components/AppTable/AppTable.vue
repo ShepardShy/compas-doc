@@ -202,9 +202,6 @@
     onMounted(async () => {
         isMobile.value = window.innerWidth <= 660
         window.addEventListener('resize', checkingWindowWidth);
-
-        console.log('tableKeys', props.table.tableKeys);
-        console.log('tableData', props.table.tableData);
         footerData.value = JSON.parse(JSON.stringify(props.table.tableFooter))
         fields.value = callAction({action: 'setPropsValues', value: props.table.tableKeys})
         bodyData.value = callAction({action: 'setPropsValues', value: props.table.tableData})
