@@ -12,6 +12,7 @@
         </a>
 
         <Details
+            v-if="!props.isOneFile"
             :id="props.id"
             :image="props.image"
             @callAction="(data) => emit('callAction', data)"
@@ -29,7 +30,7 @@
 <script setup>
     import './Image.scss';
 
-    import {computed} from "vue";
+    import {computed, onMounted} from "vue";
 
     import Details from './Details/Details.vue';
     import LoaderProgress from "@/components/AppIcons/LoaderProgress/LoaderProgress.vue";
@@ -51,6 +52,10 @@
                 extension: "png"
             },
             type: Object
+        },
+        isOneFile: {
+            default: false,
+            type: Boolean
         },
         loading: {
             default: false,

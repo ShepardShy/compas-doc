@@ -65,44 +65,36 @@
     const uploadFile = async (data, id) => {
         UploadScripts(id, values, 'ready');
 
-        try {
-            const ajax = new XMLHttpRequest();
-            const localItem = values.value.find(item => item.id == id)
+        const ajax = new XMLHttpRequest();
+        const localItem = values.value.find(item => item.id == id)
 
-            // Событие процесса загрузки файла
-            ajax.upload.onprogress = function(event) {
-                if (event.lengthComputable) {
-                    localItem.progress = (event.loaded / event.total) * 100;
-                } else {
-                    console.log('error', 'lengthComputable = ', event.lengthComputable);
-                }
-            };
+        // Событие процесса загрузки файла
+        ajax.upload.onprogress = function(event) {
+            localItem.progress = (event.loaded / event.total) * 100;
+        };
 
-            // Событие окончания загрузки файла
-            ajax.onloadend = function() {
-                if (ajax.status == 200) {
-                    const responseObj = JSON.parse(ajax.response)[0];
+        // Событие окончания загрузки файла
+        ajax.onloadend = function() {
+            try {
+                const responseObj = JSON.parse(ajax.response)[0];
 
-                    localItem.status = 'success';
-                    localItem.extension = responseObj.file.extension;
-                    localItem.file = responseObj.file.file;
-                    localItem.id = responseObj.file.id;
-                    localItem.name = responseObj.file.name;
-                    localItem.sort = responseObj.file.sort;
-                    localItem.url = responseObj.file.url;
-                } else {
-                    UploadScripts(id, values, 'fail');
-                    console.log('error', ajax.response);
-                }
-            };
+                localItem.status = 'success';
+                localItem.extension = responseObj.file.extension;
+                localItem.file = responseObj.file.file;
+                localItem.id = responseObj.file.id;
+                localItem.name = responseObj.file.name;
+                localItem.sort = responseObj.file.sort;
+                localItem.url = responseObj.file.url;
+            } catch (error) {
+                UploadScripts(id, values, 'fail');
+                console.log('error', error);
+            }
+        };
 
-            ajax.open('POST', 'https://opt6.compas.pro/api/files/store', true);
+        ajax.open('POST', 'https://opt6.compas.pro/api/files/store', true);
 
-            ajax.setRequestHeader("Authorization", `Bearer ${import.meta.env.VITE_USER_TOKEN}`);
+        ajax.setRequestHeader("Authorization", `Bearer ${import.meta.env.VITE_USER_TOKEN}`);
 
-            ajax.send(data);
-        } catch (error) {
-            console.log(error);
-        }
+        ajax.send(data);
     }
 </script>

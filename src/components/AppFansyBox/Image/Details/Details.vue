@@ -4,7 +4,7 @@
             <IconDots />
         </template>
         <template #content>
-            <PopupOption :data-fancybox="`galleryClick_${props.id}`" :href="props.image.file">
+            <PopupOption v-if="findImage" :data-fancybox="`galleryDetails_${props.id}`" :href="props.image.file">
                 Посмотреть
             </PopupOption>
             <PopupOption @click="() => callAction('downloadFile')">
@@ -23,6 +23,8 @@
     import IconDots from '@/components/AppIcons/Dots/Dots.vue'
     import PopupOption from "@/components/AppPopup/PopupOption/PopupOption.vue";
     import AppPopup from "@/components/AppPopup/Popup.vue";
+    import {computed, onMounted, ref} from "vue";
+    import {Fancybox} from "@fancyapps/ui";
 
     const emit = defineEmits([
         'callAction'
@@ -86,4 +88,7 @@
         }
     }
 
+    const findImage = computed(() => {
+        return ['png', 'svg', 'jpeg', 'jpg', 'webp', 'pdf', 'gif'].includes(props.image.extension)
+    })
 </script>

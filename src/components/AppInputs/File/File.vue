@@ -4,7 +4,7 @@
         :required="props.item.required"
     >
         <FormLabel
-            v-show="props.item.title != null && props.item.title != ''"
+            v-show="(props.item.title != null && props.item.title != '') && !props.item.is_one_file"
             :title="props.item.title"
         />
 
@@ -38,10 +38,6 @@
             },
             type: Object
         },
-        disabled: {
-            default: false,
-            type: Boolean
-        },
         isReadOnly: {
             default: false,
             type: Boolean
@@ -53,6 +49,8 @@
     ])
 
     const isReadOnly = ref(props.isReadOnly)
+
+    console.log('props.item', Object.assign({}, props.item))
 
     provide('isReadOnly', isReadOnly)
 </script>

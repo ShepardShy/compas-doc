@@ -8,6 +8,7 @@
             "required": false,
             "button_name": "Загрузить",
             "is_multiple": true,
+            "is_one_file": false,
             "value": [
                 {
                     "id": 1696445350884,

@@ -2,12 +2,47 @@
 @use '@/assets/mixins' as mixins;
 
 .file {
-    .file__container {
-        &.file__container_empty {
+    .file-container {
+        &.file-container_empty {
             &::after {
                 content: 'не заполнено';
                 color: variables.$color-grey;
             }
+        }
+
+        &.file-container_one-file {
+            @include mixins.flexBlock($vertical: center, $gap: 5px);
+
+            .file-container__circle {
+                display: grid;
+            }
+
+            .file-list {
+                align-items: center;
+
+                .file-list__item {
+                    &:not(:first-child) {
+                        display: none;
+                    }
+
+                    .fancybox-item__title {
+                        display: none !important;
+                    }
+                }
+            }
+        }
+
+        .file-container__circle {
+            display: none;
+            opacity: 0.6;
+            background-color: variables.$color-blue-grey;
+            place-items: center;
+            padding: 3px;
+            color: variables.$color-white;
+            border-radius: 50%;
+            min-width: 21px;
+            font-size: variables.$font-size-label;
+            @include mixins.elemResolutionOptions(21px, 21px);
         }
     }
 
