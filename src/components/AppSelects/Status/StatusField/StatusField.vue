@@ -48,7 +48,7 @@
 
     import { ref, onMounted, watch } from 'vue'
 
-    import elementsDOM from '@/scripts/elementsDOM'
+    import popupScripts from '@/components/AppPopup/Scripts.js';
     import AppPopup from '@/components/AppPopup/Popup.vue';
     import StatusOption from '../StatusOption/StatusOption.vue';
     import IconArrow from '@/components/AppIcons/Arrow/Arrow.vue';
@@ -177,7 +177,7 @@
 
             createHiddenOption()
             toggleColorPicker(false)
-            elementsDOM.hideDetails(popupRef.value.popupRef)
+            popupScripts.hideDetails(popupRef.value.popupRef)
         }
 
         switch (data.action) {
@@ -203,7 +203,7 @@
     // Изменение значения
     const changeValue = (option) => {
         activeOption.value = option == null ? null : option.label
-        elementsDOM.hideDetails(popupRef.value.popupRef)
+        popupScripts.hideDetails(popupRef.value.popupRef)
         emit('changeValue', {key: props.item.key, value:  option == null ? null : option.value})
     }
 

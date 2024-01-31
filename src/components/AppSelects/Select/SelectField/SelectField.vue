@@ -219,7 +219,7 @@
 
         // Изменить значение поля
         const changeValue = (value, event = null) => {
-            if (value == null || (![null, undefined].includes(props.item.lockedOptions) && !props.item.lockedOptions.includes(value))) {
+            if (value == null || (![null, undefined].includes(props.item.lockedOptions) ? !props.item.lockedOptions.includes(value) : true)) {
                 search.value = null
 
                 if (props.isFiltered) {
