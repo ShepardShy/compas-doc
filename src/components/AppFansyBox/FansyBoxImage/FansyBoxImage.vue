@@ -11,7 +11,7 @@
             />
         </a>
 
-        <Details
+        <FansyBoxImageDetails
             v-if="!props.isOneFile"
             :id="props.id"
             :image="props.image"
@@ -28,21 +28,17 @@
 </template>
 
 <script setup>
-    import './Image.scss';
+    import './FansyBoxImage.scss';
 
-    import {computed, onMounted} from "vue";
+    import {computed} from "vue";
 
-    import Details from './Details/Details.vue';
+    import FansyBoxImageDetails from './FansyBoxImageDetails/FansyBoxImageDetails.vue';
     import LoaderProgress from "@/components/AppIcons/LoaderProgress/LoaderProgress.vue";
     
     const props = defineProps({
         id: {
             default: 0,
             type: Number
-        },
-        isShowFileName: {
-            default: false,
-            type: Boolean
         },
         image: {
             default: {
@@ -54,6 +50,10 @@
             type: Object
         },
         isOneFile: {
+            default: false,
+            type: Boolean
+        },
+        isShowFileName: {
             default: false,
             type: Boolean
         },
@@ -91,7 +91,7 @@
 
     // Задаем ссылку
     const setHref = computed(() => {
-        return ['png', 'svg', 'jpeg', 'jpg', 'webp', 'pdf', 'gif', 'mp4', 'mov', 'mp3'].includes(props.image.extension) ? props.image.file : props.image.preview
+        return ['png', 'svg', 'jpeg', 'jpg', 'webp', 'pdf', 'gif', 'mp4', 'mp3'].includes(props.image.extension) ? props.image.file : props.image.preview
     })
 
     // Проверка блока на состояние перетаскивания

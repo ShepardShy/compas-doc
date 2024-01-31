@@ -58,7 +58,7 @@
     }
 
     svg {
-        g {
+        * {
             fill: variables.$color-active;
         }
     }

@@ -4,11 +4,8 @@
             "id": 0,
             "title": "Фото",
             "key": "photo",
-            "show_file_name": true,
             "required": false,
-            "button_name": "Загрузить",
-            "is_multiple": true,
-            "is_one_file": false,
+            "buttonName": "Загрузить",
             "value": [
                 {
                     "id": 1696445350884,
@@ -35,7 +32,19 @@
         }
     },
     "isReadOnly": {
+        "default": false,
+        "type": "Boolean"
+    },
+    "isShowFileName": {
         "default": true,
+        "type": "Boolean"
+    },
+    "isMultiple": {
+        "default": true,
+        "type": "Boolean"
+    },
+    "isOneFile": {
+        "default": false,
         "type": "Boolean"
     }
 }

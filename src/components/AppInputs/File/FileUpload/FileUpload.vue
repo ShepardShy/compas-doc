@@ -7,11 +7,11 @@
             type="file"
             class="file-upload__input"
             :multiple="props.isMultiple"
+            :title="props.buttonTitle"
             @dragover="dragover = true"
             @dragenter="dragover = true"
             @dragleave="dragover = false"
-            @change="(event) => changeValue(event)"
-            :title="props.buttonTitle"
+            @change="(event) => addFiles(event)"
         >
 
         <div class="file-upload__button">
@@ -24,11 +24,9 @@
 </template>
 
 <script setup>
-    import './Upload.scss';
+    import './FileUpload.scss';
 
     import {inject, ref} from "vue";
-
-    import UploadScripts from './UploadScripts.js'
 
     import LoadFile from "@/components/AppIcons/LoadFile/LoadFile.vue";
     import Input from "@/components/AppAutocomplete/Input/Input.vue";
@@ -44,11 +42,15 @@
         }
     })
 
+    const emit = defineEmits([
+        'callAction'
+    ])
+
     const dragover = ref(false)
     const values = inject('values')
 
     // Добавление файлов
-    const changeValue = (event) => {
+    const addFiles = (event) => {
         dragover.value = false
 
         event.target.files.forEach(async (file) => {
@@ -63,12 +65,12 @@
 
     // Загрузка файлов
     const uploadFile = async (data, id) => {
-        UploadScripts(id, values, 'ready');
+        emit('callAction', { action: 'preAddImage', value: id })
 
         const ajax = new XMLHttpRequest();
         const localItem = values.value.find(item => item.id == id)
 
-        // Событие процесса загрузки файла
+        // Отслеживание прогресса загрузки файла
         ajax.upload.onprogress = function(event) {
             localItem.progress = (event.loaded / event.total) * 100;
         };
@@ -78,15 +80,9 @@
             try {
                 const responseObj = JSON.parse(ajax.response)[0];
 
-                localItem.status = 'success';
-                localItem.extension = responseObj.file.extension;
-                localItem.file = responseObj.file.file;
-                localItem.id = responseObj.file.id;
-                localItem.name = responseObj.file.name;
-                localItem.sort = responseObj.file.sort;
-                localItem.preview = responseObj.file.preview;
+                emit('callAction', { action: 'addImage', value: { id: id, image: responseObj.file } })
             } catch (error) {
-                UploadScripts(id, values, 'fail');
+                emit('callAction', { action: 'deleteImage', value: id })
                 console.log('error', error);
             }
         };

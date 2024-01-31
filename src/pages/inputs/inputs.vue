@@ -4,6 +4,7 @@
         :component="AppFile"
         :codeProps="FileProps"
         :codeEmits="FileEmits"
+        @changeValue="(data) => changeValueFile(data)"
     />
 
     <AppComponent
@@ -58,6 +59,10 @@
     const changeValue = (data) => {
         InputProps.item.default.value = data.value
         console.log(data);
+    }
+
+    const changeValueFile = (data) => {
+        FileProps.isReadOnly = false
     }
 
 </script>

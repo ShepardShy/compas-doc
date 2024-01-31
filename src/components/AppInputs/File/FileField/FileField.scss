@@ -26,7 +26,7 @@
                     }
 
                     .fancybox-item__title {
-                        display: none !important;
+                        display: none;
                     }
                 }
             }
@@ -52,7 +52,7 @@
 
         .file-list__item {
             position: relative;
-            @include mixins.sortableGhost;
+            @include mixins.sortableGhost();
             @include mixins.flexColumn();
 
             &.sortable-ghost {

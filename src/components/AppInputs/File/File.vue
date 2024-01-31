@@ -4,13 +4,16 @@
         :required="props.item.required"
     >
         <FormLabel
-            v-show="(props.item.title != null && props.item.title != '') && !props.item.is_one_file"
+            v-show="props.item.title != null && props.item.title != ''"
             :title="props.item.title"
         />
 
-        <Field
+        <FileField
             :item="props.item"
-            :isReadOnly="isReadOnly"
+            :isReadOnly="props.isReadOnly"
+            :isShowFileName="props.isShowFileName"
+            :isMultiple="props.isMultiple"
+            :isOneFile="props.isOneFile"
             @changeValue="(data) => emit('changeValue', data)"
         />
     </FormItem>
@@ -21,8 +24,7 @@
 
     import FormItem from "@/components/AppForm/FormItem/FormItem.vue";
     import FormLabel from "@/components/AppForm/FormLabel/FormLabel.vue";
-    import Field from './Field/Field.vue'
-    import {provide, ref} from "vue";
+    import FileField from './FileField/FileField.vue'
 
     const props = defineProps({
         item: {
@@ -34,7 +36,7 @@
                 required: false,
                 focus: true,
                 value: null,
-                button_name: "",
+                buttonName: "",
             },
             type: Object
         },
@@ -42,15 +44,21 @@
             default: false,
             type: Boolean
         },
+        isShowFileName: {
+            default: false,
+            type: Boolean
+        },
+        isMultiple: {
+            default: false,
+            type: Boolean
+        },
+        isOneFile: {
+            default: false,
+            type: Boolean
+        }
     })
 
     const emit = defineEmits([
         'changeValue'
     ])
-
-    const isReadOnly = ref(props.isReadOnly)
-
-    console.log('props.item', Object.assign({}, props.item))
-
-    provide('isReadOnly', isReadOnly)
 </script>
