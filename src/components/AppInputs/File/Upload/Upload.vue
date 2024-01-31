@@ -84,7 +84,7 @@
                 localItem.id = responseObj.file.id;
                 localItem.name = responseObj.file.name;
                 localItem.sort = responseObj.file.sort;
-                localItem.url = responseObj.file.url;
+                localItem.preview = responseObj.file.preview;
             } catch (error) {
                 UploadScripts(id, values, 'fail');
                 console.log('error', error);
