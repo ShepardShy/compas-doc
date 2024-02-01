@@ -27,6 +27,7 @@
     import './FileUpload.scss';
 
     import {inject, ref} from "vue";
+    import {toast} from 'vue3-toastify';
 
     import LoadFile from "@/components/AppIcons/LoadFile/LoadFile.vue";
     import Input from "@/components/AppAutocomplete/Input/Input.vue";
@@ -54,6 +55,11 @@
         dragover.value = false
 
         event.target.files.forEach(async (file) => {
+            if (!['png', 'svg', 'jpeg', 'jpg', 'webp', 'pdf', 'gif', 'mp4'].includes(file.name.split('.').splice(-1)[0])) {
+                toast.error(`Формат файла ${file.name} не поддерживается`);
+                return
+            }
+
             const formData = new FormData()
             const id = new Date().getTime()
             formData.append('files[]', file)

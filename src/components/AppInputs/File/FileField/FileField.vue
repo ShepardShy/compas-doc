@@ -91,10 +91,6 @@
         }
     })
 
-    const findImage = (extension) => {
-        return ['png', 'svg', 'jpeg', 'jpg', 'webp', 'pdf', 'gif', 'mp4'].includes(extension)
-    }
-
     // Получение значении
     const getValues = () => {
         if ([null, undefined].includes(props.item.value) || !Array.isArray(props.item.value)) {
