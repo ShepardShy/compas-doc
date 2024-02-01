@@ -67,7 +67,7 @@
         'callAction'
     ])
 
-    // Задаем название файла
+    // Обработка название файла
     const setName = computed(() => {
         if (props.id != undefined && props.image.name != undefined) {
             let name = props.image.name
@@ -89,7 +89,7 @@
         }
     })
 
-    // Задаем ссылку
+    // Провекра расширения файла и возврат нужной ссылкы
     const setHref = computed(() => {
         return ['png', 'svg', 'jpeg', 'jpg', 'webp', 'pdf', 'gif', 'mp4', 'mp3'].includes(props.image.extension) ? props.image.file : props.image.preview
     })
@@ -103,7 +103,7 @@
         }
     }
 
-    // Задаем прогресс загрузки
+    // Высчитывание прогресса загрузки
     const progressImage = computed(() => {
         return props.image.progress ? 62.8 - props.image.progress / 100 * 62.8 : 62.8
     })

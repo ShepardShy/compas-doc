@@ -30,7 +30,7 @@
                 />
 
                 <FileUpload
-                    v-else-if="!props.isReadOnly && !props.isOneFile"
+                    v-else-if="!props.isReadOnly"
                     :buttonTitle="props.item.buttonName"
                     :isMultiple="props.isMultiple"
                     @callAction="(data) => callAction(data)"
@@ -38,8 +38,8 @@
             </template>
         </draggable>
 
-        <div class="file-container__circle">
-            {{ values.length }}
+        <div class="file-container__circle" v-if="props.isOneFile && props.isReadOnly && values.length > 1">
+            {{ values.length - 1 }}
         </div>
     </FansyBox>
 </template>
@@ -48,6 +48,7 @@
     import './FileField.scss';
 
     import draggable from 'vuedraggable'
+    import {toast} from 'vue3-toastify';
     import {computed, provide, ref, watch} from "vue";
 
     import FansyBox from '@/components/AppFansyBox/FansyBox.vue';
@@ -112,9 +113,16 @@
 
     // Вызов деиствий и изменение значений
     const callAction = (data) => {
-        const currentImage = data ? values.value.find(item => item.id === data.value.id) : null
+        const supportedExtensions = ['png', 'svg', 'jpeg', 'jpg', 'webp', 'pdf', 'gif', 'mp4', 'xlsx', 'mp3', 'doc', 'docx', 'txt', 'pptx'];
 
-        const downloadFile = async (imageSrc, nameOfDownload = 'my-image.png') => {
+        // Скачивание файла
+        const downloadFile = async () => {
+            const imageSrc = data.value.file;
+            const nameOfDownload = [null, undefined].includes(data.value.name) || data.value.name !== '' ? data.value.name : 'my-image.png'
+
+            console.log('imageSrc', imageSrc)
+            console.log('nameOfDownload', nameOfDownload)
+
             try {
                 const response = await fetch(imageSrc, {
                     method: 'GET',
@@ -141,9 +149,10 @@
             }
         }
 
-        const preAddImage = () => {
+        // Добавление загружаемого изображения
+        const preAddImage = (id) => {
             const downloadingItem = {
-                id: data.value,
+                id: id,
                 name: "Загрузка",
                 preview: null,
                 file: null,
@@ -154,42 +163,85 @@
             values.value.splice(values.value.length - 1, 0, downloadingItem);
         }
 
-        const addImage = () => {
-            const image = data.value.image;
+        // Добавление успешно загруженного изображения
+        const addImage = (image, id) => {
+            const currentImage = values.value.find(item => item.id == id)
 
-            currentImage.status = 'success';
-            currentImage.extension = image.extension;
-            currentImage.file = image.file;
             currentImage.id = image.id;
             currentImage.name = image.name;
-            currentImage.sort = image.sort;
             currentImage.preview = image.preview;
+            currentImage.file = image.file;
+            currentImage.extension = image.extension;
+            currentImage.status = 'success';
         }
 
-        const deleteImage = () => {
-            values.value = values.value.filter(item => Object.keys(item).length === 0 || item.id !== data.value)
+        // Локальное удаление эллемента
+        const deleteImage = (id) => {
+            values.value = values.value.filter(item => Object.keys(item).length === 0 || item.id !== id)
+        }
+
+        // Загрузка файлов
+        const uploadFile = async (data, id) => {
+            preAddImage(id)
+
+            const ajax = new XMLHttpRequest();
+            const localItem = values.value.find(item => item.id == id)
+
+            // Отслеживание прогресса загрузки файла
+            ajax.upload.onprogress = function(event) {
+                localItem.progress = (event.loaded / event.total) * 100;
+            };
+
+            // Событие окончания загрузки файла
+            ajax.onloadend = function() {
+                try {
+                    const responseObj = JSON.parse(ajax.response)[0];
+                    addImage(responseObj.file, id);
+                } catch (error) {
+                    deleteImage(id)
+                    console.log('error', error);
+                }
+            };
+
+            ajax.open('POST', 'https://opt6.compas.pro/api/files/store', true);
+
+            ajax.setRequestHeader("Authorization", `Bearer ${import.meta.env.VITE_USER_TOKEN}`);
+
+            ajax.send(data);
+        }
+
+        // Добавление файлов
+        const addFiles = () => {
+            data.value.forEach(async (file) => {
+                if (!supportedExtensions.includes(file.name.split('.').splice(-1)[0])) {
+                    const shortName = file.name.slice(0, 9) + '...' + file.name.slice(file.name.length - 7)
+                    toast.error(`Формат файла ${shortName} не поддерживается`, {
+                        autoClose: 300000
+                    });
+                    return
+                }
+
+                const formData = new FormData()
+                const id = new Date().getTime()
+                formData.append('files[]', file)
+                formData.append('uid', id)
+
+                await uploadFile(formData, id)
+            })
         }
 
         if (data !== null) {
             switch (data.action) {
-                // Скачивание файла
+                case 'addFiles':
+                    addFiles();
+                    break;
+
                 case 'downloadFile':
-                    downloadFile(currentImage.file);
+                    downloadFile();
                     break;
 
-                // Добавление загружаемого изображения
-                case 'preAddImage':
-                    preAddImage();
-                    break;
-
-                // Добавление успешно загруженного изображения
-                case 'addImage':
-                    addImage();
-                    break;
-
-                // Локальное удаление эллемента
                 case 'deleteImage':
-                    deleteImage();
+                    deleteImage(data.value);
                     break;
 
                 default:

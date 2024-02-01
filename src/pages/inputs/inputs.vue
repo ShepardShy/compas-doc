@@ -58,11 +58,13 @@
     // Локальный вывод данных в консоль
     const changeValue = (data) => {
         InputProps.item.default.value = data.value
-        console.log(data);
+        console.log('data', data)
     }
 
+    // Локальный вывод данных в консоль
     const changeValueFile = (data) => {
-        FileProps.isReadOnly = false
+        // FileProps.isReadOnly = false
+        console.log('data', data)
     }
 
 </script>

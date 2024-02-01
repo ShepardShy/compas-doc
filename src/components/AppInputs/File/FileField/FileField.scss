@@ -6,16 +6,17 @@
         &.file-container_empty {
             &::after {
                 content: 'не заполнено';
+                position: relative;
                 color: variables.$color-grey;
+            }
+
+            &.file-container_one-file:after {
+                right: 5px;
             }
         }
 
         &.file-container_one-file {
             @include mixins.flexBlock($vertical: center, $gap: 5px);
-
-            .file-container__circle {
-                display: grid;
-            }
 
             .file-list {
                 align-items: center;
@@ -33,7 +34,7 @@
         }
 
         .file-container__circle {
-            display: none;
+            display: grid;
             opacity: 0.6;
             background-color: variables.$color-blue-grey;
             place-items: center;

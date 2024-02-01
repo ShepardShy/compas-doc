@@ -4,10 +4,10 @@
             <IconDots />
         </template>
         <template #content>
-            <PopupOption :data-fancybox="`galleryDetails_${props.id}`" :href="findImage ? props.image.file : props.image.preview">
+            <PopupOption :data-fancybox="`galleryDetails_${props.id}`" :href="checkExtension ? props.image.file : props.image.preview">
                 Посмотреть
             </PopupOption>
-            <PopupOption @click="() => emit('callAction', { action: 'downloadFile', value: props.image.id })">
+            <PopupOption @click="() => emit('callAction', { action: 'downloadFile', value: props.image })">
                 Скачать
             </PopupOption>
             <PopupOption class="popup__option_red" @click="() => emit('callAction', { action: 'deleteImage', value: props.image.id })">
@@ -45,7 +45,7 @@
         }
     })
 
-    const findImage = computed(() => {
+    const checkExtension = computed(() => {
         return ['png', 'svg', 'jpeg', 'jpg', 'webp', 'pdf', 'gif', 'mp4', 'mp3'].includes(props.image.extension)
     })
 </script>
