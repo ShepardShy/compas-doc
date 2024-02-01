@@ -3,7 +3,19 @@
         "default": {
             "id": 0,
             "title": "Заголовок",
-            "value": [null],
+            "value": {
+                "value": [null],
+                "localOptions": [{
+                    "label": {
+                        "id": 1,
+                        "sort": 0,
+                        "text": "Локальная опция 1",
+                        "color": "linear-gradient(to bottom, #90aeee 2%, #65dd78 100%)",
+                        "file": null
+                    },
+                    "value": 2
+                }]
+            },
             "focus": false,
             "required": false,
             "placeholder": null,

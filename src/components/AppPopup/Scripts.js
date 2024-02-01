@@ -14,16 +14,16 @@ export default {
             case 'All':
                 let data = document.querySelectorAll('.popup')
                 data.forEach(element => {
-                    element.classList.remove('popup_up')
                     element.removeAttribute('open')
+                    element.classList.remove('popup_up')
                     element.classList.remove('popup_visible')
                 });
                 break
             // Удаление у определенного элемента 
             default:
-                element.classList.remove('popup_up')
                 element.removeAttribute('open')
-                    element.classList.remove('popup_visible')
+                element.classList.remove('popup_up')
+                element.classList.remove('popup_visible')
             break;
         }
     },

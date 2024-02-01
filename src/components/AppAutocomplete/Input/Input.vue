@@ -36,7 +36,7 @@
                     :enabledAutocomplete="false"
                     @openLink="(item) => emit('openLink', item)"
                     @changeValue="(data) => callAction({action: 'searchOptions', value: data.value})"
-                    @mousedown="(event) => props.isReadOnly ? event.preventDefault() : callAction({action: 'showContent', value: true})"
+                    @mousedown="(event) => props.isReadOnly ? null : event.target.classList.contains('popup_prevent') ? event.preventDefault() : callAction({action: 'showContent', value: true})"
                     @keydown.space="(event) => {event.preventDefault(); callAction({action: 'searchOptions', value: event.target.value + ' '})}"
                 > 
                     <slot name="link"></slot>
@@ -263,5 +263,9 @@
             action: 'setActiveOption',
             value: props.item.value
         })
+    })
+
+    defineExpose({
+        popupRef
     })
 </script>

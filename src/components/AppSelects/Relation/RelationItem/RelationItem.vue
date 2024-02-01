@@ -17,8 +17,8 @@
         <template #icon>
             <figure 
                 v-if="![null, undefined].includes(activeOption)" 
-                class='ibg relation__icon' 
-                @click="() => callAction({action: 'openLink', value: localItem})"
+                class='ibg relation__icon popup_prevent' 
+                @click="(event) => {event.preventDefault(); callAction({action: 'openLink', value: localItem})}"
             >
                 <img 
                     v-if="![null, undefined].includes(activeOption.file) && activeOption.file != ''"
@@ -32,7 +32,7 @@
         </template>
 
         <template #link>
-            <div class="relation__link" @click="(event) => {event.preventDefault(); callAction({action: 'openLink', value: localItem})}"></div>
+            <div class="relation__link popup_prevent" @click="(event) => {event.preventDefault(); callAction({action: 'openLink', value: localItem})}"></div>
         </template>
     </AppAutocomplete>
 </template>
@@ -95,12 +95,15 @@
                 findedOption = props.item.options == null ? null : props.item.options.find(option => option.value == value)
                 if ([null, undefined].includes(findedOption)) {
                     activeOption.value = nullOption 
+                    return nullOption
                 } else {
                     activeOption.value = findedOption.label
                     localItem.value.options.push(findedOption)
+                    return findedOption
                 }
             } else {
                 activeOption.value = findedOption.label
+                return findedOption
             }
         }
 
@@ -122,8 +125,8 @@
 
         // Изменение значения
         const changeValue = (value) => {
-            setActiveOption(value)
-            emit('callAction', {action: 'changeValue', value: data.value})
+            let findedOption = setActiveOption(value)
+            emit('callAction', {action: 'changeValue', value: findedOption})
         }
 
         // Поиск опций
