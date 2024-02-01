@@ -32,6 +32,10 @@
         isReadOnly: {
             default: false,
             type: Boolean
+        },
+        isHaveParent: {
+            default: false,
+            type: Boolean
         }
     })
 
@@ -48,7 +52,12 @@
         mouseDownEvent.value = null
     }
 
+    // Показать выплывающее меню
     const showDetail = () => {
+        if (props.isHaveParent) {
+            popupRef.value.setAttribute('open', true)
+        }
+        
         popupScripts.setDropdownPosition(popupRef.value)
     }
 
