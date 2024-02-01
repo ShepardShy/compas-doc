@@ -20,6 +20,7 @@
             :enabledAutocomplete="props.codeProps.enabledAutocomplete != undefined ? props.codeProps.enabledAutocomplete.default : null"
             @showAll="(data) => emit('showAll', data)"
             @openLink="(data) => emit('openLink', data)"
+            @callAction="(data) => emit('callAction', data)"
             @changeValue="(data) => emit('changeValue', data)"
             @actionFilter="(data) => emit('actionFilter', data)"
             @createOption="(data) => emit('createOption', data)"

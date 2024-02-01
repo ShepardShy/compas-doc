@@ -332,6 +332,7 @@
                     }
 
 
+                    console.log(updatedRows.value);
                     if (updatedRows.value.length == 0) {
                         return
                     } else {
