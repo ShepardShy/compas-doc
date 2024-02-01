@@ -254,8 +254,6 @@
         }
     }
 
-    provide('values', values)
-
     watch(() => props.item.value, () => {
         values.value = getValues()
     })
