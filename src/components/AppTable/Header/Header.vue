@@ -7,7 +7,13 @@
                 :headerRef="headerRef"
                 :data-key="item.key"
                 :isTrash="props.isTrash"
-                :class="[item.fixed ? 'table__item_fixed' : '', !item.enabled ? 'table__item_hidden' : '', item.required ? 'table__item_required' : '', item.read_only ? 'table__item_readonly' : '']" 
+                :class="[
+                    item.fixed ? 'table__item_fixed' : '', 
+                    !item.enabled ? 'table__item_hidden' : '',
+                    item.required ? 'table__item_required' : '', 
+                    item.read_only ? 'table__item_readonly' : '',
+                    item.isUpdated ? 'table__item_updated' : ''
+                ]" 
                 @dragStart="(event) => dragColumn({action: 'dragStart', value: {event, key: item.key}})"
                 @dragEnd="() => dragColumn({action: 'dragEnd', value: null})"
             />

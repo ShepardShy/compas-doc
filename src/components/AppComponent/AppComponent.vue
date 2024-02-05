@@ -55,6 +55,7 @@
     const emit = defineEmits([
         'showAll',
         'openLink',
+        'callAction',
         'changeValue',
         'actionFilter',
         'createOption',

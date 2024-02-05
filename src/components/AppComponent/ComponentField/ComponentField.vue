@@ -46,6 +46,7 @@
         'showAll',
         'openLink',
         'changeValue',
+        'callAction',
         'actionFilter',
         'createOption',
         'searchOptions'

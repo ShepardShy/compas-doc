@@ -11,7 +11,7 @@
         />
  
         <TableSocket 
-            v-show="socketRows.length > 0"
+            v-show="socketRows.header.length > 0 || socketRows.body.length > 0"
             :socketRows="socketRows"
             @callAction="(data) => callAction(data)"
         />
@@ -75,7 +75,10 @@
     let footerData = ref({})
     let actionState = ref(null)
     let backupValues = ref([])
-    let socketRows = ref([])
+    let socketRows = ref({
+        header: [],
+        body: []
+    })
 
     const tableRef = ref(null)
     const sectionRef = ref(null)
@@ -204,6 +207,20 @@
         window.addEventListener('resize', checkingWindowWidth);
         footerData.value = JSON.parse(JSON.stringify(props.table.tableFooter))
         fields.value = callAction({action: 'setPropsValues', value: props.table.tableKeys})
+        socketRows.value = {
+            header: [
+                {
+                    "id": 842,
+                    "title": "Клиент 222",
+                }
+            ],
+            body: [
+                {
+                    id: 130301,
+                    name: "Новый клиент",
+                }
+            ]
+        }
         bodyData.value = callAction({action: 'setPropsValues', value: props.table.tableData})
     })
 
@@ -332,7 +349,6 @@
                     }
 
 
-                    console.log(updatedRows.value);
                     if (updatedRows.value.length == 0) {
                         return
                     } else {
@@ -403,36 +419,78 @@
 
         // Обновление таблицы с помощью сокетов
         const socketUpdate = () => {
-            const updateFieldValue = (row, updatedRow) => {
-                for (let key in updatedRow) {
-                    row[key] = updatedRow[key]
+            // Обновление тела таблицы
+            const updateBody = () => {
+                // Обновление значения поля
+                const updateFieldValue = (row, updatedRow) => {
+                    for (let key in updatedRow) {
+                        row[key] = updatedRow[key]
+                    }
                 }
-            }
 
-            const setUpdatedStatus = (id) => {
-                let findedIndex = bodyData.value.findIndex(row => row.id == id)
-                bodyData.value[findedIndex].isUpdated = true
-
-                setTimeout(() => {
+                // Установка статуса, что строка была обновлена
+                const setUpdatedStatus = (id) => {
                     let findedIndex = bodyData.value.findIndex(row => row.id == id)
-                    delete bodyData.value[findedIndex].isUpdated
-                }, 3000);
+                    bodyData.value[findedIndex].isUpdated = true
+
+                    setTimeout(() => {
+                        let findedIndex = bodyData.value.findIndex(row => row.id == id)
+                        delete bodyData.value[findedIndex].isUpdated
+                    }, 3000);
+                }
+
+                for (let socketRow of socketRows.value.body) {
+                    if (socketRow.isNew) {
+                        bodyData.value.unshift(socketRow)
+                        setUpdatedStatus(socketRow.id)
+                    } else if (socketRow.isDeleted) {
+                        bodyData.value = bodyData.value.filter(row => row.id != socketRow.id)
+                    } else {
+                        let findedIndex = bodyData.value.findIndex(row => row.id == socketRow.id)
+                        updateFieldValue(bodyData.value[findedIndex], socketRow)
+                        setUpdatedStatus(socketRow.id)
+                    }
+                    socketRows.value.body = socketRows.value.body.filter(row => row.id != socketRow.id)
+                }
             }
 
-            for (let socketRow of socketRows.value) {
-                if (socketRow.isNew) {
-                    bodyData.value.unshift(socketRow)
-                    setUpdatedStatus(socketRow.id)
-                    
-                } else if (socketRow.isDeleted) {
-                    bodyData.value = bodyData.value.filter(row => row.id != socketRow.id)
-                } else {
-                    let findedIndex = bodyData.value.findIndex(row => row.id == socketRow.id)
-                    updateFieldValue(bodyData.value[findedIndex], socketRow)
-                    setUpdatedStatus(socketRow.id)
+            // Обновление шапки таблицы
+            const updateHeader = () => {
+                // Обновление значения поля
+                const updateFieldValue = (column, updatedColumn) => {
+                    for (let key in updatedColumn) {
+                        column[key] = updatedColumn[key]
+                    }
                 }
-                socketRows.value = socketRows.value.filter(row => row.id != socketRow.id)
+
+                // Установка статуса, что строка была обновлена
+                const setUpdatedStatus = (id) => {
+                    let findedIndex = fields.value.findIndex(column => column.id == id)
+                    fields.value[findedIndex].isUpdated = true
+
+                    setTimeout(() => {
+                        let findedIndex = fields.value.findIndex(column => column.id == id)
+                        delete fields.value[findedIndex].isUpdated
+                    }, 3000);
+                }
+
+                for (let socketColumn of socketRows.value.header) {
+                    let findedIndex = fields.value.findIndex(column => column.id == socketColumn.id)
+
+                    if (socketColumn.isNew) {
+                            fields.value.unshift(socketColumn)
+                    } else if (socketColumn.isDeleted) {
+                            fields.value = fields.value.filter(column => column.id != socketColumn.id)
+                    } else {
+                        updateFieldValue(fields.value[findedIndex], socketColumn)
+                        setUpdatedStatus(socketColumn.id)
+                    }
+                    socketRows.value.header = socketRows.value.header.filter(column => column.id != socketColumn.id)
+                } 
             }
+
+            updateBody()
+            updateHeader()
         }
 
         // Получить данные таблицы

@@ -30,16 +30,16 @@
     import AppComponent from '@/components/AppComponent/AppComponent.vue';
 
     import AppInput from '@/components/AppInputs/Input/Input.vue';
-    import InputProps from '@/data/inputs/input/codeProps.json';
-    import inputEmits from '@/data/inputs/input/codeEmits.json';
+    import InputProps from '@/data/frontend/inputs/input/codeProps.json';
+    import inputEmits from '@/data/frontend/inputs/input/codeEmits.json';
 
     import AppCheckbox from '@/components/AppInputs/Checkbox/Checkbox.vue';
-    import checkboxProps from '@/data/inputs/checkbox/codeProps.json';
-    import checkboxEmits from '@/data/inputs/checkbox/codeEmits.json';
+    import checkboxProps from '@/data/frontend/inputs/checkbox/codeProps.json';
+    import checkboxEmits from '@/data/frontend/inputs/checkbox/codeEmits.json';
 
     import AppTextarea from '@/components/AppInputs/Textarea/Textarea.vue';
-    import textareaProps from '@/data/inputs/textarea/codeProps.json';
-    import textareaEmits from '@/data/inputs/textarea/codeEmits.json';
+    import textareaProps from '@/data/frontend/inputs/textarea/codeProps.json';
+    import textareaEmits from '@/data/frontend/inputs/textarea/codeEmits.json';
 
     // import AppDateInput from '@/components/AppInputs/Date/AppDateInput/AppDateInput.vue';
 

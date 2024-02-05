@@ -22,6 +22,10 @@
         display: none;
     }
 
+    &.table__item_updated {
+        background: #fffbe280;
+    }
+
     &.table__item_required {
         .table-item__content {
             .table-item__title {

@@ -4,7 +4,11 @@
         class="table__item"
         :style="`--colorItem: ${props.item.color};`"
         :data-key="props.item.key" 
-        :class="[props.item.fixed ? 'table__item_fixed' : '', !props.item.enabled ? 'table__item_hidden' : '']" 
+        :class="[
+            props.item.fixed ? 'table__item_fixed' : '', 
+            !props.item.enabled ? 'table__item_hidden' : '',
+            props.item.isUpdated ? 'table__item_updated' : ''
+        ]" 
         @click="(event) => doubleClick(event, props.row)" 
     >
         <div class="table-item__content">

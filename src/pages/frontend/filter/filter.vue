@@ -14,8 +14,8 @@
     import AppComponent from '@/components/AppComponent/AppComponent.vue';
     
     import AppFilter from '@/components/AppFilter/Filter.vue';
-    import filterProps from '@/data/filter/codeProps.js';
-    import filterEmits from '@/data/filter/codeEmits.js';
+    import filterProps from '@/data/frontend/filter/codeProps.js';
+    import filterEmits from '@/data/frontend/filter/codeEmits.js';
 
     // Эмиты фильтра
     const actionFilter = (data) => {

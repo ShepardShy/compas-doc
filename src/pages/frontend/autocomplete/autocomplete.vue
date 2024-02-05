@@ -19,8 +19,8 @@
     import AppComponent from '@/components/AppComponent/AppComponent.vue';
 
     import AppAutocomplete from '@/components/AppAutocomplete/Input/Input.vue';
-    import InputProps from '@/data/autocomplete/input/codeProps.json';
-    import inputEmits from '@/data/autocomplete/input/codeEmits.json';
+    import InputProps from '@/data/frontend/autocomplete/input/codeProps.json';
+    import inputEmits from '@/data/frontend/autocomplete/input/codeEmits.json';
 
     const backupOptions = InputProps.item.default.options
     let localProps = ref(null)

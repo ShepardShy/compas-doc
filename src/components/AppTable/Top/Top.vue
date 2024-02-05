@@ -1,6 +1,5 @@
 <template>
     <div class="table-template__header table-top">
-
         <AppSelect 
             class="table-top__item table-top__select"
             :class="sortItem.order == 'asc' ? 'table-top__select_up' : ''"
@@ -20,30 +19,11 @@
             :isHaveNullOption="true"
             @changeValue="(data) => sortTable(data)"
         />
-
-        <AppPopup v-show="menu.saves.isShow" class="table-top__item" ref="popupSavesRef" :closeByClick="false" @clickOutside="() => callAction({action: 'changeSaveTab', value: null})">
-            <template #summary>
-                <IconSave />
-            </template>
-            <template #content>
-                <template v-if="menu.saves.activeTab != null && menu.saves.activeTab.tab == 'roles'">
-                    <PopupOption class="popup-option__sublink popup-option__sublink_back" @click="() => callAction({action: 'changeSaveTab', value: null})">
-                        <IconArrow />
-                        
-                        {{ menu.saves.activeTab.title }}
-                    </PopupOption>
-                    <PopupOption v-for="option in menu.saves.options" @click="() => callAction({action: 'changeSaveTab', value: option})">
-                        {{ option.title }}
-                    </PopupOption>
-                </template>
-                <template v-else>
-                    <PopupOption :class="option.tab == 'roles' ? 'popup-option__sublink': ''" v-for="option in menu.saves.tabs" @click="() => callAction({action: 'changeSaveTab', value: option})">
-                        {{ option.title }}
-                        <IconArrow v-show="option.tab == 'roles'"/>
-                    </PopupOption>
-                </template>
-            </template>
-        </AppPopup>
+        <PopupSave 
+            class="table-top__item"
+            v-show="menu.saves.isShow"
+            @saveSettings="(role) => callAction({action: 'saveSettings', value: role})"
+        />
         <AppPopup class="table-top__item" :closeByClick="true">
             <template #summary>
                 <IconDots />
@@ -121,19 +101,18 @@
 
     import IconDots from '@/components/AppIcons/Dots/Dots.vue'
     import IconDrag from '@/components/AppIcons/Drag/Drag.vue'
-    import IconSave from '@/components/AppIcons/Save/Save.vue'
     import IconArrow from '@/components/AppIcons/Arrow/Arrow.vue'
+    import IconSettings from '@/components/AppIcons/Settings/Settings.vue'
     
     import draggable from 'vuedraggable'
     import resizeTable from '../Header/resizeTable.js'
     import AppPopup from '@/components/AppPopup/Popup.vue';
+    import PopupSave from '@/components/AppPopup/Save/Save.vue';
     import AppSelect from '@/components/AppSelects/Select/Select.vue'
-    import IconSettings from '@/components/AppIcons/Settings/Settings.vue'
     import AppCheckbox from '@/components/AppInputs/Checkbox/Checkbox.vue';
     import PopupOption from '@/components/AppPopup/PopupOption/PopupOption.vue';
     
     const draggableRef = ref(null)
-    const popupSavesRef = ref(null)
     
     let options = ref([])
     
@@ -183,23 +162,16 @@
             showSaves(true)
         }
 
-        // Изменение активной вкладки у сохранения
-        const changeSaveTab = (tab) => {
-            setTimeout(() => {
-                menu.value.saves.activeTab = tab
-
-                if (tab != null && tab.key != 'roles') {
-                    showSaves(false)
-                    emit('callAction', {
-                        action: 'saveFields',
-                        value: {
-                            role: tab.key,
-                            fields: fields.value
-                        }
-                    })
-                    popupSavesRef.value.popupRef.removeAttribute('open')
+        // Сохранение настроек полей для выбранной роли
+        const saveSettings = (role) => {
+            showSaves(false)
+            emit('callAction', {
+                action: 'saveFields', 
+                value: {
+                    role: role, 
+                    fields: fields
                 }
-            }, 10);
+            })
         }
 
         // Открытие/скрытие окна сохранения
@@ -236,9 +208,9 @@
                 changeValue(data.value)
                 break;
 
-            // Изменение активной вкладки у сохранения
-            case "changeSaveTab":
-                changeSaveTab(data.value)
+            // Открытие/скрытие окна сохранения
+            case 'saveSettings':
+                saveSettings(data.value)
                 break;
 
             // Открытие/скрытие окна сохранения
@@ -255,6 +227,7 @@
         }
     }
 
+    // Сортировка таблицы
     const sortTable = (data) => {
         if (data.value == sortItem.value.key) {
             sortItem.value.order = sortItem.value.order == 'asc' ? 'desc' : 'asc'
@@ -269,6 +242,7 @@
         })
     }
 
+    // Установка полей для сортировке в мобильной версии
     const setOptions = () => {
         let localFields = JSON.parse(JSON.stringify(fields.value))
         let localOptions = []
