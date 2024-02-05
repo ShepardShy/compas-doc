@@ -4,7 +4,7 @@
             {{ props.activeLink.name }}
         </AppH1>
 
-        <div class="main__content">
+        <div class="main__content" :class="`main__content_${props.activeLink.slug}`">
             <component 
                 :is="props.activeLink.component"
             />
