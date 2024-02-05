@@ -30,22 +30,17 @@ export default {
             id: 14,
             name: 'Таблица',
             slug: 'table',
-            component: markRaw(defineAsyncComponent(() => import('@/pages/tables/tables.vue')))
+            component: markRaw(defineAsyncComponent(() => import('@/pages/frontend/tables/tables.vue')))
         },
         {
             id: 15,
             slug: 'menu',
-            name: 'Таблица',
-            component: markRaw(defineAsyncComponent(() => import('@/pages/frontend/tables/tables.vue')))
+            name: 'Меню',
+            component: markRaw(defineAsyncComponent(() => import('@/pages/frontend/menu/menu.vue')))
         },
         {
             id: 16,
             name: 'Меню ошибки',
-            component: markRaw(defineAsyncComponent(() => import('@/pages/frontend/warning/warning.vue')))
-        },
-        {
-            id: 17,
-            name: 'Меню',
             component: markRaw(defineAsyncComponent(() => import('@/pages/frontend/warning/warning.vue')))
         }
     ],

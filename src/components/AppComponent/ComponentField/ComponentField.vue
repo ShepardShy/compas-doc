@@ -16,7 +16,6 @@
             :isUseEnter="props.codeProps.isUseEnter != undefined ? props.codeProps.isUseEnter.default : null"
             :isReadOnly="props.codeProps.isReadOnly != undefined ? props.codeProps.isReadOnly.default : null"
             :isShowFileName="props.codeProps.isShowFileName != undefined ? props.codeProps.isShowFileName.default : null"
-            :isMultiple="props.codeProps.isMultiple != undefined ? props.codeProps.isMultiple.default : null"
             :isOneFile="props.codeProps.isOneFile != undefined ? props.codeProps.isOneFile.default : null"
             :isCanCreate="props.codeProps.isCanCreate != undefined ? props.codeProps.isCanCreate.default : null"
             :isHaveNullOption="props.codeProps.isHaveNullOption != undefined ? props.codeProps.isHaveNullOption.default : null"

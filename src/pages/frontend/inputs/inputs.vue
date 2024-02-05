@@ -38,13 +38,8 @@
     import AppComponent from '@/components/AppComponent/AppComponent.vue';
 
     import AppInput from '@/components/AppInputs/Input/Input.vue';
-<<<<<<< HEAD:src/pages/inputs/inputs.vue
-    import InputProps from '@/data/inputs/input/codeProps.json';
-    import InputEmits from '@/data/inputs/input/codeEmits.json';
-=======
     import InputProps from '@/data/frontend/inputs/input/codeProps.json';
-    import inputEmits from '@/data/frontend/inputs/input/codeEmits.json';
->>>>>>> main:src/pages/frontend/inputs/inputs.vue
+    import InputEmits from '@/data/frontend/inputs/input/codeEmits.json';
 
     import AppCheckbox from '@/components/AppInputs/Checkbox/Checkbox.vue';
     import checkboxProps from '@/data/frontend/inputs/checkbox/codeProps.json';
