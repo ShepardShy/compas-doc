@@ -5,18 +5,20 @@
         :item="localItem" 
         :isReadOnly="props.isReadOnly"
         :isCanCreate="props.isCanCreate" 
+        :isShowId="true"
         :isLink="![null, undefined].includes(activeOption.id)"
         :class="[null, undefined].includes(activeOption.id) ? 'relation__item_empty' : ''"
-        @openLink="() => callAction({action: 'openLink', value: localItem})"
+        @clickOutside="() => emit('clickOutside', true)"
         @createOption="(data) => emit('createOption', data)"
+        @openLink="() => callAction({action: 'openLink', value: localItem})"
         @changeValue="(data) => callAction({action: 'changeValue', value: data.value})"
         @searchOptions="(data) => callAction({action: 'searchOptions', value: data})"
     >
         <template #icon>
             <figure 
                 v-if="![null, undefined].includes(activeOption)" 
-                class='ibg relation__icon' 
-                @click="() => callAction({action: 'openLink', value: localItem})"
+                class='ibg relation__icon popup_prevent' 
+                @click="(event) => {event.preventDefault(); callAction({action: 'openLink', value: localItem})}"
             >
                 <img 
                     v-if="![null, undefined].includes(activeOption.file) && activeOption.file != ''"
@@ -30,7 +32,7 @@
         </template>
 
         <template #link>
-            <div class="relation__link" @click="(event) => {event.preventDefault(); callAction({action: 'openLink', value: localItem})}"></div>
+            <div class="relation__link popup_prevent" @click="(event) => {event.preventDefault(); callAction({action: 'openLink', value: localItem})}"></div>
         </template>
     </AppAutocomplete>
 </template>
@@ -79,7 +81,8 @@
     const emit = defineEmits([
         'openLink',
         'callAction',
-        'createOption'
+        'createOption',
+        'clickOutside'
     ])
 
     // Вызов действия
@@ -92,12 +95,15 @@
                 findedOption = props.item.options == null ? null : props.item.options.find(option => option.value == value)
                 if ([null, undefined].includes(findedOption)) {
                     activeOption.value = nullOption 
+                    return nullOption
                 } else {
                     activeOption.value = findedOption.label
                     localItem.value.options.push(findedOption)
+                    return findedOption
                 }
             } else {
                 activeOption.value = findedOption.label
+                return findedOption
             }
         }
 
@@ -119,8 +125,8 @@
 
         // Изменение значения
         const changeValue = (value) => {
-            setActiveOption(value)
-            emit('callAction', {action: 'changeValue', value: data.value})
+            let findedOption = setActiveOption(value)
+            emit('callAction', {action: 'changeValue', value: findedOption})
         }
 
         // Поиск опций

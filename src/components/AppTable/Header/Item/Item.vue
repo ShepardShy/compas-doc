@@ -1,7 +1,7 @@
 <template>
     <th class="table__item table-item" ref="tableItemRef">
 
-        <div class="table-item__content" v-if="props.item.type == 'checkbox'">
+        <div class="table-item__content" v-if="props.item.key == 'isChoose'">
             <AppCheckbox 
                 :item="{
                     id: props.item.id,
@@ -22,7 +22,6 @@
                 :isUseEnter="false"
                 :enabledAutocomplete="false"
                 :isReadOnly="false"
-                :isCanAdd="false"
                 @changeValue="(data) => selectAllRows(data)"
             />
             
@@ -45,7 +44,7 @@
 
             <div 
                 class="table-item__drag-area"
-                :draggable="true"
+                :draggable="!props.headerRef.parentNode.classList.contains('table_resizing')"
                 @dragover.prevent
                 @dragenter.prevent
                 @dragstart="(event) => $emit('dragStart', event)"
@@ -70,6 +69,7 @@
     const bodyData = inject('bodyData')
     const selectAll = inject('selectAll')
     const footerData = inject('footerData')
+    const actionState = inject('actionState')
 
     let clickSetting = ref({
         id: -1,
@@ -95,6 +95,10 @@
         },
         headerRef: {
             default: null,
+        },
+        isTrash: {
+            default: false,
+            type: Boolean
         }
     })
 
@@ -113,6 +117,11 @@
                 }
                 menu.value.saves.isShow = true
                 footerData.value.activePage = 1
+          
+                emit('callAction', {
+                    action: 'getTableData',
+                    value: null
+                })
             }
             window.getSelection().empty();
             clearTimeout(clickSetting.value.timer);  
@@ -127,5 +136,11 @@
         bodyData.value.forEach(row => {
             row.isChoose = selectAll.value
         });
+
+        if (data.value) {
+            actionState.value = props.isTrash ? 'restoring' : 'editting'
+        } else {
+            actionState.value = null
+        }
     }
 </script>

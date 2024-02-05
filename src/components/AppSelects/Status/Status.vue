@@ -13,7 +13,8 @@
             :isReadOnly="props.isReadOnly"
             :isCanCreate="props.isCanCreate"
             :isHaveNullOption="props.isHaveNullOption"
-            @changeValue="(data) => $emit('changeValue', data)"
+            @clickOutside="() => emit('clickOutside', true)"
+            @changeValue="(data) => emit('changeValue', data)"
         />
     </FormItem>
 </template>
@@ -62,4 +63,9 @@
             type: Boolean
         }
     })
+
+    const emit = defineEmits([
+        'changeValue',
+        'clickOutside'
+    ])
 </script>

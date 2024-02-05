@@ -27,7 +27,8 @@
                 id: 0,
                 key: '',
                 title: '',
-                value: false
+                value: false,
+                isHTML: false
             },
             type: Object
         },

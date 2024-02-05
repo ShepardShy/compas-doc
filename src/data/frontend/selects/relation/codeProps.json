@@ -1,0 +1,52 @@
+{
+    "item": {
+        "default": {
+            "id": 0,
+            "title": "Заголовок",
+            "value": {
+                "value": [null],
+                "localOptions": [{
+                    "label": {
+                        "id": 1,
+                        "sort": 0,
+                        "text": "Локальная опция 1",
+                        "color": "linear-gradient(to bottom, #90aeee 2%, #65dd78 100%)",
+                        "file": null
+                    },
+                    "value": 2
+                }]
+            },
+            "focus": false,
+            "required": false,
+            "placeholder": null,
+            "key": "relationKey",
+            "options": [
+                {
+                    "label": {
+                        "id": 1,
+                        "sort": 0,
+                        "text": "Опция 1",
+                        "color": "linear-gradient(to bottom, #aeee90 2%, #65dd78 100%)",
+                        "file": null
+                    },
+                    "value": 1
+                }
+            ],
+            "lockedOptions": []
+        },
+        "type": "Object"
+    },
+    "isReadOnly": {
+        "default": false,
+        "type": "Boolean"
+    },
+    "isCanCreate": {
+        "default": true,
+        "type": "Boolean"
+    },
+    "isMultiple": {
+        "default": true,
+        "type": "Boolean"
+    }
+}
+
