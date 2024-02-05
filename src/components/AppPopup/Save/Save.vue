@@ -1,5 +1,5 @@
 <template>
-    <AppPopup ref="popupSavesRef" :closeByClick="false" @clickOutside="() => changeSaveTab(null)">
+    <AppPopup class="popup_save" ref="popupSavesRef" :closeByClick="false" @clickOutside="() => changeSaveTab(null)">
         <template #summary>
             <IconSave />
         </template>
