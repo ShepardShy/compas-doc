@@ -1,58 +1,87 @@
 @use '@/assets/variables.scss' as variables;
 @use '@/assets/mixins.scss' as mixins;
 
-.menu__container {
-    &:not(:last-child) {
-        margin-bottom: 30px;
+.menu {
+    @include mixins.elemResolutionOptions(230px, 100%);
+    background-image: radial-gradient(circle at 29% 0,#000,#1c2734 21%);
+
+    &.menu_draggable {
+        .menu__item {
+            &:hover {
+                background: inherit;
+
+                .icon__draggable {
+                    opacity: 0;
+                }
+            }
+        }
     }
-}
 
-.menu__title {
-    padding: 0px 15px;
-    margin-bottom: 15px;
-}
-.menu__list {
-}
+    .icon__logo {
+        display: flex;
+        justify-content: center;
+    }
 
-.menu__item {
-    cursor: pointer;
-    padding: 10px 15px;
+    .menu__logo {
+        display: block;
+        width: max-content;
+        margin: 30px auto;
+    }
 
-    &.menu__item_active {
+    .menu__list {
+    }
+
+    .menu__item {
+        cursor: pointer;
+        line-height: 120%;
+        position: relative;
+        padding: 10px 30px 10px 25px;
         color: variables.$color-white;
-        background: linear-gradient(90deg, rgba(0, 133, 255, 0.51) 34.29%, rgba(0, 156, 244, 0.00) 100.89%);
+        @include mixins.sortableGhost();
+        @include mixins.userSelect(none);
+        @include mixins.flexBlock($vertical: center, $gap: 0px);
 
         &:hover {
+            background: #161616;
+
+            .icon__draggable {
+                opacity: 1;
+            }
+        }
+
+        .icon__draggable {
+            opacity: 0;
+            left: 8px;
+        }
+
+        &.menu__item_active {
+            color: #fd8301;
+
+            &::before {
+                content: '';
+                position: absolute;
+                background: variables.$color-orange;
+                @include mixins.elemPositionOptions(0px, 0px);
+                @include mixins.elemResolutionOptions(3px, 100%);
+            }
+        }
+
+        &.sortable-ghost {
+            background: #161616;
+            height: 42px;
+            font-size: 0;
+
+            * {
+                opacity: 0;
+            }
+
             &::before {
                 content: none;
             }
-            &::after {
-                content: none;
-            }
         }
     }
 
-    &:hover {
-        position: relative;
-
-        &::before {
-            content: '';
-            top: 0px;
-            position: absolute;
-            height: 1px;
-            left: 0px;
-            width: 100%;
-            background: variables.$color-black;
-        }
-
-        &::after {
-            content: '';
-            bottom: 0px;
-            left: 0px;
-            position: absolute;
-            height: 1px;
-            width: 100%;
-            background: variables.$color-black;
-        }
+    .menu__item-details {
+        
     }
 }
