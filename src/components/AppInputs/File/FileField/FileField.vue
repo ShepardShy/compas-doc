@@ -49,7 +49,7 @@
 
     import draggable from 'vuedraggable'
     import {toast} from 'vue3-toastify';
-    import {computed, provide, ref, watch} from "vue";
+    import {computed, ref, watch} from "vue";
 
     import FansyBox from '@/components/AppFansyBox/FansyBox.vue';
     import FansyBoxImage from '@/components/AppFansyBox/FansyBoxImage/FansyBoxImage.vue';
@@ -119,9 +119,6 @@
         const downloadFile = async () => {
             const imageSrc = data.value.file;
             const nameOfDownload = [null, undefined].includes(data.value.name) || data.value.name !== '' ? data.value.name : 'my-image.png'
-
-            console.log('imageSrc', imageSrc)
-            console.log('nameOfDownload', nameOfDownload)
 
             try {
                 const response = await fetch(imageSrc, {
