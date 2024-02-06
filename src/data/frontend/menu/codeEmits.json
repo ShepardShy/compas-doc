@@ -1,0 +1,18 @@
+{
+    "@callAction": {
+        "action": "saveSettings",
+        "value": {
+            "role": "user_role",
+            "fields": [
+                {
+                    "id": 0,
+                    "link": "/field_1",
+                    "slug": "field_1",
+                    "enabled": 1,
+                    "is_hidden": 0,
+                    "name": "Поле 1"
+                }
+            ]
+        }
+    }
+}

@@ -9,6 +9,7 @@
             :disabled="props.codeProps.mask != undefined ? props.codeProps.disabled.default : null"
             :mask="props.codeProps.mask != undefined ? props.codeProps.mask.default : null"
             :table="props.codeProps.table != undefined ? props.codeProps.table.default : null"
+            :menu="props.codeProps.menu != undefined ? props.codeProps.menu.default : null"
             :slug="props.codeProps.slug != undefined ? props.codeProps.slug.default : null"
             :isTrash="props.codeProps.isTrash != undefined ? props.codeProps.isTrash.default : null"
             :isMultiple="props.codeProps.isMultiple != undefined ? props.codeProps.isMultiple.default : null"

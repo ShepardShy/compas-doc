@@ -50,8 +50,8 @@
     import textareaEmits from '@/data/frontend/inputs/textarea/codeEmits.json';
 
     import AppFile from "@/components/AppInputs/File/File.vue";
-    import FileProps from "@/data/inputs/file/codeProps.json";
-    import FileEmits from "@/data/inputs/file/codeEmits.json";
+    import FileProps from "@/data/frontend/inputs/file/codeProps.json";
+    import FileEmits from "@/data/frontend/inputs/file/codeEmits.json";
 
     // import AppDateInput from '@/components/AppInputs/Date/AppDateInput/AppDateInput.vue';
 
