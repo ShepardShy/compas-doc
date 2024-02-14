@@ -1,0 +1,36 @@
+{
+    "item": {
+        "default": {
+            "id": 0,
+            "title": "Адрес",
+            "key": "address",
+            "required": false,
+            "focus": false,
+            "value": null,
+            "options": [
+                {
+                    "label": {
+                        "id": 0,
+                        "sort": 0,
+                        "text": "Россия, Москва, улица Бутлерова, 38к4",
+                        "coords": [
+                            "37.642606",
+                            "55.547414"
+                        ]
+                    },
+                    "value": 0
+                }
+            ],
+            "lockedOptions": []
+        },
+        "type": "Object" 
+    },
+    "isReadOnly": {
+        "default": false,
+        "type": "Boolean"
+    },
+    "isShowMap": {
+        "default": true,
+        "type": "Boolean"
+    }
+}

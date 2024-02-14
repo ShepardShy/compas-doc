@@ -33,6 +33,7 @@
     import AppH3 from '@/components/AppH3/AppH3.vue'
     import ComponentField from './ComponentField/ComponentField.vue';
     import ComponentDescription from './ComponentDescription/ComponentDescription.vue';
+    import {onMounted} from "vue";
 
     const props = defineProps({
         title: {
