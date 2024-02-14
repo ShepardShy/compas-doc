@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="page">
       <aside>
-        <AppMenu 
+        <DocMenu 
           :activeLink="activeLink"
           @changeLink="(link) => changeLink(link)"
         />
@@ -20,7 +20,7 @@
 
   import { ref } from 'vue'
 
-  import AppMenu from './components/AppMenu/AppMenu.vue';
+  import DocMenu from './components/DocMenu/DocMenu.vue';
   import AppMain from './components/AppMain/AppMain.vue';
 
   let activeLink = ref({});

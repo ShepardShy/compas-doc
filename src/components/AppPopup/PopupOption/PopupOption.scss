@@ -26,13 +26,13 @@
         cursor: default;
     }
 
-    &.popup__option-sublink {
+    &.popup-option__sublink {
         display: flex;
         gap: 5px;
         align-items: center;
         justify-content: space-between;
 
-        &.popup__option-sublink_back {
+        &.popup-option__sublink_back {
             flex-direction: row-reverse;
             justify-content: flex-end;
 
@@ -106,7 +106,7 @@
     }
 
     .popup__option {
-        &.popup__option-sublink {
+        &.popup-option__sublink {
             justify-content: flex-start;
         }
         

@@ -1,0 +1,33 @@
+[
+    {
+        "id": 1,
+        "sort": 0,
+        "enabled": 1,
+        "children": [],
+        "is_hidden": 1,
+        "slug": "logistic_tasks",
+        "name": "Задачи логистики",
+        "link": "/objects/logistic_tasks"
+    },
+    {
+        "id": 2,
+        "sort": 7,
+        "enabled": 1,
+        "is_hidden": 1,
+        "name": "Настройки",
+        "slug": "settings",
+        "link": "/objects/users",
+        "children": [
+            {
+                "id": 79,
+                "sort": 0,
+                "enabled": 1,
+                "children": [],
+                "is_hidden": 0,
+                "slug": "users",
+                "name": "Пользователи",
+                "link": "/objects/users"
+            }
+        ]
+    }
+]

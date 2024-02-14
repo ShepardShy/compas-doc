@@ -1,0 +1,47 @@
+{
+    "menu": {
+        "default": [
+            {
+                "id": 0,
+                "link": "/field_1",
+                "slug": "field_1",
+                "enabled": 1,
+                "is_hidden": 0,
+                "name": "Поле 1"
+            },
+            {
+                "id": 1,
+                "link": "/field_2",
+                "slug": "field_2",
+                "enabled": 1,
+                "is_hidden": 0,
+                "name": "Поле 2"
+            },
+            {
+                "id": 2,
+                "link": "/field_3",
+                "slug": "field_3",
+                "enabled": 1,
+                "is_hidden": 0,
+                "name": "Поле 3"
+            },
+            {
+                "id": 3,
+                "link": "/field_4",
+                "slug": "field_4",
+                "enabled": 1,
+                "is_hidden": 1,
+                "name": "Поле 4"
+            },
+            {
+                "id": 4,
+                "link": "/field_5",
+                "slug": "field_5",
+                "enabled": 1,
+                "is_hidden": 0,
+                "name": "Поле 5"
+            }
+       ],
+       "type": "Array"
+    }
+}

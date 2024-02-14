@@ -19,7 +19,7 @@
                     placeholder: null,
                     focus: false,
                     key: props.item.key,
-                    options: props.item.options,
+                    options: localOptions,
                     lockedOptions: lockedOptions,
                     related_table: props.item.related_table
                 }"
@@ -27,6 +27,7 @@
                 :isCanCreate="props.isCanCreate"
                 @openLink="(item) => emit('openLink', item)"
                 @callAction="(data) => callAction(data, index)"
+                @clickOutside="() => emit('clickOutside', true)"
                 @createOption="(data) => emit('createOption', data)"
             />
         </div>
@@ -35,17 +36,17 @@
             <ButtonText v-show="values.length >= 5" @click="() => callAction({action: 'showAll', value: true})"> 
                 Всего {{ values.length }}, посмотреть все 
             </ButtonText>
-            <ButtonText v-if="props.isCanAdd" @click="() => callAction({action: 'changeValue', value: {value: null, isNew: true}})"> 
+            <ButtonText v-if="props.isMultiple" @click="() => callAction({action: 'changeValue', value: {value: null, isNew: true}})"> 
                 + Добавить 
             </ButtonText>
         </div>
     </FormItem>
-    
 </template>
 
 <script setup>
     import './Relation.scss';
     
+    import _ from 'lodash'
     import { ref, onMounted, watch } from 'vue'
 
     import FormItem from '@/components/AppForm/FormItem/FormItem.vue';
@@ -55,6 +56,7 @@
 
     let values = ref([])
     let lockedOptions = ref([])
+    let localOptions = ref([])
 
     const props = defineProps({
         item: {
@@ -62,7 +64,10 @@
                 title: null,
                 id: 0,
                 required: false,
-                value: null,
+                value: {
+                    value: null,
+                    localOptions: []
+                },
                 placeholder: null,
                 focus: false,
                 key: null,
@@ -79,7 +84,7 @@
             default: true,
             type: Boolean
         },
-        isCanAdd: {
+        isMultiple: {
             default: true,
             type: Boolean
         }
@@ -90,6 +95,7 @@
         'openLink',
         'changeValue',
         'createOption',
+        'clickOutside'
     ])
 
     // Вызов действия
@@ -100,13 +106,23 @@
             if (data.value != null && data.value.isNew) {
                 values.value.push(null)
             } else {
-                values.value[index] = value
+                values.value[index] = value.value ?? null
+                localOptions.value.push(value)
+
+                localOptions.value = _.uniqBy(localOptions.value, (o) => {
+                    return o.value;
+                }).filter(p => values.value.includes(p.value))
+
+                callAction({action: 'getOptions', value: true})
             }
 
             lockedOptions.value = Array.from(new Set(props.item.lockedOptions)).concat(values.value.filter(item => item != null))
             emit('changeValue', {
                 key: props.item.key,
-                value: values.value
+                value: {
+                    value: values.value.filter(p => p != null),
+                    localOptions: localOptions.value
+                }
             })
         }
 
@@ -120,13 +136,32 @@
 
         // Получить значения от родителя
         const getValues = () => {
-            if (!Array.isArray(props.item.value) || props.item.value.length == 0) {
+            if ([null, undefined].includes(props.item.value) || !Array.isArray(props.item.value.value) || props.item.value.value.length == 0) {
                 values.value =  [null] 
             } else {
-                values.value = JSON.parse(JSON.stringify(props.item.value))
+                let localValues = props.item.value.value.filter(p => ![null, undefined].includes(p))
+                
+                if (localValues.length == 0) {
+                    localValues =  [null]
+                }
+
+                localValues = _.uniqBy(localValues, (o) => {
+                    return o;
+                })
+                values.value = JSON.parse(JSON.stringify(localValues))
             }
 
             lockedOptions.value = Array.from(new Set(props.item.lockedOptions)).concat(values.value.filter(item => item != null))
+        }
+
+        // Получение опций
+        const getOptions = () => {
+            let filteredLocalOptions = props.item.value != null && props.item.value.localOptions != null ? props.item.value.localOptions.filter(p => ![null, undefined].includes(p) && typeof p == 'object') : []
+            let options = JSON.parse(JSON.stringify(props.item.options.concat(filteredLocalOptions)))
+
+            localOptions.value = _.uniqBy(options, (o) => {
+                return o.value;
+            })
         }
 
         switch (data.action) {
@@ -144,6 +179,11 @@
             case "getValues":
                 getValues()
                 break;
+
+            // Получение опций
+            case "getOptions":
+                getOptions()
+                break;
             default:
                 break;
         }
@@ -151,6 +191,7 @@
 
     onMounted(() => {
         callAction({action: 'getValues', value: true})
+        callAction({action: 'getOptions', value: true})
     })
 
     watch(() => props.item.value, () => {

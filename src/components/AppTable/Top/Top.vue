@@ -1,28 +1,29 @@
 <template>
     <div class="table-template__header table-top">
-        <AppPopup v-show="menu.saves.isShow" class="table-top__item" ref="popupSavesRef" :closeByClick="false" @clickOutside="() => callAction({action: 'changeSaveTab', value: null})">
-            <template #summary>
-                <IconSave />
-            </template>
-            <template #content>
-                <template v-if="menu.saves.activeTab != null && menu.saves.activeTab.tab == 'roles'">
-                    <PopupOption class="popup__option-sublink popup__option-sublink_back" @click="() => callAction({action: 'changeSaveTab', value: null})">
-                        <IconArrow />
-                        
-                        {{ menu.saves.activeTab.title }}
-                    </PopupOption>
-                    <PopupOption v-for="option in menu.saves.options" @click="() => callAction({action: 'changeSaveTab', value: option})">
-                        {{ option.title }}
-                    </PopupOption>
-                </template>
-                <template v-else>
-                    <PopupOption :class="option.tab == 'roles' ? 'popup__option-sublink': ''" v-for="option in menu.saves.tabs" @click="() => callAction({action: 'changeSaveTab', value: option})">
-                        {{ option.title }}
-                        <IconArrow v-show="option.tab == 'roles'"/>
-                    </PopupOption>
-                </template>
-            </template>
-        </AppPopup>
+        <AppSelect 
+            class="table-top__item table-top__select"
+            :class="sortItem.order == 'asc' ? 'table-top__select_up' : ''"
+            :item="{
+                id: 0,
+                key: 'sortTable',
+                value: sortItem.key,
+                focus: false,
+                required: false,
+                title: null,
+                lockedOptions: [],
+                options: options
+            }"
+            :isFiltered="false"
+            :isMultiple="false"
+            :isReadOnly="false"
+            :isHaveNullOption="true"
+            @changeValue="(data) => sortTable(data)"
+        />
+        <PopupSave 
+            class="table-top__item"
+            v-show="menu.saves.isShow"
+            @saveSettings="(role) => callAction({action: 'saveSettings', value: role})"
+        />
         <AppPopup class="table-top__item" :closeByClick="true">
             <template #summary>
                 <IconDots />
@@ -39,14 +40,14 @@
             </template>
             <template #content>
                 <template v-if="menu.activeTab == null">
-                    <PopupOption class="popup__option-sublink" v-for="tab in menu.tabs" @click="() => callAction({action: 'changeTab', value: tab})">
+                    <PopupOption class="popup-option__sublink" v-for="tab in menu.tabs" @click="() => callAction({action: 'changeTab', value: tab})">
                         {{ tab.title }} 
 
                         <IconArrow />
                     </PopupOption>
                 </template>
                 <template v-else>
-                    <PopupOption class="popup__option-sublink popup__option-sublink_back" @click="() => callAction({action: 'changeTab', value: null})">
+                    <PopupOption class="popup-option__sublink popup-option__sublink_back" @click="() => callAction({action: 'changeTab', value: null})">
                         <IconArrow />
                         
                         {{ menu.activeTab.title }}
@@ -64,7 +65,7 @@
                             @start="(event) => callAction({action: 'dragStart', value: event})" 
                         >
                             <template #item="{ element: option }">
-                                <PopupOption class="popup__option-sublink" v-show="option.enabled">
+                                <PopupOption class="popup-option__sublink" v-show="option.enabled">
                                     <IconDrag /> 
                                     {{ option.title }}
                                 </PopupOption>
@@ -96,28 +97,37 @@
 <script setup>
     import './Top.scss';
     
-    import { ref, inject } from 'vue'
+    import { ref, inject, onMounted } from 'vue'
 
     import IconDots from '@/components/AppIcons/Dots/Dots.vue'
     import IconDrag from '@/components/AppIcons/Drag/Drag.vue'
-    import IconSave from '@/components/AppIcons/Save/Save.vue'
     import IconArrow from '@/components/AppIcons/Arrow/Arrow.vue'
+    import IconSettings from '@/components/AppIcons/Settings/Settings.vue'
     
     import draggable from 'vuedraggable'
+    import resizeTable from '../Header/resizeTable.js'
     import AppPopup from '@/components/AppPopup/Popup.vue';
-    import IconSettings from '@/components/AppIcons/Settings/Settings.vue'
+    import PopupSave from '@/components/AppPopup/Save/Save.vue';
+    import AppSelect from '@/components/AppSelects/Select/Select.vue'
     import AppCheckbox from '@/components/AppInputs/Checkbox/Checkbox.vue';
     import PopupOption from '@/components/AppPopup/PopupOption/PopupOption.vue';
     
     const draggableRef = ref(null)
-    const popupSavesRef = ref(null)
+    
+    let options = ref([])
     
     const menu = inject('menu')
     const fields = inject('fields')
-
+    const sortItem = inject('sortItem')
+    const tableRef = inject('tableRef')
+    
     const emit = defineEmits([
         'callAction'
     ])
+
+    onMounted(() => {
+        setOptions()
+    })
 
     // Действия с шапкой
     const callAction = (data) => {
@@ -133,6 +143,12 @@
             let findedOption = fields.value.find(option => option.key == data.key)
             findedOption[menu.value.activeTab.tab] = data.value
             showSaves(true)
+
+            if (menu.value.activeTab.tab == 'enabled') {
+                setTimeout(() => {
+                    resizeTable.resizableGrid(tableRef.value, fields.value)
+                }, 100);
+            }
         }
 
         // Начало перетаскивания опции
@@ -146,23 +162,16 @@
             showSaves(true)
         }
 
-        // Изменение активной вкладки у сохранения
-        const changeSaveTab = (tab) => {
-            setTimeout(() => {
-                menu.value.saves.activeTab = tab
-
-                if (tab != null && tab.key != 'roles') {
-                    showSaves(false)
-                    emit('callAction', {
-                        action: 'saveFields',
-                        value: {
-                            role: tab.key,
-                            fields: fields.value
-                        }
-                    })
-                    popupSavesRef.value.popupRef.removeAttribute('open')
+        // Сохранение настроек полей для выбранной роли
+        const saveSettings = (role) => {
+            showSaves(false)
+            emit('callAction', {
+                action: 'saveFields', 
+                value: {
+                    role: role, 
+                    fields: fields
                 }
-            }, 10);
+            })
         }
 
         // Открытие/скрытие окна сохранения
@@ -199,9 +208,9 @@
                 changeValue(data.value)
                 break;
 
-            // Изменение активной вкладки у сохранения
-            case "changeSaveTab":
-                changeSaveTab(data.value)
+            // Открытие/скрытие окна сохранения
+            case 'saveSettings':
+                saveSettings(data.value)
                 break;
 
             // Открытие/скрытие окна сохранения
@@ -217,4 +226,35 @@
                 break;
         }
     }
+
+    // Сортировка таблицы
+    const sortTable = (data) => {
+        if (data.value == sortItem.value.key) {
+            sortItem.value.order = sortItem.value.order == 'asc' ? 'desc' : 'asc'
+        } else {
+            sortItem.value.key = data.value
+            sortItem.value.order = 'desc'
+        }
+
+        emit('callAction', {
+            action: 'getTableData',
+            value: null
+        })
+    }
+
+    // Установка полей для сортировке в мобильной версии
+    const setOptions = () => {
+        let localFields = JSON.parse(JSON.stringify(fields.value))
+        let localOptions = []
+
+        for (let field of localFields) {
+            localOptions.push({
+                label: field.title,
+                value: field.key
+            })
+        }
+
+        options.value = localOptions 
+    }
+
 </script>

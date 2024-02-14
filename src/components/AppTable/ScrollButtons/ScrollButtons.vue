@@ -18,6 +18,7 @@
 <script setup>
     import './ScrollButtons.scss';
     
+    import _ from 'lodash'
     import { ref, onMounted, inject, onUnmounted } from 'vue'
 
     import AppLoader from '@/components/AppLoader/AppLoader.vue';
@@ -34,7 +35,8 @@
 
     onMounted(async () => {
         window.addEventListener('scroll', throt_funScroll)
-
+        tableRef.value.parentNode.addEventListener('scroll', scrollXThrottling)
+        
         setTimeout(() => {
             actionScroll({action: 'setButtonsVisible', value: tableRef.value.parentNode})
             scrollPosition.value = actionScroll({action: 'setPosition', value: null})
@@ -148,4 +150,9 @@
     const throt_funScroll = () => {
         scrollPosition.value = actionScroll({action: 'setPosition', value: null})
     }
+
+    // Троттлинг скролла по горизонтали
+    const scrollXThrottling = _.throttle(() => {
+        actionScroll({action: 'setButtonsVisible', value: tableRef.value.parentNode})
+    }, 20)
 </script>

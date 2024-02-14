@@ -2,7 +2,7 @@ import _ from 'lodash'
 
 export default {
     // Ресайз таблицы
-    resizableGrid(table) {
+    resizableGrid(table, fields) {
         // Установка слушателей на движение мышкой с бордером
         const setListeners = (div) => {
             let info = {
@@ -10,7 +10,8 @@ export default {
                 curCol: undefined,
                 nxtCol: 0,
                 index: 0,
-                curColWidth: 0
+                curColWidth: 0,
+                prevDown: null
             };
     
             if (div == null || div.getAttribute('setListener') === 'true') return
@@ -33,7 +34,7 @@ export default {
                     return (parseInt(padLeft) + parseInt(padRight));
                 }
     
-                info.curCol = e.target.closest('.table__item');
+                info.curCol = info.prevDown = e.target.closest('.table__item');
                 info.index = [...table.querySelectorAll('thead .table__item')].findIndex(p => p.getAttribute('data-key') == info.curCol.getAttribute('data-key'));
                 info.nxtCol = info.curCol.nextElementSibling;
                 info.pageX = e.pageX;
@@ -43,12 +44,15 @@ export default {
                 info.curCol.querySelector('.table-item__border').classList.add('table-item__border_changing')
                 info.curColWidth = info.curCol.offsetWidth - padding;
             });
-    
+
             // Прослушивание события, что на блок навелись
             div.addEventListener('mouseover', function (e) {
-                e.target.style.height = `${table.offsetHeight}px`
+                let hoverElem = e.target.closest('.table__item_fixed')
+                if (hoverElem != null) {
+                    hoverElem.classList.add('table__item_hover')
+                }
             })
-    
+
             // Прослушивание события, что у блока меняют ширину
             document.addEventListener('mousemove', (e) => {
                 const resizeCell = (e, info) => {               
@@ -76,7 +80,8 @@ export default {
                         info.curCol.classList.remove('changeWidth')
                         info.curCol.classList.remove('table__item_resizing')
                         document.body.classList.remove('body__cursor-style')
-            
+                        info.prevDown.classList.remove('table__item_hover')
+                        info.prevDown = null
                         info.curCol = undefined;
                         info.nxtCol = undefined;
                         info.pageX = undefined;
@@ -101,8 +106,13 @@ export default {
         if (!cols) return;
     
         setFixedCellsWidth(table)
+        this.setDefaultWidth(cols, fields)
         this.setCellsWidth(table)
     
+        if (tableHeader.offsetWidth + 10 <= sectionBody.offsetWidth) {
+            setCellsWidthDefference(tableHeader, sectionBody)    
+        }
+
         for (let i = 0; i < cols.length; i++) {
             let div = cols[i].querySelector('.table-item__border');
             setListeners(div);
@@ -111,14 +121,8 @@ export default {
 
     // Установка изначального положения ячеек если ширина таблицы меньше секции
     setCellsWidth(table) {
-        let tableHeader = table.querySelector('.table__header')
-        let sectionBody = table.parentNode
         setFixedCellsWidth(table)
         this.setStickyClass(table)
-
-        if (tableHeader.offsetWidth + 10 <= sectionBody.offsetWidth) {
-            setCellsWidthDefference(tableHeader, sectionBody)    
-        }
     },
 
     // Установка цвета у зафиксированного столбца
@@ -133,15 +137,26 @@ export default {
         for (let row of rows) {
             fixedFields = row.querySelectorAll('.table__item_fixed:not(.table__item_hidden)')
 
-            for (let index = 0; index < fixedFields.length; index++) {
-                fieldPos = fixedFields[index].getBoundingClientRect().left - table.parentNode.getBoundingClientRect().left
+            for (let cell of fixedFields) {
+                fieldPos = cell.getBoundingClientRect().left - table.parentNode.getBoundingClientRect().left
 
-                if (scrolledArea > fieldPos) {
-                    fixedFields[index].classList.add('table__item_sticky')
+                if (scrolledArea != 0 && fieldPos == cell.style.getPropertyValue("--fixTarget").replace('px', '')) {
+                    cell.classList.add('table__item_sticky')
                 } else {
-                    fixedFields[index].classList.remove('table__item_sticky')
+                    cell.classList.remove('table__item_sticky')
                 }
             }
+        }
+    },
+
+    // Установить значения ширин при импорте
+    setDefaultWidth(cells, fields) {
+        let width = null
+
+        for (let cell of cells) {
+            width = fields.find(p => p.key == cell.getAttribute('data-key')).width
+            setCellWidth(cell, width)
+            setVisibleTitle(cell)    
         }
     }
 }
@@ -151,13 +166,16 @@ const onMouseMoveThrottle = _.throttle(async function (table, tableHeader, secti
     setCellWidth(cell, width)
     setVisibleTitle(cell)
 
+    if (cell.classList.contains('table__item_fixed')) {
+        setFixedCellsWidth(table)
+    }
+
     let data = table.querySelectorAll('tbody .table__row')
     let rowFields = []
     data.forEach(row => {
         rowFields = row.querySelectorAll('.table__item')
         setCellWidth([...rowFields][info.index], width)
     });
-
 
     if (table.offsetWidth <= sectionBody.offsetWidth) {
         setCellsWidthDefference(tableHeader, sectionBody)

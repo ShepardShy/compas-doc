@@ -7,14 +7,11 @@
 
     position: relative;
     width: 100%;
-
+    margin-bottom: 70px;
+    
     &.table-template_loading, &.table-template_filtering {
         .table {
             pointer-events: none;
-        }
-
-        .table-template__loader {
-            display: grid;
         }
     }
 
@@ -30,67 +27,13 @@
         .table {
             opacity: 0.5;
         }
-        
-        .table-template__loader {
-            top: calc(var(--stickyTop) + 40px);
-        }
-    
-    }
-
-    .table-template__loader {
-        height: max-content;
-        position: absolute;
-        z-index: 2;
-        top: calc(var(--stickyTop) + 50px);
-        left: 0px;
-        width: 100%;
-        display: none;
-        place-items: center;
-
-        &::after {
-            width: 32px;
-            height: 32px;
-            margin: 0;
-            position: static;
-        }
-    }
-
-    .table-template__buttons {
-        position: absolute;
-        z-index: 3;
-        top: calc(var(--stickyTop) + 16px);
-        left: 0px;
-        display: flex;
-        width: 100%;
-    }
-
-    .scroll-button {
-        &.scroll-button_disabled {
-            display: none;
-        }
-    
-        &.scroll-button_left {
-            left: 0px;
-            position: absolute;
-
-            &::before {
-                content: url('/icons/scrollButtonLeft.svg');
-            }
-        }
-    
-        &.scroll-button_right {
-            right: 0px;
-            position: absolute;
-
-            &::before {
-                content: url('/icons/scrollButtonRight.svg');
-            }
-        }
     }
 }
 
 .table-template__body {
+    min-height: 70vh;
     overflow: auto;
+    overflow-y: hidden;
 }
 
 .table {
@@ -110,100 +53,32 @@
         background: variables.$color-white;
     }
 
+    &.table_empty {
+        width: 100%;
+
+        .table__body {
+            width: 100%;
+            position: relative;
+
+            &::before {
+                content: "Нет данных";
+                position: sticky;
+                left: 35vw;
+                top: 35vh;
+                white-space: nowrap;
+                display: flex;
+                height: 60vh;
+                align-items: center;
+                justify-content: center;
+                color:variables.$color-blue-grey;
+            }
+        }
+    }
+
     &.table_transfer {
         position: absolute;
         top: -10000px;
         left: -10000px;
         background: variables.$color-white;
-    }
-}
-
-.table__item {
-    min-width: 50px;
-    overflow: hidden;
-    font-weight: 400;
-    text-align: start;
-    position: relative;
-    width: var(--defaultWidth);
-    max-width: var(--defaultWidth);
-    min-width: var(--defaultWidth);
-    @include mixins.sortableGhost();
-    
-    &.table__item_fixed {
-        z-index: 3;
-        position: sticky;
-        left: var(--fixTarget);
-        background: variables.$color-white;
-    }
-
-    &.table__item_hidden {
-        display: none;
-    }
-
-    &.table__item_required {
-        .table-item__content {
-            .table-item__title {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 5px;
-
-                &::after {
-                    content: url('/public/icons/require.svg');
-                    position: relative;
-                    top: -7px;
-                }
-            }
-        }
-    }
-
-    &.table__item_readonly {
-        color: variables.$color-grey;
-    }
-
-    &.table__item_sticky {
-        background: #f9f9fa;
-    }
-
-    &.table__item_clicked {
-        z-index: 10;
-        overflow: visible;
-    }
-
-    .table-item__content {
-        color: var(--colorItem);
-        padding: 10px;
-        display: flex;
-        gap: 5px;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .table-item__title {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px;
-    }
-
-    .table-item__drag-area {
-        height: 100%;
-        position: absolute;
-        width: calc(100% - 10px);
-        top: 0;
-        left: 5px;
-        z-index: 3;
-    }
-
-    .table-item__border {
-        top: 0px; 
-        right: 0px; 
-        position: absolute; 
-        cursor: col-resize; 
-        
-        @include mixins.userSelect($value: none);
-        @include mixins.elemResolutionOptions(5px, 100%);
-    
-        &:hover, &.table-item__border_changing {
-            border-right: 1px solid #bcbcbc;
-        }
     }
 }

@@ -1,0 +1,37 @@
+{
+    "item": {
+        "default": {
+            "id": 0,
+            "required": true,
+            "title": "Заголовок",
+            "placeholder": "Введите текст",
+            "value": "asda sdasd has kd haskd has d \n\n\n\n\n\n sada sd asd asldh askda kls",
+            "key": "textareaKey",
+            "focus": false,
+            "type": "text",
+            "substring": null,
+            "external_link": null
+        },
+        "type": "Object"
+    },
+    "mask": {
+        "default": null,
+        "type": "String"
+    },
+    "disabled": {
+        "default": false,
+        "type": "Boolean"
+    },
+    "isUseEnter": {
+        "default": true,
+        "type": "Boolean"
+    },
+    "isReadOnly": {
+        "default": true,
+        "type": "Boolean"
+    },
+    "isLink": {
+        "default": false,
+        "type": "Boolean"
+    }
+}

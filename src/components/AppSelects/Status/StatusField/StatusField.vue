@@ -3,7 +3,7 @@
         class="status__popup" 
         :class="colorPicker.state ? 'status__popup_colorpicker' : ''" 
         :closeByClick="false" ref="popupRef" 
-        @clickOutside="() => callActionColorPicker({action: 'toggleColorPicker', data: false})"
+        @clickOutside="() => {emit('clickOutside', true); callActionColorPicker({action: 'toggleColorPicker', data: false})}"
         @click="(event) => props.isReadOnly ? event.preventDefault() : null"
     >
         <template #summary> 
@@ -17,7 +17,12 @@
                 Не выбрано
             </PopupOption>
 
-            <PopupOption v-show="!colorPicker.state" v-for="option in visibileOptions" @click="() => changeValue(option)">
+            <PopupOption 
+                v-show="!colorPicker.state" 
+                v-for="option in visibileOptions" 
+                :class="activeOption != null && activeOption.id == option.value ? 'popup__option_active' : ''" 
+                @click="() => changeValue(option)"
+            >
                 <StatusOption 
                     :option="option.label"
                 />
@@ -25,8 +30,8 @@
 
             <PopupOption 
                 v-if="props.isCanCreate"
-                class="popup__option-sublink" 
-                :class="colorPicker.state ? 'popup__option-sublink_back' : ''"
+                class="popup-option__sublink" 
+                :class="colorPicker.state ? 'popup-option__sublink_back' : ''"
                 @click="() => callActionColorPicker({action: 'toggleColorPicker', data: !colorPicker.state})" 
             >
                 Палитра цветов <IconArrow />
@@ -48,7 +53,7 @@
 
     import { ref, onMounted, watch } from 'vue'
 
-    import elementsDOM from '@/scripts/elementsDOM'
+    import popupScripts from '@/components/AppPopup/Scripts.js';
     import AppPopup from '@/components/AppPopup/Popup.vue';
     import StatusOption from '../StatusOption/StatusOption.vue';
     import IconArrow from '@/components/AppIcons/Arrow/Arrow.vue';
@@ -106,6 +111,7 @@
 
     const emit = defineEmits([
         'changeValue',
+        'clickOutside'
     ])
 
     // Действия с колорпикером
@@ -176,7 +182,7 @@
 
             createHiddenOption()
             toggleColorPicker(false)
-            elementsDOM.hideDetails(popupRef.value.popupRef)
+            popupScripts.hideDetails(popupRef.value.popupRef)
         }
 
         switch (data.action) {
@@ -202,7 +208,7 @@
     // Изменение значения
     const changeValue = (option) => {
         activeOption.value = option == null ? null : option.label
-        elementsDOM.hideDetails(popupRef.value.popupRef)
+        popupScripts.hideDetails(popupRef.value.popupRef)
         emit('changeValue', {key: props.item.key, value:  option == null ? null : option.value})
     }
 

@@ -9,10 +9,12 @@
         />    
 
         <AppPopup 
-            class="autocomplete__popup" 
-            :closeByClick="false" 
             ref="popupRef" 
+            class="autocomplete__popup" 
+            :isHaveParent="true"
+            :closeByClick="false" 
             :isReadOnly="props.isReadOnly"
+            @clickOutside="() => emit('clickOutside', true)"
             @click="(event) => props.isReadOnly ? event.preventDefault() : null"
         >
             <template #summary> 
@@ -35,7 +37,7 @@
                     :enabledAutocomplete="false"
                     @openLink="(item) => emit('openLink', item)"
                     @changeValue="(data) => callAction({action: 'searchOptions', value: data.value})"
-                    @mousedown="(event) => props.isReadOnly ? event.preventDefault() : callAction({action: 'showContent', value: true})"
+                    @mousedown="(event) => props.isReadOnly ? null : event.target.classList.contains('popup_prevent') ? event.preventDefault() : null"
                     @keydown.space="(event) => {event.preventDefault(); callAction({action: 'searchOptions', value: event.target.value + ' '})}"
                 > 
                     <slot name="link"></slot>
@@ -51,7 +53,7 @@
                 <PopupOption 
                     class="popup-option__root" 
                     v-for="option in options" 
-                    :class="option.value == activeOption.id ? 'popup__option_active' : '', props.item.lockedOptions.includes(option.value) ? 'popup__option_disabled' : ''" 
+                    :class="option.value == activeOption.id ? 'popup__option_active' : '', ![null, undefined].includes(props.item.lockedOptions) && props.item.lockedOptions.includes(option.value) ? 'popup__option_disabled' : ''" 
                     @click="() => callAction({action: 'changeValue', value: option.value})"
                 >
                     <div class="popup-option__text">
@@ -80,6 +82,7 @@
     import FormItem from '@/components/AppForm/FormItem/FormItem.vue';
     import FormLabel from '@/components/AppForm/FormLabel/FormLabel.vue';
     import PopupOption from '@/components/AppPopup/PopupOption/PopupOption.vue';
+    import PopupScripts from '@/components/AppPopup/Scripts.js';
 
     const popupRef = ref(null)
     const nullOption = {
@@ -118,6 +121,10 @@
         isLink: {
             default: false,
             type: Boolean
+        },
+        isShowId: {
+            default: false,
+            type: Boolean
         }
     })
 
@@ -125,20 +132,12 @@
         'openLink',
         'changeValue',
         'createOption',
+        'clickOutside',
         'searchOptions',
     ])
 
     // Действия с автокомплитом
     const callAction = (data) => {
-        // Открытие/скрытие всплывающего окна
-        const showContent = (state) => {
-            if (state) {
-                popupRef.value.popupRef.setAttribute('open', true)
-            } else {
-                popupRef.value.popupRef.removeAttribute('open')
-            }
-        }
-
         // Получение опций
         const getOptions = () => {
             // Проверка на пустой объект
@@ -157,7 +156,7 @@
 
         // Создание опции
         const createOption = () => {
-            showContent(false)
+            PopupScripts.hideDetails(popupRef.value.popupRef)
             emit('createOption', {
                 key: props.item.key,
                 value: true
@@ -183,11 +182,11 @@
 
         // Изменить значение поля
         const changeValue = (value) => {
-            if (value == null || !props.item.lockedOptions.includes(value)) {
+            if (value == null || (![null, undefined].includes(props.item.lockedOptions) && !props.item.lockedOptions.includes(value))) {
                 search.value = null
                 options.value = backupOptions.value
                 setActiveOption(value)
-                showContent(false)
+                PopupScripts.hideDetails(popupRef.value.popupRef)
                 emit('changeValue', {
                     key: props.item.key,
                     value: value
@@ -196,11 +195,6 @@
         }
 
         switch (data.action) {
-            // Отображение всплывающего окна
-            case 'showContent':
-                showContent(data.value)
-                break;
-        
             // Создание опции
             case 'createOption':
                 createOption()
@@ -257,5 +251,9 @@
             action: 'setActiveOption',
             value: props.item.value
         })
+    })
+
+    defineExpose({
+        popupRef
     })
 </script>

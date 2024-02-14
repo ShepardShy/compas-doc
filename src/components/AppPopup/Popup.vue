@@ -5,10 +5,10 @@
         @mousedown="(event) => mouseDownEvent = event" 
         v-click-out-side="(event) => clickOutside(event)"
     >
-        <summary class="popup__summary">
+        <summary class="popup__summary" @click="() => showDetail()">
             <slot name="summary"></slot>
         </summary>
-        <div class="popup__content" @click="() => props.closeByClick ? elementsDOM.hideDetails(popupRef) : ''">
+        <div class="popup__content" @click="() => props.closeByClick ? popupScripts.hideDetails(popupRef) : ''">
             <slot name="content"></slot>
         </div>
     </details>
@@ -19,7 +19,7 @@
 
     import { ref } from 'vue'
     import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside'
-    import elementsDOM from '@/scripts/elementsDOM'
+    import popupScripts from './Scripts.js'
 
     const popupRef = ref(null)
     let mouseDownEvent = ref(null)
@@ -30,6 +30,10 @@
             type: Boolean
         },
         isReadOnly: {
+            default: false,
+            type: Boolean
+        },
+        isHaveParent: {
             default: false,
             type: Boolean
         }
@@ -43,9 +47,18 @@
     const clickOutside = (event) => {
         if (mouseDownEvent.value == null || mouseDownEvent.value.target.closest('.popup') == null) {
             emit('clickOutside', event)
-            elementsDOM.hideDetails(popupRef.value)
+            popupScripts.hideDetails(popupRef.value)
         }
         mouseDownEvent.value = null
+    }
+
+    // Показать выплывающее меню
+    const showDetail = () => {
+        if (props.isHaveParent) {
+            popupRef.value.setAttribute('open', true)
+        }
+        
+        popupScripts.setDropdownPosition(popupRef.value)
     }
 
     defineExpose({
