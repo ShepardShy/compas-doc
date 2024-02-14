@@ -1,17 +1,17 @@
-@use '@/assets/variables' as variables;
-@use '@/assets/mixins' as mixins;
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
 
 .file {
     .file-container {
         &.file-container_empty {
             &::after {
                 content: 'не заполнено';
-                position: relative;
                 color: variables.$color-grey;
+                margin-bottom: auto;
             }
 
-            &.file-container_one-file:after {
-                right: 5px;
+            .file-list {
+                display: none;
             }
         }
 
@@ -99,12 +99,12 @@
                         place-items: center;
                         grid-template-columns: 1fr;
                         background-color: rgba(246, 245, 243, 0.6);
-                        @include mixins.borderOptions(1px, solid, variables.$color-darkest-gray, 50%);
+                        @include mixins.borderOptions(1px, solid, variables.$color-darkest-grey, 50%);
                         @include mixins.elemResolutionOptions(30px, 30px);
                         @include mixins.elemPositionOptions(35px, 35px);
 
                         svg {
-                            fill: variables.$color-darkest-gray;
+                            fill: variables.$color-darkest-grey;
                         }
                     }
 
@@ -155,4 +155,34 @@
             }
         }
     }
+}
+
+.table__item .file {
+    height: 100%;
+
+    .file-container {
+        height: 100%;
+    }
+
+    .file-list {
+        height: 100%;
+        aspect-ratio: 1;
+
+        .file-list__item {
+            display: block;
+
+            &.fancybox-item {
+                .fancybox-item__img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
+
+    .fancybox-item {
+        height: 100%;
+        aspect-ratio: 1;
+    }
+
 }
