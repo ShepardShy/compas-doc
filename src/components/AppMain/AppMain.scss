@@ -8,5 +8,6 @@
 .main__content {
     display: grid;
     grid-gap: 70px;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
+    //grid-template-columns: repeat(3, 1fr);
 }

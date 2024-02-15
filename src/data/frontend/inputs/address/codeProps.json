@@ -32,5 +32,9 @@
     "isShowMap": {
         "default": true,
         "type": "Boolean"
+    },
+    "isSelectSeveral": {
+        "default": true,
+        "type": "Boolean"
     }
 }

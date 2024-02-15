@@ -10,61 +10,29 @@
             @searchOptions="(data) => emit('searchOptions', (data))"
         />
 
-        <!--  Изменение состояния поля  -->
-        <label style="display: flex; align-items: center">
-            <input type="checkbox" style="width: 20px; margin-right: 5px">
-            <span>&lt;-- ЖМИ НА РЫЧАГ КРОНК</span>
-        </label>
+        <AppCopy
+            v-if="activeOption"
+            class="form-item__copy"
+            :text="activeOption.label.text"
+            :buttonTitle="'Скопировать адрес'"
+        />
 
-        <YandexMap
-            v-model="map"
-            :settings="{
-                location: {
-                  center: [37.455864, 55.617698],
-                  zoom: 9,
-                }
-            }"
-            width="100%"
-            height="382px"
-        >
-            <YandexMapDefaultSchemeLayer />
-            <YandexMapDefaultFeaturesLayer />
-
-            <YandexMapMarker
-                :settings="{
-                    coordinates: activeOption ? activeOption.label.coords : [37.455864, 55.617698],
-                }"
-            >
-                <div class="marker"></div>
-            </YandexMapMarker>
-
-            <YandexMapControls :settings="{ position: 'left' }">
-                <YandexMapZoomControl :settings="{ easing: 'linear' }"/>
-            </YandexMapControls>
-        </YandexMap>
-
-        <a
-            :href="`https://maps.yandex.ru/?text=${coords === undefined || coords.length === 0 ? '55.755864+37.617698' : coords.join('+')}`"
-            target="_blank"
-            class="yandex-container__custom-button"
-        >
-            Открыть в Яндекс.Картах
-        </a>
+       <MapDefault
+           v-if="props.isShowMap"
+           :markers="activeOption ? [activeOption] : []"
+           :isSelectSeveral="props.isSelectSeveral"
+       />
     </div>
 </template>
 
 <script setup>
     import './AddressField.scss';
 
-    import {
-        YandexMap,
-        YandexMapControls, YandexMapDefaultFeaturesLayer,
-        YandexMapDefaultSchemeLayer, YandexMapMarker,
-        YandexMapZoomControl
-    } from 'vue-yandex-maps'
+    import {computed, onMounted, shallowRef, watch} from "vue";
+
     import AppAutocomplete from "@/components/AppAutocomplete/Input/Input.vue";
-    import {computed, shallowRef, watch} from "vue";
-    import Input from "@/components/AppAutocomplete/Input/Input.vue";
+    import MapDefault from "@/components/AppMap/MapDefault/MapDefault.vue";
+    import AppCopy from "@/components/AppCopy/AppCopy.vue";
 
     const props = defineProps({
         item: {
@@ -90,6 +58,10 @@
         isShowMap: {
             default: false,
             type: Boolean
+        },
+        isSelectSeveral: {
+            default: false,
+            type: Boolean
         }
     })
 
@@ -98,9 +70,8 @@
         'searchOptions'
     ])
 
-    const map = shallowRef(null)
-
     const activeOption = computed(() => {
         return props.item.options.find((option) => option.value === props.item.value)
     })
+
 </script>

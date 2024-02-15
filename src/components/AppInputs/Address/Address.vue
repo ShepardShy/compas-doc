@@ -12,6 +12,7 @@
             :item="props.item"
             :isReadOnly="props.isReadOnly"
             :isShowMap="props.isShowMap"
+            :isSelectSeveral="props.isSelectSeveral"
             @changeValue="(data) => emit('changeValue', (data))"
             @searchOptions="(data) => emit('searchOptions', (data))"
         />
@@ -48,6 +49,10 @@
             type: Boolean
         },
         isShowMap: {
+            default: false,
+            type: Boolean
+        },
+        isSelectSeveral: {
             default: false,
             type: Boolean
         }

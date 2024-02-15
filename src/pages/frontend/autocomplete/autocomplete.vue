@@ -1,13 +1,13 @@
 <template>
-    <AppComponent
-        :title="'Стандартный автокомплит'"
-        :component="AppAutocomplete"
-        :codeProps="localProps"
-        :codeEmits="AutocompleteEmits"
-        @changeValue="(data) => changeValue(data)"
-        @createOption="(data) => createOption(data)"
-        @searchOptions="(data) => searchOptions(data)"
-    />
+<!--    <AppComponent-->
+<!--        :title="'Стандартный автокомплит'"-->
+<!--        :component="AppAutocomplete"-->
+<!--        :codeProps="localProps"-->
+<!--        :codeEmits="AutocompleteEmits"-->
+<!--        @changeValue="(data) => changeValue(data)"-->
+<!--        @createOption="(data) => createOption(data)"-->
+<!--        @searchOptions="(data) => searchOptions(data)"-->
+<!--    />-->
 
     <AppComponent
         :title="'Поле адреса'"
