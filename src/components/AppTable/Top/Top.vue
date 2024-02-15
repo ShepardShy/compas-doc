@@ -1,96 +1,102 @@
 <template>
     <div class="table-template__header table-top">
-        <AppSelect 
-            class="table-top__item table-top__select"
-            :class="sortItem.order == 'asc' ? 'table-top__select_up' : ''"
-            :item="{
-                id: 0,
-                key: 'sortTable',
-                value: sortItem.key,
-                focus: false,
-                required: false,
-                title: null,
-                lockedOptions: [],
-                options: options
-            }"
-            :isFiltered="false"
-            :isMultiple="false"
-            :isReadOnly="false"
-            :isHaveNullOption="true"
-            @changeValue="(data) => sortTable(data)"
-        />
-        <PopupSave 
-            class="table-top__item"
-            v-show="menu.saves.isShow"
-            @saveSettings="(role) => callAction({action: 'saveSettings', value: role})"
-        />
-        <AppPopup class="table-top__item" :closeByClick="true">
-            <template #summary>
-                <IconDots />
-            </template>
-            <template #content>
-                <PopupOption @click="() => callAction({action: 'downloadExcel', value: null})">
-                    Скачать Excel
-                </PopupOption>
-            </template>
-        </AppPopup>
-        <AppPopup class="table-top__item" :closeByClick="false" @clickOutside="() => callAction({action: 'changeTab', value: null})">
-            <template #summary>
-                <IconSettings />
-            </template>
-            <template #content>
-                <template v-if="menu.activeTab == null">
-                    <PopupOption class="popup-option__sublink" v-for="tab in menu.tabs" @click="() => callAction({action: 'changeTab', value: tab})">
-                        {{ tab.title }} 
+        <caption class="table__title">
+            {{ props.tableTitle }}
+        </caption>
 
-                        <IconArrow />
+        <div class="table-top__actions">
+            <AppSelect 
+                class="table-top__item table-top__select"
+                :class="sortItem.order == 'asc' ? 'table-top__select_up' : ''"
+                :item="{
+                    id: 0,
+                    key: 'sortTable',
+                    value: sortItem.key,
+                    focus: false,
+                    required: false,
+                    title: null,
+                    lockedOptions: [],
+                    options: options
+                }"
+                :isFiltered="false"
+                :isMultiple="false"
+                :isReadOnly="false"
+                :isHaveNullOption="true"
+                @changeValue="(data) => sortTable(data)"
+            />
+            <PopupSave 
+                class="table-top__item"
+                v-show="menu.saves.isShow"
+                @saveSettings="(role) => callAction({action: 'saveSettings', value: role})"
+            />
+            <AppPopup class="table-top__item" :closeByClick="true">
+                <template #summary>
+                    <IconDots />
+                </template>
+                <template #content>
+                    <PopupOption @click="() => callAction({action: 'downloadExcel', value: null})">
+                        Скачать Excel
                     </PopupOption>
                 </template>
-                <template v-else>
-                    <PopupOption class="popup-option__sublink popup-option__sublink_back" @click="() => callAction({action: 'changeTab', value: null})">
-                        <IconArrow />
-                        
-                        {{ menu.activeTab.title }}
-                    </PopupOption>
+            </AppPopup>
+            <AppPopup class="table-top__item" :closeByClick="false" @clickOutside="() => callAction({action: 'changeTab', value: null})">
+                <template #summary>
+                    <IconSettings />
+                </template>
+                <template #content>
+                    <template v-if="menu.activeTab == null">
+                        <PopupOption class="popup-option__sublink" v-for="tab in menu.tabs" @click="() => callAction({action: 'changeTab', value: tab})">
+                            {{ tab.title }} 
 
-                    <template v-if="menu.activeTab.tab == 'order'">
-                        <draggable 
-                            ref="draggableRef"
-                            class="popup-option__draggable"
-                            group="table-top__item" 
-                            itemKey="table-top__item"
-                            v-model="fields" 
-                            handle=".icon__draggable"
-                            @end="(event) => callAction({action: 'dragEnd', value: event})" 
-                            @start="(event) => callAction({action: 'dragStart', value: event})" 
-                        >
-                            <template #item="{ element: option }">
-                                <PopupOption class="popup-option__sublink" v-show="option.enabled">
-                                    <IconDrag /> 
-                                    {{ option.title }}
-                                </PopupOption>
-                            </template>
-                        </draggable>
-                    </template>
-                    <template v-else>
-                        <PopupOption class="popup__option_checkbox" v-for="option in menu.activeTab.tab == 'enabled' ? fields : fields.filter(p => p.enabled)">
-                            <AppCheckbox 
-                                :item="{
-                                    id: option.id,
-                                    title: option.title,
-                                    type: 'checkbox',
-                                    disabled: false, 
-                                    value: menu.activeTab.tab == 'enabled' ? option.enabled : option.fixed,
-                                    options:  null,
-                                    key: option.key                           
-                                }"
-                                @changeValue="(data) => callAction({action: 'changeValue', value: data})"
-                            />                            
+                            <IconArrow />
                         </PopupOption>
                     </template>
+                    <template v-else>
+                        <PopupOption class="popup-option__sublink popup-option__sublink_back" @click="() => callAction({action: 'changeTab', value: null})">
+                            <IconArrow />
+                            
+                            {{ menu.activeTab.title }}
+                        </PopupOption>
+
+                        <template v-if="menu.activeTab.tab == 'order'">
+                            <draggable 
+                                ref="draggableRef"
+                                class="popup-option__draggable"
+                                group="table-top__item" 
+                                itemKey="table-top__item"
+                                v-model="fields" 
+                                handle=".icon__draggable"
+                                @end="(event) => callAction({action: 'dragEnd', value: event})" 
+                                @start="(event) => callAction({action: 'dragStart', value: event})" 
+                            >
+                                <template #item="{ element: option }">
+                                    <PopupOption class="popup-option__sublink" v-show="option.enabled">
+                                        <IconDrag /> 
+                                        {{ option.title }}
+                                    </PopupOption>
+                                </template>
+                            </draggable>
+                        </template>
+                        <template v-else>
+                            <PopupOption class="popup__option_checkbox" v-for="option in menu.activeTab.tab == 'enabled' ? fields : fields.filter(p => p.enabled)">
+                                <AppCheckbox 
+                                    :item="{
+                                        id: option.id,
+                                        title: option.title,
+                                        type: 'checkbox',
+                                        disabled: false, 
+                                        value: menu.activeTab.tab == 'enabled' ? option.enabled : option.fixed,
+                                        options:  null,
+                                        key: option.key                           
+                                    }"
+                                    @changeValue="(data) => callAction({action: 'changeValue', value: data})"
+                                />                            
+                            </PopupOption>
+                        </template>
+                    </template>
                 </template>
-            </template>
-        </AppPopup>
+            </AppPopup>
+        </div>
     </div>
 </template>
 
@@ -121,6 +127,14 @@
     const sortItem = inject('sortItem')
     const tableRef = inject('tableRef')
     
+    const props = defineProps({
+        tableTitle: {
+            default: null,
+            type: String
+        }
+    })
+
+
     const emit = defineEmits([
         'callAction'
     ])
@@ -169,7 +183,7 @@
                 action: 'saveFields', 
                 value: {
                     role: role, 
-                    fields: fields
+                    fields: fields.value
                 }
             })
         }
@@ -183,7 +197,7 @@
         const downloadExcel = () => {
             emit('callAction', {
                 action: 'downloadExcel',
-                value: fields.value
+                value: fields.value.filter(item => item.enabled)
             })
         }
 

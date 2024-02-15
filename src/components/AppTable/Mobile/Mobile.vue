@@ -127,6 +127,24 @@
                         :isFiltered="true"
                         @changeValue="(data) => changeValue(row.id, data)"
                     />
+
+                    <AppFile 
+                        v-else-if="item.type == 'file'"
+                        :item="{
+                            id: row.id,
+                            title: item.title,
+                            key: item.key,
+                            required: Boolean(item.required),
+                            buttonName: null,
+                            value: row[item.key]
+                        }"
+                        :isReadOnly="true"
+                        :isShowFileName="false"
+                        :isMultiple="false"
+                        :isOneFile="true"
+                        @changeValue="(data) => changeValue(row.id, data)"
+                    />
+
                     <div v-else>
                         {{ item.type }}
                     </div>
@@ -141,6 +159,7 @@
 
     import { inject, ref } from 'vue'
     
+    import AppFile from '@/components/AppInputs/File/File.vue'
     import FormItem from '@/components/AppForm/FormItem/FormItem.vue';
     import FormLabel from '@/components/AppForm/FormLabel/FormLabel.vue';
     import AppActions from '@/components/AppTable/Body/Actions/Actions.vue'

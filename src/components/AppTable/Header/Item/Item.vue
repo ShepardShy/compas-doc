@@ -44,7 +44,7 @@
 
             <div 
                 class="table-item__drag-area"
-                :draggable="!props.headerRef.parentNode.classList.contains('table_resizing')"
+                :draggable="props.headerRef != null && !props.headerRef.parentNode.classList.contains('table_resizing')"
                 @dragover.prevent
                 @dragenter.prevent
                 @dragstart="(event) => $emit('dragStart', event)"
@@ -101,6 +101,10 @@
             type: Boolean
         }
     })
+
+    const emit = defineEmits([
+        'callAction'
+    ])
 
     // Симуляция двойного клика
     const doubleClick = (item) => {

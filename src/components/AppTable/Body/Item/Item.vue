@@ -11,7 +11,7 @@
         ]" 
         @click="(event) => doubleClick(event, props.row)" 
     >
-        <div class="table-item__content">
+        <div class="table-item__content" :class="`table-item__content_${props.item.type}`">
                 <AppCheckbox 
                     v-if="props.item.type == 'checkbox'"
                     :item="{
@@ -126,6 +126,22 @@
                     @clickOutside="() => callAction({action: 'openPopup', value: false})"
                     @changeValue="(data) => changeValue(props.row.id, data)"
                 />
+                <AppFile 
+                    v-else-if="props.item.type == 'file'"
+                    :item="{
+                        id: props.row.id,
+                        title: props.item.title,
+                        key: props.item.key,
+                        required: Boolean(props.item.required),
+                        buttonName: null,
+                        value: props.row[props.item.key]
+                    }"
+                    :isReadOnly="true"
+                    :isShowFileName="false"
+                    :isMultiple="false"
+                    :isOneFile="true"
+                    @changeValue="(data) => changeValue(props.row.id, data)"
+                />
         </div>
     </td>
 </template>
@@ -136,6 +152,7 @@
     import { inject, ref } from 'vue'
 
     import AppActions from '../Actions/Actions.vue'
+    import AppFile from '@/components/AppInputs/File/File.vue'
     import AppStatus from '@/components/AppSelects/Status/Status.vue'
     import AppSelect from '@/components/AppSelects/Select/Select.vue'
     import FormValue from '@/components/AppForm/FormValue/FormValue.vue'

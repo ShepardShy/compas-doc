@@ -60,7 +60,7 @@
                         {{ option.label.text }}
                     </div>
 
-                    <span class="popup-option__substring">
+                    <span class="popup-option__substring" v-show="props.isShowId">
                         ID: {{ option.label.id }}
                     </span>
                 </PopupOption>

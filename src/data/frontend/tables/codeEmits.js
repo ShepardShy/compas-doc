@@ -1,57 +1,82 @@
 export default {
-    '@callAction': {
-        action: 'actionFilter', 
-        value: [
-            {
-                /* Поиск по фильтру */
-                search: {
-                    field_key: null,
-                    field_key_2: null
+    '@callAction': [
+        {
+            action: 'getTableData', 
+            value: {
+                "sortItem": {
+                    "key": "id",
+                    "order": "desc"
                 },
-
-                /* Удаление сохраненного фильтра */
-                delete: 'id',
-
-                /* Cохранение нового фильтра */
-                create: {
-                    id: 0,
-                    sort: 2,
-                    is_new: true,
-                    is_hidden: 0,
-                    title: "Title",
-                    fields: [
-                        {
-                            id: 1,
-                            key: "field_key",
-                            value: null
-                        }
-                    ],
-                    requestFields: {
-                        field_key: null
-                    }
-                },
-
-                /* Обновление сохраненного фильтра */
-                update: {
-                    id: 0,
-                    sort: 2,
-                    is_hidden: 0,
-                    title: "Title",
-                    fields: [
-                        {
-                            id: 1,
-                            key: "field_key",
-                            value: null
-                        }
-                    ],
-                    requestFields: {
-                        field_key: null
-                    }
-                },
-
-                /* Смена сортировки сохраненных фильтров */
-                sort: ['id_1', 'id_3', 'id_3']
+                "footerData": {
+                    "pages": 1,
+                    "activePage": 1,
+                    "count": 50
+                }
             }
-        ]
-    }
+        },
+        {
+            action: 'downloadExcel',
+            value: [
+                {
+                    "id": 105,
+                    "title": "Название",
+                    "key": "name",
+                    "width": "368px",
+                    "enabled": true,
+                    "sort_order": "desc",
+                    "type": "text",
+                    "is_plural": 0,
+                    "external_link": "https://avixo.ru/logistics",
+                    "is_external_link": 1,
+                    "is_link": 0,
+                    "required": 1,
+                    "fixed": null,
+                    "index": 0,
+                    "fixTarget": "0px",
+                    "read_only": 0,
+                    "unit": "",
+                    "mask": "",
+                    "can_edit": 0,
+                    "color": "",
+                    "is_hidden": 0,
+                    "visible_always": 1,
+                    "options": []
+                }
+            ]
+        },
+        {
+            action: 'saveFields', 
+            value: {
+                role: 'all',
+                fields: [
+                    {
+                        "id": 105,
+                        "title": "Название",
+                        "key": "name",
+                        "width": "368px",
+                        "enabled": true,
+                        "sort_order": "desc",
+                        "type": "text",
+                        "is_plural": 0,
+                        "external_link": "https://avixo.ru/logistics",
+                        "is_external_link": 1,
+                        "is_link": 0,
+                        "required": 1,
+                        "fixed": null,
+                        "index": 0,
+                        "fixTarget": "0px",
+                        "read_only": 0,
+                        "unit": "",
+                        "mask": "",
+                        "can_edit": 0,
+                        "color": "",
+                        "is_hidden": 0,
+                        "visible_always": 1,
+                        "options": []
+                    }
+                ]
+            } 
+        },
+    ]
+    
 }

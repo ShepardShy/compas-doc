@@ -54,7 +54,7 @@
         .file-list__item {
             position: relative;
             @include mixins.sortableGhost();
-            @include mixins.flexColumn();
+            // @include mixins.flexColumn();
 
             &.sortable-ghost {
                 border: none;

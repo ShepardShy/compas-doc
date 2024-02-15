@@ -63,6 +63,7 @@
     const callAction = (data) => {
         // Изменение количества отображаемых элементов
         const changeVisibleElems = (value) => {
+            footerData.value.activePage = 1
             footerData.value.count = value
             emit('callAction', {action: 'getTableData', value: null})
         }

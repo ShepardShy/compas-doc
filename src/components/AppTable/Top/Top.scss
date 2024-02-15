@@ -4,7 +4,15 @@
 .table-top {
     padding: 10px;
     border-bottom: 1px solid variables.$color-light-grey;
-    @include mixins.flexBlock($vertical: center, $horizontal: flex-end, $gap: 10px);
+    @include mixins.flexBlock($vertical: center, $horizontal: space-between, $gap: 10px);
+}
+
+.table-top__actions {
+    @include mixins.flexBlock($vertical: center, $gap: 10px);
+}
+
+.table__title {
+    font-weight: 600;
 }
 
 .table-top__item {

@@ -215,6 +215,10 @@
         const searchOptions = (value) => {
             search.value = value
             options.value = backupOptions.value.filter(option => option.label.toLowerCase().includes(search.value.toLowerCase()))
+
+            if (!popupRef.value.popupRef.hasAttribute('open')) {
+                popupRef.value.popupRef.setAttribute('open', true)
+            }
         }
 
         // Изменить значение поля

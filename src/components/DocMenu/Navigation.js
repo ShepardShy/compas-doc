@@ -53,18 +53,8 @@ export default {
         },
         {
             id: 21,
-            name: 'Детальная страница',
-            component: ''
-        },
-        {
-            id: 22,
             name: 'Страница с таблицей',
-            component: ''
+            component: markRaw(defineAsyncComponent(() => import('@/pages/backend/pageTable/pageTable.vue')))
         },
-        {
-            id: 23,
-            name: 'Корзина',
-            component: ''
-        }
     ]
 }
