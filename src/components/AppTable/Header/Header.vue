@@ -14,6 +14,7 @@
                     item.read_only ? 'table__item_readonly' : '',
                     item.isUpdated ? 'table__item_updated' : ''
                 ]" 
+                @callAction="(data) => emit('callAction', data)"
                 @dragStart="(event) => dragColumn({action: 'dragStart', value: {event, key: item.key}})"
                 @dragEnd="() => dragColumn({action: 'dragEnd', value: null})"
             />
@@ -47,6 +48,10 @@
             type: Boolean
         }
     })
+
+    const emit = defineEmits([
+        'callAction'
+    ])
 
     // Движение мыши
     const onMouseMove = (e) => {

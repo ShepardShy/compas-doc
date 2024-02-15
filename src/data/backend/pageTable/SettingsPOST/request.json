@@ -1,0 +1,18 @@
+{
+   "fields": [
+        {
+            "id": 0,
+            "title": "Выделение",
+            "key": "isChoose",
+            "width": "44px",
+            "enabled": true,
+            "hover": false,
+            "sort_order": null,
+            "type": "checkbox",
+            "fixed": true,
+            "fixTarget": "0px",
+            "index": 0,
+            "isSticky": false
+        }
+   ]
+}

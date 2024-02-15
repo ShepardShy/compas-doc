@@ -109,6 +109,30 @@
             }
 
             .table-item__content {
+                &.table-item__content_file {
+                    height: 100%;
+                    padding: 0px 10px;
+                    position: absolute;
+
+                    .form-item__file, 
+                    .file__container, 
+                    .file__list, 
+                    .file-list__item, 
+                    .fancybox-item__img {
+                        height: 100%;
+                    }
+
+                    .fancybox-item__img {
+                        width: 100%;
+                        max-height: 120px;
+                        max-width: 120px;
+                    }
+
+                    .file-list__item {
+                        aspect-ratio: 1;
+                    }
+                }
+
                 .form-item__title, .relation__actions {
                     display: none;
                 }

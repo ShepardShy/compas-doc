@@ -26,9 +26,10 @@
     }
    
     .status-option__rect {
-        display: flex;
-        align-items: center;
         position: relative;
+        @include mixins.flexBlock($vertical: center);
+        overflow: hidden;
+        border-radius: 5px;
 
         img {
             position: absolute;

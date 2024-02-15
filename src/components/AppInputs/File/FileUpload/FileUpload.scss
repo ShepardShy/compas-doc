@@ -21,6 +21,10 @@
     cursor: pointer;
     font-size: 0;
     z-index: 1;
+
+    &::-webkit-file-upload-button {
+        cursor: pointer;
+    }
 }
 
 .file-upload__button {

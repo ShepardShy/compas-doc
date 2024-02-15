@@ -208,7 +208,6 @@
     // Изменение значения
     const changeValue = (option) => {
         activeOption.value = option == null ? null : option.label
-        popupScripts.hideDetails(popupRef.value.popupRef)
         emit('changeValue', {key: props.item.key, value:  option == null ? null : option.value})
     }
 
@@ -252,12 +251,14 @@
 
         if (props.item.focus) {
             popupRef.value.popupRef.setAttribute('open', true)
+            popupScripts.setDropdownPosition(popupRef.value.popupRef)
         }
     })
 
     watch(() => props.item.focus, () => {
         if (props.item.focus) {
             popupRef.value.popupRef.setAttribute('open', true)
+            popupScripts.setDropdownPosition(popupRef.value.popupRef)
         }
     })
 

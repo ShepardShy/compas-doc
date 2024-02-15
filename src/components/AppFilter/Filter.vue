@@ -19,6 +19,7 @@
 
     import { ref, onMounted, watch, provide, onUnmounted } from 'vue'
 
+    import _ from 'lodash'
     import FilterMenu from './FilterMenu/FilterMenu.vue';
     import FilterHeader from './FilterHeader/FilterHeader.vue';
     import renderScripts from "@/scripts/renderScripts/renderScripts"
@@ -81,7 +82,7 @@
 
     // Установка активных плашек фильтра
     const setTabsFields = () => {
-        if (props.tabs != null) {
+        if (!_.isEmpty(props.tabs)) {
             for (let field in props.tabs) {
                 let findedField = fields.value.find(item => item.key == field)
                 if (findedField != undefined) {
@@ -93,7 +94,12 @@
             if (props.tabs.q != undefined) {
                 search.value = props.tabs.q
             }
+        } else {
+            for (let field of activeFields.value) {
+                field.value = null
+            }
         }
+
         activeFields.value = fields.value.filter(field => field.enabled)
         actionFilter({action: 'loadTabs', value: null})
     }

@@ -1,6 +1,6 @@
 <template>
     <FansyBox
-        class="file__container file-container"
+        class="file__container file-container form-item__value"
         :class="setClasses"
     >
         <draggable
@@ -38,7 +38,7 @@
             </template>
         </draggable>
 
-        <div class="file-container__circle" v-if="props.isOneFile && props.isReadOnly && values.length > 1">
+        <div class="file-container__circle" v-if="props.isOneFile && props.isReadOnly && values.length > 2">
             {{ values.length - 1 }}
         </div>
     </FansyBox>
@@ -49,7 +49,7 @@
 
     import draggable from 'vuedraggable'
     import {toast} from 'vue3-toastify';
-    import {computed, provide, ref, watch} from "vue";
+    import {computed, ref, watch} from "vue";
 
     import FansyBox from '@/components/AppFansyBox/FansyBox.vue';
     import FansyBoxImage from '@/components/AppFansyBox/FansyBoxImage/FansyBoxImage.vue';
@@ -106,7 +106,7 @@
 
     const setClasses = computed(() => {
         return [
-            values.value.length === 1 && props.isReadOnly ? 'file-container_empty' : '',
+            values.value.length === 1 && props.isReadOnly ? 'form-item__value_empty' : '',
             props.isOneFile ? 'file-container_one-file' : ''
         ]
     })

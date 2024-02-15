@@ -4,7 +4,7 @@
             "id": 0,
             "key": "selectKey",
             "value": null,
-            "focus": false,
+            "focus": true,
             "required": false,
             "title": "Заголовок",
             "options": [

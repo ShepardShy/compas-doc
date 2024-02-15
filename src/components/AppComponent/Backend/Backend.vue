@@ -15,6 +15,7 @@
             :code="props.request"
         />
         <ComponentDescription 
+            v-if="props.response != null"
             :title="'Response'"
             :code="props.response"
         />

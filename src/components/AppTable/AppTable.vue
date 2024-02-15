@@ -7,6 +7,7 @@
     >
         <TableTop 
             v-if="fields.length > 0"
+            :tableTitle="props.table.title"
             @callAction="(data) => callAction(data)"
         />
  
@@ -27,6 +28,7 @@
             <table class="table" ref="tableRef" :class="fields.length == 0 || bodyData.length == 0 ? 'table_empty' : ''">
                 <TableHeader 
                     :isTrash="props.isTrash"
+                    @callAction="(data) => callAction(data)"
                 />
                 <TableBody 
                     :slug="props.slug"
@@ -170,6 +172,7 @@
                     activePage: 0,
                     count: 25
                 },
+                title: null,
                 loaderState: null
             },
             type: Object
@@ -205,22 +208,9 @@
     onMounted(async () => {
         isMobile.value = window.innerWidth <= 660
         window.addEventListener('resize', checkingWindowWidth);
+        sortItem.value = JSON.parse(JSON.stringify(props.table.sortItem))
         footerData.value = JSON.parse(JSON.stringify(props.table.tableFooter))
         fields.value = callAction({action: 'setPropsValues', value: props.table.tableKeys})
-        socketRows.value = {
-            header: [
-                {
-                    "id": 842,
-                    "title": "Клиент 222",
-                }
-            ],
-            body: [
-                {
-                    id: 130301,
-                    name: "Новый клиент",
-                }
-            ]
-        }
         bodyData.value = callAction({action: 'setPropsValues', value: props.table.tableData})
     })
 

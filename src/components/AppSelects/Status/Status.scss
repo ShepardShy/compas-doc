@@ -13,10 +13,6 @@
         .status__option {
             &.status__preview {
                 .status-option__rect {   
-                    &::before {
-                        border-radius: 5px;
-                    }
-
                     &::after {
                         display: none;
                     }

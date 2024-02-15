@@ -134,7 +134,7 @@
 <script setup>
     import './Validation.scss';
     
-    import { ref, inject, onMounted } from 'vue'
+    import { ref, inject, onMounted, watch } from 'vue'
 
     import AppButton from '@/components/AppButton/AppButton.vue';
     import AppWarning from '@/components/AppWarning/AppWarning.vue';
@@ -178,4 +178,9 @@
         activePage.value = page
         activeRow.value = invalidRows.value[page]
     }
+
+    watch(() => invalidRows.value, () => {
+        activePage.value = 0
+        activeRow.value = invalidRows.value[0]
+    })
 </script>

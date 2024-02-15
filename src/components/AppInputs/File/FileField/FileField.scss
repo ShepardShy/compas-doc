@@ -3,18 +3,6 @@
 
 .file {
     .file-container {
-        &.file-container_empty {
-            &::after {
-                content: 'не заполнено';
-                position: relative;
-                color: variables.$color-grey;
-            }
-
-            &.file-container_one-file:after {
-                right: 5px;
-            }
-        }
-
         &.file-container_one-file {
             @include mixins.flexBlock($vertical: center, $gap: 5px);
 
@@ -54,7 +42,7 @@
         .file-list__item {
             position: relative;
             @include mixins.sortableGhost();
-            @include mixins.flexColumn();
+            // @include mixins.flexColumn();
 
             &.sortable-ghost {
                 border: none;

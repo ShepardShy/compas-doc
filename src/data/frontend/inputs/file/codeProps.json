@@ -5,16 +5,8 @@
             "title": "Фото",
             "key": "photo",
             "required": false,
-            "buttonName": "Загрузить",
-            "value": [
-                {
-                    "id": 1696445350884,
-                    "name": "Group 6 Copy 2.png",
-                    "preview": "https://compas.pro/storage/thumbnails/default/9k/oh/2sx8nf8ckw08oo0c8oo0w.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FkxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png&s=https",
-                    "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png",
-                    "extension": "png"
-                }
-            ]
+            "buttonName": null,
+            "value": []
         },
         "type": "Object"
     },
@@ -23,11 +15,11 @@
         "type": "Boolean"
     },
     "isShowFileName": {
-        "default": true,
+        "default": false,
         "type": "Boolean"
     },
     "isMultiple": {
-        "default": true,
+        "default": false,
         "type": "Boolean"
     },
     "isOneFile": {
