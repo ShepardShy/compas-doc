@@ -1,6 +1,6 @@
 <template>
     <div class="map">
-        <MapDefaultTop
+        <MapTop
             v-if="props.isSelectSeveral"
             :drawButtonActive="drawButtonActive"
             @drawButton="(status) => drawButton(status)"
@@ -11,8 +11,8 @@
                 v-model="map"
                 :settings="{
                     location: {
-                      center: [37.455864, 55.617698],
-                      zoom: 9,
+                      center: [37.54770, 55.643393],
+                      zoom: 15,
                     }
                 }"
                 width="100%"
@@ -31,11 +31,29 @@
                     <div class="marker"></div>
                 </YandexMapMarker>
 
+                <YandexMapMarker
+                    v-for="(marker, index) in [
+                        [
+                            37.51298148651122, // широта
+                            55.63728838783018 // долгота
+                        ],
+                        [
+                            37.58241851348875,
+                            55.649496656772726
+                        ]
+                    ]"
+                    :key="index"
+                    :settings="{
+                        coordinates: marker,
+                    }"
+                >
+                    <div class="marker" style="background: red">{{marker}}</div>
+                </YandexMapMarker>
+
+
                 <YandexMapControls :settings="{ position: 'left' }">
                     <YandexMapZoomControl :settings="{ easing: 'linear' }"/>
                 </YandexMapControls>
-
-<!--                <YandexMapListener />-->
 
                 <YandexMapControls v-if="aloneItem && !props.isSelectSeveral" :settings="{ position: 'bottom right' }">
                     <YandexMapControlButton>
@@ -52,24 +70,21 @@
                     v-model="polygon"
                     :settings="{
                         id: 'one',
-                        draggable: true,
                         geometry: {
-                            type: 'LineString',
-                            coordinates: [
-                                // Specify the coordinates of the vertices of the polyline.
-                                [37.5, 55.7],
-                                [37.4, 55.8],
-                                [37.5, 55.8],
-                                [37.4, 55.7],
-                            ],
+                            type: 'Polygon',
+                            coordinates: [polygonCoords],
                         },
-                        style: { stroke: [{ color: '#f00', width: 4 }] }
+                        style: {
+                            fill: 'rgba(56, 56, 219, 0.5)',
+                            stroke: [{ color: '#f00', width: 4 }],
+                        }
                     }"
                 />
             </YandexMap>
 
             <canvas
                 v-if="props.isSelectSeveral"
+                :style="drawButtonActive ? 'display: block' : 'display: none'"
                 class="map__canvas"
                 ref="mapCanvasRef"
             />
@@ -78,16 +93,17 @@
 </template>
 
 <script setup>
-    import './MapDefault.scss'
+    import './Map.scss'
 
     import {
         YandexMap,
         YandexMapControlButton, YandexMapControls,
         YandexMapDefaultFeaturesLayer,
-        YandexMapDefaultSchemeLayer, YandexMapFeature, YandexMapListener, YandexMapMarker, YandexMapZoomControl
+        YandexMapDefaultSchemeLayer, YandexMapFeature, YandexMapMarker, YandexMapZoomControl
     } from "vue-yandex-maps";
+
     import {computed, onMounted, ref, shallowRef, toRaw, watch} from "vue";
-    import MapDefaultTop from "@/components/AppMap/MapDefault/MapDefaultTop/MapDefaultTop.vue";
+    import MapTop from "@/components/AppMap/Map/MapTop/MapTop.vue";
 
     const props = defineProps({
         markers: {
@@ -109,14 +125,6 @@
 
     const drawButtonActive = ref(false)
 
-    const polygonOptions = {
-        strokeColor: '#0000ff',
-        fillColor: '#8080ff',
-        interactivityModel: 'default#transparent',
-        strokeWidth: 4,
-        opacity: 0.7
-    };
-
     const canvasOptions = {
         strokeStyle: '#0000ff',
         lineWidth: 4,
@@ -124,8 +132,10 @@
     };
 
     const polygon = ref(null)
+    const polygonCoords = ref([])
     const tableDataCoords = ref([])
     const mapCanvasRef = ref(null)
+    const dataSource = ref(null)
 
     const setMarkers = () => {
         // Удаляем все маркеры сразу
@@ -151,34 +161,31 @@
         }
     }
 
-    // watch(() => props.tableStore.backupTableData, () => {
-    //     setMarkers()
-    // })
-
     const drawButton = (status) => {
         const copyMap = toRaw(map.value)
         let copyPolygon = toRaw(polygon.value)
         console.log('copyMap', copyMap)
         console.log('copyPolygon', copyPolygon)
 
-        console.log('copyMap.geoObjects', copyMap.geoObjects)
-
         // copyMap.geoObjects.remove(copyPolygon);
-
 
         if (status) {
             drawButtonActive.value = true
             drawLineOverMap()
                 .then(function (coordinates) {
+                    console.log('coordinates', coordinates)
+
                     // Переводим координаты из 0..1 в географические.
-                    const bounds = copyMap.getBounds();
+                    const bounds = copyMap.bounds;
+                    console.log('bounds', bounds)
+
                     coordinates = coordinates.map(function (x) {
                         return [
                             // Широта (latitude).
                             // Y переворачивается, т.к. на canvas'е он направлен вниз.
-                            bounds[0][0] + (1 - x[1]) * (bounds[1][0] - bounds[0][0]),
+                            bounds[0][0] + x[0] * (bounds[1][0] - bounds[0][0]),
                             // Долгота (longitude).
-                            bounds[0][1] + x[0] * (bounds[1][1] - bounds[0][1]),
+                            bounds[0][1] + x[1] * (bounds[1][1] - bounds[0][1]),
                         ];
                     });
 
@@ -189,22 +196,34 @@
                     });
 
                     // Удаляем старый полигон.
-                    if (copyPolygon) {
-                        copyMap.geoObjects.remove(copyPolygon);
+                    if (polygonCoords.value.length > 0) {
+                        polygonCoords.value = []
                     }
 
+                    console.log('coordinates',coordinates)
+
+                    polygonCoords.value = coordinates
+
+                    console.log('polygon', polygon.value)
+
+                    console.log('check', polygon.value.geometry)
+
+                    console.log('hgffh', map.value.util)
+
+                    console.log('dataSource', dataSource.value)
+
                     // Создаем новый полигон
-                    copyPolygon = new ymaps.Polygon([coordinates], {}, polygonOptions);
-                    polygon.value = copyPolygon
-                    copyPolygon.options.setParent(copyMap.options);
-                    copyPolygon.geometry.setMap(copyMap);
-                    copyMap.geoObjects.add(copyPolygon);
-                    filterMarkers(copyPolygon)
+                    // copyPolygon = new ymaps.Polygon([coordinates], {}, polygonOptions);
+                    // polygon.value = copyPolygon
+                    // copyPolygon.options.setParent(copyMap.options);
+                    // copyPolygon.geometry.setMap(copyMap);
+                    // copyMap.geoObjects.add(copyPolygon);
+                    // filterMarkers(copyPolygon)
                     drawButtonActive.value = false
-                    map.value = copyMap
+                    // map.value = copyMap
                 });
         } else {
-            // emit('filteredMarker', null)
+            drawButtonActive.value = false
         }
     }
 
@@ -227,9 +246,6 @@
         canvas.style.opacity = canvasOptions.opacity;
 
         ctx2d.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Показываем канвас. Он будет сверху карты из-за position: absolute.
-        canvas.style.display = 'block';
 
         canvas.onmousedown = function (e) {
             // При нажатии мыши запоминаем, что мы начали рисовать и координаты.
@@ -254,7 +270,6 @@
             // При отпускании мыши запоминаем координаты и скрываем канвас.
             canvas.onmouseup = function (e) {
                 coordinates.push([e.offsetX, e.offsetY]);
-                canvas.style.display = 'none';
                 drawing = false;
 
                 coordinates = coordinates.map(function (x) {

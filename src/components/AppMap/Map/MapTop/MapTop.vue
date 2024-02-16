@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-    import './MapDefaultTop.scss'
+    import './MapTop.scss'
 
     import IconLasso from "@/components/AppIcons/IconLasso/IconLasso.vue";
     import IconLassoRemove from "@/components/AppIcons/IconLasso/IconLassoRemove/IconLassoRemove.vue";

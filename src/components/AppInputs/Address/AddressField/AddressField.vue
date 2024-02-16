@@ -17,7 +17,7 @@
             :buttonTitle="'Скопировать адрес'"
         />
 
-       <MapDefault
+       <Map
            v-if="props.isShowMap"
            :markers="activeOption ? [activeOption] : []"
            :isSelectSeveral="props.isSelectSeveral"
@@ -31,7 +31,7 @@
     import {computed, onMounted, shallowRef, watch} from "vue";
 
     import AppAutocomplete from "@/components/AppAutocomplete/Input/Input.vue";
-    import MapDefault from "@/components/AppMap/MapDefault/MapDefault.vue";
+    import Map from "@/components/AppMap/Map/Map.vue";
     import AppCopy from "@/components/AppCopy/AppCopy.vue";
 
     const props = defineProps({
