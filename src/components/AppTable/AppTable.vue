@@ -25,7 +25,7 @@
         />
         
         <div v-else class="table-template__body section__scroll-area">
-            <table class="table" ref="tableRef" :class="fields.length == 0 || bodyData.length == 0 ? 'table_empty' : ''">
+            <table class="table" ref="tableRef" :class="[fields.length == 0 || bodyData.length == 0 ? 'table_empty' : '', props.isPermanentEdit ? 'table_permanent-edit' : '']">
                 <TableHeader 
                     :isTrash="props.isTrash"
                     @callAction="(data) => callAction(data)"
@@ -99,6 +99,8 @@
         state: false,
         type: null
     })
+
+    let skipChecking = ref(false)
 
     let menu = ref({
         tabs: [
@@ -184,6 +186,10 @@
         slug: {
             default: 'undefined',
             type: String
+        },
+        isPermanentEdit: {
+            default: false,
+            type: Boolean
         }
     })
 
@@ -339,7 +345,7 @@
                     }
 
 
-                    if (updatedRows.value.length == 0) {
+                    if (updatedRows.value.length == 0 && !skipChecking.value) {
                         return
                     } else {
                         emit('callAction', {
@@ -352,15 +358,19 @@
 
             let findedIndex = null
             let invalidFlag = false 
-            updatedRows.value = []
             invalidRows.value = []
             isShow.value = {
                 state: false,
                 type: null
             }
 
-            checkingRows()
+            if (!skipChecking.value) {
+                updatedRows.value = []
+                checkingRows()
+            }
+
             initSave()
+            skipChecking.value = false
         }
 
         // Инициализация удаления строк таблицы
@@ -491,6 +501,22 @@
             }})
         }
 
+        // Перемещение строк
+        const moveRows = (data) => {
+            actionState.value = 'saving'
+            skipChecking.value = true
+            updatedRows.value = data
+            bodyData.value = data
+        }
+        
+        // Удаление строки по иконке
+        const removeRow = (id) => {
+            actionState.value = 'saving'
+            skipChecking.value = true
+            bodyData.value = bodyData.value.filter(row => row.id != id)
+            updatedRows.value = bodyData.value
+        }
+
         switch (data.action) {
             // Установка значений по умолчанию
             case 'setPropsValues':
@@ -523,7 +549,7 @@
 
             // Восстановление строк
             case 'initRestore':
-                initRestoreRows()
+                initRestoreRows(data.value)
                 break;
 
             // Восстановление строк
@@ -541,6 +567,16 @@
                 getTableData()
                 break;
 
+            // Перемещение строк
+            case 'moveRows':
+                moveRows(data.value)
+                break;
+
+            // Удаление строки по иконке
+            case 'removeRow':
+                removeRow(data.value)
+                break;
+
             default:
                 emit('callAction', data)
                 break;
@@ -550,6 +586,9 @@
     watch(() => props.table.tableData, () => {
         footerData.value = JSON.parse(JSON.stringify(props.table.tableFooter))
         bodyData.value = callAction({action: 'setPropsValues', value: props.table.tableData})
+        if (props.isPermanentEdit) {
+            backupValues.value = callAction({action: 'setPropsValues', value: props.table.tableData})
+        }
     }, {
         deep: true
     })

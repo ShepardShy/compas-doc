@@ -130,7 +130,6 @@
 @mixin sortableGhostRow() {
     &.sortable-ghost {
         .table__item {
-            position: relative;
             z-index: 2000;
             background: #fbfcfd;
             @include borderOptions(2px, dashed, variables.$color-blue-grey, 0px);

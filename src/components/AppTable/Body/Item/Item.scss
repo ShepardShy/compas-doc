@@ -97,6 +97,8 @@
 
 .table__body {
     .table__row {
+        @include mixins.sortableGhostRow();
+
         .table__item {
             width: auto;
             min-width: auto;
@@ -109,6 +111,28 @@
             }
 
             .table-item__content {
+                .icon__draggable {
+                    position: static;
+                }
+
+                .icon__delete {
+                    @include mixins.elemResolutionOptions(20px, 20px);
+
+                    svg {
+                        * {
+                            fill: variables.$color-grey;
+                        }
+                    }
+
+                    &:hover {
+                        svg {
+                            * {
+                                fill: variables.$color-active;
+                            }
+                        }
+                    }
+                }
+                
                 &.table-item__content_file {
                     height: 100%;
                     padding: 0px 10px;

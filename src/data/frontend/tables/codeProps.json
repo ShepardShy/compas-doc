@@ -3,6 +3,26 @@
         "default": {
             "tableKeys": [
                 {
+                    "id": 9,
+                    "title": "Перетаскивание",
+                    "key": "iconDrag",
+                    "width": "44px",
+                    "type": "iconDrag",
+                    "enabled": true,
+                    "fixed": false,
+                    "fixTarget": "0px"
+                },
+                {
+                    "id": 10,
+                    "title": "Удаление",
+                    "key": "iconDelete",
+                    "width": "44px",
+                    "type": "iconDelete",
+                    "enabled": true,
+                    "fixed": false,
+                    "fixTarget": "0px"
+                },
+                {
                     "id": 0,
                     "title": "Выделение",
                     "key": "isChoose",

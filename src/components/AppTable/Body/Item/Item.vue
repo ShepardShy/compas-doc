@@ -142,6 +142,13 @@
                     :isOneFile="true"
                     @changeValue="(data) => changeValue(props.row.id, data)"
                 />
+                <IconDrag 
+                    v-else-if="props.item.type == 'iconDrag'"
+                />
+                <IconDelete
+                    v-else-if="props.item.type == 'iconDelete'"
+                    @click="() => callAction({action: 'removeRow', value: props.row.id})"
+                />
         </div>
     </td>
 </template>
@@ -151,6 +158,8 @@
     
     import { inject, ref } from 'vue'
 
+    import IconDrag from '@/components/AppIcons/Drag/Drag.vue'
+    import IconDelete from '@/components/AppIcons/Delete/Delete.vue'
     import AppActions from '../Actions/Actions.vue'
     import AppFile from '@/components/AppInputs/File/File.vue'
     import AppStatus from '@/components/AppSelects/Status/Status.vue'
