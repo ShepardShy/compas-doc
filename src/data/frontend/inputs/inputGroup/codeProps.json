@@ -1,0 +1,36 @@
+{
+    "item": {
+        "default": {
+            "id": 0,
+            "required": true,
+            "substring": null,
+            "type": "text",
+            "title": "Заголовок",
+            "placeholder": "Введите текст",
+            "value": null,
+            "key": "inputGroupKey",
+            "focus": false,
+            "subfields": [
+                {
+                    "id": 0,
+                    "title": "Инпут 1",
+                    "value": "text text text"
+                },
+                {
+                    "id": 1,
+                    "title": "Инпут 2",
+                    "value": "input input input"
+                }
+            ]
+        },
+        "type": "Object"
+    },
+    "disabled": {
+        "default": false,
+        "type": "Boolean"
+    },
+    "isReadOnly": {
+        "default": true,
+        "type": "Boolean"
+    }
+}

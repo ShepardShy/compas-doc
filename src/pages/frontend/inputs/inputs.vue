@@ -40,6 +40,13 @@
         @changeValue="(data) => changeValue(data)"
     />
 
+    <AppComponent
+        :title="'Сгрупированный инпут'"
+        :component="InputGroup"
+        :codeProps="inputGroupProps"
+        :codeEmits="inputGroupEmits"
+        @changeValue="(data) => changeValue(data)"
+    />
 </template>
 
 <script setup>
@@ -66,6 +73,10 @@
     import AppDate from '@/components/AppInputs/Date/Date.vue';
     import DateProps from "@/data/frontend/inputs/date/codeProps.json";
     import DateEmits from "@/data/frontend/inputs/date/codeEmits.json";
+
+    import InputGroup from '@/components/AppInputs/InputGroup/InputGroup.vue';
+    import inputGroupProps from "@/data/frontend/inputs/inputGroup/codeProps.json";
+    import inputGroupEmits from "@/data/frontend/inputs/inputGroup/codeEmits.json";
 
     // Локальный вывод данных в консоль
     const changeValue = (data) => {
