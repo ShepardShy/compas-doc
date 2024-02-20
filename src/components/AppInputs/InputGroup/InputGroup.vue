@@ -22,8 +22,9 @@
             </div>
 
             <div class="group-input__fields" v-else>
-                <div class="group-input__field"  v-for="field of props.item.subfields">
                     <AppInput
+                        class="group-input__field"
+                        v-for="field of props.item.subfields"
                         :item="{
                             id: field.id,
                             required: false,
@@ -38,7 +39,6 @@
                         :disabled="props.disabled"
                         @changeValue="(data) => changeValue(data)"
                     />
-                </div>
             </div>
     </FormItem>
 </template>
