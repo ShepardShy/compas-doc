@@ -1,0 +1,28 @@
+{
+    "item": {
+        "default": {
+            "id": 0,
+            "required": true,
+            "substring": null,
+            "type": "date",
+            "title": "Заголовок",
+            "placeholder": "__.__.____",
+            "value": "2024-02-01",
+            "key": "dateKey",
+            "focus": false
+        },
+        "type": "Object"
+    },
+    "disabled": {
+        "default": false,
+        "type": "Boolean"
+    },
+    "isMultiple": {
+        "default": false,
+        "type": "Boolean"
+    },
+    "isReadOnly": {
+        "default": false,
+        "type": "Boolean"
+    }
+}

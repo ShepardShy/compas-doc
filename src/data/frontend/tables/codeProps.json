@@ -384,6 +384,16 @@
                 "key": "id",
                 "order": "desc"
             },
+            "socketRows": {
+                "header": [{
+                    "id": 105,
+                    "required": 0
+                }],
+                "body": [{
+                    "id": 130303,
+                    "name": "asdasdasdasdasdasd"
+                }]
+            },
             "title": "Название таблицы"
         },
         "type": "Object"

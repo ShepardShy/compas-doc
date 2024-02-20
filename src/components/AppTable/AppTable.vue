@@ -218,6 +218,7 @@
         footerData.value = JSON.parse(JSON.stringify(props.table.tableFooter))
         fields.value = callAction({action: 'setPropsValues', value: props.table.tableKeys})
         bodyData.value = callAction({action: 'setPropsValues', value: props.table.tableData})
+        socketRows.value = JSON.parse(JSON.stringify(props.table.socketRows))
     })
 
     // Проверка был ли уменьшен размер окна
@@ -589,6 +590,12 @@
         if (props.isPermanentEdit) {
             backupValues.value = callAction({action: 'setPropsValues', value: props.table.tableData})
         }
+    }, {
+        deep: true
+    })
+
+    watch(() => props.table.socketRows, () => {
+        socketRows.value = JSON.parse(JSON.stringify(props.table.socketRows))
     }, {
         deep: true
     })
