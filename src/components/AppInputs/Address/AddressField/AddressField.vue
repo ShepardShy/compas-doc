@@ -17,11 +17,13 @@
             :buttonTitle="'Скопировать адрес'"
         />
 
-       <Map
+        <Map
            v-if="props.isShowMap"
            :markers="activeOption ? [activeOption] : []"
            :isSelectSeveral="props.isSelectSeveral"
-       />
+           :isReadOnly="props.isReadOnly"
+           @selectPoints="(data) => console.log('Выбранные точки', data)"
+        />
     </div>
 </template>
 
