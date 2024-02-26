@@ -36,7 +36,7 @@
                     <YandexMapZoomControl />
                 </YandexMapControls>
 
-                <YandexMapControls v-if="aloneItem && !props.isSelectSeveral" :settings="{ position: 'bottom right' }">
+                <YandexMapControls v-if="aloneItem" :settings="{ position: 'bottom right' }">
                     <YandexMapControlButton>
                         <a
                             :href="`https://maps.yandex.ru/?text=${aloneItem == null ? '55.755864+37.617698' : aloneItem[1] + '+' + aloneItem[0]}`"
@@ -82,8 +82,8 @@
         YandexMapDefaultSchemeLayer, YandexMapFeature, YandexMapMarker, YandexMapZoomControl
     } from "vue-yandex-maps";
 
-    import {computed, onMounted, ref, shallowRef, toRaw, watch} from "vue";
-    import MapTop from "@/components/AppMap/Map/MapTop/MapTop.vue";
+    import {computed, ref, shallowRef} from "vue";
+    import MapTop from "@/components/AppInputs/Address/Map/MapTop/MapTop.vue";
     import MapMarker from "@/components/AppIcons/MapMarker/MapMarker.vue";
 
     const props = defineProps({
@@ -105,8 +105,9 @@
         'selectPoints'
     ])
 
+    // Проверка на получение только одного маркера
     const aloneItem = computed(() => {
-        return props.markers.length === 1 ? props.markers[0].label.coords : null;
+        return props.markers.length === 1 && !props.isSelectSeveral ? props.markers[0].label.coords : null;
     })
 
     const canvasOptions = {
@@ -124,6 +125,7 @@
     const drawMarkers = ref([]);
     const gettingCoords = ref([]);
 
+    // Отрисовка маркеров по координатам карты
     const getNestedMarkers = (bounds, context) => {
         // Функция для рисования круга (точки)
         const fillCircle = (context, x, y, radius) => {
@@ -158,6 +160,7 @@
         }
     };
 
+    // Инициализация рисования полигона
     const drawButton = (status) => {
         if (!status) {
             drawButtonActive.value = false;
@@ -199,6 +202,7 @@
 
     }
 
+    // Инициализация полигона и подписка canvas элемента на события мыши
     const drawLineOverMap = (bounds) => {
         const canvas = mapCanvasRef.value;
         const ctx2d = canvas.getContext('2d');
@@ -246,7 +250,6 @@
                 // Очищаем канвас от нарисованной фигуры
                 ctx2d.clearRect(0, 0, canvas.width, canvas.height);
 
-                // Отрисовка маркеров по координатам карты
                 getNestedMarkers(bounds, ctx2d);
 
                 // Рисуем полноценную фигуру на основе полученных координат

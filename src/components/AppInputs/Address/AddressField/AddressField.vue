@@ -30,10 +30,10 @@
 <script setup>
     import './AddressField.scss';
 
-    import {computed, onMounted, shallowRef, watch} from "vue";
+    import {computed} from "vue";
 
     import AppAutocomplete from "@/components/AppAutocomplete/Input/Input.vue";
-    import Map from "@/components/AppMap/Map/Map.vue";
+    import Map from "@/components/AppInputs/Address/Map/Map.vue";
     import AppCopy from "@/components/AppCopy/AppCopy.vue";
 
     const props = defineProps({

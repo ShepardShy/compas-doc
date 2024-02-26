@@ -2,9 +2,8 @@
 @use '@/assets/mixins' as mixins;
 
 .form-item__address-wrapper {
-	background: #fbfcfd;
-	border: 1px solid #eeeff1;
-	border-radius: 10px;
+	@include mixins.borderOptions(1px, solid, variables.$color-light-grey, 10px);
+	background: variables.$color-pale-grey;
 	padding: 15px;
 	position: relative;
 

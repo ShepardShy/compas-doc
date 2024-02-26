@@ -1,5 +1,5 @@
-@use '@/assets/variables.scss' as variables;
-@use '@/assets/mixins.scss' as mixins;
+@use '@/assets/variables' as variables;
+@use '@/assets/mixins' as mixins;
 
 .map-top {
     @include mixins.flexBlock($vertical: center, $horizontal: flex-end, $gap: 10px);

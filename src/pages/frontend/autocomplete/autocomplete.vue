@@ -1,20 +1,20 @@
 <template>
-<!--    <AppComponent-->
-<!--        :title="'Стандартный автокомплит'"-->
-<!--        :component="AppAutocomplete"-->
-<!--        :codeProps="localProps"-->
-<!--        :codeEmits="AutocompleteEmits"-->
-<!--        @changeValue="(data) => changeValue(data)"-->
-<!--        @createOption="(data) => createOption(data)"-->
-<!--        @searchOptions="(data) => searchOptions(data)"-->
-<!--    />-->
+    <AppComponent
+        :title="'Стандартный автокомплит'"
+        :component="AppAutocomplete"
+        :codeProps="localProps"
+        :codeEmits="AutocompleteEmits"
+        @changeValue="(data) => changeValue(data)"
+        @createOption="(data) => createOption(data)"
+        @searchOptions="(data) => searchOptions(data)"
+    />
 
     <AppComponent
         :title="'Поле адреса'"
-        :component="Address"
+        :component="AppAddress"
         :codeProps="localPropsAddress"
         :codeEmits="AddressEmits"
-        @searchOptions="(data) => searchOptionsAddress(data)"
+        @searchOptions="(data) => searchOptions(data)"
         @changeValue="(data) => changeValueAddress(data)"
     />
 
@@ -23,7 +23,7 @@
 <script setup>
     import './autocomplete.scss';
     
-    import { ref, onMounted } from 'vue'
+    import { ref } from 'vue'
 
     import AppComponent from '@/components/AppComponent/AppComponent.vue';
 
@@ -31,7 +31,7 @@
     import AutocompleteProps from '@/data/frontend/autocomplete/input/codeProps.json';
     import AutocompleteEmits from '@/data/frontend/autocomplete/input/codeEmits.json';
 
-    import Address from "@/components/AppInputs/Address/Address.vue";
+    import AppAddress from "@/components/AppInputs/Address/Address.vue";
     import AddressProps from '@/data/frontend/inputs/address/codeProps.json';
     import AddressEmits from '@/data/frontend/inputs/address/codeEmits.json';
 
@@ -57,15 +57,6 @@
         let findedOptions = backupOptions.filter(option => option.label.text.toLowerCase().includes(data.value.toLowerCase())) 
         localProps.value.item.default.options = findedOptions
         console.log('Поиск опций', findedOptions);
-    }
-
-    const searchOptionsAddress = (data) => {
-
-        /* Удалить код и вставить свой метод на поиск опций */
-
-        // let findedOptions = backupOptions.filter(option => option.label.text.toLowerCase().includes(data.value.toLowerCase()))
-        // localProps.value.item.default.options = findedOptions
-        console.log('searchOptionsAddress');
     }
 
     // Создание опции
