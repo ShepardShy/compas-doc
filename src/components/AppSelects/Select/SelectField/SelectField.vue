@@ -162,7 +162,11 @@
                     } else {
                         inputRef.value.inputRef.inputRef.focus()
                     }
-                }, 10);
+
+                    if (!popupRef.value.popupRef.hasAttribute('open')) {
+                        popupRef.value.popupRef.setAttribute('open', true)
+                    }
+                }, 100);
             } else {
                 popupRef.value.popupRef.removeAttribute('open')
             }

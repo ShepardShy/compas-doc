@@ -24,7 +24,7 @@
             min-width: 120px;
             
             input {
-                padding: 10px 90px 10px 15px;
+                padding: 10px 20px 10px 15px;
             }
 
             .form-item__substring {
@@ -36,6 +36,17 @@
 
                 &::after {
                     content: url('/public/icons/arrow.svg');
+                }
+
+                &::before {
+                    content: "";
+                    background: variables.$color-white;
+                    position: absolute;
+                    width: 130%;
+                    height: 38px;
+                    top: -10px;
+                    right: -10px;
+                    z-index: -1;
                 }
             }
         }
@@ -54,6 +65,6 @@
     padding: 10px 15px;
     white-space: nowrap;
     pointer-events: none;
-    @include mixins.elemResolutionOptions(calc(100% - 90px), 40px);
+    @include mixins.elemResolutionOptions(100%, 40px);
     @include mixins.flexBlock($vertical: center, $horizontal: flex-start);
 }

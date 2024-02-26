@@ -39,10 +39,6 @@
         }
     })
 
-    const dragEnd = (data) => {
-        console.log(data);
-    }
-
     const emit = defineEmits([
         'callAction'
     ])

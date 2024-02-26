@@ -1,8 +1,8 @@
 <template>
     <AppPopup 
         class="status__popup" 
-        :class="colorPicker.state ? 'status__popup_colorpicker' : ''" 
-        :closeByClick="false" ref="popupRef" 
+        :closeByClick="false" 
+        ref="popupRef" 
         @clickOutside="() => {emit('clickOutside', true); callActionColorPicker({action: 'toggleColorPicker', data: false})}"
         @click="(event) => props.isReadOnly ? event.preventDefault() : null"
     >
@@ -53,7 +53,7 @@
 
     import { ref, onMounted, watch } from 'vue'
 
-    import popupScripts from '@/components/AppPopup/Scripts.js';
+    import PopupScripts from '@/components/AppPopup/Scripts.js';
     import AppPopup from '@/components/AppPopup/Popup.vue';
     import StatusOption from '../StatusOption/StatusOption.vue';
     import IconArrow from '@/components/AppIcons/Arrow/Arrow.vue';
@@ -124,6 +124,12 @@
         // Смена отображения палитры
         const toggleColorPicker = (state) => {
             colorPicker.value.state = state
+
+            if (state) {
+                popupRef.value.popupRef.classList.add('status__popup_colorpicker')
+            } else {
+                popupRef.value.popupRef.classList.remove('status__popup_colorpicker')
+            }
         }
 
         // Сохранение нового скрытого цвета
@@ -182,7 +188,7 @@
 
             createHiddenOption()
             toggleColorPicker(false)
-            popupScripts.hideDetails(popupRef.value.popupRef)
+            PopupScripts.hideDetails(popupRef.value.popupRef)
         }
 
         switch (data.action) {
@@ -251,14 +257,14 @@
 
         if (props.item.focus) {
             popupRef.value.popupRef.setAttribute('open', true)
-            popupScripts.setDropdownPosition(popupRef.value.popupRef)
+            PopupScripts.setDropdownPosition(popupRef.value.popupRef)
         }
     })
 
     watch(() => props.item.focus, () => {
         if (props.item.focus) {
             popupRef.value.popupRef.setAttribute('open', true)
-            popupScripts.setDropdownPosition(popupRef.value.popupRef)
+            PopupScripts.setDropdownPosition(popupRef.value.popupRef)
         }
     })
 

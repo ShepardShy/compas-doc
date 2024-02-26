@@ -11,11 +11,11 @@
         <AppPopup 
             ref="popupRef" 
             class="autocomplete__popup" 
-            :isHaveParent="true"
             :closeByClick="false" 
             :isReadOnly="props.isReadOnly"
+            :isHaveParent="false"
             @clickOutside="() => emit('clickOutside', true)"
-            @click="(event) => props.isReadOnly ? event.preventDefault() : null"
+            @click="(event) => preventClick(event)"
         >
             <template #summary> 
                 <slot name="icon"></slot>
@@ -37,7 +37,6 @@
                     :enabledAutocomplete="false"
                     @openLink="(item) => emit('openLink', item)"
                     @changeValue="(data) => callAction({action: 'searchOptions', value: data.value})"
-                    @mousedown="(event) => props.isReadOnly ? null : event.target.classList.contains('popup_prevent') ? event.preventDefault() : null"
                     @keydown.space="(event) => {event.preventDefault(); callAction({action: 'searchOptions', value: event.target.value + ' '})}"
                 > 
                     <slot name="link"></slot>
@@ -136,6 +135,16 @@
         'searchOptions',
     ])
 
+    // Превент клика при нажатии на блок
+    const preventClick = (event) => {
+        if (props.isReadOnly || event.target.closest('.popup_prevent') != null) {
+            event.preventDefault()
+            popupRef.value.popupRef.removeAttribute('open')
+        } else {
+            popupRef.value.popupRef.setAttribute('open', true)
+        } 
+    }
+
     // Действия с автокомплитом
     const callAction = (data) => {
         // Получение опций
@@ -182,7 +191,7 @@
 
         // Изменить значение поля
         const changeValue = (value) => {
-            if (value == null || (![null, undefined].includes(props.item.lockedOptions) && !props.item.lockedOptions.includes(value))) {
+            if (value == null || [null, undefined].includes(props.item.lockedOptions) || (![null, undefined].includes(props.item.lockedOptions) && !props.item.lockedOptions.includes(value))) {
                 search.value = null
                 options.value = backupOptions.value
                 setActiveOption(value)
@@ -191,6 +200,10 @@
                     key: props.item.key,
                     value: value
                 })
+
+                setTimeout(() => {
+                    popupRef.value.popupRef.removeAttribute('open')
+                }, 10);
             }
         }
 

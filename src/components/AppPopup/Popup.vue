@@ -8,7 +8,7 @@
         <summary class="popup__summary" @click="() => showDetail()">
             <slot name="summary"></slot>
         </summary>
-        <div class="popup__content" @click="() => props.closeByClick ? popupScripts.hideDetails(popupRef) : ''">
+        <div class="popup__content" @click="() => props.closeByClick ? PopupScripts.hideDetails(popupRef) : ''">
             <slot name="content"></slot>
         </div>
     </details>
@@ -19,7 +19,7 @@
 
     import { ref } from 'vue'
     import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside'
-    import popupScripts from './Scripts.js'
+    import PopupScripts from './Scripts.js'
 
     const popupRef = ref(null)
     let mouseDownEvent = ref(null)
@@ -47,7 +47,7 @@
     const clickOutside = (event) => {
         if (mouseDownEvent.value == null || mouseDownEvent.value.target.closest('.popup') == null) {
             emit('clickOutside', event)
-            popupScripts.hideDetails(popupRef.value)
+            PopupScripts.hideDetails(popupRef.value)
         }
         mouseDownEvent.value = null
     }
@@ -58,7 +58,7 @@
             popupRef.value.setAttribute('open', true)
         }
         
-        popupScripts.setDropdownPosition(popupRef.value)
+        PopupScripts.setDropdownPosition(popupRef.value)
     }
 
     defineExpose({

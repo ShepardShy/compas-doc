@@ -32,7 +32,7 @@
     
         .autocomplete__active-option {
             left: 0px;
-            @include mixins.elemResolutionOptions(calc(100% - 120px), 40px);
+            @include mixins.elemResolutionOptions(100%, 40px);
         }
 
         .relation__link {
@@ -43,6 +43,7 @@
             place-items: center;
             right: 1px;
             top: 1px;
+            z-index: 2;
             background-color: #eeeff1;
             cursor: pointer;
             border-radius: 0px 5px 5px 0px;
