@@ -76,6 +76,7 @@
     
     import { ref, onMounted, watch } from 'vue'
 
+    import _ from 'lodash'
     import AppPopup from '@/components/AppPopup/Popup.vue';
     import AppInput from '@/components/AppInputs/Input/Input.vue';
     import FormItem from '@/components/AppForm/FormItem/FormItem.vue';
@@ -175,7 +176,7 @@
         // Установка выбранной опции
         const setActiveOption = (value) => {
             search.value = ''
-            let findedOption = options.value == null ? null : options.value.find(option => option.value == value)
+            let findedOption = options.value == null ? null : options.value.find(option => _.isEqual(option.value, value))
             if ([null, undefined].includes(findedOption)) {
                 activeOption.value = nullOption 
             } else {
@@ -253,7 +254,8 @@
         callAction({
             action: 'getOptions',
             value: null
-        })    })
+        })    
+    })
 
     watch(() => props.item.value, () => {
         callAction({
