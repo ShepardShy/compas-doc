@@ -2,8 +2,7 @@
     <div class="address__wrapper">
         <AppAutocomplete
             :item="{
-                ...props.item,
-                value: props.item.value ? props.item.value.value : null
+                ...props.item
             }"
             :isCanCreate="false"
             :isLink="false"
@@ -37,6 +36,7 @@
     import AppAutocomplete from "@/components/AppAutocomplete/Input/Input.vue";
     import Map from "@/components/AppInputs/Address/Map/Map.vue";
     import AppCopy from "@/components/AppCopy/AppCopy.vue";
+    import _ from "lodash";
 
     const props = defineProps({
         item: {
@@ -78,7 +78,8 @@
     const activeOption = ref(null)
 
     const changeValue = (data) => {
-        emit('changeValue', (props.item.options.find((option) => data && option.value === data.value)))
+        console.log('data', data)
+        emit('changeValue', (props.item.options.find((option) => data && _.isEqual(option.value, data.value))))
     }
 
     const setActiveOption = () => {
@@ -86,7 +87,8 @@
             props.item.options.push(props.item.value)
         }
 
-        activeOption.value = props.item.options.find((option) => props.item.value && option.value === props.item.value.value)
+        activeOption.value = props.item.options.find((option) => props.item.value && option.value === props.item.value.value) ?
+            props.item.options.find((option) => props.item.value && option.value === props.item.value.value).value : null
     }
 
     setActiveOption()
