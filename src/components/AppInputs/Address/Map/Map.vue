@@ -78,7 +78,7 @@
     import {
         YandexMap,
         YandexMapControlButton, YandexMapControls,
-        YandexMapDefaultFeaturesLayer, YandexMapDefaultMarker,
+        YandexMapDefaultFeaturesLayer,
         YandexMapDefaultSchemeLayer, YandexMapFeature, YandexMapMarker, YandexMapZoomControl
     } from "vue-yandex-maps";
 
@@ -140,11 +140,11 @@
         for (let marker of props.markers) {
             // Получаем координаты в пикселях для отрисовки точки в canvas
             const markerElem = map.value.container.querySelector(`.marker_${marker.label.id}`).parentNode.parentNode.parentNode;
-            const coords = markerElem.style.transform.replace(/[^0-9\s]+/g, '').split(' ');
+            const coords = markerElem.style.transform.replace(/[^0-9\s.]+/g, '').split(' ');
 
             // Убираем погрешность в позиционировании и присваиваем точки переменным
-            const x = +coords[0];
-            const y = +coords[1] - 5;
+            const x = Math.round(+coords[0]);
+            const y = Math.round(+coords[1] - 5);
 
             // Проверка на наличие точки в обалсти видимости пользователя
             if (bounds[0][0] < +marker.label.coords[0] && +marker.label.coords[0] < bounds[1][0] &&

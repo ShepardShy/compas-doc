@@ -30,6 +30,7 @@
             @actionFilter="(data) => emit('actionFilter', data)"
             @createOption="(data) => emit('createOption', data)"
             @searchOptions="(data) => emit('searchOptions', data)"
+            @selectPoints="(data) => emit('selectPoints', data)"
         />
     </div>
 </template>

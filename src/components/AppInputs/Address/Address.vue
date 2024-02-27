@@ -1,6 +1,6 @@
 <template>
     <FormItem
-        class="file form-item__address"
+        class="address form-item__address"
         :required="props.item.required"
     >
         <FormLabel
@@ -15,6 +15,7 @@
             :isSelectSeveral="props.isSelectSeveral"
             @changeValue="(data) => emit('changeValue', (data))"
             @searchOptions="(data) => emit('searchOptions', (data))"
+            @selectPoints="(data) => emit('selectPoints', (data))"
         />
 
     </FormItem>
@@ -60,6 +61,7 @@
 
     const emit = defineEmits([
         'changeValue',
-        'searchOptions'
+        'searchOptions',
+        'selectPoints'
     ])
 </script>

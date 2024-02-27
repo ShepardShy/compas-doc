@@ -1,5 +1,5 @@
 <template>
-    <div class="form-item__address-wrapper">
+    <div class="address__wrapper">
         <AppAutocomplete
             :item="props.item"
             :isCanCreate="false"
@@ -12,7 +12,6 @@
 
         <AppCopy
             v-if="activeOption"
-            class="form-item__copy"
             :text="activeOption.label.text"
             :buttonTitle="'Скопировать адрес'"
         />
@@ -22,7 +21,7 @@
            :markers="activeOption ? [activeOption] : []"
            :isSelectSeveral="props.isSelectSeveral"
            :isReadOnly="props.isReadOnly"
-           @selectPoints="(data) => console.log('Выбранные точки', data)"
+           @selectPoints="(data) => emit('selectPoints', (data))"
         />
     </div>
 </template>
@@ -69,7 +68,8 @@
 
     const emit = defineEmits([
         'changeValue',
-        'searchOptions'
+        'searchOptions',
+        'selectPoints'
     ])
 
     const activeOption = computed(() => {

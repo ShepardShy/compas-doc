@@ -1,7 +1,7 @@
 @use '@/assets/variables' as variables;
 @use '@/assets/mixins' as mixins;
 
-.form-item__address-wrapper {
+.address__wrapper {
 	@include mixins.borderOptions(1px, solid, variables.$color-light-grey, 10px);
 	background: variables.$color-pale-grey;
 	padding: 15px;
@@ -13,6 +13,6 @@
 	}
 }
 
-.form-item__copy {
+.copy {
 	padding-top: 10px;
 }

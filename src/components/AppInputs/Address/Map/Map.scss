@@ -1,11 +1,6 @@
 @use '@/assets/variables' as variables;
 @use '@/assets/mixins' as mixins;
 
-.ymaps3x0--map-copyrights {
-	// В случае если нужно будет удалить copyrights
-  	//display: none !important;
-}
-
 .map__wrapper {
     position: relative;
 

@@ -16,6 +16,7 @@
         :codeEmits="AddressEmits"
         @searchOptions="(data) => searchOptions(data)"
         @changeValue="(data) => changeValueAddress(data)"
+        @selectPoints="(data) => selectPoints(data)"
     />
 
 </template>
@@ -62,6 +63,11 @@
     // Создание опции
     const createOption = (data) => {
         console.log('Создание опции', data);
+    }
+
+    // Получение точек попадающих в лассо
+    const selectPoints = (data) => {
+        console.log('Выбранные точки', data);
     }
 
     // Инициализация пропсов для компонентов
