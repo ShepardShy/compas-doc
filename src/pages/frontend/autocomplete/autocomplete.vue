@@ -9,16 +9,6 @@
         @searchOptions="(data) => searchOptions(data)"
     />
 
-    <AppComponent
-        :title="'Поле адреса'"
-        :component="AppAddress"
-        :codeProps="localPropsAddress"
-        :codeEmits="AddressEmits"
-        @searchOptions="(data) => searchOptions(data)"
-        @changeValue="(data) => changeValueAddress(data)"
-        @selectPoints="(data) => selectPoints(data)"
-    />
-
 </template>
 
 <script setup>
@@ -32,22 +22,12 @@
     import AutocompleteProps from '@/data/frontend/autocomplete/input/codeProps.json';
     import AutocompleteEmits from '@/data/frontend/autocomplete/input/codeEmits.json';
 
-    import AppAddress from "@/components/AppInputs/Address/Address.vue";
-    import AddressProps from '@/data/frontend/inputs/address/codeProps.json';
-    import AddressEmits from '@/data/frontend/inputs/address/codeEmits.json';
-
     const backupOptions = AutocompleteProps.item.default.options
-    let localProps = ref(null)
-    let localPropsAddress = ref(null)
+    const localProps = ref(null)
 
     // Изменение значений
     const changeValue = (data) => {
         console.log('Изменение значений', data);
-    }
-
-    const changeValueAddress = (data) => {
-        console.log('Изменение значений', data);
-        localPropsAddress.value.item.default.value = data.value
     }
 
     // Поиск опций
@@ -72,5 +52,4 @@
 
     // Инициализация пропсов для компонентов
     localProps.value = JSON.parse(JSON.stringify(AutocompleteProps))
-    localPropsAddress.value = JSON.parse(JSON.stringify(AddressProps))
 </script>

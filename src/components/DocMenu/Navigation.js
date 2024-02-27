@@ -42,6 +42,11 @@ export default {
             id: 16,
             name: 'Меню ошибки',
             component: markRaw(defineAsyncComponent(() => import('@/pages/frontend/warning/warning.vue')))
+        },
+        {
+            id: 17,
+            name: 'Адрес',
+            component: markRaw(defineAsyncComponent(() => import('@/pages/frontend/address/address.vue')))
         }
     ],
 
