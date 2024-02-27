@@ -53,7 +53,7 @@
         copyState.value = true
 
         setTimeout(() => {
-                copyState.value = false
+            copyState.value = false
         }, 2000)
     }
 </script>
