@@ -8,7 +8,7 @@
             :title="props.item.title"
         />
 
-        <AddressField
+        <Field
             :item="props.item"
             :isReadOnly="props.isReadOnly"
             :isShowMap="props.isShowMap"
@@ -26,7 +26,7 @@
 
     import FormLabel from "@/components/AppForm/FormLabel/FormLabel.vue";
     import FormItem from "@/components/AppForm/FormItem/FormItem.vue";
-    import AddressField from "@/components/AppInputs/Address/AddressField/AddressField.vue";
+    import Field from "@/components/AppInputs/Address/Field/Field.vue";
 
     const props = defineProps({
         item: {

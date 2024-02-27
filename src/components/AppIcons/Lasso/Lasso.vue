@@ -15,6 +15,6 @@
 </template>
 
 <script setup>
-    import './IconLasso.scss';
+    import './Lasso.scss';
     
 </script>

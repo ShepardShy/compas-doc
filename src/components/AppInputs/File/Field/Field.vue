@@ -29,7 +29,7 @@
                     @callAction="(data) => callAction(data)"
                 />
 
-                <FileUpload
+                <Upload
                     v-else-if="!props.isReadOnly"
                     :buttonTitle="props.item.buttonName"
                     :isMultiple="props.isMultiple"
@@ -45,7 +45,7 @@
 </template>
 
 <script setup>
-    import './FileField.scss';
+    import './Field.scss';
 
     import draggable from 'vuedraggable'
 
@@ -56,7 +56,7 @@
 
     import FansyBox from '@/components/AppFansyBox/FansyBox.vue';
     import FansyBoxImage from '@/components/AppFansyBox/FansyBoxImage/FansyBoxImage.vue';
-    import FileUpload from "../FileUpload/FileUpload.vue";
+    import Upload from "../Upload/Upload.vue";
     import {computed, ref, watch} from "vue";
 
     const props = defineProps({

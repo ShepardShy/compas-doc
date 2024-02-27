@@ -24,5 +24,5 @@
 </template>
 
 <script setup>
-    import './IconLassoRemove.scss';
+    import './LassoRemove.scss';
 </script>

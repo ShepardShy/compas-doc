@@ -1,25 +1,23 @@
 <template>
     <div class="map__top map-top">
-        <div class="map-top__group">
-            <IconLassoRemove
-                v-show="props.drawButtonActive"
-                class="map-top__lasso"
-                @click="() => emit('drawButton', false)"
-            />
-            <IconLasso
-                v-show="!props.drawButtonActive"
-                :class="props.drawButtonActive ? 'map-top__lasso_active' : ''"
-                @click="() => emit('drawButton', true)"
-            />
-        </div>
+        <IconLassoRemove
+            v-show="props.drawButtonActive"
+            class="map-top__lasso"
+            @click="() => emit('toggleDraw', false)"
+        />
+        <IconLasso
+            v-show="!props.drawButtonActive"
+            :class="props.drawButtonActive ? 'map-top__lasso_active' : ''"
+            @click="() => emit('toggleDraw', true)"
+        />
     </div>
 </template>
 
 <script setup>
     import './MapTop.scss'
 
-    import IconLasso from "@/components/AppIcons/IconLasso/IconLasso.vue";
-    import IconLassoRemove from "@/components/AppIcons/IconLasso/IconLassoRemove/IconLassoRemove.vue";
+    import IconLasso from "@/components/AppIcons/Lasso/Lasso.vue";
+    import IconLassoRemove from "@/components/AppIcons/Lasso/LassoRemove/LassoRemove.vue";
 
     const props = defineProps({
         drawButtonActive: {
@@ -29,6 +27,6 @@
     })
 
     const emit = defineEmits([
-        'drawButton'
+        'toggleDraw'
     ])
 </script>

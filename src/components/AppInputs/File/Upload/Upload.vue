@@ -45,11 +45,11 @@
 </template>
 
 <script setup>
-    import './FileUpload.scss';
+    import './Upload.scss';
 
     import LoadFile from "@/components/AppIcons/LoadFile/LoadFile.vue";
     import Input from "@/components/AppAutocomplete/Input/Input.vue";
-    import IconClose from "@/components/AppIcons/IconClose/IconClose.vue";
+    import IconClose from "@/components/AppIcons/Close/Close.vue";
     import {ref} from "vue";
 
     const props = defineProps({

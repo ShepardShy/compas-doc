@@ -33,7 +33,7 @@
 
     // Изменение значений
     const changeValue = (data) => {
-        localPropsAddress.value.item.default.value = data.value
+        localPropsAddress.value.item.default.value = data
         console.log('Изменение значений', data);
     }
 

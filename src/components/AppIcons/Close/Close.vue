@@ -7,5 +7,5 @@
 </template>
 
 <script setup>
-    import './IconClose.scss';
+    import './Close.scss';
 </script>

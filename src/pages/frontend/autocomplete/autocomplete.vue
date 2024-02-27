@@ -45,11 +45,6 @@
         console.log('Создание опции', data);
     }
 
-    // Получение точек попадающих в лассо
-    const selectPoints = (data) => {
-        console.log('Выбранные точки', data);
-    }
-
     // Инициализация пропсов для компонентов
     localProps.value = JSON.parse(JSON.stringify(AutocompleteProps))
 </script>

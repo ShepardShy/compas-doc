@@ -1,12 +1,15 @@
 <template>
     <div class="address__wrapper">
         <AppAutocomplete
-            :item="props.item"
+            :item="{
+                ...props.item,
+                value: props.item.value ? props.item.value.value : null
+            }"
             :isCanCreate="false"
             :isLink="false"
             :isShowId="false"
             :isReadOnly="props.isReadOnly"
-            @changeValue="(data) => emit('changeValue', (data))"
+            @changeValue="(data) => changeValue(data)"
             @searchOptions="(data) => emit('searchOptions', (data))"
         />
 
@@ -27,9 +30,9 @@
 </template>
 
 <script setup>
-    import './AddressField.scss';
+    import './Field.scss';
 
-    import {computed} from "vue";
+    import {computed, ref, watch} from "vue";
 
     import AppAutocomplete from "@/components/AppAutocomplete/Input/Input.vue";
     import Map from "@/components/AppInputs/Address/Map/Map.vue";
@@ -72,8 +75,24 @@
         'selectPoints'
     ])
 
-    const activeOption = computed(() => {
-        return props.item.options.find((option) => option.value === props.item.value)
+    const activeOption = ref(null)
+
+    const changeValue = (data) => {
+        emit('changeValue', (props.item.options.find((option) => data && option.value === data.value)))
+    }
+
+    const setActiveOption = () => {
+        if (props.item.value && !props.item.options.find((option) => option.value === props.item.value.value)) {
+            props.item.options.push(props.item.value)
+        }
+
+        activeOption.value = props.item.options.find((option) => props.item.value && option.value === props.item.value.value)
+    }
+
+    setActiveOption()
+
+    watch(() => props.item.value, () => {
+        setActiveOption()
     })
 
 </script>

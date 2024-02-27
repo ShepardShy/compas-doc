@@ -3,7 +3,7 @@
         <MapTop
             v-if="props.isSelectSeveral && !props.isReadOnly"
             :drawButtonActive="drawButtonActive"
-            @drawButton="(status) => drawButton(status)"
+            @toggleDraw="(status) => toggleDraw(status)"
         />
 
         <div class="map__wrapper">
@@ -126,7 +126,7 @@
     const gettingCoords = ref([]);
 
     // Отрисовка маркеров по координатам карты
-    const getNestedMarkers = (bounds, context) => {
+    const drawNestedMarkers = (bounds, context) => {
         // Функция для рисования круга (точки)
         const fillCircle = (context, x, y, radius) => {
             context.beginPath();
@@ -161,7 +161,7 @@
     };
 
     // Инициализация рисования полигона
-    const drawButton = (status) => {
+    const toggleDraw = (status) => {
         if (!status) {
             drawButtonActive.value = false;
             return;
@@ -170,7 +170,7 @@
         drawButtonActive.value = true;
         const bounds = map.value.bounds;
 
-        drawLineOverMap(bounds)
+        initDrawEventsCanvas(bounds)
             .then(function (coordinates) {
                 // Переводим координаты из 0..1 в географические.
                 coordinates = coordinates.map(function (x) {
@@ -203,7 +203,7 @@
     }
 
     // Инициализация полигона и подписка canvas элемента на события мыши
-    const drawLineOverMap = (bounds) => {
+    const initDrawEventsCanvas = (bounds) => {
         const canvas = mapCanvasRef.value;
         const ctx2d = canvas.getContext('2d');
 
@@ -250,7 +250,7 @@
                 // Очищаем канвас от нарисованной фигуры
                 ctx2d.clearRect(0, 0, canvas.width, canvas.height);
 
-                getNestedMarkers(bounds, ctx2d);
+                drawNestedMarkers(bounds, ctx2d);
 
                 // Рисуем полноценную фигуру на основе полученных координат
                 ctx2d.beginPath();
