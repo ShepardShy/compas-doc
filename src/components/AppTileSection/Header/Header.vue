@@ -1,6 +1,6 @@
 <template>
     <div class="tile-section__header">
-        <div class="tile-section__title">
+        <div class="tile-section__title" v-click-out-side="(event) => stateTitle ? saveTitle() : ''">
             <IconDrag />
 
             <AppInput 
@@ -23,7 +23,6 @@
                 :isLink="false"
                 :isReadOnly="Boolean(!stateTitle)"
                 @changeValue="(data) => changeValue(data)"
-                @clickOutside="() => stateTitle ? saveTitle() : ''"
             />
 
             <IconEdit v-show="!stateTitle" @click="() => editTitle()"/>
@@ -59,6 +58,7 @@
     import IconSettings from '@/components/AppIcons/Settings/Settings.vue';
     import PopupOption from '@/components/AppPopup/PopupOption/PopupOption.vue';
     import IconDrag from '@/components/AppIcons/Drag/Drag.vue';
+    import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside'
 
     const emit = defineEmits([
         'callAction'
@@ -73,6 +73,7 @@
     }
 
     const saveTitle = () => {
+        console.log('asdasd');
         stateTitle.value = false
         emit('callAction', { 
             action: 'editSection', 
