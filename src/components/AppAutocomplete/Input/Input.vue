@@ -151,8 +151,6 @@
                 return true;
             }
 
-            console.log('ffff', props.item.options == null ? [] : props.item.options.filter(p => p != null && typeof p == 'object' && !Array.isArray(p) && !isEmpty(p)))
-
             let localOptions = props.item.options == null ? [] : props.item.options.filter(p => p != null && typeof p == 'object' && !Array.isArray(p) && !isEmpty(p)).sort((prev, next) => prev.label.sort - next.label.sort)
             options.value = JSON.parse(JSON.stringify(localOptions))
         }

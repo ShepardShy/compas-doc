@@ -23,13 +23,13 @@
                 <YandexMapDefaultFeaturesLayer />
 
                 <YandexMapMarker
-                    v-for="(marker, index) in props.markers"
+                    v-for="(marker, index) in modifyMarkers"
                     :key="index"
                     :settings="{
-                        coordinates: marker.label.coords,
+                        coordinates: marker.coords,
                     }"
                 >
-                    <MapMarker :class="`marker_${marker.label.id}`" />
+                    <MapMarker :class="`marker_${marker.id}`" />
                 </YandexMapMarker>
 
                 <YandexMapControls :settings="{ position: 'left' }">
@@ -118,6 +118,14 @@
 
     const map = shallowRef(null);
     const mapCanvasRef = ref(null);
+    const modifyMarkers = computed(() => {
+        return props.markers.map((marker, index) => {
+            return {
+                ...marker,
+                id: index
+            }
+        })
+    })
 
     const drawButtonActive = ref(false);
 
@@ -137,9 +145,9 @@
         // Очищаем массив с нарисованными маркерами
         drawMarkers.value = [];
 
-        for (let marker of props.markers) {
+        for (let marker of modifyMarkers.value) {
             // Получаем координаты в пикселях для отрисовки точки в canvas
-            const markerElem = map.value.container.querySelector(`.marker_${marker.label.id}`).parentNode.parentNode.parentNode;
+            const markerElem = map.value.container.querySelector(`.marker_${marker.id}`).parentNode.parentNode.parentNode;
             const coords = markerElem.style.transform.replace(/[^0-9\s.]+/g, '').split(' ');
 
             // Убираем погрешность в позиционировании и присваиваем точки переменным
@@ -147,8 +155,8 @@
             const y = Math.round(+coords[1] - 5);
 
             // Проверка на наличие точки в обалсти видимости пользователя
-            if (bounds[0][0] < +marker.label.coords[0] && +marker.label.coords[0] < bounds[1][0] &&
-                bounds[1][1] < +marker.label.coords[1] && +marker.label.coords[1] < bounds[0][1]) {
+            if (bounds[0][0] < +marker.coords[0] && +marker.coords[0] < bounds[1][0] &&
+                bounds[1][1] < +marker.coords[1] && +marker.coords[1] < bounds[0][1]) {
 
                 // Отрисовка невидемой точки для будущей проверки
                 fillCircle(context, x, y, 5);
@@ -262,8 +270,8 @@
                 drawMarkers.value.forEach(marker => {
                     if (ctx2d.isPointInPath(marker.canvasCoords[0], marker.canvasCoords[1])) {
                         gettingCoords.value.push({
-                            label: marker.label,
-                            value: marker.value
+                            text: marker.text,
+                            coords: marker.coords
                         })
                     }
                 });
