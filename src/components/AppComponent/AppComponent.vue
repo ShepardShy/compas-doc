@@ -14,6 +14,7 @@
             @actionFilter="(data) => emit('actionFilter', data)"
             @createOption="(data) => emit('createOption', data)"
             @searchOptions="(data) => emit('searchOptions', data)"
+            @selectPoints="(data) => emit('selectPoints', data)"
         />
 
         <ComponentDescription 
@@ -33,6 +34,7 @@
     import AppH3 from '@/components/AppH3/AppH3.vue'
     import ComponentField from './ComponentField/ComponentField.vue';
     import ComponentDescription from './ComponentDescription/ComponentDescription.vue';
+    import {onMounted} from "vue";
 
     const props = defineProps({
         title: {

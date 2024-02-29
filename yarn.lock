@@ -952,6 +952,11 @@
     date-fns "^2.30.0"
     date-fns-tz "^1.3.7"
 
+"@yandex/ymaps3-types@>=0.0.21":
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/@yandex/ymaps3-types/-/ymaps3-types-0.0.21.tgz#a8e893c62aaa448f7ff8f229945bf9aebdd26279"
+  integrity sha512-mMKDhzHdV+4ZkzrN2oKzRXEHfCtS3/PLjzWUG2Tp5qsBWszViruk4gng+c/ORthztooYRgqB2+U5syNHDPc0Kw==
+
 ansi-escapes@^4.2.1:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-4.3.2.tgz#6b2291d1db7d98b6521d5f1efa42d0f3a9feb65e"
@@ -2734,6 +2739,13 @@ vue-the-mask@^0.11.1:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/vue-the-mask/-/vue-the-mask-0.11.1.tgz#91ee01008354ae57bccc79bb61b65f32d971d9d5"
   integrity sha512-UquSfnSWejD0zAfcD+3jJ1chUAkOAyoxya9Lxh9acCRtrlmGcAIvd0cQYraWqKenbuZJUdum+S174atv2AuEHQ==
+
+vue-yandex-maps@^2.0.0-rc.14:
+  version "2.0.0-rc.14"
+  resolved "https://registry.yarnpkg.com/vue-yandex-maps/-/vue-yandex-maps-2.0.0-rc.14.tgz#5d1bdce531770cdee8aff634cb625c8439c43c4d"
+  integrity sha512-YwxVd4PwDd8lKtv4GIUjw9OBMGY8OTxd0hSneKSPjQ/DankmCKH8aoQ7+I1tUKLdaBfv4OyY2JgY6/pYmCLkww==
+  dependencies:
+    "@yandex/ymaps3-types" ">=0.0.21"
 
 vue3-toastify@^0.2.1:
   version "0.2.1"

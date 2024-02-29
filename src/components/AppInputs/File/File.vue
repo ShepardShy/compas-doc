@@ -8,7 +8,7 @@
             :title="props.item.title"
         />
 
-        <FileField
+        <Field
             :item="props.item"
             :isReadOnly="props.isReadOnly"
             :isShowFileName="props.isShowFileName"
@@ -24,7 +24,7 @@
 
     import FormItem from "@/components/AppForm/FormItem/FormItem.vue";
     import FormLabel from "@/components/AppForm/FormLabel/FormLabel.vue";
-    import FileField from './FileField/FileField.vue'
+    import Field from './Field/Field.vue'
 
     const props = defineProps({
         item: {

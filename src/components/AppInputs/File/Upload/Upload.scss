@@ -1,5 +1,5 @@
-@use '@/assets/variables' as variables;
-@use '@/assets/mixins' as mixins;
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
 
 .file-upload {
     position: relative;
@@ -20,10 +20,42 @@
     transform: scale(1.1);
     cursor: pointer;
     font-size: 0;
-    z-index: 1;
+    z-index: 2;
 
     &::-webkit-file-upload-button {
-        cursor: pointer;
+        display: none;
+    }
+}
+
+.file-upload__image-wrapper {
+    display: flex;
+    height: 100%;
+
+    .file-upload__image {
+        @include mixins.elemResolutionOptions(100%, 100%);
+        z-index: 1;
+        object-fit: contain;
+    }
+
+    .icon__close {
+        position: absolute;
+        height: 1em;
+        width: 1em;
+        @include mixins.elemResolutionOptions(1em, 1em);
+        background: #fff;
+        border-radius: 50%;
+        display: block;
+        top: 2px;
+        right: 2px;
+        z-index: 20;
+        opacity: 75%;
+        color: #606266;
+        transition: 0.2s ease-in-out;
+
+        &:hover {
+            color: variables.$color-blue;
+            opacity: 1;
+        }
     }
 }
 
