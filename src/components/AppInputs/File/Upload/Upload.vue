@@ -14,22 +14,43 @@
             @change="(event) => addFiles(event)"
         >
 
-        <div class="file-upload__button">
-            <LoadFile />
+        <div
+            v-if="props.buttonImage === null"
+            class="file-upload__button"
+        >
+            <LoadFile v-if="!props.otherIcon" />
+            <component v-else :is="props.otherIcon" />
+
             <span class="file-upload__button-title">
                 {{ props.buttonTitle }}
             </span>
+        </div>
+
+        <div
+            v-else
+            class="file-upload__image-wrapper"
+        >
+            <img
+                class="file-upload__image"
+                :src="props.buttonImage"
+                :alt="props.buttonTitle"
+            />
+
+            <IconClose
+                title="Удалить иконку"
+                @click.prevent="emit('deleteFile')"
+            />
         </div>
     </div>
 </template>
 
 <script setup>
-    import './FileUpload.scss';
-
-    import {ref} from "vue";
+    import './Upload.scss';
 
     import LoadFile from "@/components/AppIcons/LoadFile/LoadFile.vue";
     import Input from "@/components/AppAutocomplete/Input/Input.vue";
+    import IconClose from "@/components/AppIcons/Close/Close.vue";
+    import {ref} from "vue";
 
     const props = defineProps({
         isMultiple: {
@@ -38,6 +59,14 @@
         },
         buttonTitle: {
             default: 'Загрузить',
+            type: String
+        },
+        otherIcon: {
+            default: null,
+            type: Object
+        },
+        buttonImage: {
+            default: null,
             type: String
         }
     })

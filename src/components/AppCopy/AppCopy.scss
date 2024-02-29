@@ -1,0 +1,14 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.button-text__copy {
+	@include mixins.userSelect($value: none);
+	position: relative;
+
+	.button-text__mirror {
+		position: absolute;
+		@include mixins.elemPositionOptions(0, 0);
+		@include mixins.userSelect($value: auto);
+		opacity: 0;
+	}
+}

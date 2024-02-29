@@ -14,7 +14,7 @@
             :disabled="props.isOneFile"
             handle=".fancybox-item__link"
             draggable=".file-list__item:not(.file-list__item_undraggable)"
-            @end="() => callAction(null)"
+            @end="(event) => callAction(event)"
         >
             <template #item="{ element: image }" >
                 <FansyBoxImage
@@ -29,7 +29,7 @@
                     @callAction="(data) => callAction(data)"
                 />
 
-                <FileUpload
+                <Upload
                     v-else-if="!props.isReadOnly"
                     :buttonTitle="props.item.buttonName"
                     :isMultiple="props.isMultiple"
@@ -45,19 +45,19 @@
 </template>
 
 <script setup>
-    import './FileField.scss';
+    import './Field.scss';
 
     import draggable from 'vuedraggable'
+
+    // import {useUserStore} from "~/stores/userStore";
+    // import commonScripts from "~/commonScripts/commonScripts";
+
     import {toast} from 'vue3-toastify';
-    import {computed, ref, watch} from "vue";
 
     import FansyBox from '@/components/AppFansyBox/FansyBox.vue';
     import FansyBoxImage from '@/components/AppFansyBox/FansyBoxImage/FansyBoxImage.vue';
-    import FileUpload from "@/components/AppInputs/File/FileUpload/FileUpload.vue";
-
-    const emit = defineEmits([
-        'changeValue'
-    ])
+    import Upload from "../Upload/Upload.vue";
+    import {computed, ref, watch} from "vue";
 
     const props = defineProps({
         item: {
@@ -92,6 +92,13 @@
         }
     })
 
+    const emit = defineEmits([
+        'changeValue',
+        'initEdit'
+    ])
+
+    // const userStore = useUserStore()
+
     // Получение значении
     const getValues = () => {
         if ([null, undefined].includes(props.item.value) || !Array.isArray(props.item.value)) {
@@ -115,13 +122,15 @@
     const callAction = (data) => {
         const supportedExtensions = ['png', 'svg', 'jpeg', 'jpg', 'webp', 'pdf', 'gif', 'mp4', 'xlsx', 'mp3', 'doc', 'docx', 'txt', 'pptx'];
 
+        // Изменение значений в сторе
+        const changeValue = () => {
+            emit('changeValue', { key: props.item.key, value: values.value.filter(item => Object.keys(item).length !== 0) })
+        }
+
         // Скачивание файла
         const downloadFile = async () => {
             const imageSrc = data.value.file;
             const nameOfDownload = [null, undefined].includes(data.value.name) || data.value.name !== '' ? data.value.name : 'my-image.png'
-
-            console.log('imageSrc', imageSrc)
-            console.log('nameOfDownload', nameOfDownload)
 
             try {
                 const response = await fetch(imageSrc, {
@@ -154,7 +163,7 @@
             const downloadingItem = {
                 id: id,
                 name: "Загрузка",
-                preview: null,
+                url: null,
                 file: null,
                 extension: '',
                 status: 'loading'
@@ -165,19 +174,22 @@
 
         // Добавление успешно загруженного изображения
         const addImage = (image, id) => {
-            const currentImage = values.value.find(item => item.id == id)
+            const currentImage = values.value.find(item => item.id == id);
 
             currentImage.id = image.id;
             currentImage.name = image.name;
-            currentImage.preview = image.preview;
+            currentImage.url = image.url;
             currentImage.file = image.file;
             currentImage.extension = image.extension;
             currentImage.status = 'success';
+
+            changeValue();
         }
 
         // Локальное удаление эллемента
-        const deleteImage = (id) => {
-            values.value = values.value.filter(item => Object.keys(item).length === 0 || item.id !== id)
+        const deleteFile = (id) => {
+            values.value = values.value.filter(item => Object.keys(item).length === 0 || item.id !== id);
+            changeValue();
         }
 
         // Загрузка файлов
@@ -196,9 +208,9 @@
             ajax.onloadend = function() {
                 try {
                     const responseObj = JSON.parse(ajax.response)[0];
-                    addImage(responseObj.file, id);
+                    addImage(responseObj, id);
                 } catch (error) {
-                    deleteImage(id)
+                    deleteFile(id)
                     console.log('error', error);
                 }
             };
@@ -214,48 +226,44 @@
         const addFiles = () => {
             data.value.forEach(async (file) => {
                 if (!supportedExtensions.includes(file.name.split('.').splice(-1)[0])) {
-                    const shortName = file.name.slice(0, 9) + '...' + file.name.slice(file.name.length - 7)
-                    toast.error(`Формат файла ${shortName} не поддерживается`, {
-                        autoClose: 300000
-                    });
+                    // Здесь должен использоваться toast
+                    // await commonScripts.showNotification({
+                    //     title: 'Ошибка загрузки файла',
+                    //     description: `Поддерживаемыей файлы ${supportedExtensions.join(', ')}`
+                    // }, 'error')
                     return
                 }
 
                 const formData = new FormData()
                 const id = new Date().getTime()
                 formData.append('files[]', file)
-                formData.append('uid', id)
 
                 await uploadFile(formData, id)
             })
         }
 
-        if (data !== null) {
-            switch (data.action) {
-                case 'addFiles':
-                    addFiles();
-                    break;
+        switch (data.action) {
+            case 'addFiles':
+                addFiles();
+                break;
 
-                case 'downloadFile':
-                    downloadFile();
-                    break;
+            case 'downloadFile':
+                downloadFile();
+                break;
 
-                case 'deleteImage':
-                    deleteImage(data.value);
-                    break;
+            case 'deleteFile':
+                deleteFile(data.value);
+                break;
 
-                default:
-                    break;
-            }
-        }
-
-        if (data == null || ['addImage', 'deleteImage'].includes(data.action)) {
-            emit('changeValue', { key: props.item.key, value: values.value.filter(item => Object.keys(item).length !== 0) })
+            default:
+                emit('initEdit', data)
+                changeValue();
+                break;
         }
     }
 
-    watch(() => props.item.value, () => {
-        values.value = getValues()
+    watch(() => props.isReadOnly, () => {
+        values.value = getValues();
     })
 
 </script>

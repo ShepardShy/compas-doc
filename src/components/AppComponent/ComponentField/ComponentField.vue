@@ -20,6 +20,8 @@
             :isOneFile="props.codeProps.isOneFile != undefined ? props.codeProps.isOneFile.default : null"
             :isCanCreate="props.codeProps.isCanCreate != undefined ? props.codeProps.isCanCreate.default : null"
             :isHaveNullOption="props.codeProps.isHaveNullOption != undefined ? props.codeProps.isHaveNullOption.default : null"
+            :isShowMap="props.codeProps.isShowMap != undefined ? props.codeProps.isShowMap.default : null"
+            :isSelectSeveral="props.codeProps.isSelectSeveral != undefined ? props.codeProps.isSelectSeveral.default : null"
             :enabledAutocomplete="props.codeProps.enabledAutocomplete != undefined ? props.codeProps.enabledAutocomplete.default : null"
             @showAll="(data) => emit('showAll', data)"
             @openLink="(data) => emit('openLink', data)"
@@ -28,6 +30,7 @@
             @actionFilter="(data) => emit('actionFilter', data)"
             @createOption="(data) => emit('createOption', data)"
             @searchOptions="(data) => emit('searchOptions', data)"
+            @selectPoints="(data) => emit('selectPoints', data)"
         />
     </div>
 </template>

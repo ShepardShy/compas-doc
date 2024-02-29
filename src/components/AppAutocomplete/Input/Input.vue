@@ -83,6 +83,7 @@
     import FormLabel from '@/components/AppForm/FormLabel/FormLabel.vue';
     import PopupOption from '@/components/AppPopup/PopupOption/PopupOption.vue';
     import PopupScripts from '@/components/AppPopup/Scripts.js';
+    import _ from "lodash";
 
     const popupRef = ref(null)
     const nullOption = {
@@ -159,6 +160,8 @@
                 }
                 return true;
             }
+
+            console.log('ffff', props.item.options == null ? [] : props.item.options.filter(p => p != null && typeof p == 'object' && !Array.isArray(p) && !isEmpty(p)))
 
             let localOptions = props.item.options == null ? [] : props.item.options.filter(p => p != null && typeof p == 'object' && !Array.isArray(p) && !isEmpty(p)).sort((prev, next) => prev.label.sort - next.label.sort)
             options.value = JSON.parse(JSON.stringify(localOptions))
