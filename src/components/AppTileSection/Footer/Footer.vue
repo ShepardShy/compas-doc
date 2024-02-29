@@ -1,0 +1,39 @@
+<template>
+    <div class="tile-section__footer">
+        <AppPopup :closeByClick="true">
+            <template #summary>
+                <ButtonText>
+                    Добавить
+                </ButtonText>
+            </template>
+            <template #content>
+                <PopupOption v-for="field in hiddenFields" @click="() => emit('callAction', { action: 'changeVisibleField', value: field.id })">
+                    {{ field.title }}
+                </PopupOption>
+                <PopupOption class="popup__option_empty" v-show="hiddenFields.length == 0">
+                    Пусто
+                </PopupOption>
+            </template>
+        </AppPopup>
+
+        <ButtonText @click="() => emit('callAction', { action: 'createField', value: null })">
+            Создать поле
+        </ButtonText>
+    </div>
+</template>
+
+<script setup>
+    import './Footer.scss';
+
+    import { inject } from 'vue';
+
+    import AppPopup from '@/components/AppPopup/Popup.vue';
+    import PopupOption from '@/components/AppPopup/PopupOption/PopupOption.vue';
+    import ButtonText from '@/components/AppButton/ButtonText/ButtonText.vue';
+
+    const emit = defineEmits([
+        'callAction'
+    ])
+
+    const hiddenFields = inject('hiddenFields')
+</script>

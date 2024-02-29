@@ -18,17 +18,16 @@
     }
 
     .form-item__input {
-        width: 100%;
-
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        
         .form-item__title {
             display: none;
         }
     }
 
     .tile-section__title {
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
         width: 100%;
 
         .icon__draggable {

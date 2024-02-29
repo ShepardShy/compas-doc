@@ -14,6 +14,14 @@
         color: variables.$color-red;
     }
 
+    &.popup__option_empty {
+        color: variables.$color-blue-grey;
+
+        &:hover {
+            background: transparent;
+        }
+    }
+
     &.popup__option_active {
         &::after {
             content: url('/public/icons/success.svg');

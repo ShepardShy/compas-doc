@@ -142,7 +142,6 @@
                     :isOneFile="true"
                     @changeValue="(data) => changeValue(props.row.id, data)"
                 />
-
                 <AppDate 
                     v-else-if="props.item.type == 'date'"
                     :item="{
@@ -156,6 +155,7 @@
                     }"
                     :isMultiple="Boolean(props.item.is_plural)"
                     :isReadOnly="Boolean(props.item.read_only || !props.row.isEdit)"
+                    @changeValue="(data) => changeValue(data)"
                 />
 
                 <IconDrag 

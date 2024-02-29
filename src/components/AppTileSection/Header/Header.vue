@@ -22,14 +22,16 @@
                 :mask="null"
                 :isLink="false"
                 :isReadOnly="Boolean(!stateTitle)"
+                @keyup.enter="() => stateTitle ? saveTitle() : ''"
                 @changeValue="(data) => changeValue(data)"
-            />
-
-            <IconEdit v-show="!stateTitle" @click="() => editTitle()"/>
+            > 
+            
+                <IconEdit v-show="!stateTitle" @click="() => editTitle()"/>
+            </AppInput>
         </div>
         <div class="tile-section__header-actions">
-            <ButtonText>
-                Изменить
+            <ButtonText @click="() => emit('callAction', { action: 'changeState', value: null })">
+                {{ section.state ? 'Отмена' : 'Изменить' }}
             </ButtonText>
 
             <AppPopup :closeByClick="true">
@@ -37,7 +39,7 @@
                     <IconSettings />
                 </template>
                 <template #content>
-                    <PopupOption class="popup__option_red">
+                    <PopupOption class="popup__option_red" @click="() => emit('callAction', { action: 'delete', value: section.id })">
                         Удалить
                     </PopupOption>
                 </template>
@@ -73,13 +75,12 @@
     }
 
     const saveTitle = () => {
-        console.log('asdasd');
         stateTitle.value = false
         emit('callAction', { 
-            action: 'editSection', 
+            action: 'edit', 
             value: {
-                id: section.id,
-                title: section.title
+                id: section.value.id,
+                title: section.value.title
             } 
         })
     }
