@@ -18,7 +18,10 @@
     }
 
     .form-item__input {
-        width: 100%;
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        
 
         .form-item__title {
             display: none;
