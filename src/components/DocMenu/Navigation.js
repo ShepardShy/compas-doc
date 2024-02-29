@@ -47,6 +47,11 @@ export default {
             id: 17,
             name: 'Адрес',
             component: markRaw(defineAsyncComponent(() => import('@/pages/frontend/address/address.vue')))
+        },
+        {
+            id: 18,
+            name: 'Секция',
+            component: markRaw(defineAsyncComponent(() => import('@/pages/frontend/tileSection/tileSection.vue')))
         }
     ],
 

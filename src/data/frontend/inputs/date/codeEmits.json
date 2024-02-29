@@ -1,6 +1,6 @@
 {
     "@changeValue": {
         "key": "key", 
-        "value": "value"
+        "value": ["yyyy.mm.dd"]
     }
 }

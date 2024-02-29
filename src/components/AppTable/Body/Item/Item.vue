@@ -142,6 +142,29 @@
                     :isOneFile="true"
                     @changeValue="(data) => changeValue(props.row.id, data)"
                 />
+
+                <AppDate 
+                    v-else-if="props.item.type == 'date'"
+                    :item="{
+                        id: props.row.id,
+                        required: true,
+                        title: props.item.title,
+                        placeholder: null,
+                        value: props.row[props.item.key],
+                        key: props.item.key,
+                        focus: false
+                    }"
+                    :isMultiple="Boolean(props.item.is_plural)"
+                    :isReadOnly="Boolean(props.item.read_only || !props.row.isEdit)"
+                />
+
+                <IconDrag 
+                    v-else-if="props.item.type == 'iconDrag'"
+                />
+                <IconDelete
+                    v-else-if="props.item.type == 'iconDelete'"
+                    @click="() => callAction({action: 'removeRow', value: props.row.id})"
+                />
         </div>
     </td>
 </template>
@@ -151,7 +174,10 @@
     
     import { inject, ref } from 'vue'
 
+    import IconDrag from '@/components/AppIcons/Drag/Drag.vue'
+    import IconDelete from '@/components/AppIcons/Delete/Delete.vue'
     import AppActions from '../Actions/Actions.vue'
+    import AppDate from '@/components/AppInputs/Date/Date.vue'
     import AppFile from '@/components/AppInputs/File/File.vue'
     import AppStatus from '@/components/AppSelects/Status/Status.vue'
     import AppSelect from '@/components/AppSelects/Select/Select.vue'

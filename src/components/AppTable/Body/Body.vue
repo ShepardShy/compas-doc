@@ -1,12 +1,21 @@
 <template>
-    <tbody class="table__body">
-        <TableRow 
-            v-for="row in bodyData" 
-            :row="row"
-            :slug="props.slug"
-            @callAction="(data) => emit('callAction', data)"
-        />
-    </tbody>
+    <draggable 
+        tag="tbody"
+        class="table__body"
+        itemKey="table-body"
+        v-model="bodyData" 
+        handle=".icon__draggable"
+        @end="(event) => emit('callAction', {action: 'moveRows', value: event.to.__draggable_component__.modelValue})" 
+    >
+        <template #item="{ element: row }">
+            <TableRow 
+                :row="row"
+                :slug="props.slug"
+                :isTrash="props.isTrash"
+                @callAction="(data) => emit('callAction', data)"
+            />
+        </template>
+    </draggable>
 </template>
 
 <script setup>
@@ -14,6 +23,7 @@
     
     import { inject } from 'vue'
 
+    import draggable from 'vuedraggable'
     import TableRow from './Row/Row.vue'
 
     const bodyData = inject('bodyData')

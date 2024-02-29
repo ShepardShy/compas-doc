@@ -39,6 +39,7 @@
                 key: '',
                 value: '',
                 type: "text",
+                focus: false,
                 placeholder: '',
                 title: "Undefined title"
             },

@@ -42,7 +42,7 @@
     <componentBackend 
         :title="'Поиск опций в других таблицах'"
         :type="'GET'"
-        :method="'api/objects/${slug}/search'"
+        :method="'api/objects/search'"
         :response="SearchResponse"
         :request="SearchRequest"
     />

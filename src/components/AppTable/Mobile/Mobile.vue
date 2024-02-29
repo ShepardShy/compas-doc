@@ -1,5 +1,7 @@
 <template>
     <div class="table-template__body_mobile">
+        <AppLoader class="table-template__loader" ref="loaderRef"/>
+
         <div class="table-mobile" :class="bodyData.length == 0 ? 'table-mobile_empty' : ''">
             <div 
                 v-for="row in bodyData" 
@@ -157,9 +159,10 @@
 <script setup>
     import './Mobile.scss';
 
-    import { inject, ref } from 'vue'
+    import { inject, ref, onMounted, onUnmounted } from 'vue'
     
     import AppFile from '@/components/AppInputs/File/File.vue'
+    import AppLoader from '@/components/AppLoader/AppLoader.vue';
     import FormItem from '@/components/AppForm/FormItem/FormItem.vue';
     import FormLabel from '@/components/AppForm/FormLabel/FormLabel.vue';
     import AppActions from '@/components/AppTable/Body/Actions/Actions.vue'
@@ -174,6 +177,8 @@
     const bodyData = inject('bodyData')
     const actionState = inject('actionState')
     const backupValues = inject('backupValues')
+    const sectionRef = inject('sectionRef')
+    const scrollPosition = inject('scrollPosition')
 
     let clickSetting = ref({
         id: -1,
@@ -276,5 +281,46 @@
                 emit('callAction', {action: data.action, value: data.value})
                 break;
         }
+    }
+
+    // Установка позиции у кнопок
+    const setPosition = () => {
+        // старт таблицы
+        if (sectionRef.value.sectionRef.getBoundingClientRect().top > 0) {
+            const rect = sectionRef.value.sectionRef.getBoundingClientRect();
+            const isFullyVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+            if (isFullyVisible) {
+                return (sectionRef.value.sectionRef.offsetHeight - 82) / 2 - 27
+            } else {
+                return (window.innerHeight - sectionRef.value.sectionRef.getBoundingClientRect().top - 82) / 2 - 17
+            }
+        // конец таблицы
+        } else {
+            let startPosScrollBlock = sectionRef.value.sectionRef.getBoundingClientRect().top +  window.pageYOffset - document.body.clientTop
+            if (sectionRef.value.sectionRef.getBoundingClientRect().height + startPosScrollBlock < window.scrollY + window.innerHeight) {
+                return window.innerHeight / 2 + (window.scrollY - startPosScrollBlock - startPosScrollBlock + 5)
+            }
+            // середина таблицы
+            else {
+                return window.innerHeight / 2 + window.scrollY - startPosScrollBlock - 41
+            }
+        }
+    }
+
+    onMounted(async () => {
+        window.addEventListener('scroll', throt_funScroll)
+
+        setTimeout(() => {
+            scrollPosition.value = setPosition()
+        }, 100);
+    })
+
+    onUnmounted(() => {
+        window.removeEventListener('scroll', throt_funScroll)
+    })
+
+    // Троттлинг скролла по вертикали
+    const throt_funScroll = () => {
+        scrollPosition.value = setPosition()
     }
 </script>

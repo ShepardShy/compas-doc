@@ -17,6 +17,7 @@
 
     &.table-template_loading {
         height: 88vh;
+        overflow: hidden;
         
         .table {
             display: none;
@@ -24,7 +25,7 @@
     }
 
     &.table-template_filtering {
-        .table {
+        .table, .table-mobile {
             opacity: 0.5;
         }
     }

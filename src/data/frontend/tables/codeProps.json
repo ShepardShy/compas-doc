@@ -3,6 +3,26 @@
         "default": {
             "tableKeys": [
                 {
+                    "id": 9,
+                    "title": "Перетаскивание",
+                    "key": "iconDrag",
+                    "width": "44px",
+                    "type": "iconDrag",
+                    "enabled": true,
+                    "fixed": false,
+                    "fixTarget": "0px"
+                },
+                {
+                    "id": 10,
+                    "title": "Удаление",
+                    "key": "iconDelete",
+                    "width": "44px",
+                    "type": "iconDelete",
+                    "enabled": true,
+                    "fixed": false,
+                    "fixTarget": "0px"
+                },
+                {
                     "id": 0,
                     "title": "Выделение",
                     "key": "isChoose",
@@ -94,6 +114,31 @@
                     ],
                     "related_table": "clients",
                     "can_create": 1
+                },
+                {
+                    "id": 105,
+                    "title": "Дата",
+                    "key": "created_at",
+                    "width": "368px",
+                    "enabled": true,
+                    "sort_order": "desc",
+                    "type": "date",
+                    "is_plural": 0,
+                    "external_link": null,
+                    "is_external_link": 1,
+                    "is_link": 0,
+                    "required": 1,
+                    "fixed": null,
+                    "index": 5,
+                    "fixTarget": "0px",
+                    "read_only": 0,
+                    "unit": "",
+                    "mask": "",
+                    "can_edit": 0,
+                    "color": "",
+                    "is_hidden": 0,
+                    "visible_always": 1,
+                    "options": []
                 },
                 {
                     "id": 105,
@@ -363,6 +408,16 @@
             "sortItem": {
                 "key": "id",
                 "order": "desc"
+            },
+            "socketRows": {
+                "header": [{
+                    "id": 105,
+                    "required": 0
+                }],
+                "body": [{
+                    "id": 130303,
+                    "name": "asdasdasdasdasdasd"
+                }]
             },
             "title": "Название таблицы"
         },

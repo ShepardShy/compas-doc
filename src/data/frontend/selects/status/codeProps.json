@@ -25,7 +25,7 @@
         "type": "Object"
     },
     "isCanCreate": {
-        "default": false,
+        "default": true,
         "type": "Boolean"
     },
     "isReadOnly": {

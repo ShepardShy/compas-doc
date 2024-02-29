@@ -1,0 +1,76 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.tile-section__header {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 10px 15px;
+    gap: 15px;
+    border-bottom: 1px solid variables.$color-light-grey;
+
+    &:hover {
+        .tile-section__title {
+            .icon__draggable, .icon__edit {
+                opacity: 1;
+            }
+        }
+    }
+
+    .form-item__input {
+        width: 100%;
+
+        .form-item__title {
+            display: none;
+        }
+    }
+
+    .tile-section__title {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        width: 100%;
+
+        .icon__draggable {
+            opacity: 0;
+            left: 2px;
+        }
+
+        .icon__edit {
+            opacity: 0;
+            cursor: pointer;
+
+            svg {
+                * {
+                    fill: variables.$color-blue-grey;
+                }
+            }
+
+            &:hover {
+                svg {
+                    * {
+                        fill: variables.$color-active;
+                    }
+                }
+            }
+        }
+
+        input {
+            padding: 0px;
+            min-height: auto;
+            height: auto;
+            border: none;
+        }
+    }
+
+    .tile-section__header-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+
+        .button-text {
+            font-size: variables.$font-size-label;
+        }
+    }
+}

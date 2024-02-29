@@ -65,6 +65,7 @@
                         height: auto;
                         min-height: auto;
                         padding: 5px 30px 5px 15px;
+                        border: none;
                     }
                 }
             }
@@ -72,7 +73,8 @@
             .select__active-option {
                 top: 1px;
                 height: auto;
-                padding: 5px 30px 5px 10px;
+                padding: 5px 10px;
+                justify-content: flex-end;
             }
         }
 

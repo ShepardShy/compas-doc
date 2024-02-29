@@ -7,7 +7,7 @@
         @changeValue="(data) => changeValue(data)"
     /> 
 
-    <AppComponent 
+    <!-- <AppComponent 
         :title="'Селект'"
         :component="AppSelect"
         :codeProps="SelectProps"
@@ -24,7 +24,7 @@
         @openLink="(data) => openLink(data)"
         @changeValue="(data) => changeValue(data)"
         @createOption="(data) => createOption(data)"
-    /> 
+    />  -->
 </template>
 
 <script setup>

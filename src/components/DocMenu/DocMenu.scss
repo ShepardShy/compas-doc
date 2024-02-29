@@ -58,3 +58,24 @@
         }
     }
 }
+
+@media (max-width: 660px) {
+    .page {
+        grid-template-columns: 1fr;
+    }
+
+    aside {
+        display: none;
+    }
+
+    .main__content {
+        &.main__content_table {
+            grid-template-columns: 1fr;
+
+            .component__table {
+                width: 95vw;
+                margin: 0 20px 100px;
+            }
+        }
+    }
+}
