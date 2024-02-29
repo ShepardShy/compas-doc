@@ -12,6 +12,7 @@
         <TileFooter 
             @callAction="(data) => callActionFields(data)"
         />
+
     </AppSection>
 </template>
 
@@ -53,6 +54,7 @@
         }
     })
 
+
     // Действие с секцией
     const callActionSection = (data) => {
         // Перемещение секции
@@ -80,6 +82,7 @@
             section.value.state = !section.value.state
         }
 
+
         switch (data.action) {
             // Перемещение секции
             case 'move':
@@ -90,7 +93,7 @@
             case 'changeState':
                 changeState()
                 break;
-        
+
             // Изменение заголовка
             case 'changeTitle':
                 changeTitle(data.value)
@@ -155,4 +158,5 @@
             action: 'getFields'
         })
     })
+
 </script>

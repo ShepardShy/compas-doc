@@ -32,6 +32,7 @@
         <div class="tile-section__header-actions">
             <ButtonText @click="() => emit('callAction', { action: 'changeState', value: null })">
                 {{ section.state ? 'Отмена' : 'Изменить' }}
+
             </ButtonText>
 
             <AppPopup :closeByClick="true">
@@ -81,6 +82,7 @@
             value: {
                 id: section.value.id,
                 title: section.value.title
+
             } 
         })
     }

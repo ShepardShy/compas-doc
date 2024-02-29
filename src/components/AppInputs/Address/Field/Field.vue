@@ -1,9 +1,7 @@
 <template>
     <div class="address__wrapper">
         <AppAutocomplete
-            :item="{
-                ...props.item
-            }"
+            :item="props.item"
             :isCanCreate="false"
             :isLink="false"
             :isShowId="false"
@@ -14,7 +12,7 @@
 
         <AppCopy
             v-if="activeOption"
-            :text="activeOption.label.text"
+            :text="activeOption.text"
             :buttonTitle="'Скопировать адрес'"
         />
 
@@ -31,7 +29,7 @@
 <script setup>
     import './Field.scss';
 
-    import {computed, ref, watch} from "vue";
+    import {ref, toRaw, watch} from "vue";
 
     import AppAutocomplete from "@/components/AppAutocomplete/Input/Input.vue";
     import Map from "@/components/AppInputs/Address/Map/Map.vue";
@@ -78,17 +76,22 @@
     const activeOption = ref(null)
 
     const changeValue = (data) => {
-        console.log('data', data)
-        emit('changeValue', (props.item.options.find((option) => data && _.isEqual(option.value, data.value))))
+        const selectedItem = props.item.options.find((option) => data && _.isEqual(option.value, data.value))
+        emit('changeValue', (selectedItem ? selectedItem.value : null))
     }
 
     const setActiveOption = () => {
-        if (props.item.value && !props.item.options.find((option) => option.value === props.item.value.value)) {
-            props.item.options.push(props.item.value)
+        if (props.item.value && !props.item.options.find((option) => _.isEqual(option.value, props.item.value))) {
+            props.item.options.push({
+                label: {
+                    text: props.item.value.text
+                },
+                value: toRaw(props.item.value)
+            })
         }
 
-        activeOption.value = props.item.options.find((option) => props.item.value && option.value === props.item.value.value) ?
-            props.item.options.find((option) => props.item.value && option.value === props.item.value.value).value : null
+        const selectedItem = props.item.options.find((option) => props.item.value && _.isEqual(option.value, props.item.value))
+        activeOption.value = selectedItem ? selectedItem.value : null
     }
 
     setActiveOption()
