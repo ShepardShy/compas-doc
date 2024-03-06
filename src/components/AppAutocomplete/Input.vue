@@ -27,7 +27,7 @@
                         focus: false,
                         key: props.item.key,
                         placeholder: null,
-                        value: props.isReadOnly ? activeOption.id == null ? null : activeOption.text : search,
+                        value: props.isReadOnly ? activeOption == null ? null : activeOption.text : search,
                         substring: props.isReadOnly ? null : activeOption.id == null ? ' ' : `ID: ${activeOption.id}`
                     }"
                     :mask="null"
@@ -83,7 +83,6 @@
     import FormLabel from '@/components/AppForm/FormLabel/FormLabel.vue';
     import PopupOption from '@/components/AppPopup/PopupOption/PopupOption.vue';
     import PopupScripts from '@/components/AppPopup/Scripts.js';
-    import _ from "lodash";
 
     const popupRef = ref(null)
     const nullOption = {

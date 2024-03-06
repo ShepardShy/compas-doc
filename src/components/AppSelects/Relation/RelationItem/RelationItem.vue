@@ -42,7 +42,7 @@
     
     import { ref, onMounted, watch } from 'vue'
 
-    import AppAutocomplete from '@/components/AppAutocomplete/Input/Input.vue';
+    import AppAutocomplete from '@/components/Appautocomplete/input.vue';
 
     let activeOption = ref(null)
     let localItem = ref(null)
@@ -67,6 +67,10 @@
                 lockedOptions: []
             },
             type: Object
+        },
+        fieldId: {
+            default: 0,
+            type: Number
         },
         isCanCreate: {
             default: false,
@@ -97,14 +101,14 @@
                     activeOption.value = nullOption 
                     return nullOption
                 } else {
-                    activeOption.value = findedOption.label
+                    activeOption.value = findedOption.label == undefined ? nullOption : findedOption.label
                     localItem.value.options.push(findedOption)
                     return findedOption
                 }
             } else {
                 activeOption.value = findedOption.label
                 return findedOption
-            }
+            } 
         }
 
         // Получение опций

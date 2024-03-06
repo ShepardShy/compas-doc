@@ -12,7 +12,7 @@
     &.status {
         .status__option {
             &.status__preview {
-                .status-option__rect {   
+                .status-option__rect {
                     &::after {
                         display: none;
                     }

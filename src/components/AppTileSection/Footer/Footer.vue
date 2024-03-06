@@ -7,7 +7,16 @@
                 </ButtonText>
             </template>
             <template #content>
-                <PopupOption v-for="field in hiddenFields" @click="() => emit('callAction', { action: 'changeVisibleField', value: field.id })">
+                <PopupOption 
+                    v-for="field in hiddenFields" 
+                    @click="() => emit('callAction', {
+                        action: 'changeVisibleField', 
+                        value: {
+                            state: 'visible',
+                            field: field
+                        }
+                    })"
+                >
                     {{ field.title }}
                 </PopupOption>
                 <PopupOption class="popup__option_empty" v-show="hiddenFields.length == 0">
@@ -16,7 +25,7 @@
             </template>
         </AppPopup>
 
-        <ButtonText @click="() => emit('callAction', { action: 'createField', value: null })">
+        <ButtonText @click="() => emit('callAction', { action: 'initCreateField', value: null })">
             Создать поле
         </ButtonText>
     </div>

@@ -54,7 +54,7 @@
                 display: flex;
                 justify-content: center;
                 position: relative;
-                left: -2px;
+                left: -4px;
             }
         }
 
@@ -94,6 +94,12 @@
                         right: 30px;
                         white-space: nowrap;
                         background: variables.$color-white;
+                        pointer-events: none;
+                        @include mixins.userSelect($value: none);
+
+                        &::after {
+                            pointer-events: fill;
+                        }
                     }
                 }
             }

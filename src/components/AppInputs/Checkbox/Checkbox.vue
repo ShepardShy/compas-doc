@@ -1,5 +1,5 @@
 <template>
-    <FormItem class="form-item__checkbox" :class="props.disabled ? 'form-item__checkbox_disabled' : ''" @click="() => changeValue()">
+    <FormItem class="form-item__checkbox" :class="props.disabled ? 'form-item__checkbox_disabled' : ''" @click="(event) => changeValue(event)">
         <CheckboxLabel 
             :title="props.item.title"
             :isHTML="props.item.isHTML"
@@ -27,8 +27,7 @@
                 id: 0,
                 key: '',
                 title: '',
-                value: false,
-                isHTML: false
+                value: false
             },
             type: Object
         },
@@ -42,13 +41,13 @@
         'changeValue'
     ])
 
-    const changeValue = () => {
+    const changeValue = (event) => {
         if (!props.disabled) {
             emit('changeValue', {
                 id: props.item.id, 
                 key: props.item.key, 
                 value: !props.item.value
-            })
+            }, event)
         }
     }
 </script>

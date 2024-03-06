@@ -50,12 +50,6 @@
             filter: opacity(0.5);
         }        
 
-        .popup__option_active {
-            .popup-option__text {
-                filter: opacity(0.5);
-            }
-        }
-
         &.select__popup_multiply {
             .popup__summary {
                 @include mixins.borderOptions(1px, solid, variables.$color-blue, 5px);
@@ -139,14 +133,13 @@
             min-width: 120px;
 
             .form-item__substring {
-                top: 11px;
+                top: 9px;
                 right: 10px;
-                pointer-events: none;
                 color: variables.$color-grey;
                 @include mixins.flexBlock($vertical: center, $horizontal: flex-start, $gap: 10px);
 
                 &::after {
-                    content: url('/public/icons/arrow.svg');
+                    content: url('/icons/arrow.svg');
                 }
             }
 

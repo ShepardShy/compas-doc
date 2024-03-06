@@ -23,6 +23,7 @@
                     lockedOptions: lockedOptions,
                     related_table: props.item.related_table
                 }"
+                :fieldId="props.item.id"
                 :isReadOnly="props.isReadOnly"
                 :isCanCreate="props.isCanCreate"
                 @openLink="(item) => emit('openLink', item)"
@@ -87,6 +88,10 @@
         isMultiple: {
             default: true,
             type: Boolean
+        },
+        loaderStatus: {
+            default: false,
+            type: Boolean
         }
     })
 
@@ -103,11 +108,16 @@
         
         // Изменение значения
         const changeValue = (value) => {
-            if (data.value != null && data.value.isNew) {
+            if (props.loaderStatus === 'save') return
+
+            if (data.value.isNew) {
                 values.value.push(null)
             } else {
                 values.value[index] = value.value ?? null
-                localOptions.value.push(value)
+
+                if (value.id != null) {
+                    localOptions.value.push(value)
+                }
 
                 localOptions.value = _.uniqBy(localOptions.value, (o) => {
                     return o.value;
@@ -116,11 +126,11 @@
                 callAction({action: 'getOptions', value: true})
             }
 
-            lockedOptions.value = Array.from(new Set(props.item.lockedOptions)).concat(values.value.filter(item => item != null))
+            lockedOptions.value = Array.from(new Set(props.item.lockedOptions)).concat(values.value)
             emit('changeValue', {
                 key: props.item.key,
                 value: {
-                    value: values.value.filter(p => p != null),
+                    value: values.value,
                     localOptions: localOptions.value
                 }
             })
@@ -139,15 +149,12 @@
             if ([null, undefined].includes(props.item.value) || !Array.isArray(props.item.value.value) || props.item.value.value.length == 0) {
                 values.value =  [null] 
             } else {
-                let localValues = props.item.value.value.filter(p => ![null, undefined].includes(p))
+                let localValues = props.item.value.value
                 
                 if (localValues.length == 0) {
                     localValues =  [null]
                 }
 
-                localValues = _.uniqBy(localValues, (o) => {
-                    return o;
-                })
                 values.value = JSON.parse(JSON.stringify(localValues))
             }
 
@@ -196,5 +203,8 @@
 
     watch(() => props.item.value, () => {
         callAction({action: 'getValues', value: true})
+        callAction({action: 'getOptions', value: true})
+    }, {
+        deep: true
     })
 </script>

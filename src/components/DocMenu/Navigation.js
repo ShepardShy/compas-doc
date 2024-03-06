@@ -41,16 +41,19 @@ export default {
         {
             id: 16,
             name: 'Меню ошибки',
+            slug: 'menu-warning',
             component: markRaw(defineAsyncComponent(() => import('@/pages/frontend/warning/warning.vue')))
         },
         {
             id: 17,
             name: 'Адрес',
+            slug: 'address',
             component: markRaw(defineAsyncComponent(() => import('@/pages/frontend/address/address.vue')))
         },
         {
             id: 18,
             name: 'Секция',
+            slug: 'tile-section',
             component: markRaw(defineAsyncComponent(() => import('@/pages/frontend/tileSection/tileSection.vue')))
         }
     ],

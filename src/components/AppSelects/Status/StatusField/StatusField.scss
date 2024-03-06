@@ -5,9 +5,7 @@
     &[open] {
         .popup__summary {
             .status__option {
-                .status-option__rect {
-                    border-radius: 5px;
-    
+                .status-option__rect {    
                     &::after {
                         transform: rotate(180deg);    
                         @include mixins.borderOptions(1px, solid, variables.$color-blue, 5px 0px 0px 5px);
@@ -19,7 +17,7 @@
 
     &.status__popup_colorpicker {
         .popup__content {
-            height: max-content;
+            max-height: 300px;
             max-height: max-content;
         }
     }

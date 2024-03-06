@@ -17,12 +17,7 @@
                 Не выбрано
             </PopupOption>
 
-            <PopupOption 
-                v-show="!colorPicker.state" 
-                v-for="option in visibileOptions" 
-                :class="activeOption != null && activeOption.id == option.value ? 'popup__option_active' : ''" 
-                @click="() => changeValue(option)"
-            >
+            <PopupOption v-show="!colorPicker.state" v-for="option in visibileOptions" :class="activeOption != null && activeOption.id == option.value ? 'popup__option_active' : ''" @click="() => changeValue(option)">
                 <StatusOption 
                     :option="option.label"
                 />
@@ -39,6 +34,7 @@
 
             <PopupOption class="popup__option_unhover" v-if="colorPicker.state">
                 <ColorPicker 
+                    :isCanSave="props.isCanSave"
                     :color="colorPicker.color"
                     @changeColor="(color) => callActionColorPicker({action: 'changeColor', data: color})"
                     @saveHiddenColor="(color) => callActionColorPicker({action: 'saveHiddenColor', data: color})"
@@ -104,6 +100,10 @@
             type: Boolean
         },
         isHaveNullOption: {
+            default: false,
+            type: Boolean
+        },
+        isCanSave: {
             default: false,
             type: Boolean
         }
@@ -214,6 +214,7 @@
     // Изменение значения
     const changeValue = (option) => {
         activeOption.value = option == null ? null : option.label
+        PopupScripts.hideDetails(popupRef.value.popupRef)
         emit('changeValue', {key: props.item.key, value:  option == null ? null : option.value})
     }
 
@@ -251,7 +252,7 @@
     onMounted(() => {
         let localOptions = getOptions()
         options.value = localOptions.filter((option) => option.label.is_hidden == 0 || option.label.field_id == props.item.id)
-        visibileOptions.value = options.value.filter((option) => option.label.is_hidden != 1)
+        visibileOptions.value = props.item.options == null ? [] : props.item.options.filter((option) => option.label.is_hidden != 1)
 
         setActiveOption()
 
@@ -267,6 +268,10 @@
             PopupScripts.setDropdownPosition(popupRef.value.popupRef)
         }
     })
+
+    watch(() => props.item.options, () => {
+        visibileOptions.value = props.item.options == null ? [] : props.item.options.filter((option) => option.label.is_hidden != 1)
+    }, {deep: true})
 
     watch(() => props.item.value, () => {
         setActiveOption()

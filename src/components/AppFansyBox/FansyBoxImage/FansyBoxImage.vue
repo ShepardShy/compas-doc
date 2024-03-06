@@ -2,7 +2,7 @@
     <div class="fancybox-item fancybox__item" @mouseover="(event) => checkingBlock(event)">
         <a class="fancybox-item__link" :data-fancybox="`galleryClick_${props.id}`" :href="setHref">
             <figure class="ibg fancybox-item__img">
-                <img :src="props.image.preview" :alt="props.image.name" :title="props.image.name" />
+                <img :src="props.image.url" :alt="props.image.name" :title="props.image.name" />
             </figure>
 
             <LoaderProgress

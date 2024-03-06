@@ -1,6 +1,6 @@
 <template>
     <div class="tile-section__header">
-        <div class="tile-section__title" v-click-out-side="(event) => stateTitle ? saveTitle() : ''">
+        <div class="tile-section__title" :class="Boolean(stateTitle) ? 'tile-section__title_edit' : ''" v-click-out-side="(event) => stateTitle ? saveTitle() : ''">
             <IconDrag />
 
             <AppInput 
@@ -26,6 +26,9 @@
                 @changeValue="(data) => changeValue(data)"
             > 
             
+                <div class="form-item__mirror">
+                    {{ section.title }}
+                </div>
                 <IconEdit v-show="!stateTitle" @click="() => editTitle()"/>
             </AppInput>
         </div>
@@ -78,7 +81,7 @@
     const saveTitle = () => {
         stateTitle.value = false
         emit('callAction', { 
-            action: 'edit', 
+            action: 'changeTitle', 
             value: {
                 id: section.value.id,
                 title: section.value.title

@@ -32,7 +32,8 @@
         display: flex;
         align-items: flex-start;
         gap: 10px;
-        width: 100%;
+        width: 80%;
+
 
         .icon__draggable {
             opacity: 0;
@@ -64,6 +65,29 @@
             height: auto;
             border: none;
         }
+
+        .form-item__mirror {
+            display: none;
+        }
+
+        &.tile-section__title_edit {
+            max-width: 80%;
+            overflow: hidden;
+
+            .form-item__input {
+                white-space: nowrap;
+
+                input {
+                    width: calc(100% + 10px);
+                    position: absolute;
+                }
+            }
+
+            .form-item__mirror {
+                display: block;
+            }
+        }
+
     }
 
     .tile-section__header-actions {

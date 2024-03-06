@@ -1,861 +1,962 @@
 {
-    "fields": {
+    "sections": {
         "default": [
             {
-                "id": 2301,
-                "title": "Строка",
-                "key": "stroka_2301",
-                "type": "text",
-                "visible_always": 0,
-                "is_hidden": 0,
-                "is_plural": 0,
-                "is_external_link": 0,
-                "required": 0,
-                "read_only": 0,
-                "permanent_required": 0,
-                "permanent_name": 0,
-                "is_permanent": null,
-                "color": "#000",
-                "value": "",
-                "unit": "",
-                "module": null,
-                "mask": "",
-                "can_edit": 0,
-                "used_in_modules": []
-            },
-            {
-                "id": 795,
-                "title": "Окно [лог.]11",
-                "key": "okno_log",
-                "type": "text",
-                "visible_always": 0,
-                "is_hidden": 0,
-                "is_plural": 0,
-                "is_external_link": 1,
-                "required": 0,
-                "read_only": 0,
-                "permanent_required": 0,
-                "permanent_name": 0,
-                "is_permanent": null,
-                "color": "#dd8e8eff",
-                "value": {
-                    "value": "123213123123123123121",
-                    "external_link": null
-                },
-                "unit": "",
-                "module": null,
-                "mask": null,
-                "can_edit": 0,
-                "used_in_modules": []
-            },
-            {
-                "id": 2152,
-                "title": "Фото",
-                "key": "photo",
-                "type": "file",
-                "visible_always": 0,
-                "is_hidden": 0,
-                "is_plural": 0,
-                "show_file_name": 0,
-                "is_external_link": 0,
-                "required": 0,
-                "read_only": 0,
-                "permanent_required": 0,
-                "permanent_name": 1,
-                "is_permanent": 1,
-                "color": null,
-                "button_name": "Загрузить",
-                "value": [
-                    ""
-                ],
-                "unit": "",
-                "module": null,
-                "mask": null,
-                "can_edit": 0,
-                "used_in_modules": []
-            },
-            {
-                "id": 797,
-                "title": "Комментарии водителя к статусу [прог.]",
-                "key": "kommentarii_voditelia_k_statusu_prog",
-                "type": "text",
-                "visible_always": 0,
-                "is_hidden": 0,
-                "is_plural": 1,
-                "is_external_link": 0,
-                "required": 0,
-                "read_only": 0,
-                "permanent_required": 0,
-                "permanent_name": 0,
-                "is_permanent": null,
-                "color": "#ff9300",
-                "value": "",
-                "unit": null,
-                "module": null,
-                "mask": null,
-                "can_edit": 0,
-                "used_in_modules": []
-            },
-            {
-                "id": 2149,
-                "title": "Поле списка",
-                "key": "pole_spiska_2149",
-                "type": "select_dropdown",
-                "visible_always": 0,
-                "is_hidden": 0,
-                "is_plural": 0,
-                "is_external_link": 0,
-                "required": 0,
-                "read_only": 0,
-                "permanent_required": 0,
-                "permanent_name": 0,
-                "is_permanent": null,
-                "color": "#000",
-                "value": "",
-                "unit": "",
-                "module": null,
-                "mask": null,
-                "can_edit": 0,
-                "used_in_modules": [],
-                "options": [
+                "id": 0,
+                "title": "Первая секция",
+                "fields":  [
                     {
-                        "value": 1,
-                        "label": "Значение 2",
-                        "sort": 0
+                        "id": 2301,
+                        "roles_read": [4],
+                        "roles_write": [1, 3],
+                        "set_color": 1,
+                        "has_roles_read": 1,
+                        "has_roles_write": 1,
+                        "title": "Строка",
+                        "key": "stroka_2301",
+                        "type": "text",
+                        "visible_always": 1,
+                        "is_hidden": 0,
+                        "is_plural": 0,
+                        "is_external_link": 0,
+                        "required": 0,
+                        "read_only": 0,
+                        "permanent_required": 1,
+                        "permanent_name": 1,
+                        "is_permanent": null,
+                        "color": "#ff9300",
+                        "value": "фывфывфывфыв",
+                        "unit": "",
+                        "module": null,
+                        "mask": "",
+                        "can_edit": 1,
+                        "used_in_modules": []
                     },
                     {
-                        "value": 2,
-                        "label": "Значение 3",
-                        "sort": 1
+                        "id": 2251,
+                        "roles_read": [4],
+                        "roles_write": [1, 3],
+                        "set_color": 0,
+                        "has_roles_read": 1,
+                        "has_roles_write": 0,
+                        "title": "Число",
+                        "key": "cislo_2251",
+                        "type": "number",
+                        "visible_always": 1,
+                        "is_hidden": 0,
+                        "is_plural": 0,
+                        "is_external_link": 0,
+                        "external_link": "",
+                        "required": 0,
+                        "read_only": 0,
+                        "permanent_required": 0,
+                        "permanent_name": 0,
+                        "is_permanent": null,
+                        "color": null,
+                        "value": "34",
+                        "unit": "шт.",
+                        "module": null,
+                        "mask": "",
+                        "can_edit": 1,
+                        "used_in_modules": []
                     },
                     {
-                        "value": 3,
-                        "label": "Значение 4",
-                        "sort": 2
-                    },
-                    {
-                        "value": 4,
-                        "label": "Значение 5",
-                        "sort": 3
-                    },
-                    {
-                        "value": 5,
-                        "label": "Значение 6",
-                        "sort": 4
-                    },
-                    {
-                        "value": 6,
-                        "label": "Значение 7",
-                        "sort": 5
-                    },
-                    {
-                        "value": 7,
-                        "label": "Значение 8",
-                        "sort": 6
-                    },
-                    {
-                        "value": 8,
-                        "label": "Значение 9",
-                        "sort": 7
-                    },
-                    {
-                        "value": 9,
-                        "label": "Значение 10",
-                        "sort": 8
-                    },
-                    {
-                        "value": 10,
-                        "label": "Значение 11",
-                        "sort": 9
-                    },
-                    {
-                        "value": 11,
-                        "label": "Значение 12",
-                        "sort": 10
-                    },
-                    {
-                        "value": 12,
-                        "label": "Значение 13",
-                        "sort": 11
-                    }
-                ],
-                "choosed": []
-            },
-            {
-                "id": 798,
-                "title": "ID",
-                "key": "id",
-                "type": "number",
-                "visible_always": 1,
-                "is_hidden": 0,
-                "is_plural": 0,
-                "is_external_link": 0,
-                "required": 1,
-                "read_only": 1,
-                "permanent_required": 1,
-                "permanent_name": 1,
-                "is_permanent": 1,
-                "color": "#109054ff",
-                "value": "1120",
-                "unit": "",
-                "module": null,
-                "mask": "",
-                "can_edit": 0,
-                "used_in_modules": []
-            },
-            {
-                "id": 2248,
-                "title": "Множественный список",
-                "key": "mnozestvennyi_spisok_2248",
-                "type": "select_dropdown",
-                "visible_always": 1,
-                "is_hidden": 0,
-                "is_plural": 1,
-                "is_external_link": 0,
-                "required": 0,
-                "read_only": 0,
-                "permanent_required": 0,
-                "permanent_name": 0,
-                "is_permanent": null,
-                "color": "#000",
-                "button_name": "",
-                "value": [
-                    null,
-                    1,
-                    2
-                ],
-                "unit": "",
-                "module": null,
-                "mask": "",
-                "can_edit": 0,
-                "used_in_modules": [],
-                "options": [
-                    {
-                        "value": 1,
-                        "label": "Второй элемент",
-                        "sort": 0
-                    },
-                    {
-                        "value": 2,
-                        "label": "Третий элемент",
-                        "sort": 1
-                    },
-                    {
-                        "value": 3,
-                        "label": "Четвертый элемент",
-                        "sort": 2
-                    },
-                    {
-                        "value": 4,
-                        "label": "вап",
-                        "sort": 3
-                    }
-                ],
-                "choosed": []
-            },
-            {
-                "id": 789,
-                "title": "Адрес",
-                "key": "address",
-                "type": "address",
-                "visible_always": 1,
-                "is_hidden": 0,
-                "is_plural": 0,
-                "is_external_link": 0,
-                "required": 0,
-                "read_only": 0,
-                "permanent_required": 0,
-                "permanent_name": 0,
-                "is_permanent": 1,
-                "color": null,
-                "value": {
-                    "text": "Россия, Свердловская область, посёлок городского типа Арти",
-                    "coords": [
-                        "56.416794",
-                        "58.532544"
-                    ]
-                },
-                "unit": "",
-                "module": null,
-                "mask": null,
-                "can_edit": 0,
-                "used_in_modules": []
-            },
-            {
-                "id": 2308,
-                "title": "Строка несколько значений33",
-                "key": "stroka_neskolko_znacenii_2308",
-                "type": "text_group",
-                "visible_always": 0,
-                "is_hidden": 0,
-                "is_plural": 0,
-                "is_external_link": 0,
-                "required": 0,
-                "read_only": 0,
-                "permanent_required": 0,
-                "permanent_name": 0,
-                "is_permanent": null,
-                "color": null,
-                "value": "",
-                "unit": "",
-                "module": null,
-                "mask": "",
-                "can_edit": 0,
-                "used_in_modules": [],
-                "options": {
-                    "2309": "1233",
-                    "2325": "23844",
-                    "2326": "3450"
-                },
-                "subfields": [
-                    {
-                        "id": 2309,
-                        "title": "1233",
-                        "key": "1_2308",
+                        "id": 795,
+                        "roles_read": [],
+                        "roles_write": [],
+                        "set_color": 1,
+                        "has_roles_read": 1,
+                        "has_roles_write": 1,
+                        "title": "Окно [лог.]11",
+                        "key": "okno_log",
                         "type": "text",
                         "visible_always": 0,
                         "is_hidden": 0,
                         "is_plural": 0,
+                        "is_external_link": 1,
                         "required": 0,
                         "read_only": 0,
-                        "can_edit": 0,
-                        "color": null,
-                        "group_id": 2308,
-                        "value": "111",
-                        "sort": 0
+                        "permanent_required": 0,
+                        "permanent_name": 0,
+                        "is_permanent": null,
+                        "color": "#dd8e8eff",
+                        "value": {
+                            "value": "123213123123123123121",
+                            "external_link": null
+                        },
+                        "unit": "",
+                        "module": null,
+                        "mask": null,
+                        "can_edit": 1,
+                        "used_in_modules": []
                     },
                     {
-                        "id": 2325,
-                        "title": "23844",
-                        "key": "23_2308",
+                        "id": 797,
+                        "roles_read": [],
+                        "roles_write": [],
+                        "set_color": 0,
+                        "has_roles_read": 1,
+                        "has_roles_write": 0,
+                        "title": "Комментарии водителя к статусу [прог.]",
+                        "key": "kommentarii_voditelia_k_statusu_prog",
                         "type": "text",
                         "visible_always": 0,
                         "is_hidden": 0,
-                        "is_plural": 0,
+                        "is_plural": 1,
+                        "is_external_link": 0,
                         "required": 0,
                         "read_only": 0,
-                        "can_edit": 0,
-                        "color": null,
-                        "group_id": 2308,
-                        "value": "222",
-                        "sort": 1
+                        "permanent_required": 0,
+                        "permanent_name": 0,
+                        "is_permanent": null,
+                        "color": "#ff9300",
+                        "value": "",
+                        "unit": null,
+                        "module": null,
+                        "mask": null,
+                        "can_edit": 1,
+                        "used_in_modules": []
                     },
                     {
-                        "id": 2326,
-                        "title": "3450",
-                        "key": "34_2308",
-                        "type": "text",
+                        "id": 2149,
+                        "roles_read": [],
+                        "roles_write": [],
+                        "set_color": 0,
+                        "has_roles_read": 1,
+                        "has_roles_write": 0,
+                        "title": "Поле списка",
+                        "key": "pole_spiska_2149",
+                        "type": "select_dropdown",
                         "visible_always": 0,
                         "is_hidden": 0,
                         "is_plural": 0,
+                        "is_external_link": 0,
                         "required": 0,
                         "read_only": 0,
+                        "permanent_required": 0,
+                        "permanent_name": 0,
+                        "is_permanent": null,
+                        "color": "#000",
+                        "value": "",
+                        "unit": "",
+                        "module": null,
+                        "mask": null,
+                        "can_edit": 1,
+                        "used_in_modules": [],
+                        "options": [
+                            {
+                                "value": 1,
+                                "label": "Значение 2",
+                                "sort": 0
+                            },
+                            {
+                                "value": 2,
+                                "label": "Значение 3",
+                                "sort": 1
+                            },
+                            {
+                                "value": 3,
+                                "label": "Значение 4",
+                                "sort": 2
+                            },
+                            {
+                                "value": 4,
+                                "label": "Значение 5",
+                                "sort": 3
+                            },
+                            {
+                                "value": 5,
+                                "label": "Значение 6",
+                                "sort": 4
+                            },
+                            {
+                                "value": 6,
+                                "label": "Значение 7",
+                                "sort": 5
+                            },
+                            {
+                                "value": 7,
+                                "label": "Значение 8",
+                                "sort": 6
+                            },
+                            {
+                                "value": 8,
+                                "label": "Значение 9",
+                                "sort": 7
+                            },
+                            {
+                                "value": 9,
+                                "label": "Значение 10",
+                                "sort": 8
+                            },
+                            {
+                                "value": 10,
+                                "label": "Значение 11",
+                                "sort": 9
+                            },
+                            {
+                                "value": 11,
+                                "label": "Значение 12",
+                                "sort": 10
+                            },
+                            {
+                                "value": 12,
+                                "label": "Значение 13",
+                                "sort": 11
+                            }
+                        ],
+                        "choosed": []
+                    },
+                    {
+                        "id": 798,
+                        "roles_read": [],
+                        "roles_write": [],
+                        "set_color": 0,
+                        "has_roles_read": 1,
+                        "has_roles_write": 0,
+                        "title": "ID",
+                        "key": "id",
+                        "type": "number",
+                        "visible_always": 1,
+                        "is_hidden": 0,
+                        "is_plural": 0,
+                        "is_external_link": 0,
+                        "required": 1,
+                        "read_only": 1,
+                        "permanent_required": 1,
+                        "permanent_name": 1,
+                        "is_permanent": 1,
+                        "color": "#109054ff",
+                        "value": "1120",
+                        "unit": "",
+                        "module": null,
+                        "mask": "",
                         "can_edit": 0,
+                        "used_in_modules": []
+                    },
+                    {
+                        "id": 2248,
+                        "roles_read": [],
+                        "roles_write": [],
+                        "set_color": 0,
+                        "has_roles_read": 1,
+                        "has_roles_write": 0,
+                        "title": "Множественный список",
+                        "key": "mnozestvennyi_spisok_2248",
+                        "type": "select_dropdown",
+                        "visible_always": 1,
+                        "is_hidden": 0,
+                        "is_plural": 1,
+                        "is_external_link": 0,
+                        "required": 0,
+                        "read_only": 0,
+                        "permanent_required": 0,
+                        "permanent_name": 0,
+                        "is_permanent": null,
+                        "color": "#000",
+                        "value": [ null, 1, 2 ],
+                        "unit": "",
+                        "module": null,
+                        "mask": "",
+                        "can_edit": 1,
+                        "used_in_modules": [],
+                        "options": [
+                            {
+                                "value": 1,
+                                "label": "Второй элемент",
+                                "sort": 0
+                            },
+                            {
+                                "value": 2,
+                                "label": "Третий элемент",
+                                "sort": 1
+                            },
+                            {
+                                "value": 3,
+                                "label": "Четвертый элемент",
+                                "sort": 2
+                            },
+                            {
+                                "value": 4,
+                                "label": "вап",
+                                "sort": 3
+                            }
+                        ],
+                        "choosed": []
+                    },
+                    {
+                        "id": 789,
+                        "roles_read": [],
+                        "roles_write": [],
+                        "set_color": 0,
+                        "has_roles_read": 1,
+                        "has_roles_write": 0,
+                        "title": "Адрес",
+                        "key": "address",
+                        "type": "address",
+                        "visible_always": 1,
+                        "is_hidden": 0,
+                        "is_plural": 0,
+                        "is_external_link": 0,
+                        "required": 0,
+                        "read_only": 0,
+                        "permanent_required": 0,
+                        "permanent_name": 0,
+                        "is_permanent": 1,
                         "color": null,
-                        "group_id": 2308,
-                        "value": "333",
-                        "sort": 2
+                        "value": {
+                            "text": "Россия, 54 Москва, улица Бутлерова, 38к7",
+                            "coords": [
+                                "38.642606",
+                                "56.547414"
+                            ]
+                        },
+                        "options": [
+                            {
+                                "label": {
+                                    "text": "Россия, Москва, улица Бутлерова, 38к4"
+                                },
+                                "value": {
+                                    "text": "Россия, Москва, улица Бутлерова, 38к4",
+                                    "coords": [
+                                        "37.642606",
+                                        "55.547414"
+                                    ]
+                                }
+                            }
+                        ],
+                        "unit": "",
+                        "module": null,
+                        "mask": null,
+                        "can_edit": 1,
+                        "used_in_modules": []
+                    },
+                    {
+                        "id": 2308,
+                        "roles_read": [],
+                        "roles_write": [],
+                        "set_color": 0,
+                        "has_roles_read": 1,
+                        "has_roles_write": 0,
+                        "title": "Строка несколько значений33",
+                        "key": "stroka_neskolko_znacenii_2308",
+                        "type": "text_group",
+                        "visible_always": 0,
+                        "is_hidden": 0,
+                        "is_plural": 0,
+                        "is_external_link": 0,
+                        "required": 0,
+                        "read_only": 0,
+                        "permanent_required": 0,
+                        "permanent_name": 0,
+                        "is_permanent": null,
+                        "color": null,
+                        "value": "",
+                        "unit": "",
+                        "module": null,
+                        "mask": "",
+                        "can_edit": 1,
+                        "used_in_modules": [],
+                        "options": [
+                            {
+                                "value": 2309,
+                                "label": "1233",
+                                "sort": 0
+                            },
+                            {
+                                "value": 2325,
+                                "label": "23844",
+                                "sort": 1
+                            },
+                            {
+                                "value": 2326,
+                                "label": "3450",
+                                "sort": 2
+                            }
+                        ],
+                        "subfields": [
+                            {
+                                "id": 2309,
+                                "title": "1233",
+                                "key": "1_2308",
+                                "type": "text",
+                                "visible_always": 0,
+                                "is_hidden": 0,
+                                "is_plural": 0,
+                                "required": 0,
+                                "read_only": 0,
+                                "can_edit": 1,
+                                "color": null,
+                                "group_id": 2308,
+                                "value": "111",
+                                "sort": 0
+                            },
+                            {
+                                "id": 2325,
+                                "title": "23844",
+                                "key": "23_2308",
+                                "type": "text",
+                                "visible_always": 0,
+                                "is_hidden": 0,
+                                "is_plural": 0,
+                                "required": 0,
+                                "read_only": 0,
+                                "can_edit": 1,
+                                "color": null,
+                                "group_id": 2308,
+                                "value": "222",
+                                "sort": 1
+                            },
+                            {
+                                "id": 2326,
+                                "title": "3450",
+                                "key": "34_2308",
+                                "type": "text",
+                                "visible_always": 0,
+                                "is_hidden": 0,
+                                "is_plural": 0,
+                                "required": 0,
+                                "read_only": 0,
+                                "can_edit": 1,
+                                "color": null,
+                                "group_id": 2308,
+                                "value": "333",
+                                "sort": 2
+                            }
+                        ]
+                    },
+                    {
+                        "id": 112,
+                        "roles_read": [],
+                        "roles_write": [],
+                        "set_color": 0,
+                        "has_roles_read": 1,
+                        "has_roles_write": 0,
+                        "title": "Дата доставки [прог.]",
+                        "key": "date",
+                        "type": "date",
+                        "visible_always": 1,
+                        "is_hidden": 0,
+                        "is_plural": 0,
+                        "is_external_link": 0,
+                        "required": 0,
+                        "read_only": 0,
+                        "permanent_required": 0,
+                        "permanent_name": 0,
+                        "is_permanent": 1,
+                        "color": null,
+                        "value": "2024-02-25",
+                        "unit": "",
+                        "module": null,
+                        "mask": "",
+                        "can_edit": 1,
+                        "used_in_modules": []
+                    },
+                    {
+                        "id": 2249,
+                        "roles_read": [],
+                        "roles_write": [],
+                        "set_color": 0,
+                        "has_roles_read": 1,
+                        "has_roles_write": 0,
+                        "title": "Файл",
+                        "key": "fail_2249",
+                        "button_name": "Загрузить",
+                        "type": "file",
+                        "visible_always": 1,
+                        "is_hidden": 0,
+                        "is_plural": 0,
+                        "is_external_link": 0,
+                        "required": 0,
+                        "read_only": 0,
+                        "permanent_required": 0,
+                        "show_file_name": 0,
+                        "permanent_name": 0,
+                        "is_permanent": null,
+                        "color": "#000",
+                        "value": [
+                            {
+                                "id": 1700634111214,
+                                "name": "1.2.png",
+                                "url": "https://compas.pro/storage/thumbnails/default/4g/2s/xn00ulmok0wggw444okow.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FFdsF9J6GwiVPNxad2g0kf98vytpstkoRidQzU7Ly.png&s=https",
+                                "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/FdsF9J6GwiVPNxad2g0kf98vytpstkoRidQzU7Ly.png",
+                                "extension": "png",
+                                "sort": 0,
+                                "uid": "1700634111214",
+                                "status": "success"
+                            },
+                            {
+                                "id": 1700634105674,
+                                "name": "2.1.svg",
+                                "url": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kRFx3iGTKT5ix5oZwgXzSsYR25Gh1jbxtLgEKS7E.svg",
+                                "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kRFx3iGTKT5ix5oZwgXzSsYR25Gh1jbxtLgEKS7E.svg",
+                                "extension": "svg",
+                                "sort": 0,
+                                "uid": "1700634105674",
+                                "status": "success"
+                            },
+                            {
+                                "id": 1703657482946,
+                                "name": "4.pdf",
+                                "url": "https://opt6.compas.pro/storage/tenantopt6/app/public/2401/conversions/gtLzTgAGu90QJ7js8SIf91VeJ1JbgBoZBfegVKjf-thumb.jpg",
+                                "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/gtLzTgAGu90QJ7js8SIf91VeJ1JbgBoZBfegVKjf.pdf",
+                                "extension": "pdf",
+                                "sort": 0,
+                                "uid": "1703657482946",
+                                "status": "success"
+                            },
+                            {
+                                "id": 1703657482943,
+                                "name": "3.xlsx",
+                                "url": "/icons/new/xls.svg",
+                                "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/lzOeWuGl5LEQD64lgfVKLV8NaNBrtR7mKfy88fTj.xlsx",
+                                "extension": "xlsx",
+                                "sort": 0,
+                                "uid": "1703657482943",
+                                "status": "success"
+                            },
+                            {
+                                "id": 5240,
+                                "name": "NFpjjRoJD6ymlpZUveu63mBWQysfWug897DAwu4L.pdf",
+                                "url": "https://opt6.compas.pro/storage/tenantopt6/app/public/2801/conversions/lZZZNTf3d5Q8sTpu2QACrD0SzJFMEKOljEBhf9sO-thumb.jpg",
+                                "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/lZZZNTf3d5Q8sTpu2QACrD0SzJFMEKOljEBhf9sO.pdf",
+                                "extension": "pdf",
+                                "status": "success"
+                            }
+                        ],
+                        "unit": "",
+                        "module": null,
+                        "mask": "",
+                        "can_edit": 1,
+                        "used_in_modules": []
+                    },
+                    {
+                        "id": 794,
+                        "roles_read": [],
+                        "roles_write": [],
+                        "set_color": 1,
+                        "has_roles_read": 1,
+                        "has_roles_write": 0,
+                        "title": "Примечание",
+                        "key": "primecanie",
+                        "type": "text",
+                        "visible_always": 0,
+                        "is_hidden": 0,
+                        "is_plural": 1,
+                        "is_external_link": 0,
+                        "required": 0,
+                        "read_only": 0,
+                        "permanent_required": 0,
+                        "permanent_name": 0,
+                        "is_permanent": null,
+                        "color": "#fb00ffff",
+                        "value": "Данный текст был введен для проверки работоспособности поля, так как является его тестом и \n\n\n\n\n\nпоказывает сохраняется ли пробел в тексте или нет asdas klajs \n\n\ndlaskd 120398120",
+                        "unit": "",
+                        "module": null,
+                        "mask": null,
+                        "can_edit": 1,
+                        "used_in_modules": []
+                    },
+                    {
+                        "id": 2356,
+                        "roles_read": [],
+                        "roles_write": [],
+                        "set_color": 0,
+                        "has_roles_read": 1,
+                        "has_roles_write": 0,
+                        "title": "hfg",
+                        "key": "hfg_2356",
+                        "type": "status",
+                        "visible_always": 1,
+                        "is_hidden": 0,
+                        "is_plural": 0,
+                        "is_external_link": 0,
+                        "required": 1,
+                        "read_only": 0,
+                        "permanent_required": 0,
+                        "permanent_name": 0,
+                        "is_permanent": null,
+                        "color": "#000",
+                        "value": "802",
+                        "unit": "",
+                        "module": null,
+                        "mask": null,
+                        "can_edit": 1,
+                        "used_in_modules": [],
+                        "options": [
+                            {
+                                "label": {
+                                    "id": 802,
+                                    "sort": 0,
+                                    "file": "",
+                                    "is_hidden": 0,
+                                    "field_id": 2356,
+                                    "color": "#b6b6b6",
+                                    "text": "802"
+                                },
+                                "value": 802
+                            },
+                            {
+                                "label": {
+                                    "id": 1235,
+                                    "sort": 1,
+                                    "file": "https://compas.pro/storage/thumbnails/default/eq/ay/980ps68k0s4g8888k0gkk.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2F27y1Fqnzxg2ciXFuJ880KiRA1GdlZdVa8SZ3PHZx.png&s=https",
+                                    "is_hidden": 0,
+                                    "field_id": 2356,
+                                    "color": "#b6b6b6",
+                                    "text": "3"
+                                },
+                                "value": 1235
+                            },
+                            {
+                                "label": {
+                                    "id": 1236,
+                                    "sort": 2,
+                                    "file": "https://compas.pro/storage/thumbnails/default/a2/b2/kum1tdkwocwgc4go4sws.jpg?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FrYAGrbdD9q5Y2stWdgQ5j1pAUKZ57IY2SSJcFUeN.jpg&s=https",
+                                    "is_hidden": 0,
+                                    "field_id": 2356,
+                                    "color": "#94C066",
+                                    "text": "4"
+                                },
+                                "value": 1236
+                            },
+                            {
+                                "label": {
+                                    "id": 1240,
+                                    "sort": 0,
+                                    "file": null,
+                                    "is_hidden": 1,
+                                    "field_id": 2356,
+                                    "color": "#c24444ff",
+                                    "text": ""
+                                },
+                                "value": 1240
+                            },
+                            {
+                                "label": {
+                                    "id": 1237,
+                                    "sort": 3,
+                                    "file": null,
+                                    "is_hidden": 1,
+                                    "field_id": 2356,
+                                    "color": "#9218c2ff",
+                                    "text": ""
+                                },
+                                "value": 1237
+                            },
+                            {
+                                "label": {
+                                    "id": 1238,
+                                    "sort": 4,
+                                    "file": null,
+                                    "is_hidden": 1,
+                                    "field_id": 2356,
+                                    "color": "#5d16c7ff",
+                                    "text": ""
+                                },
+                                "value": 1238
+                            },
+                            {
+                                "label": {
+                                    "id": 1239,
+                                    "sort": 5,
+                                    "file": null,
+                                    "is_hidden": 1,
+                                    "field_id": 2356,
+                                    "color": "#b32525ff",
+                                    "text": ""
+                                },
+                                "value": 1239
+                            }
+                        ],
+                        "choosed": []
+                    },
+                    {
+                        "id": 842,
+                        "roles_read": [],
+                        "roles_write": [],
+                        "set_color": 0,
+                        "has_roles_read": 1,
+                        "has_roles_write": 0,
+                        "title": "Клиент",
+                        "key": "client_id",
+                        "type": "relation",
+                        "visible_always": 1,
+                        "is_hidden": 0,
+                        "is_plural": 1,
+                        "is_external_link": 0,
+                        "required": 0,
+                        "read_only": 0,
+                        "permanent_required": 0,
+                        "permanent_name": 0,
+                        "is_permanent": 1,
+                        "color": null,
+                        "value": {
+                            "value": [
+                                112
+                            ],
+                            "localOptions": [
+                                {
+                                    "label": {
+                                        "id": 112,
+                                        "sort": 2,
+                                        "file": "",
+                                        "is_hidden": 0,
+                                        "field_id": 842,
+                                        "color": "linear-gradient(to bottom, #f1c3ff 2%, #a8c7ff)",
+                                        "text": "Михаил "
+                                    },
+                                    "value": 112
+                                }
+                            ]
+                        },
+                        "unit": "",
+                        "module": null,
+                        "mask": null,
+                        "can_edit": 1,
+                        "used_in_modules": [],
+                        "can_create": 1,
+                        "options": [
+                            {
+                                "label": {
+                                    "id": 111,
+                                    "sort": 0,
+                                    "file": "",
+                                    "is_hidden": 0,
+                                    "field_id": 842,
+                                    "color": "linear-gradient(to bottom, #aeee90 2%, #65dd78 100%)",
+                                    "text": "Кирилл Сапегин"
+                                },
+                                "value": 111
+                            },
+                            {
+                                "label": {
+                                    "id": 5583,
+                                    "sort": 1,
+                                    "file": "",
+                                    "is_hidden": 0,
+                                    "field_id": 842,
+                                    "color": "linear-gradient(to bottom, #ffdc96 2%, #ff8d8d 100%)",
+                                    "text": "Роман Степанов"
+                                },
+                                "value": 5583
+                            },
+                            {
+                                "label": {
+                                    "id": 112,
+                                    "sort": 2,
+                                    "file": "",
+                                    "is_hidden": 0,
+                                    "field_id": 842,
+                                    "color": "linear-gradient(to bottom, #f1c3ff 2%, #a8c7ff)",
+                                    "text": "Михаил "
+                                },
+                                "value": 112
+                            },
+                            {
+                                "label": {
+                                    "id": 365,
+                                    "sort": 3,
+                                    "file": "",
+                                    "is_hidden": 0,
+                                    "field_id": 842,
+                                    "color": "linear-gradient(to bottom, #ee90d2 4%, #dd6565 100%)",
+                                    "text": "Иван Петров"
+                                },
+                                "value": 365
+                            },
+                            {
+                                "label": {
+                                    "id": 113,
+                                    "sort": 4,
+                                    "file": "",
+                                    "is_hidden": 0,
+                                    "field_id": 842,
+                                    "color": "linear-gradient(to bottom, #aeee90 2%, #65dd78 100%)",
+                                    "text": "Светлана Плужникова"
+                                },
+                                "value": 113
+                            },
+                            {
+                                "label": {
+                                    "id": 114,
+                                    "sort": 5,
+                                    "file": "",
+                                    "is_hidden": 0,
+                                    "field_id": 842,
+                                    "color": "linear-gradient(to bottom, #ffdc96 2%, #ff8d8d 100%)",
+                                    "text": "Александр Дренин"
+                                },
+                                "value": 114
+                            },
+                            {
+                                "label": {
+                                    "id": 117,
+                                    "sort": 6,
+                                    "file": "",
+                                    "is_hidden": 0,
+                                    "field_id": 842,
+                                    "color": "linear-gradient(to bottom, #ee90d2 4%, #dd6565 100%)",
+                                    "text": "Андрей "
+                                },
+                                "value": 117
+                            },
+                            {
+                                "label": {
+                                    "id": 412,
+                                    "sort": 7,
+                                    "file": "",
+                                    "is_hidden": 0,
+                                    "field_id": 842,
+                                    "color": "linear-gradient(to bottom, #9390ee 2%, #dd65d5)",
+                                    "text": "Марина Пушкина"
+                                },
+                                "value": 412
+                            },
+                            {
+                                "label": {
+                                    "id": 267,
+                                    "sort": 8,
+                                    "file": "",
+                                    "is_hidden": 0,
+                                    "field_id": 842,
+                                    "color": "linear-gradient(to bottom, #9ce1ff 2%, #6dc2ff 100%)",
+                                    "text": "Денис Ткачев"
+                                },
+                                "value": 267
+                            },
+                            {
+                                "label": {
+                                    "id": 1036,
+                                    "sort": 9,
+                                    "file": "",
+                                    "is_hidden": 0,
+                                    "field_id": 842,
+                                    "color": "linear-gradient(to bottom, #aeee90 2%, #48b85a 99%)",
+                                    "text": "Денис Ташков"
+                                },
+                                "value": 1036
+                            },
+                            {
+                                "label": {
+                                    "id": 130,
+                                    "sort": 10,
+                                    "file": "",
+                                    "is_hidden": 0,
+                                    "field_id": 842,
+                                    "color": "linear-gradient(to bottom, #ffdc96 2%, #ffc28d)",
+                                    "text": "Юрий Сорокин"
+                                },
+                                "value": 130
+                            },
+                            {
+                                "label": {
+                                    "id": 475,
+                                    "sort": 11,
+                                    "file": "",
+                                    "is_hidden": 0,
+                                    "field_id": 842,
+                                    "color": "linear-gradient(to bottom, #ffdc96 2%, #ff8d8d 100%)",
+                                    "text": "Денис Потемкин"
+                                },
+                                "value": 475
+                            },
+                            {
+                                "label": {
+                                    "id": 666,
+                                    "sort": 12,
+                                    "file": "",
+                                    "is_hidden": 0,
+                                    "field_id": 842,
+                                    "color": "linear-gradient(to bottom, #ee9090 2%, #6765dd 100%)",
+                                    "text": "Вячеслав Киндеров"
+                                },
+                                "value": 666
+                            },
+                            {
+                                "label": {
+                                    "id": 1154,
+                                    "sort": 13,
+                                    "file": "",
+                                    "is_hidden": 0,
+                                    "field_id": 842,
+                                    "color": "linear-gradient(to bottom, #9ce1ff 2%, #6dc2ff 100%)",
+                                    "text": "Николай"
+                                },
+                                "value": 1154
+                            },
+                            {
+                                "label": {
+                                    "id": 1328,
+                                    "sort": 14,
+                                    "file": "",
+                                    "is_hidden": 0,
+                                    "field_id": 842,
+                                    "color": "linear-gradient(to bottom, #ffab8e 2%, #ff8596 100%)",
+                                    "text": "Александр Степанов"
+                                },
+                                "value": 1328
+                            },
+                            {
+                                "label": {
+                                    "id": 118,
+                                    "sort": 15,
+                                    "file": "",
+                                    "is_hidden": 0,
+                                    "field_id": 842,
+                                    "color": "linear-gradient(to bottom, #ffab8e 2%, #ff8596 100%)",
+                                    "text": "Галина Макеева"
+                                },
+                                "value": 118
+                            },
+                            {
+                                "label": {
+                                    "id": 954,
+                                    "sort": 16,
+                                    "file": "",
+                                    "is_hidden": 0,
+                                    "field_id": 842,
+                                    "color": "linear-gradient(to bottom, #f1c3ff 2%, #a8c7ff)",
+                                    "text": "Афонин Дмитрий Юрьевич"
+                                },
+                                "value": 954
+                            },
+                            {
+                                "label": {
+                                    "id": 127,
+                                    "sort": 17,
+                                    "file": "",
+                                    "is_hidden": 0,
+                                    "field_id": 842,
+                                    "color": "linear-gradient(to bottom, #ee90d2 4%, #dd6565 100%)",
+                                    "text": "Дмитрий "
+                                },
+                                "value": 127
+                            },
+                            {
+                                "label": {
+                                    "id": 131,
+                                    "sort": 18,
+                                    "file": "",
+                                    "is_hidden": 0,
+                                    "field_id": 842,
+                                    "color": "linear-gradient(to bottom, #5ef9e2 2%, #50e2d2 100%)",
+                                    "text": "Дмитрий Ероха"
+                                },
+                                "value": 131
+                            }
+                        ],
+                        "choosed": [],
+                        "related_table": "clients"
                     }
                 ]
             },
             {
-                "id": 112,
-                "title": "Дата доставки [прог.]",
-                "key": "date",
-                "type": "date",
-                "visible_always": 1,
-                "is_hidden": 0,
-                "is_plural": 0,
-                "is_external_link": 0,
-                "required": 0,
-                "read_only": 0,
-                "permanent_required": 0,
-                "permanent_name": 0,
-                "is_permanent": 1,
-                "color": null,
-                "value": "2024-02-25",
-                "unit": "",
-                "module": null,
-                "mask": "",
-                "can_edit": 0,
-                "used_in_modules": []
-            },
-            {
-                "id": 2249,
-                "title": "Файл",
-                "key": "fail_2249",
-                "type": "file",
-                "visible_always": 1,
-                "is_hidden": 0,
-                "is_plural": 0,
-                "is_external_link": 0,
-                "required": 0,
-                "read_only": 0,
-                "permanent_required": 0,
-                "permanent_name": 0,
-                "is_permanent": null,
-                "color": "#000",
-                "value": [
-                    {
-                        "id": 1700634111214,
-                        "name": "1.2.png",
-                        "url": "https://compas.pro/storage/thumbnails/default/4g/2s/xn00ulmok0wggw444okow.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FFdsF9J6GwiVPNxad2g0kf98vytpstkoRidQzU7Ly.png&s=https",
-                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/FdsF9J6GwiVPNxad2g0kf98vytpstkoRidQzU7Ly.png",
-                        "extension": "png",
-                        "sort": 0,
-                        "uid": "1700634111214",
-                        "status": "success"
-                    },
-                    {
-                        "id": 1700634105674,
-                        "name": "2.1.svg",
-                        "url": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kRFx3iGTKT5ix5oZwgXzSsYR25Gh1jbxtLgEKS7E.svg",
-                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kRFx3iGTKT5ix5oZwgXzSsYR25Gh1jbxtLgEKS7E.svg",
-                        "extension": "svg",
-                        "sort": 0,
-                        "uid": "1700634105674",
-                        "status": "success"
-                    },
-                    {
-                        "id": 1703657482946,
-                        "name": "4.pdf",
-                        "url": "https://opt6.compas.pro/storage/tenantopt6/app/public/2401/conversions/gtLzTgAGu90QJ7js8SIf91VeJ1JbgBoZBfegVKjf-thumb.jpg",
-                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/gtLzTgAGu90QJ7js8SIf91VeJ1JbgBoZBfegVKjf.pdf",
-                        "extension": "pdf",
-                        "sort": 0,
-                        "uid": "1703657482946",
-                        "status": "success"
-                    },
-                    {
-                        "id": 1703657482943,
-                        "name": "3.xlsx",
-                        "url": "/icons/new/xls.svg",
-                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/lzOeWuGl5LEQD64lgfVKLV8NaNBrtR7mKfy88fTj.xlsx",
-                        "extension": "xlsx",
-                        "sort": 0,
-                        "uid": "1703657482943",
-                        "status": "success"
-                    },
-                    {
-                        "id": 5240,
-                        "name": "NFpjjRoJD6ymlpZUveu63mBWQysfWug897DAwu4L.pdf",
-                        "url": "https://opt6.compas.pro/storage/tenantopt6/app/public/2801/conversions/lZZZNTf3d5Q8sTpu2QACrD0SzJFMEKOljEBhf9sO-thumb.jpg",
-                        "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/lZZZNTf3d5Q8sTpu2QACrD0SzJFMEKOljEBhf9sO.pdf",
-                        "extension": "pdf",
-                        "status": "success"
-                    }
-                ],
-                "unit": "",
-                "module": null,
-                "mask": "",
-                "can_edit": 0,
-                "used_in_modules": []
-            },
-            {
-                "id": 794,
-                "title": "Примечание",
-                "key": "primecanie",
-                "type": "text",
-                "visible_always": 0,
-                "is_hidden": 0,
-                "is_plural": 1,
-                "is_external_link": 0,
-                "required": 0,
-                "read_only": 0,
-                "permanent_required": 0,
-                "permanent_name": 0,
-                "is_permanent": null,
-                "color": "#fb00ffff",
-                "value": "Данный текст был введен для проверки работоспособности поля, так как является его тестом и \n\n\n\n\n\nпоказывает сохраняется ли пробел в тексте или нет asdas klajs \n\n\ndlaskd 120398120",
-                "unit": "",
-                "module": null,
-                "mask": null,
-                "can_edit": 1,
-                "used_in_modules": []
-            },
-            {
-                "id": 2356,
-                "title": "hfg",
-                "key": "hfg_2356",
-                "type": "status",
-                "visible_always": 1,
-                "is_hidden": 0,
-                "is_plural": 0,
-                "is_external_link": 0,
-                "required": 1,
-                "read_only": 0,
-                "permanent_required": 0,
-                "permanent_name": 0,
-                "is_permanent": null,
-                "color": "#000",
-                "button_name": "",
-                "value": "802",
-                "unit": "",
-                "module": null,
-                "mask": null,
-                "can_edit": 0,
-                "used_in_modules": [],
-                "options": [
-                    {
-                        "label": {
-                            "id": 802,
-                            "sort": 0,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 2356,
-                            "color": "#b6b6b6",
-                            "text": "802"
-                        },
-                        "value": 802
-                    },
-                    {
-                        "label": {
-                            "id": 1235,
-                            "sort": 1,
-                            "file": "https://compas.pro/storage/thumbnails/default/eq/ay/980ps68k0s4g8888k0gkk.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2F27y1Fqnzxg2ciXFuJ880KiRA1GdlZdVa8SZ3PHZx.png&s=https",
-                            "is_hidden": 0,
-                            "field_id": 2356,
-                            "color": "#b6b6b6",
-                            "text": "3"
-                        },
-                        "value": 1235
-                    },
-                    {
-                        "label": {
-                            "id": 1236,
-                            "sort": 2,
-                            "file": "https://compas.pro/storage/thumbnails/default/a2/b2/kum1tdkwocwgc4go4sws.jpg?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FrYAGrbdD9q5Y2stWdgQ5j1pAUKZ57IY2SSJcFUeN.jpg&s=https",
-                            "is_hidden": 0,
-                            "field_id": 2356,
-                            "color": "#94C066",
-                            "text": "4"
-                        },
-                        "value": 1236
-                    },
-                    {
-                        "label": {
-                            "id": 1240,
-                            "sort": 0,
-                            "file": null,
-                            "is_hidden": 1,
-                            "field_id": 2356,
-                            "color": "#c24444ff",
-                            "text": ""
-                        },
-                        "value": 1240
-                    },
-                    {
-                        "label": {
-                            "id": 1237,
-                            "sort": 3,
-                            "file": null,
-                            "is_hidden": 1,
-                            "field_id": 2356,
-                            "color": "#9218c2ff",
-                            "text": ""
-                        },
-                        "value": 1237
-                    },
-                    {
-                        "label": {
-                            "id": 1238,
-                            "sort": 4,
-                            "file": null,
-                            "is_hidden": 1,
-                            "field_id": 2356,
-                            "color": "#5d16c7ff",
-                            "text": ""
-                        },
-                        "value": 1238
-                    },
-                    {
-                        "label": {
-                            "id": 1239,
-                            "sort": 5,
-                            "file": null,
-                            "is_hidden": 1,
-                            "field_id": 2356,
-                            "color": "#b32525ff",
-                            "text": ""
-                        },
-                        "value": 1239
-                    }
-                ],
-                "choosed": []
-            },
-            {
-                "id": 842,
-                "title": "Клиент",
-                "key": "client_id",
-                "type": "relation",
-                "visible_always": 1,
-                "is_hidden": 0,
-                "is_plural": 1,
-                "is_external_link": 0,
-                "required": 0,
-                "read_only": 0,
-                "permanent_required": 0,
-                "permanent_name": 0,
-                "is_permanent": 1,
-                "color": null,
-                "value": {
-                    "value": [
-                        112
-                    ],
-                    "localOptions": [
-                        {
-                            "label": {
-                                "id": 112,
-                                "sort": 2,
-                                "file": "",
-                                "is_hidden": 0,
-                                "field_id": 842,
-                                "color": "linear-gradient(to bottom, #f1c3ff 2%, #a8c7ff)",
-                                "text": "Михаил "
-                            },
-                            "value": 112
-                        }
-                    ]
-                },
-                "unit": "",
-                "module": null,
-                "mask": null,
-                "can_edit": 0,
-                "used_in_modules": [],
-                "can_create": 1,
-                "options": [
-                    {
-                        "label": {
-                            "id": 111,
-                            "sort": 0,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 842,
-                            "color": "linear-gradient(to bottom, #aeee90 2%, #65dd78 100%)",
-                            "text": "Кирилл Сапегин"
-                        },
-                        "value": 111
-                    },
-                    {
-                        "label": {
-                            "id": 5583,
-                            "sort": 1,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 842,
-                            "color": "linear-gradient(to bottom, #ffdc96 2%, #ff8d8d 100%)",
-                            "text": "Роман Степанов"
-                        },
-                        "value": 5583
-                    },
-                    {
-                        "label": {
-                            "id": 112,
-                            "sort": 2,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 842,
-                            "color": "linear-gradient(to bottom, #f1c3ff 2%, #a8c7ff)",
-                            "text": "Михаил "
-                        },
-                        "value": 112
-                    },
-                    {
-                        "label": {
-                            "id": 365,
-                            "sort": 3,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 842,
-                            "color": "linear-gradient(to bottom, #ee90d2 4%, #dd6565 100%)",
-                            "text": "Иван Петров"
-                        },
-                        "value": 365
-                    },
-                    {
-                        "label": {
-                            "id": 113,
-                            "sort": 4,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 842,
-                            "color": "linear-gradient(to bottom, #aeee90 2%, #65dd78 100%)",
-                            "text": "Светлана Плужникова"
-                        },
-                        "value": 113
-                    },
-                    {
-                        "label": {
-                            "id": 114,
-                            "sort": 5,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 842,
-                            "color": "linear-gradient(to bottom, #ffdc96 2%, #ff8d8d 100%)",
-                            "text": "Александр Дренин"
-                        },
-                        "value": 114
-                    },
-                    {
-                        "label": {
-                            "id": 117,
-                            "sort": 6,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 842,
-                            "color": "linear-gradient(to bottom, #ee90d2 4%, #dd6565 100%)",
-                            "text": "Андрей "
-                        },
-                        "value": 117
-                    },
-                    {
-                        "label": {
-                            "id": 412,
-                            "sort": 7,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 842,
-                            "color": "linear-gradient(to bottom, #9390ee 2%, #dd65d5)",
-                            "text": "Марина Пушкина"
-                        },
-                        "value": 412
-                    },
-                    {
-                        "label": {
-                            "id": 267,
-                            "sort": 8,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 842,
-                            "color": "linear-gradient(to bottom, #9ce1ff 2%, #6dc2ff 100%)",
-                            "text": "Денис Ткачев"
-                        },
-                        "value": 267
-                    },
-                    {
-                        "label": {
-                            "id": 1036,
-                            "sort": 9,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 842,
-                            "color": "linear-gradient(to bottom, #aeee90 2%, #48b85a 99%)",
-                            "text": "Денис Ташков"
-                        },
-                        "value": 1036
-                    },
-                    {
-                        "label": {
-                            "id": 130,
-                            "sort": 10,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 842,
-                            "color": "linear-gradient(to bottom, #ffdc96 2%, #ffc28d)",
-                            "text": "Юрий Сорокин"
-                        },
-                        "value": 130
-                    },
-                    {
-                        "label": {
-                            "id": 475,
-                            "sort": 11,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 842,
-                            "color": "linear-gradient(to bottom, #ffdc96 2%, #ff8d8d 100%)",
-                            "text": "Денис Потемкин"
-                        },
-                        "value": 475
-                    },
-                    {
-                        "label": {
-                            "id": 666,
-                            "sort": 12,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 842,
-                            "color": "linear-gradient(to bottom, #ee9090 2%, #6765dd 100%)",
-                            "text": "Вячеслав Киндеров"
-                        },
-                        "value": 666
-                    },
-                    {
-                        "label": {
-                            "id": 1154,
-                            "sort": 13,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 842,
-                            "color": "linear-gradient(to bottom, #9ce1ff 2%, #6dc2ff 100%)",
-                            "text": "Николай"
-                        },
-                        "value": 1154
-                    },
-                    {
-                        "label": {
-                            "id": 1328,
-                            "sort": 14,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 842,
-                            "color": "linear-gradient(to bottom, #ffab8e 2%, #ff8596 100%)",
-                            "text": "Александр Степанов"
-                        },
-                        "value": 1328
-                    },
-                    {
-                        "label": {
-                            "id": 118,
-                            "sort": 15,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 842,
-                            "color": "linear-gradient(to bottom, #ffab8e 2%, #ff8596 100%)",
-                            "text": "Галина Макеева"
-                        },
-                        "value": 118
-                    },
-                    {
-                        "label": {
-                            "id": 954,
-                            "sort": 16,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 842,
-                            "color": "linear-gradient(to bottom, #f1c3ff 2%, #a8c7ff)",
-                            "text": "Афонин Дмитрий Юрьевич"
-                        },
-                        "value": 954
-                    },
-                    {
-                        "label": {
-                            "id": 127,
-                            "sort": 17,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 842,
-                            "color": "linear-gradient(to bottom, #ee90d2 4%, #dd6565 100%)",
-                            "text": "Дмитрий "
-                        },
-                        "value": 127
-                    },
-                    {
-                        "label": {
-                            "id": 131,
-                            "sort": 18,
-                            "file": "",
-                            "is_hidden": 0,
-                            "field_id": 842,
-                            "color": "linear-gradient(to bottom, #5ef9e2 2%, #50e2d2 100%)",
-                            "text": "Дмитрий Ероха"
-                        },
-                        "value": 131
-                    }
-                ],
-                "choosed": [],
-                "related_table": "clients"
+                "id": 1,
+                "title": "Вторая секция",
+                "fields": []
             }
-        ]
+        ],
+        "type": "Array"
     }
 }

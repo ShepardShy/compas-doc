@@ -2,7 +2,6 @@
 @use '@/assets/mixins.scss' as mixins;
 
 .form-item__date {
-    @include mixins.userSelect($value: none);
     overflow: inherit;
 
     .datepicker_multiple {

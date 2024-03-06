@@ -1,18 +1,18 @@
 <template>
     <FormItem 
         class="form-item__textarea" 
+        :class="[null, undefined].includes(props.item.value) || props.item.value == '' ? 'form-item__textarea_empty' : ''"
         :required="props.item.required"
     >
         <FormLabel
             :title="props.item.title"
+            v-show="props.item.title != null && props.item.title != ''"
         />
 
         <FormValue 
             v-if="props.isReadOnly"
-            :isHTML="true"
             :value="props.item.value"
-            :link="props.item.external_link"
-            :isLink="props.isLink && ![null, undefined].includes(props.item.external_link)"
+            :isHTML="true"
         />
 
         <TextareaField
@@ -26,7 +26,17 @@
             @changeValue="(data) => $emit('changeValue', data)"
         />
 
-	    <span v-if="![null, undefined].includes(props.item.substring) && props.item.substring != ''" class="form-item__substring">{{ props.item.substring }}</span>
+	    <span v-if="![null, undefined].includes(props.item.substring) && props.item.substring != ''" class="form-item__substring"> 
+            {{ props.item.substring }}
+        </span>
+
+        <a
+		    v-if="props.item.key == 'phone' && (saveValueForCall != null && saveValueForCall != '')"
+		    :href="`tel:${saveValueForCall}`"
+		    class="button-text button-text__action"
+	    >
+		    Позвонить
+	    </a>
     </FormItem>
 </template>
 
@@ -65,10 +75,6 @@
             type: Boolean
         },
         isReadOnly: {
-            default: false,
-            type: Boolean
-        },
-        isLink: {
             default: false,
             type: Boolean
         }

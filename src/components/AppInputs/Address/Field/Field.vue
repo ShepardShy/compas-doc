@@ -29,9 +29,9 @@
 <script setup>
     import './Field.scss';
 
-    import {ref, toRaw, watch} from "vue";
+    import { ref, watch} from "vue";
 
-    import AppAutocomplete from "@/components/AppAutocomplete/Input/Input.vue";
+    import AppAutocomplete from "@/components/Appautocomplete/input.vue";
     import Map from "@/components/AppInputs/Address/Map/Map.vue";
     import AppCopy from "@/components/AppCopy/AppCopy.vue";
     import _ from "lodash";
@@ -77,7 +77,10 @@
 
     const changeValue = (data) => {
         const selectedItem = props.item.options.find((option) => data && _.isEqual(option.value, data.value))
-        emit('changeValue', (selectedItem ? selectedItem.value : null))
+        emit('changeValue', {
+            key: props.item.key,
+            value: selectedItem ? selectedItem.value : null
+        })
     }
 
     const setActiveOption = () => {
@@ -86,7 +89,7 @@
                 label: {
                     text: props.item.value.text
                 },
-                value: toRaw(props.item.value)
+                value: props.item.value
             })
         }
 

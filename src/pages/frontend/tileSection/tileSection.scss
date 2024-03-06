@@ -1,0 +1,8 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.tile-section {
+    &:nth-child(2) {
+        grid-column: 3/5;
+    }
+}

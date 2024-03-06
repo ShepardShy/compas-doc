@@ -20,6 +20,7 @@
             :item="props.item"
             :disabled="props.disabled"
             :isMultiple="props.isMultiple"
+            @openDatepicker="() => $emit('openDatepicker', true)"
             @changeValue="(data) => $emit('changeValue', data)"
         />
     </FormItem>

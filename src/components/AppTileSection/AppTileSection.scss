@@ -20,21 +20,74 @@
 
 
 .tile-section__body {
-    padding: 10px 15px;
+    padding: 10px 0px;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
+
 .tile-section__item {
     position: relative;
+    padding: 0px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    @include mixins.sortableGhost();
 
     .tile-section__settings {
+        opacity: 0;
         position: absolute;
         top: 0px;
-        right: 0px;
+        right: 10px;
+
+        &[open] {
+            opacity: 1;
+        }
+
+        .icon__settings, .icon__settings > svg {
+            @include mixins.elemResolutionOptions(13px, 13px);
+        } 
+    }
+
+    .form-item__date {
+        .dp__outer_menu_wrap {
+            width: max-content;
+        }
+    }
+
+    &.sortable-ghost {
+        height: 40px;
+
+        .form__item {
+            display: none;
+        }
     }
 
     .icon__draggable {
-        left: -12px;
+        opacity: 0;
+        left: 1px;
+    }
+
+    &:hover {
+        .tile-section__settings, 
+        .icon__draggable {
+            opacity: 1;
+        }
+    }
+
+    &.tile-section__item_hidden {
+        display: none;
+    }
+
+    .form-item__title {
+        width: max-content;
+    }
+
+    .form-item__value_empty {
+        pointer-events: none;
+    }
+
+    .form-item__value {
+        color: var(--textColor);
     }
 }

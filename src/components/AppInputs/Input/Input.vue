@@ -14,6 +14,8 @@
             :isHTML="false"
             :isLink="props.isLink"
             :value="props.item.value"
+            :link="props.item.external_link"
+            :substring="props.item.substring"
             @click="() => props.isLink ? $emit('openLink', props.item) : ''"
         />
 
@@ -29,7 +31,7 @@
             @changeValue="(data) => $emit('changeValue', data)"
         />
 
-	    <span v-if="![null, undefined].includes(props.item.substring) && props.item.substring != ''" class="form-item__substring">{{ props.item.substring }}</span>
+	    <span v-if="!props.isReadOnly && ![null, undefined].includes(props.item.substring) && props.item.substring != ''" class="form-item__substring">{{ props.item.substring }}</span>
 
         <slot></slot>
     </FormItem>

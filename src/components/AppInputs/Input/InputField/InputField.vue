@@ -39,7 +39,6 @@
                 key: '',
                 value: '',
                 type: "text",
-                focus: false,
                 placeholder: '',
                 title: "Undefined title"
             },
@@ -69,7 +68,9 @@
 
     onMounted(() => {
         if (props.item.focus) {
-            inputRef.value.focus()
+            setTimeout(() => {
+                inputRef.value.focus()
+            }, 10)
         }
     })
 

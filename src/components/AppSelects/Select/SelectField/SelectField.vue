@@ -19,7 +19,7 @@
         ref="popupRef" 
         :class="props.isMultiple ? 'select__popup_multiply' : ''"
         :isReadOnly="props.isReadOnly"
-        @click="(event) => props.isReadOnly ? event.preventDefault() : null"
+        @click="(event) =>  props.isReadOnly ? event.preventDefault() : callAction({action: 'showContent', value: true})"
         @clickOutside="() => emit('clickOutside', true)"
     >
         <template #summary> 
@@ -39,7 +39,6 @@
                 :isReadOnly="props.isReadOnly"
                 :enabledAutocomplete="false"
                 @changeValue="(data) => callAction({action: 'searchOptions', value: data.value})"
-                @mousedown="(event) => props.isReadOnly ? event.preventDefault() : callAction({action: 'showContent', value: true})"
                 @keydown.space="(event) => {event.preventDefault(); callAction({action: 'searchOptions', value: event.target.value + ' '})}"
             > 
                 <div class="select__active-option active-option" v-show="!props.isReadOnly && (props.isMultiple || ([null, undefined].includes(search) || search == ''))">
@@ -72,7 +71,7 @@
             </AppInput>
         </template>
         <template #content>
-            <PopupOption v-show="props.isHaveNullOption & !props.isMultiple || options.length == 0" @click="() => callAction({action: 'changeValue', value: null})">
+            <PopupOption class="popup__option_null" v-show="props.isHaveNullOption & !props.isMultiple || options.length == 0" @click="() => callAction({action: 'changeValue', value: null})">
                 Не выбрано
             </PopupOption>
             <PopupOption 
@@ -99,6 +98,7 @@
     import IconDelete from '@/components/AppIcons/Delete/Delete.vue';
     import PopupOption from '@/components/AppPopup/PopupOption/PopupOption.vue';
     import FormValue from '@/components/AppForm/FormValue/FormValue.vue';
+    import PopupScripts from '@/components/AppPopup/Scripts.js';
 
     const props = defineProps({
         item: {
@@ -162,11 +162,7 @@
                     } else {
                         inputRef.value.inputRef.inputRef.focus()
                     }
-
-                    if (!popupRef.value.popupRef.hasAttribute('open')) {
-                        popupRef.value.popupRef.setAttribute('open', true)
-                    }
-                }, 100);
+                }, 10);
             } else {
                 popupRef.value.popupRef.removeAttribute('open')
             }
@@ -342,4 +338,14 @@
             value: props.item.value
         })
     })
+
+    watch(() => props.item.focus, () => {
+        setTimeout(() => {
+            if (props.item.focus) {
+                popupRef.value.popupRef.setAttribute('open', true)
+                PopupScripts.setDropdownPosition(popupRef.value.popupRef)
+            }
+        }, 10);
+    })
+
 </script>

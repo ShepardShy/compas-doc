@@ -8,13 +8,13 @@
             :title="props.item.title"
         />
 
-        <StatusField 
+        <StatusField
             :item="props.item"
             :isReadOnly="props.isReadOnly"
             :isCanCreate="props.isCanCreate"
+            :isCanSave="props.isCanSave"
             :isHaveNullOption="props.isHaveNullOption"
-            @clickOutside="() => emit('clickOutside', true)"
-            @changeValue="(data) => emit('changeValue', data)"
+            @changeValue="(data) => $emit('changeValue', data)"
         />
     </FormItem>
 </template>
@@ -54,6 +54,10 @@
             default: false,
             type: Boolean
         },
+        isCanSave: {
+            default: false,
+            type: Boolean
+        },
         isReadOnly: {
             default: false,
             type: Boolean
@@ -63,9 +67,4 @@
             type: Boolean
         }
     })
-
-    const emit = defineEmits([
-        'changeValue',
-        'clickOutside'
-    ])
 </script>

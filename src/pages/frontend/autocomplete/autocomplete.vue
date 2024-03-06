@@ -18,7 +18,7 @@
 
     import AppComponent from '@/components/AppComponent/AppComponent.vue';
 
-    import AppAutocomplete from '@/components/AppAutocomplete/Input/Input.vue';
+    import AppAutocomplete from '@/components/Appautocomplete/input.vue';
     import AutocompleteProps from '@/data/frontend/autocomplete/input/codeProps.json';
     import AutocompleteEmits from '@/data/frontend/autocomplete/input/codeEmits.json';
 

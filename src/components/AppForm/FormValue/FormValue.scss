@@ -14,13 +14,29 @@
         white-space: break-spaces;
     }
 
-    &.form-item__value-link {
+    &.form-item__value_link {
         cursor: pointer;
         text-decoration: underline;
         color: variables.$color-blue;
 
         &:hover {
             text-decoration: none;
+        }
+    }
+
+    &.form-item__value_has-substring {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .form-item__substring {
+            position: static;
+        }
+        
+        &.form-item__value_empty {
+            .form-item__substring {
+                opacity: 0;
+            }
         }
     }
 }

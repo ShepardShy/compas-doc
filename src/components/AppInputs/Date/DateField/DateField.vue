@@ -15,6 +15,7 @@
         :max-time="{ hours: 0, minutes: 0, seconds: 0 }"
         :month-change-on-scroll="false"
         @update:modelValue="(value) => changeValue(value)"
+        @open="() => $emit('openDatepicker', true)"
     > 
         <template #right-sidebar>
             <div class="datapicker__preset-days">
@@ -74,7 +75,7 @@
 <script setup>
     import './DateField.scss';
     
-    import { ref, onMounted } from 'vue'
+    import { ref, onMounted, watch } from 'vue'
 
     import AppButton from '@/components/AppButton/AppButton.vue'
     import AppInput from '@/components/AppInputs/Input/Input.vue';
@@ -214,9 +215,9 @@
     // Установка значения по умолчанию
     const setValue = () => {
         if (props.isMultiple) {
-            localDate.value = Array.isArray(props.item.value) ? props.item.value : []
+            localDate.value = Array.isArray(props.item.value) ? JSON.parse(JSON.stringify(props.item.value)) : []
         } else {
-            localDate.value = typeof props.item.value != 'string' || [null, undefined].includes(props.item.value) ? null : new Date(props.item.value)
+            localDate.value = typeof props.item.value != 'string' || [null, undefined].includes(props.item.value) ? null : JSON.parse(JSON.stringify(new Date(props.item.value)))
         }
     }
 
@@ -257,6 +258,10 @@
     }
 
     onMounted(() => {
+        setValue()
+    })
+
+    watch(() => props.item.value, () => {
         setValue()
     })
 </script>

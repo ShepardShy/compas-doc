@@ -8,13 +8,15 @@
             :title="props.item.title"
         />
 
-        <Field
+        <FileField
             :item="props.item"
             :isReadOnly="props.isReadOnly"
             :isShowFileName="props.isShowFileName"
             :isMultiple="props.isMultiple"
             :isOneFile="props.isOneFile"
+            :isIcon="props.isIcon"
             @changeValue="(data) => emit('changeValue', data)"
+            @initEdit="(event) => emit('initEdit', event)"
         />
     </FormItem>
 </template>
@@ -24,7 +26,7 @@
 
     import FormItem from "@/components/AppForm/FormItem/FormItem.vue";
     import FormLabel from "@/components/AppForm/FormLabel/FormLabel.vue";
-    import Field from './Field/Field.vue'
+    import FileField from './Field/Field.vue'
 
     const props = defineProps({
         item: {
@@ -55,10 +57,15 @@
         isOneFile: {
             default: false,
             type: Boolean
+        },
+        isIcon: {
+            default: false,
+            type: Boolean
         }
     })
 
     const emit = defineEmits([
-        'changeValue'
+        'changeValue',
+        'initEdit'
     ])
 </script>

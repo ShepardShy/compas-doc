@@ -9,12 +9,14 @@
     />
 
     <label :for="`checkbox_${props.item.id}`">
-        <img src="./checkbox.svg"/>
+        <IconCheckbox />
     </label>
 </template>
 
 <script setup>
     import './CheckboxField.scss';
+
+    import IconCheckbox from './IconCheckbox.vue'
     
     const props = defineProps({
         item: {

@@ -13,12 +13,13 @@
             }
 
             &::after {
-                content: url('/public/icons/selectTriangle.svg');
+                content: url('/icons/selectTriangle.svg');
                 display: flex;
+                align-items: center;
                 justify-content: center;
                 width: 16px;
                 height: 25px;
-                padding: 0px;
+                padding: 0px 0px 8px;
                 background-color: variables.$color-white;
                 @include mixins.borderOptions(1px, solid, variables.$color-grey, 0px 5px 5px 0px);
             }
@@ -34,11 +35,10 @@
         img {
             position: absolute;
             object-fit: contain;
-            width: 25px;
-            height: 100%;
+            @include mixins.elemResolutionOptions(25px, 100%);
             left: 0px;
             top: 0px;
-            border-radius: 5px 0px 0px 5px;
+            border-radius: 5px;
         }
 
         &::before {

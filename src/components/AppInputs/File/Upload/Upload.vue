@@ -15,11 +15,15 @@
         >
 
         <div
-            v-if="props.buttonImage === null"
+            v-if="
+                !props.isIcon || 
+                [null, undefined].includes(props.buttonIcon) ||
+                [null, undefined].includes(props.buttonIcon.file) ||
+                props.buttonIcon.file == ''
+            "
             class="file-upload__button"
         >
-            <LoadFile v-if="!props.otherIcon" />
-            <component v-else :is="props.otherIcon" />
+            <IconLoadFile />
 
             <span class="file-upload__button-title">
                 {{ props.buttonTitle }}
@@ -27,18 +31,27 @@
         </div>
 
         <div
-            v-else
+            v-else-if="
+                props.isIcon && 
+                ![null, undefined].includes(props.buttonIcon) && 
+                ![null, undefined].includes(props.buttonIcon.file) && 
+                props.buttonIcon.file != ''
+            "
             class="file-upload__image-wrapper"
         >
+
             <img
                 class="file-upload__image"
-                :src="props.buttonImage"
-                :alt="props.buttonTitle"
+                :src="props.buttonIcon.file"
+                alt="Иконка"
             />
 
             <IconClose
                 title="Удалить иконку"
-                @click.prevent="emit('deleteFile')"
+                @click.prevent="emit('callAction', {
+                    action: 'deleteIcon',
+                    value: props.buttonIcon.file
+                })"
             />
         </div>
     </div>
@@ -47,10 +60,11 @@
 <script setup>
     import './Upload.scss';
 
-    import LoadFile from "@/components/AppIcons/LoadFile/LoadFile.vue";
-    import Input from "@/components/AppAutocomplete/Input/Input.vue";
-    import IconClose from "@/components/AppIcons/Close/Close.vue";
     import {ref} from "vue";
+
+    import IconLoadFile from "@/components/AppIcons/LoadFile/LoadFile.vue";
+    import Input from "@/components/Appautocomplete/input.vue";
+    import IconClose from "@/components/AppIcons/Close/Close.vue";
 
     const props = defineProps({
         isMultiple: {
@@ -65,9 +79,13 @@
             default: null,
             type: Object
         },
-        buttonImage: {
+        isIcon: {
+            default: false,
+            type: Boolean
+        },
+        buttonIcon: {
             default: null,
-            type: String
+            type: Object
         }
     })
 
