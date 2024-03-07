@@ -55,6 +55,12 @@ export default {
             name: 'Секция',
             slug: 'tile-section',
             component: markRaw(defineAsyncComponent(() => import('@/pages/frontend/tileSection/tileSection.vue')))
+        },
+        {
+            id: 19,
+            name: 'История',
+            slug: 'history',
+            component: markRaw(defineAsyncComponent(() => import('@/pages/frontend/history/history.vue')))
         }
     ],
 

@@ -1,0 +1,30 @@
+{
+    "history": {
+        "default": {
+            "data": [
+                {
+                    "id": 24266,
+                    "event": "FIELD_UPDATED",
+                    "date": "2024-03-06",
+                    "created_at": "14:59:52",
+                    "field": {
+                        "title": "Поле 1",
+                        "prev_value": "Старый <b> текст </b>",
+                        "next_value": "Новый текст"
+                    },
+                    "user": {
+                        "id": 1,
+                        "ab": "ДП",
+                        "name": "Денис Потемкин",
+                        "color": "linear-gradient(to bottom, #ee9090 2%, #6765dd 100%)",
+                        "icon": "https://compas.pro/storage/thumbnails/default/i0/t4/ekc3cm8gw8ogcs0s40wo.jpg?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FAlNOaEeDiyvNjmnY5LbirUlCYfcAfflwOm8SfBg5.jpg&s=https"
+                    }
+                }
+            ],
+            "last_page": 2,
+            "per_page": 20,
+            "current_page": 1
+        },
+        "type": "Object"
+    }
+}

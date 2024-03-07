@@ -33,6 +33,7 @@
         align-items: flex-start;
         gap: 10px;
         width: 80%;
+        font-weight: 600;
 
 
         .icon__draggable {
@@ -64,6 +65,7 @@
             min-height: auto;
             height: auto;
             border: none;
+            font-weight: 600;
         }
 
         .form-item__mirror {

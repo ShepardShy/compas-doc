@@ -11,6 +11,7 @@
             :table="props.codeProps.table != undefined ? props.codeProps.table.default : null"
             :menu="props.codeProps.menu != undefined ? props.codeProps.menu.default : null"
             :slug="props.codeProps.slug != undefined ? props.codeProps.slug.default : null"
+            :history="props.codeProps.history != undefined ? props.codeProps.history.default : null"
             :isTrash="props.codeProps.isTrash != undefined ? props.codeProps.isTrash.default : null"
             :isMultiple="props.codeProps.isMultiple != undefined ? props.codeProps.isMultiple.default : null"
             :isFiltered="props.codeProps.isFiltered != undefined ? props.codeProps.isFiltered.default : null"

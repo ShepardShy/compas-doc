@@ -79,14 +79,6 @@
 
     // Действие с секцией
     const callActionSection = (data) => {
-        // Перемещение секции
-        const moveSection = (data) => {
-            emit('callAction', {
-                action: 'moveSection',
-                value: data
-            })
-        }
-
         // Изменение заголовка
         const changeTitle = (data) => {
             emit('callAction', {
@@ -118,13 +110,7 @@
             }
         }
 
-
         switch (data.action) {
-            // Перемещение секции
-            case 'move':
-                moveSection(data.value)
-                break;
-
             // Изменение состояния секции
             case 'changeState':
                 changeState()
@@ -190,7 +176,8 @@
                 required: 0,
                 set_color: 0,
                 color: '#000',
-                unit: null
+                unit: null,
+                entity: props.slug
             }
 
             isShow.value = {

@@ -3,6 +3,7 @@
         :section="TileSectionProps.sections.default[0]"
         :sections="sections"
         :hiddenFields="hiddenFields"
+        :slug="'logistic_tasks'"
         @callAction="(data) => callAction(data)"
     />
 
@@ -10,6 +11,7 @@
         :section="TileSectionProps.sections.default[1]"
         :sections="sections"
         :hiddenFields="hiddenFields"
+        :slug="'logistic_tasks'"
         @callAction="(data) => callAction(data)"
     />
 </template>
@@ -49,6 +51,11 @@
         // Обновление настроек поля
         const updateSettings = (keys) => {
             console.log('Изменение настроек поля', keys);
+        }
+
+        // Создание поля
+        const createField = async (data) => {
+            console.log('Создание поля', data);
         }
 
         // Удаление секции
@@ -114,7 +121,12 @@
             case 'changeSectionTitle':
                 changeSectionTitle(data.value)
                 break;
-                
+
+            // Создание поля
+            case 'createField':
+                createField(data.value)
+                break;
+
             default:
                 break;
         }

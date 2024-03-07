@@ -480,8 +480,7 @@
             // Добавление опции в селект
             case "addOptionSelect":
                 edittingField.value.options.push({
-                    is_new: true,
-                    value: null,
+                    value: edittingField.value.options.length,
                     label: null
                 })
                 break;
@@ -496,8 +495,7 @@
                         color: '#b6b6b6',
                         text: null
                     },
-                    value: null,
-                    is_new: true
+                    value: edittingField.value.options.length
                 })
                 break;
 
@@ -514,8 +512,7 @@
                                 color: '#b6b6b6',
                                 text: null
                             },
-                            value: null,
-                            is_new: true
+                            value: 0
                         },
                         {
                             label: {
@@ -525,8 +522,7 @@
                                 color: '#b6b6b6',
                                 text: null
                             },
-                            value: null,
-                            is_new: true
+                            value: 1
                         },
                         {
                             label: {
@@ -536,26 +532,22 @@
                                 color: '#b6b6b6',
                                 text: null
                             },
-                            value: null,
-                            is_new: true
+                            value: 2
                         }
                     ]
                 } else if (['text_group', 'select_dropdown'].includes(edittingField.value.type)) {
                     edittingField.value.options =  [
                         {
-                            is_new: true,
                             label: null,
-                            value: null
+                            value: 0
                         },
                         {
-                            is_new: true,
                             label: null,
-                            value: null
+                            value: 1
                         },
                         {
-                            is_new: true,
                             label: null,
-                            value: null
+                            value: 2
                         }
                     ]
                 } else {
