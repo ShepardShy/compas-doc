@@ -2,12 +2,10 @@
 @use '@/assets/mixins.scss' as mixins;
 
 .tile-section__header {
-    display: flex;
-    justify-content: space-between;
     position: relative;
     padding: 10px 15px;
-    gap: 15px;
     border-bottom: 1px solid variables.$color-light-grey;
+    @include mixins.flexBlock($vertical: center, $horizontal: space-between, $gap: 15px);
 
     &:hover {
         .tile-section__title {
@@ -18,27 +16,21 @@
     }
 
     .form-item__input {
-        display: flex;
-        gap: 10px;
-        align-items: flex-start;
+        @include mixins.flexBlock($vertical: flex-start, $horizontal: flex-start, $gap: 10px);
         
-
         .form-item__title {
             display: none;
         }
     }
 
     .tile-section__title {
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
         width: 80%;
         font-weight: 600;
-
+        @include mixins.flexBlock($vertical: flex-start, $horizontal: flex-start, $gap: 10px);
 
         .icon__draggable {
-            opacity: 0;
             left: 2px;
+            opacity: 0;
         }
 
         .icon__edit {
@@ -93,10 +85,7 @@
     }
 
     .tile-section__header-actions {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 10px;
+        @include mixins.flexBlock($vertical: center, $horizontal: space-between, $gap: 10px);
 
         .button-text {
             font-size: variables.$font-size-label;

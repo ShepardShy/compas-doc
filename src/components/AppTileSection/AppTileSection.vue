@@ -26,8 +26,8 @@
 
     import AppSection from '@/components/AppSection/AppSection.vue';
 
-    import TileHeader from './Header/Header.vue'
     import TileBody from './Body/Body.vue'
+    import TileHeader from './Header/Header.vue'
     import TileFooter from './Footer/Footer.vue'
     import TileWarning from './Warning/Warning.vue'
 

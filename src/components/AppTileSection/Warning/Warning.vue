@@ -4,11 +4,7 @@
     />
 
     <WarningSettings 
-        v-else-if="isShow.state && isShow.type == 'settings'"
-    />
-
-    <WarningCreate 
-        v-else-if="isShow.state && isShow.type == 'create'"
+        v-else-if="isShow.state && (isShow.type == 'settings' || isShow.type == 'create')"
     />
 </template>
 
@@ -19,7 +15,6 @@
 
     import WarningDelete from './Delete/Delete.vue'
     import WarningSettings from './Settings/Settings.vue'
-    import WarningCreate from './Create/Create.vue'
 
     const isShow = inject('isShow')
 

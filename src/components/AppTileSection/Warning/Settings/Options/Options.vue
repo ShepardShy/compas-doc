@@ -5,14 +5,14 @@
             :item="{
                 id: 0,
                 key: 'type',
-                value: edittingField.type,
+                value: isShow.type == 'settings' ? edittingField.type : edittingField.type,
                 focus: false,
                 required: false,
                 title: 'Тип поля',
                 lockedOptions: [],
-                options: SettingsOptions.types
+                options: SettingsOptions.types.filter(p => !['relation', 'address'].includes(p.value))
             }"
-            :isReadOnly="true"
+            :isReadOnly="isShow.type == 'settings'"
             :isHaveNullOption="false"
             :isMultiple="false"
             :isFiltered="true"
@@ -245,7 +245,7 @@
                 title: 'Множественное',
                 key: 'is_plural'
             }"
-            :disabled="true"
+            :disabled="isShow.type == 'settings'"
             @changeValue="(data) => changeValue(data)"
         />
         <AppCheckbox 
@@ -404,7 +404,7 @@
     import './Options.scss';
 
     import { inject } from 'vue'
-    import SettingsOptions from '../Settings.json'
+    import SettingsOptions from './Settings.json'
 
     import IconDelete from '@/components/AppIcons/Delete/Delete.vue';
     import IconPipette from '@/components/AppIcons/Pipette/Pipette.vue';
@@ -418,6 +418,7 @@
     import ButtonText from '@/components/AppButton/ButtonText/ButtonText.vue';
     import PopupOption from '@/components/AppPopup/PopupOption/PopupOption.vue';
     
+    const isShow = inject('isShow')
     const sections = inject('sections')
     const changedKeys = inject('changedKeys')
     const edittingField = inject('edittingField')
@@ -476,7 +477,63 @@
                     },
                     value: edittingField.value.options.length
                 })
-                changedKeys.value.options = edittingField.value.options
+                break;
+
+            case "type":
+                edittingField.value[data.key] = data.value
+
+                if (edittingField.value.type == 'status') {
+                    edittingField.value.options = [
+                        {
+                            label: {
+                                id: null,
+                                file: null,
+                                is_hidden: 0,
+                                color: '#b6b6b6',
+                                text: null
+                            },
+                            value: 0
+                        },
+                        {
+                            label: {
+                                id: null,
+                                file: null,
+                                is_hidden: 0,
+                                color: '#b6b6b6',
+                                text: null
+                            },
+                            value: 1
+                        },
+                        {
+                            label: {
+                                id: null,
+                                file: null,
+                                is_hidden: 0,
+                                color: '#b6b6b6',
+                                text: null
+                            },
+                            value: 2
+                        }
+                    ]
+                } else if (['text_group', 'select_dropdown'].includes(edittingField.value.type)) {
+                    edittingField.value.options =  [
+                        {
+                            label: null,
+                            value: 0
+                        },
+                        {
+                            label: null,
+                            value: 1
+                        },
+                        {
+                            label: null,
+                            value: 2
+                        }
+                    ]
+                } else {
+                    edittingField.value.options = []
+                }
+                
                 break;
                 
             default:

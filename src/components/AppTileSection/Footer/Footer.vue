@@ -37,8 +37,8 @@
     import { inject } from 'vue';
 
     import AppPopup from '@/components/AppPopup/Popup.vue';
-    import PopupOption from '@/components/AppPopup/PopupOption/PopupOption.vue';
     import ButtonText from '@/components/AppButton/ButtonText/ButtonText.vue';
+    import PopupOption from '@/components/AppPopup/PopupOption/PopupOption.vue';
 
     const emit = defineEmits([
         'callAction'

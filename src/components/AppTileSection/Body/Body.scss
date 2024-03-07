@@ -1,11 +1,86 @@
 @use '@/assets/variables.scss' as variables;
 @use '@/assets/mixins.scss' as mixins;
 
-.tile-section__body_empty {
-    &::after {
-        content: 'Пусто';
-        color:variables.$color-blue-grey;
+.tile-section__body {
+    gap: 15px;
+    display: flex;
+    padding: 10px 0px;
+    flex-direction: column;
+
+    &.tile-section__body_empty {
+        margin-top: 10px;
+        
+        &::after {
+            content: 'Пусто';
+            padding: 0px 15px;
+            text-align: center;
+            color:variables.$color-blue-grey;
+        }
+    }
+
+    .tile-section__item {
+        gap: 10px;
+        display: flex;
         padding: 0px 15px;
-        text-align: center;
+        position: relative;
+        flex-direction: column;
+        @include mixins.sortableGhost();
+    
+        .tile-section__settings {
+            top: 0px;
+            opacity: 0;
+            right: 10px;
+            position: absolute;
+    
+            &[open] {
+                opacity: 1;
+            }
+    
+            .icon__settings, .icon__settings > svg {
+                @include mixins.elemResolutionOptions(13px, 13px);
+            } 
+        }
+    
+        .form-item__date {
+            .dp__outer_menu_wrap {
+                width: max-content;
+            }
+        }
+    
+        &.sortable-ghost {
+            height: 40px;
+    
+            .form__item {
+                display: none;
+            }
+        }
+    
+        .icon__draggable {
+            opacity: 0;
+            left: 1px;
+        }
+    
+        &:hover {
+            .tile-section__settings, 
+            .icon__draggable {
+                opacity: 1;
+            }
+        }
+    
+        &.tile-section__item_hidden {
+            display: none;
+        }
+    
+        .form-item__title {
+            width: max-content;
+        }
+    
+        .form-item__value_empty {
+            pointer-events: none;
+        }
+    
+        .form-item__value {
+            color: var(--textColor);
+        }
     }
 }

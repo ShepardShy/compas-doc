@@ -1,10 +1,10 @@
 <template>
     <draggable
+        v-model="section.fields" 
         class="tile-section__body"
         group="tile-section__body" 
-        :itemKey="`tile-section__${section.id}`"
-        v-model="section.fields" 
         handle=".tile-section__drag"
+        :itemKey="`tile-section__${section.id}`"
         :class="section.fields.length == 0 ? 'tile-section__body_empty' : ''"
         @end="(event) => dragEnd(event)"
     >
@@ -265,14 +265,14 @@
 
     import AppDate from '@/components/AppInputs/Date/Date.vue'
     import AppFile from '@/components/AppInputs/File/File.vue'
+    import AppInput from '@/components/AppInputs/Input/Input.vue';
     import AppStatus from '@/components/AppSelects/Status/Status.vue'
     import AppSelect from '@/components/AppSelects/Select/Select.vue'
+    import AppAddress from '@/components/AppInputs/Address/Address.vue';
     import AppCheckbox from "@/components/AppInputs/Checkbox/Checkbox.vue"
     import AppTextarea from "@/components/AppInputs/Textarea/Textarea.vue"
     import AppRelation from "@/components/AppSelects/Relation/Relation.vue"
     import AppInputGroup from '@/components/AppInputs/InputGroup/InputGroup.vue';
-    import AppAddress from '@/components/AppInputs/Address/Address.vue';
-    import AppInput from '@/components/AppInputs/Input/Input.vue';
 
     const section = inject('section')
     

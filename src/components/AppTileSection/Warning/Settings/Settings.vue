@@ -8,7 +8,7 @@
             <OptionsComponent />
 
             <div class="warning__actions">
-                <AppButton class="button_blue" @click="() => updateSettings()">
+                <AppButton class="button_blue" @click="() => saveSettings()">
                     Сохранить
                 </AppButton>
                 <AppButton @click="() => showWarning(false)">
@@ -20,13 +20,13 @@
 </template>
 
 <script setup>
-    import '../Create/Create.scss';
+    import './Settings.scss';
     
     import { ref, inject, provide } from 'vue'
 
+    import OptionsComponent from './Options/Options.vue'
     import AppButton from '@/components/AppButton/AppButton.vue';
     import AppWarning from '@/components/AppWarning/AppWarning.vue';
-    import OptionsComponent from './Options/Options.vue'
 
     const changedKeys = ref({})
     
@@ -45,11 +45,18 @@
     }    
 
     // Обновление настроек
-    const updateSettings = () => {
-        changedKeys.value.id = edittingField.value.id
-        emit('callAction', {
-            action: 'updateSettings',
-            value: changedKeys.value
-        })
+    const saveSettings = () => {
+        if (isShow.value.type == 'create') {
+            emit('callAction', {
+                action: 'createField',
+                value: edittingField.value
+            })
+        } else {
+            changedKeys.value.id = edittingField.value.id
+            emit('callAction', {
+                action: 'updateSettings',
+                value: changedKeys.value
+            })
+        }
     }
 </script>
