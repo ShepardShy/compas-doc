@@ -5,7 +5,7 @@
     .popup__option {
         &.popup-option__sublink {
             &.popup-option__sublink_back {
-                flex-direction: row;
+                flex-direction: row-reverse;
             }
         }
     }

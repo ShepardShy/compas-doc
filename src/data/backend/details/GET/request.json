@@ -1,0 +1,8 @@
+{
+    "q": "",
+    "page": 1,
+    "per_page": 25,
+    "sort_field": "client_id",
+    "sort_order": "desc",
+    "filter[id]": "value"
+}

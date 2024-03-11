@@ -6,12 +6,12 @@
         <template #content>
             <template v-if="menu.saves.activeTab != null && menu.saves.activeTab.tab == 'roles'">
                 <PopupOption class="popup-option__sublink popup-option__sublink_back" @click="() => changeSaveTab(null)">
-                    <IconArrow />
-                    
                     {{ menu.saves.activeTab.title }}
+                    
+                    <IconArrow />
                 </PopupOption>
                 <PopupOption v-for="option in menu.saves.options" @click="() => changeSaveTab(option)">
-                    {{ option.title }}
+                    {{ option.label }}
                 </PopupOption>
             </template>
             <template v-else>
@@ -27,7 +27,7 @@
 <script setup>
     import './Save.scss';
 
-    import { ref } from 'vue'
+    import { ref, onMounted } from 'vue'
 
     import IconSave from '@/components/AppIcons/Save/Save.vue'
     import IconArrow from '@/components/AppIcons/Arrow/Arrow.vue'
@@ -63,21 +63,21 @@
                     id: 0,
                     sort: 0,
                     key: 'key_11',
-                    title: 'Role 3.1',
+                    label: 'Role 3.1',
                     enabled: true
                 },
                 {
                     id: 1,
                     sort: 0,
                     key: 'key_21',
-                    title: 'Role 3.2',
+                    label: 'Role 3.2',
                     enabled: false
                 },
                 {
                     id: 2,
                     sort: 0,
                     key: 'key_31',
-                    title: 'Role 3.3',
+                    label: 'Role 3.3',
                     enabled: false
                 }
             ],
@@ -101,4 +101,7 @@
         }, 10);
     }
 
+    onMounted(() => {
+        // menu.value.saves.options = []
+    })
 </script>

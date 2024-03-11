@@ -20,6 +20,8 @@
     const callAction = async (data) => {
         if (data.action == 'showMore') {
             console.log('Показать еще', data.value)
+        } else {
+            console.log(data)
         }
     }
 </script>

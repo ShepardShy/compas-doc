@@ -108,6 +108,11 @@
                     delete field.isEdit
                 })
             }
+
+            emit('callAction', {
+                action: 'changeState',
+                value: section.value.state      
+            })
         }
 
         switch (data.action) {

@@ -950,13 +950,12 @@
                         "related_table": "clients"
                     }
                 ]
-            },
-            {
-                "id": 5,
-                "title": "Вторая секция",
-                "fields": []
             }
         ],
         "type": "Array"
+    },
+    "slug": {
+        "default": "logistic_tasks",
+        "type": "String"
     }
 }

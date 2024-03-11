@@ -32,6 +32,12 @@
                                 <figure 
                                     class='ibg history-item__user' 
                                     :style="`--backgroundColor: ${field.user.color};`"
+                                    @click="() => emit('callAction', { action: 'showModal', value: {
+                                            id: field.user.id,
+                                            slug: 'users',
+                                            tab: null
+                                        }
+                                    })"
                                 >
                                     <img 
                                         v-if="![null, undefined].includes(field.user.icon) && field.user.icon != ''"

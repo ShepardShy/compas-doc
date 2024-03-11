@@ -81,6 +81,10 @@
     
         .form-item__value {
             color: var(--textColor);
+
+            &.form-item__value_link {
+                color: variables.$color-blue;
+            }
         }
     }
 }

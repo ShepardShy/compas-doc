@@ -9,8 +9,8 @@
 {{ props.code }}
 </pre>
                     <figure class='ibg ibg_copy' @click="(event) => copyToClipboard(event)">
-                        <img src='/public/icons/componentSuccess.svg' v-if="copyState"  alt=''>
-                        <img src='/public/icons/copy.svg' v-else  alt=''>
+                        <img src='/icons/componentSuccess.svg' v-if="copyState"  alt=''>
+                        <img src='/icons/copy.svg' v-else  alt=''>
                     </figure>
                 </div>
             </details>

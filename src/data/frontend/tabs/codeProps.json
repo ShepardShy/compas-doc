@@ -1,0 +1,47 @@
+{
+    "tabs": {
+        "default": [
+            {
+                "id": 0,
+                "title": "Общие",
+                "tab": "order",
+                "enabled": true
+            },
+            {
+                "id": 2,
+                "title": "Товары и услуги",
+                "tab": "products",
+                "enabled": true
+            },
+            {
+                "id": 3,
+                "title": "Клиенты",
+                "tab": "client_id",
+                "slug": "clients",
+                "enabled": true
+            },
+            {
+                "id": 1,
+                "title": "История изменений",
+                "tab": "history",
+                "enabled": true
+            },
+            {
+                "title": "Модули",
+                "tab": "modules",
+                "enabled": 1,
+                "id": 99,
+                "childs": [
+                    {
+                        "title": "Штрафы ГИБДД",
+                        "sort": 1,
+                        "enabled": 1,
+                        "id": 1,
+                        "alias": "gibdd"
+                    }
+                ]
+            }
+        ],
+        "type": "Array"
+    }
+}

@@ -71,5 +71,52 @@
     @include mixins.scrollBar();
     background: variables.$color-white;
     box-shadow: 0 0 3px #000, inset 0 1px 2px #ffffff80;
+
+    .popup-option__draggable {
+        .popup__option {
+            padding: 10px;
+
+            .icon__draggable {
+                left: 5px;
+                position: static;
+            }
+
+            &.sortable-ghost {
+                height: 37px;
+            }
+
+            &.popup-option__sublink {
+                justify-content: flex-start;
+            }
+            
+            &.sortable-ghost {
+                @include mixins.sortableGhost();
+            
+                font-size: 0;
+        
+                * {
+                    opacity: 0;
+                }
+            }
+
+            svg {
+                * {
+                    fill: #a6b7d4;
+                }
+            }
+        }
+
+        &.popup-option__draggable_dragging {
+            .popup-option {
+                &:hover {
+                    background: transparent !important;
+    
+                    .icon__draggable {
+                        @include mixins.setSVGColor(variables.$color-blue-grey)
+                    }
+                }
+            }
+        }
+    }
 }
 
