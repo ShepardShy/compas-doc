@@ -32,6 +32,12 @@ button {
         }
     }
 
+    &.button_white {
+        background: variables.$color-white;
+        border: 1px solid variables.$color-light-grey;
+        box-shadow: 0 5px 20px variables.$color-light-grey;
+    }
+
     &.button_orange {
         background: variables.$color-orange;
         color: variables.$color-white;

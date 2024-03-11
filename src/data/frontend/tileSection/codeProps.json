@@ -508,7 +508,7 @@
                             {
                                 "id": 1703657482943,
                                 "name": "3.xlsx",
-                                "url": "/icons/new/xls.svg",
+                                "url": "/icons/xls.svg",
                                 "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/lzOeWuGl5LEQD64lgfVKLV8NaNBrtR7mKfy88fTj.xlsx",
                                 "extension": "xlsx",
                                 "sort": 0,
@@ -950,13 +950,12 @@
                         "related_table": "clients"
                     }
                 ]
-            },
-            {
-                "id": 1,
-                "title": "Вторая секция",
-                "fields": []
             }
         ],
         "type": "Array"
+    },
+    "slug": {
+        "default": "logistic_tasks",
+        "type": "String"
     }
 }

@@ -1,0 +1,58 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.tabs {
+    @include mixins.flexBlock($vertical: center, $horizontal: space-between, $gap: 30px);
+}
+
+.tabs__list {
+    @include mixins.flexBlock($vertical: center, $horizontal: flex-start, $gap: 5px 35px);
+}
+
+.tabs__actions {
+    @include mixins.flexBlock($vertical: center, $horizontal: flex-start, $gap: 10px);
+
+    .icon__save {
+        @include mixins.flexBlock($vertical: center, $horizontal: flex-start, $gap: 0px);
+    }
+}
+
+.tabs__item {
+    cursor: pointer;
+    font-weight: 600;
+    color: variables.$color-active;
+    @include mixins.flexBlock($vertical: center, $horizontal: flex-start, $gap: 10px);
+
+    &.tabs__item_active {
+        cursor: text;
+        color: variables.$color-black;
+    }
+}
+
+.popup__tabs {
+    &[open] {
+        .icon__triangle {
+            transform: rotate(180deg);
+        }
+    }
+
+    &.tabs__item_active {
+        summary {
+            .tabs__item {
+                color: variables.$color-black;
+    
+                .icon__triangle {
+                    svg {
+                        * {
+                            fill: variables.$color-black
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .popup__option_active {
+        @include mixins.flexBlock($vertical: center, $horizontal: space-between, $gap: 5px);
+    }
+}

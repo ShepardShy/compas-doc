@@ -12,7 +12,7 @@
 }
 
 .main__content_tile-section {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 
     .tile-section {
         grid-column: 1/3;

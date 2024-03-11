@@ -99,33 +99,3 @@
         }
     }
 }
-
-.popup-option__draggable {
-    &.popup-option__draggable_dragging {
-        .popup-option {
-            &:hover {
-                background: transparent;
-
-                .icon__draggable {
-                    @include mixins.setSVGColor(variables.$color-blue-grey)
-                }
-            }
-        }
-    }
-
-    .popup__option {
-        &.popup-option__sublink {
-            justify-content: flex-start;
-        }
-        
-        &.sortable-ghost {
-            @include mixins.sortableGhost();
-        
-            font-size: 0;
-    
-            * {
-                opacity: 0;
-            }
-        }
-    }
-}

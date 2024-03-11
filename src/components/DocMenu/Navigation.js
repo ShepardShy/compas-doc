@@ -55,6 +55,18 @@ export default {
             name: 'Секция',
             slug: 'tile-section',
             component: markRaw(defineAsyncComponent(() => import('@/pages/frontend/tileSection/tileSection.vue')))
+        },
+        {
+            id: 19,
+            name: 'История',
+            slug: 'history',
+            component: markRaw(defineAsyncComponent(() => import('@/pages/frontend/history/history.vue')))
+        },
+        {
+            id: 23,
+            name: 'Плашки',
+            slug: 'tabs',
+            component: markRaw(defineAsyncComponent(() => import('@/pages/frontend/tabs/tabs.vue')))
         }
     ],
 
@@ -68,6 +80,11 @@ export default {
             id: 21,
             name: 'Страница с таблицей',
             component: markRaw(defineAsyncComponent(() => import('@/pages/backend/pageTable/pageTable.vue')))
+        },
+        {
+            id: 22,
+            name: 'Детальная страница',
+            component: markRaw(defineAsyncComponent(() => import('@/pages/backend/details/details.vue')))
         },
     ]
 }

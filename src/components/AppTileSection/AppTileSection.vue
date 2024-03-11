@@ -26,8 +26,8 @@
 
     import AppSection from '@/components/AppSection/AppSection.vue';
 
-    import TileHeader from './Header/Header.vue'
     import TileBody from './Body/Body.vue'
+    import TileHeader from './Header/Header.vue'
     import TileFooter from './Footer/Footer.vue'
     import TileWarning from './Warning/Warning.vue'
 
@@ -79,14 +79,6 @@
 
     // Действие с секцией
     const callActionSection = (data) => {
-        // Перемещение секции
-        const moveSection = (data) => {
-            emit('callAction', {
-                action: 'moveSection',
-                value: data
-            })
-        }
-
         // Изменение заголовка
         const changeTitle = (data) => {
             emit('callAction', {
@@ -116,15 +108,14 @@
                     delete field.isEdit
                 })
             }
+
+            emit('callAction', {
+                action: 'changeState',
+                value: section.value.state      
+            })
         }
 
-
         switch (data.action) {
-            // Перемещение секции
-            case 'move':
-                moveSection(data.value)
-                break;
-
             // Изменение состояния секции
             case 'changeState':
                 changeState()
@@ -190,7 +181,8 @@
                 required: 0,
                 set_color: 0,
                 color: '#000',
-                unit: null
+                unit: null,
+                entity: props.slug
             }
 
             isShow.value = {

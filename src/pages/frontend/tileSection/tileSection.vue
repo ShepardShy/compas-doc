@@ -1,15 +1,9 @@
 <template>
-    <AppTileSection 
-        :section="TileSectionProps.sections.default[0]"
-        :sections="sections"
-        :hiddenFields="hiddenFields"
-        @callAction="(data) => callAction(data)"
-    />
-
-    <AppTileSection 
-        :section="TileSectionProps.sections.default[1]"
-        :sections="sections"
-        :hiddenFields="hiddenFields"
+    <AppComponent 
+        :title="'Плашки'"
+        :component="AppTileSection"
+        :codeProps="codeProps"
+        :codeEmits="codeEmits"
         @callAction="(data) => callAction(data)"
     />
 </template>
@@ -19,25 +13,13 @@
     
     import { ref } from 'vue'
 
+    import AppComponent from '@/components/AppComponent/AppComponent.vue';
     import AppTileSection from '@/components/AppTileSection/AppTileSection.vue';
 
-    import TileSectionProps from "@/data/frontend/tileSection/codeProps.json";
-    // import TileSectionEmits from "@/data/frontend/tileSection/codeEmits.json";
+    import codeProps from "@/data/frontend/tileSection/codeProps.json";
+    import codeEmits from "@/data/frontend/tileSection/codeEmits.js";
 
     let hiddenFields = ref([])
-
-    const sections = ref([
-        {
-            id: TileSectionProps.sections.default[0].id,
-            label: TileSectionProps.sections.default[0].title,
-            value: TileSectionProps.sections.default[0].id
-        },
-        {
-            id: TileSectionProps.sections.default[1].id,
-            label: TileSectionProps.sections.default[1].title,
-            value: TileSectionProps.sections.default[1].id
-        }
-    ])
 
     const callAction = (data) => {
         // Изменение скрытых полей
@@ -51,11 +33,16 @@
             console.log('Изменение настроек поля', keys);
         }
 
+        // Создание поля
+        const createField = async (data) => {
+            console.log('Создание поля', data);
+        }
+
         // Удаление секции
         const deleteSection = (data) => {
-            let findedSection = TileSectionProps.sections.default[data]            
+            let findedSection = codeProps.sections.default[data]            
             hiddenFields.value = JSON.parse(JSON.stringify(findedSection.fields))
-            TileSectionProps.sections.default = TileSectionProps.sections.default.filter(section => section.id !== data)
+            codeProps.sections.default = codeProps.sections.default.filter(section => section.id !== data)
             console.log('Удаление секции', data);
         }
 
@@ -114,7 +101,12 @@
             case 'changeSectionTitle':
                 changeSectionTitle(data.value)
                 break;
-                
+
+            // Создание поля
+            case 'createField':
+                createField(data.value)
+                break;
+
             default:
                 break;
         }

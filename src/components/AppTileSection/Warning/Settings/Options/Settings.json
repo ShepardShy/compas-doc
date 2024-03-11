@@ -27,6 +27,10 @@
         {
             "value": "relation",
             "label": "Программное"
+        },
+        {
+            "value": "address",
+            "label": "Программное"
         }
     ],
     "roles": [
