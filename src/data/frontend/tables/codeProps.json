@@ -427,8 +427,59 @@
         "default": false,
         "type": "Boolean"
     },
+    "isHaveCategories": {
+        "default": true,
+        "type": "Boolean"
+    },
     "slug": {
         "default": "documentation",
         "type": "String"
+    },
+    "categories": {
+        "default": [
+            {
+                "id": 1,
+                "name": "Водитель34",
+                "deleted_at": null,
+                "choosed_at": null,
+                "user_id": 1,
+                "children": []
+            },
+            {
+                "id": 4,
+                "name": "Менеджер",
+                "deleted_at": null,
+                "choosed_at": null,
+                "user_id": 1,
+                "children": [
+                    {
+                        "id": 95,
+                        "name": "Общение с клиентом",
+                        "deleted_at": null,
+                        "choosed_at": null,
+                        "user_id": 1,
+                        "children": []
+                    },
+                    {
+                        "id": 97,
+                        "name": "Работа с CRM",
+                        "deleted_at": null,
+                        "choosed_at": null,
+                        "user_id": 1,
+                        "children": [
+                            {
+                                "id": 123,
+                                "name": "тест2",
+                                "deleted_at": null,
+                                "choosed_at": null,
+                                "user_id": 1,
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "type": "Array"
     }
 }

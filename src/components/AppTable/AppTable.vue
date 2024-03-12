@@ -1,57 +1,65 @@
 <template>
-    <AppSection 
-        ref="sectionRef" 
-        class="section__table table-template" 
-        :style="`--stickyTop: ${scrollPosition}px`" 
-        :class="props.table.loaderState == 'loading' ? 'table-template_loading' : props.table.loaderState == 'filtering' ? 'table-template_filtering' : ''"
-    >
-        <TableTop 
-            v-if="fields.length > 0"
-            :tableTitle="props.table.title"
-            @callAction="(data) => callAction(data)"
-        />
- 
-        <TableSocket 
-            v-show="socketRows.header.length > 0 || socketRows.body.length > 0"
-            :socketRows="socketRows"
+    <div class="table-container" :class="props.isHaveCategories ? 'table-container_categories' : ''">
+        <TableCategory 
+            v-if="props.isHaveCategories"
             @callAction="(data) => callAction(data)"
         />
 
-        <TableMobile 
-            v-if="isMobile"
-            :slug="props.slug"
-            :isTrash="props.isTrash"
-            @callAction="(data) => callAction(data)"
-        />
-        
-        <div v-else class="table-template__body section__scroll-area">
-            <table class="table" ref="tableRef" :class="[fields.length == 0 || bodyData.length == 0 ? 'table_empty' : '', props.isPermanentEdit ? 'table_permanent-edit' : '']">
-                <TableHeader 
-                    :isTrash="props.isTrash"
-                    @callAction="(data) => callAction(data)"
-                />
-                <TableBody 
-                    :slug="props.slug"
-                    :isTrash="props.isTrash"
-                    @callAction="(data) => callAction(data)"
-                />
-            </table>
-            <ScrollButtons />
-        </div>
+        <AppSection 
+            ref="sectionRef" 
+            class="section__table table-template" 
+            :style="`--stickyTop: ${scrollPosition}px`" 
+            :class="props.table.loaderState == 'loading' ? 'table-template_loading' : props.table.loaderState == 'filtering' ? 'table-template_filtering' : ''"
+        >
+            <TableTop 
+                v-if="fields.length > 0"
+                :tableTitle="props.table.title"
+                @callAction="(data) => callAction(data)"
+            />
 
-        <TableFooter 
-            @callAction="(data) => callAction(data)"
-        />
+            <TableSocket 
+                v-show="socketRows.header.length > 0 || socketRows.body.length > 0"
+                :socketRows="socketRows"
+                @callAction="(data) => callAction(data)"
+            />
 
-        <SectionActions 
-            :actionState="actionState"
-            @callAction="(data) => callAction(data)"
-        />
+            <TableMobile 
+                v-if="isMobile"
+                :slug="props.slug"
+                :isTrash="props.isTrash"
+                @callAction="(data) => callAction(data)"
+            />
+            
+            <div v-else class="table-template__body section__scroll-area">
+                <table class="table" ref="tableRef" :class="[fields.length == 0 || bodyData.length == 0 ? 'table_empty' : '', props.isPermanentEdit ? 'table_permanent-edit' : '']">
+                    <TableHeader 
+                        :isTrash="props.isTrash"
+                        @callAction="(data) => callAction(data)"
+                    />
+                    <TableBody 
+                        :slug="props.slug"
+                        :isTrash="props.isTrash"
+                        @callAction="(data) => callAction(data)"
+                    />
+                </table>
+                <ScrollButtons />
+            </div>
 
-        <TableWarning 
-            @callAction="(data) => callAction(data)"
-        />
-    </AppSection>
+            <TableFooter 
+                @callAction="(data) => callAction(data)"
+            />
+
+            <SectionActions 
+                :actionState="actionState"
+                @callAction="(data) => callAction(data)"
+            />
+
+            <TableWarning 
+                @callAction="(data) => callAction(data)"
+            />
+        </AppSection>
+    </div>
+
 </template>
 
 <script setup>
@@ -68,6 +76,7 @@
     import TableSocket from './Socket/Socket.vue'
     import TableMobile from './Mobile/Mobile.vue'
     import TableWarning from './Warning/Warning.vue';
+    import TableCategory from './Categories/Categories.vue'
     import ScrollButtons from './ScrollButtons/ScrollButtons.vue';
     import AppSection from '@/components/AppSection/AppSection.vue';
     import SectionActions from '@/components/AppSection/Actions/Actions.vue';
@@ -101,6 +110,8 @@
     })
 
     let skipChecking = ref(false)
+    let updatedCategory = ref(null)
+    let categories = ref([])
 
     let menu = ref({
         tabs: [
@@ -190,6 +201,14 @@
         isPermanentEdit: {
             default: false,
             type: Boolean
+        },
+        isHaveCategories: {
+            default: false,
+            type: Boolean
+        },
+        categories: {
+            default: [],
+            type: Array
         }
     })
 
@@ -209,7 +228,9 @@
     provide('actionState', actionState)
     provide('invalidRows', invalidRows)
     provide('backupValues', backupValues)
+    provide('categories', categories)
     provide('scrollPosition', scrollPosition)
+    provide('updatedCategory', updatedCategory)
     
     onMounted(async () => {
         isMobile.value = window.innerWidth <= 660
@@ -219,6 +240,7 @@
         fields.value = callAction({action: 'setPropsValues', value: props.table.tableKeys})
         bodyData.value = callAction({action: 'setPropsValues', value: props.table.tableData})
         socketRows.value = JSON.parse(JSON.stringify(props.table.socketRows))
+        categories.value = JSON.parse(JSON.stringify(props.categories))
     })
 
     // Проверка был ли уменьшен размер окна
@@ -518,6 +540,51 @@
             updatedRows.value = bodyData.value
         }
 
+        // Начало редактирования категории
+        const initUpdateCategory = (data) => {
+            isShow.value = {
+                state: true,
+                type: 'updateCategory'
+            }
+            updatedCategory.value = data
+        }
+
+        // Начало создания категории
+        const initCreateCategory = () => {
+            isShow.value = {
+                state: true,
+                type: 'createCategory'
+            }
+        }
+
+        // Начало создания подкатегории
+        const initCreateSubCategory = (data) => {
+            isShow.value = {
+                state: true,
+                type: 'createSubCategory'
+            }
+            updatedCategory.value = data
+        }
+
+        // Начало удаления категории
+        const initDeleteCategory = (data) => {
+            isShow.value = {
+                state: true,
+                type: 'deleteCategory'
+            }
+            updatedCategory.value = data
+        }
+
+        // Удаление категории
+        const deleteCategory = (data) => {
+            isShow.value = {
+                state: false,
+                type: null
+            }
+
+            emit('callAction', {action: 'deleteCategory', value: data})
+        }
+
         switch (data.action) {
             // Установка значений по умолчанию
             case 'setPropsValues':
@@ -578,6 +645,31 @@
                 removeRow(data.value)
                 break;
 
+            // Начало редактирования категории
+            case 'initUpdateCategory':
+                initUpdateCategory(data.value)
+                break;
+
+            // Начало создания категории
+            case 'initCreateCategory':
+                initCreateCategory(data.value)
+                break;
+
+            // Начало создания подкатегории
+            case 'initCreateSubCategory':
+                initCreateSubCategory(data.value)
+                break;
+            
+            // Начало удаления категории
+            case 'initDeleteCategory':
+                initDeleteCategory(data.value)
+                break;
+
+            // Удаление категории
+            case 'deleteCategory':
+                deleteCategory(data.value)
+                break;
+
             default:
                 emit('callAction', data)
                 break;
@@ -590,6 +682,12 @@
         if (props.isPermanentEdit) {
             backupValues.value = callAction({action: 'setPropsValues', value: props.table.tableData})
         }
+    }, {
+        deep: true
+    })
+
+    watch(() => props.categories, () => {
+        categories.value = JSON.parse(JSON.stringify(props.categories))
     }, {
         deep: true
     })

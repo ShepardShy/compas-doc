@@ -317,6 +317,8 @@
             action: 'getOptions',
             value: null
         })    
+    }, {
+        deep: true
     })
 
     watch(() => props.item.value, () => {

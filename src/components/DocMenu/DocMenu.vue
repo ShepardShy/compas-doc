@@ -53,6 +53,6 @@
     ])
 
     onMounted(() => {
-        emit('changeLink', Navigation.frontend[10])
+        emit('changeLink', Navigation.frontend[4])
     })
 </script>

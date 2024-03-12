@@ -23,6 +23,8 @@
             :isShowFileName="props.codeProps.isShowFileName != undefined ? props.codeProps.isShowFileName.default : null"
             :isOneFile="props.codeProps.isOneFile != undefined ? props.codeProps.isOneFile.default : null"
             :isCanCreate="props.codeProps.isCanCreate != undefined ? props.codeProps.isCanCreate.default : null"
+            :categories="props.codeProps.categories != undefined ? props.codeProps.categories.default : null"
+            :isHaveCategories="props.codeProps.isHaveCategories != undefined ? props.codeProps.isHaveCategories.default : null"
             :isHaveNullOption="props.codeProps.isHaveNullOption != undefined ? props.codeProps.isHaveNullOption.default : null"
             :isShowMap="props.codeProps.isShowMap != undefined ? props.codeProps.isShowMap.default : null"
             :isSelectSeveral="props.codeProps.isSelectSeveral != undefined ? props.codeProps.isSelectSeveral.default : null"
