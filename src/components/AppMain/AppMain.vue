@@ -15,7 +15,7 @@
 <script setup>
     import './AppMain.scss';
     
-    import AppH1 from '@/components/AppH1/AppH1.vue';
+    import AppH1 from '@/components/AppHeaders/H1/H1.vue';
 
     const props = defineProps({
         activeLink: {

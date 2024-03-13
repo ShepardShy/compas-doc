@@ -61,7 +61,7 @@
     import IconArrow from '@/components/AppIcons/Arrow/Arrow.vue'
     import IconGamburger from '@/components/AppIcons/Gamburger/Gamburger.vue'
 
-    import AppH2 from '@/components/AppH2/AppH2.vue'
+    import AppH2 from '@/components/AppHeaders/H2/H2.vue'
 
     import { ref, inject } from 'vue'
 

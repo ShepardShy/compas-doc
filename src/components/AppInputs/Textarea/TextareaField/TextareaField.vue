@@ -9,6 +9,7 @@
             :placeholder="props.item.placeholder"
             :id="`input_${props.item.id}`"
             @input="(event) => changeValue(event.target.value)"
+            @blur="(event) => emit('blur', event)"
         > </textarea>
 
         <pre class="textarea__mirror">{{ mirrorText }}</pre>

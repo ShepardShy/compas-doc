@@ -38,7 +38,7 @@
     
     import { onMounted } from 'vue';
 
-    import AppH2 from '@/components/AppH2/AppH2.vue';
+    import AppH2 from '@/components/AppHeaders/H2/H2.vue'
     import Navigation from './Navigation'
 
     const props = defineProps({
@@ -53,6 +53,6 @@
     ])
 
     onMounted(() => {
-        emit('changeLink', Navigation.frontend[4])
+        emit('changeLink', Navigation.frontend[10])
     })
 </script>

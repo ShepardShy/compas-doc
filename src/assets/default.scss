@@ -153,3 +153,42 @@ input, textarea {
 .Toastify__toast-body {
     overflow: hidden;
 }
+
+.h-editable {
+    * {
+        font-family: PT Sans;
+    }
+
+    .textarea {
+        textarea, .textarea__mirror {
+            padding: 0px;
+            border: none;
+            min-height: auto;
+        }
+
+        textarea {
+            background: transparent;
+            color:variables.$color-black;
+            line-height: normal; 
+        }
+
+        .textarea__mirror {
+            top: 0px;
+            opacity: 0;
+            line-height: normal;
+        }
+    }
+
+    .icon__edit {
+        display: inline;
+        cursor: pointer;
+
+        svg {
+            @include mixins.elemResolutionOptions(18px, 18px);
+
+            * {
+                fill: variables.$color-grey;
+            }
+        }
+    }
+}

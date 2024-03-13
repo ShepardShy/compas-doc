@@ -65,11 +65,12 @@ button {
     }
 
     &.button_red {
-        color: variables.$color-red;
+        background: variables.$color-red;;
+        color: variables.$color-white;
 
         svg {
             path {
-                fill: variables.$color-red
+                fill: variables.$color-white
             }
         }
     }

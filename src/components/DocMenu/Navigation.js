@@ -3,6 +3,18 @@ import {markRaw, defineAsyncComponent} from 'vue'
 export default {
     frontend: [
         {
+            id: 8,
+            name: 'Кнопки',
+            slug: 'buttons',
+            component: markRaw(defineAsyncComponent(() => import('@/pages/frontend/buttons/buttons.vue')))
+        },
+        {
+            id: 9,
+            name: 'Заголовки',
+            slug: 'headers',
+            component: markRaw(defineAsyncComponent(() => import('@/pages/frontend/headers/headers.vue')))
+        },
+        {
             id: 10,
             name: 'Инпут',
             slug: 'input',

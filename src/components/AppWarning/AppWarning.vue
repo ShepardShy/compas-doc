@@ -25,7 +25,7 @@
     
     import { ref, watch, onMounted, onUnmounted} from 'vue'
 
-    import AppH3 from '@/components/AppH3/AppH3.vue';
+    import AppH3 from '@/components/AppHeaders/H3/H3.vue'
     import IconDelete from '@/components/AppIcons/Delete/Delete.vue';
 
     const props = defineProps({

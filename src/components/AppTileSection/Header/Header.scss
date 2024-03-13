@@ -3,9 +3,9 @@
 
 .tile-section__header {
     position: relative;
-    padding: 10px 15px;
+    padding: 10px 15px 0px;
     border-bottom: 1px solid variables.$color-light-grey;
-    @include mixins.flexBlock($vertical: center, $horizontal: space-between, $gap: 15px);
+    @include mixins.flexBlock($vertical: flex-start, $horizontal: space-between, $gap: 15px);
 
     &:hover {
         .tile-section__title {
@@ -15,12 +15,20 @@
         }
     }
 
-    .form-item__input {
-        @include mixins.flexBlock($vertical: flex-start, $horizontal: flex-start, $gap: 10px);
-        
-        .form-item__title {
-            display: none;
+    .h-editable {
+        &.h-editable_h3 {
+            width: 100%;
+
+            textarea, .textarea__mirror {
+                font-weight: 600;
+                font-size: variables.$font-size-default;           
+            }
         }
+    }
+
+    h3 {
+        min-height: 25px;
+        font-size: variables.$font-size-default;           
     }
 
     .tile-section__title {
@@ -38,6 +46,8 @@
             cursor: pointer;
 
             svg {
+                @include mixins.elemResolutionOptions(13px, 13px);
+
                 * {
                     fill: variables.$color-blue-grey;
                 }
@@ -51,37 +61,6 @@
                 }
             }
         }
-
-        input {
-            padding: 0px;
-            min-height: auto;
-            height: auto;
-            border: none;
-            font-weight: 600;
-        }
-
-        .form-item__mirror {
-            display: none;
-        }
-
-        &.tile-section__title_edit {
-            max-width: 80%;
-            overflow: hidden;
-
-            .form-item__input {
-                white-space: nowrap;
-
-                input {
-                    width: calc(100% + 10px);
-                    position: absolute;
-                }
-            }
-
-            .form-item__mirror {
-                display: block;
-            }
-        }
-
     }
 
     .tile-section__header-actions {

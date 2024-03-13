@@ -26,7 +26,7 @@
     import './Backend.scss';
     
 
-    import AppH3 from '@/components/AppH3/AppH3.vue'
+    import AppH3 from '@/components/AppHeaders/H3/H3.vue'
     import componentAlternative from './componentAlternative/componentAlternative.vue';
     import ComponentDescription from '../ComponentDescription/ComponentDescription.vue';
 
