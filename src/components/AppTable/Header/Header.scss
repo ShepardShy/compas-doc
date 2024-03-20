@@ -35,7 +35,17 @@
             position: relative;
             z-index: 4;
         }
+    }
 
+    &:hover {
+        .table-item__border {
+            height: 500vh;
+        }
+    }
+}
+
+.table_resizing {
+    .table__header {
         .table-item__border {
             height: 500vh;
         }

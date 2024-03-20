@@ -14,6 +14,7 @@
                     item.read_only ? 'table__item_readonly' : '',
                     item.isUpdated ? 'table__item_updated' : ''
                 ]" 
+                @mousedown="() => hideAllDetails()"
                 @callAction="(data) => emit('callAction', data)"
                 @dragStart="(event) => dragColumn({action: 'dragStart', value: {event, key: item.key}})"
                 @dragEnd="() => dragColumn({action: 'dragEnd', value: null})"
@@ -106,6 +107,14 @@
         prevMouseCoords.value = dragX
     }
 
+    // Закрытие открытых меню
+    const hideAllDetails = () => {
+        let details = document.querySelectorAll('details[open]')
+        details.forEach(element => {
+            element.removeAttribute('open')
+        });
+    }
+
     // Перемещение колонки
     const dragColumn = (data) => {
         // Копирование таблицы
@@ -170,10 +179,7 @@
             }
 
             draggingItem.value = null
-            removeDragImage()
             updateFields()
-            tableRef.value.classList.remove('table_hidden')
-            tableCopy.value.remove()
             document.removeEventListener("dragover", onMouseMove);
             menu.value.saves.isShow = true
             tableRef.value.closest(".section__table").style.removeProperty("overflow")
@@ -181,6 +187,9 @@
             setTimeout(() => {
                 let cells = headerRef.value.querySelector('tr').children
                 resizeTable.setDefaultWidth(cells, fields.value)
+                tableCopy.value.remove()
+                tableRef.value.classList.remove('table_hidden')
+                removeDragImage()
             }, 10);
         }
 
@@ -205,9 +214,9 @@
                         } else {
                             let findedRow = [...backupRows][index]
                             if (findedRow != undefined) {
-                                if (item.offsetWidth >= 300) {
-                                    item.style.setProperty("--defaultWidth", "300px")
-                                }
+                                // if (item.offsetWidth >= 300) {
+                                //     item.style.setProperty("--defaultWidth", "300px")
+                                // }
                                 item.style.height = `${ findedRow.offsetHeight}px`
                                 item.classList.remove('sortable-ghost')
                             } else {
@@ -248,7 +257,7 @@
 
     // Отображение сохранения после ресайза колонки
     const updateTableHeader = (e) => {
-        if (tableRef.value.classList.contains('table_resizing')) {
+        if (tableRef.value && tableRef.value.classList.contains('table_resizing')) {
             menu.value.saves.isShow = true
             let findedIndex = fields.value.findIndex(p => p.key == mouseDown.value.closest('.table__item').getAttribute('data-key')) 
             fields.value[findedIndex].width = `${mouseDown.value.closest('.table__item').offsetWidth}px`

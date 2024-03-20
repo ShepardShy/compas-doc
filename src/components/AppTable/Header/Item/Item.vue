@@ -22,6 +22,7 @@
                 :isUseEnter="false"
                 :enabledAutocomplete="false"
                 :isReadOnly="false"
+                :disabled="actionState == 'saving'"
                 @changeValue="(data) => selectAllRows(data)"
             />
             
@@ -44,7 +45,7 @@
 
             <div 
                 class="table-item__drag-area"
-                :draggable="props.headerRef != null && !props.headerRef.parentNode.classList.contains('table_resizing')"
+                :draggable="props.headerRef != null && !props.headerRef.parentNode.classList.contains('table_resizing') && tableItemRef != null && !tableItemRef.classList.contains('table__item_sticky')"
                 @dragover.prevent
                 @dragenter.prevent
                 @dragstart="(event) => $emit('dragStart', event)"
@@ -103,7 +104,9 @@
     })
 
     const emit = defineEmits([
-        'callAction'
+        'callAction',
+        'dragStart',
+        'dragEnd'
     ])
 
     // Симуляция двойного клика

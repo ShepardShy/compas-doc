@@ -21,7 +21,7 @@
                 :isFiltered="false"
                 :isMultiple="false"
                 :isReadOnly="false"
-                :isHaveNullOption="true"
+                :isHaveNullOption="false"
                 @changeValue="(data) => sortTable(data)"
             />
             <PopupSave 
@@ -29,7 +29,7 @@
                 v-show="menu.saves.isShow"
                 @saveSettings="(role) => callAction({action: 'saveSettings', value: role})"
             />
-            <AppPopup class="table-top__item" :closeByClick="true">
+            <AppPopup class="table-top__item table-top__item_excel" :closeByClick="true">
                 <template #summary>
                     <IconDots />
                 </template>
@@ -47,15 +47,15 @@
                     <template v-if="menu.activeTab == null">
                         <PopupOption class="popup-option__sublink" v-for="tab in menu.tabs" @click="() => callAction({action: 'changeTab', value: tab})">
                             {{ tab.title }} 
-
+                            
                             <IconArrow />
                         </PopupOption>
                     </template>
                     <template v-else>
                         <PopupOption class="popup-option__sublink popup-option__sublink_back" @click="() => callAction({action: 'changeTab', value: null})">
-                            <IconArrow />
-                            
                             {{ menu.activeTab.title }}
+                            
+                            <IconArrow />
                         </PopupOption>
 
                         <template v-if="menu.activeTab.tab == 'order'">
@@ -70,7 +70,7 @@
                                 @start="(event) => callAction({action: 'dragStart', value: event})" 
                             >
                                 <template #item="{ element: option }">
-                                    <PopupOption class="popup-option__sublink" v-show="option.enabled">
+                                    <PopupOption class="popup-option__sublink" v-show="option.enabled" @dragStart="(event) => callAction({action: 'cloningDraggableComponent', event: event})">
                                         <IconDrag /> 
                                         {{ option.title }}
                                     </PopupOption>
@@ -102,7 +102,7 @@
 
 <script setup>
     import './Top.scss';
-    
+
     import { ref, inject, onMounted } from 'vue'
 
     import IconDots from '@/components/AppIcons/Dots/Dots.vue'
@@ -127,17 +127,16 @@
     const sortItem = inject('sortItem')
     const tableRef = inject('tableRef')
     
+    const emit = defineEmits([
+        'callAction'
+    ])
+
     const props = defineProps({
         tableTitle: {
             default: null,
             type: String
         }
     })
-
-
-    const emit = defineEmits([
-        'callAction'
-    ])
 
     onMounted(() => {
         setOptions()
@@ -173,6 +172,9 @@
         // Конец перетаскивания опции
         const dragEnd = (value) => {
             fields.value = value.to.__draggable_component__.modelValue
+            let row = tableRef.value.querySelector('tr');
+            let cols = row ? row.children : undefined;
+            resizeTable.setDefaultWidth(cols, fields.value)
             showSaves(true)
         }
 
@@ -195,10 +197,31 @@
 
         // Скачивание экселя
         const downloadExcel = () => {
+            let localFields = []
+
+            for (let field of fields.value.filter(item => item.enabled)) {
+                localFields.push(`fields[]=${field.key}`)
+            }
+
             emit('callAction', {
                 action: 'downloadExcel',
-                value: fields.value.filter(item => item.enabled)
+                value: localFields
             })
+        }
+
+        // Клонирование перетаскиваемого элемента c созданием родителя
+        const cloningDraggableComponent = (event) => {
+            if (document.getElementById('clone-elem') == null) {
+                let parentElem = document.createElement("div")
+                let elem = event.target.cloneNode(true)
+                parentElem.classList.add(event.target.parentNode.classList[0])
+                parentElem.appendChild(elem)
+                parentElem.id = "clone-elem";
+                parentElem.classList.add('clone-elem')
+                elem.style.width = `${ event.target.offsetWidth}px`
+                document.body.appendChild(parentElem);
+                event.dataTransfer.setDragImage(parentElem, 5, 8);
+            }
         }
 
         switch (data.action) {
@@ -236,6 +259,11 @@
             case 'downloadExcel':
                 downloadExcel()
                 break;
+                
+            // Клонирование перетаскиваемого элемента c созданием родителя
+            case 'cloningDraggableComponent':
+                cloningDraggableComponent(data.event)
+                break;
             default:
                 break;
         }
@@ -268,7 +296,7 @@
             })
         }
 
-        options.value = localOptions 
+        options.value = localOptions.filter(p => !['isChoose', 'actions', 'iconDelete', 'iconDrag'].includes(p.value))
     }
 
 </script>

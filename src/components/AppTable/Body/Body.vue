@@ -12,6 +12,8 @@
                 :row="row"
                 :slug="props.slug"
                 :isTrash="props.isTrash"
+                :actionType="props.actionType"
+                :isPermanentEdit="props.isPermanentEdit"
                 @callAction="(data) => emit('callAction', data)"
             />
         </template>
@@ -36,8 +38,20 @@
         slug: {
             default: '',
             type: String
+        },
+        isPermanentEdit: {
+            default: false,
+            type: Boolean
+        },
+        actionType: {
+            default: 'view',
+            type: String
         }
     })
+
+    const dragEnd = (data) => {
+        console.log(data);
+    }
 
     const emit = defineEmits([
         'callAction'

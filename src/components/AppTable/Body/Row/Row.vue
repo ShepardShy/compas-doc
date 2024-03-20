@@ -12,6 +12,9 @@
             :item="item"
             :slug="props.slug"
             :isTrash="isTrash"
+            :actionType="props.actionType"
+            :isPermanentEdit="props.isPermanentEdit"
+            @clickRow="() => clickRow(true)"
             @callAction="(data) => emit('callAction', data)"
         />
     </tr>
@@ -37,6 +40,14 @@
         slug: {
             default: '',
             type: String
+        },
+        isPermanentEdit: {
+            default: false,
+            type: Boolean
+        },
+        actionType: {
+            default: 'view',
+            type: String
         }
     })
 
@@ -46,10 +57,12 @@
 
     // Добавление классов приоритета при клике на строку
     const clickRow = (state) => {
-        if (state) {
-            rowRef.value.classList.add('table_row_clicked')
-        } else {
-            rowRef.value.classList.remove('table_row_clicked')
+        if (rowRef.value != null) {
+            if (state) {
+                rowRef.value.classList.add('table_row_clicked')
+            } else {
+                rowRef.value.classList.remove('table_row_clicked')
+            }
         }
     }
 </script>

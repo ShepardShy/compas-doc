@@ -14,7 +14,7 @@
                 @saveTitle="(data) => emit('callAction', { 
                     action: 'changeTitle', 
                     value: {
-                        id: section.value.id,
+                        id: section.id,
                         title: data
                     } 
                 })"

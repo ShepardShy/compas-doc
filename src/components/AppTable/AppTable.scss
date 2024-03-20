@@ -14,12 +14,9 @@
 }
 
 .table-template {
-    // Удалить этот стиль, тк он для доки
-    grid-column: 1/4;
-
     position: relative;
     width: 100%;
-    margin-bottom: 70px;
+    margin-bottom: 40px;
     
     &.table-template_loading, &.table-template_filtering {
         .table {
@@ -47,6 +44,12 @@
     min-height: 70vh;
     overflow: auto;
     overflow-y: hidden;
+
+    &.table-template__body_dinamyc {
+        display: grid;
+        grid-template-rows: max-content auto;
+    }
+
 }
 
 .table {

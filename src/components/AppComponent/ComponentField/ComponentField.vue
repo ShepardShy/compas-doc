@@ -15,6 +15,8 @@
             :isTrash="props.codeProps.isTrash != undefined ? props.codeProps.isTrash.default : null"
             :isMultiple="props.codeProps.isMultiple != undefined ? props.codeProps.isMultiple.default : null"
             :sections="props.codeProps.sections != undefined ? props.codeProps.sections.default : []"
+            :isPermanentEdit="props.codeProps.isPermanentEdit != undefined ? props.codeProps.isPermanentEdit.default : null"
+            :isDinamyc="props.codeProps.isDinamyc != undefined ? props.codeProps.isDinamyc.default : null"
             :section="props.codeProps.sections != undefined ? props.codeProps.sections.default[0] : null"
             :hiddenFields="props.codeProps.hiddenFields != undefined ? props.codeProps.hiddenFields.default : []"
             :isFiltered="props.codeProps.isFiltered != undefined ? props.codeProps.isFiltered.default : null"

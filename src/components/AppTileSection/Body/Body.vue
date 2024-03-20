@@ -302,8 +302,18 @@
             action: 'changeOrder',
             value: {
                 fields: fields,
-                id: event.item.__draggable_context.element.id,
-                section_id: Number(event.to.__draggable_component__.itemKey.replace('tile-section__', ''))
+                id: event.item._underlying_vm_.id,
+                section_id: Number(event.to.__draggable_component__.itemKey)
+            },
+            sections: {
+                from: {
+                    id: event.from.__draggable_component__.itemKey,
+                    fields: event.from.__draggable_component__.modelValue
+                },
+                to: {
+                    id: event.to.__draggable_component__.itemKey,
+                    fields: event.to.__draggable_component__.modelValue
+                }
             }
         })
     }

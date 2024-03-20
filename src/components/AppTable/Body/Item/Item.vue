@@ -30,18 +30,19 @@
                     v-else-if="props.item.type == 'relation'"
                     :item="{
                         focus: false,
-                        id: props.row.id,
+                        id: props.item.id,
                         placeholder: null,
                         key: props.item.key,
                         title: props.item.title,
                         value: props.row[props.item.key],
+                        related_table: props.item.related_table,
                         required: Boolean(props.item.required),
                         options: ['status', 'relation'].includes(props.item.type) ? props.item.options : null,
                         lockedOptions: props.item.choosed,
                     }"
                     :isCanCreate="true"
                     :isMultiple="Boolean(props.item.is_plural)"
-                    :isReadOnly="Boolean(props.item.read_only || !props.row.isEdit)"
+                    :isReadOnly="Boolean(props.item.read_only || (!props.row.isEdit && !props.isPermanentEdit))"
                     @click="() => callAction({action: 'openPopup', value: true})"
                     @changeValue="(data) => changeValue(props.row.id, data)"
                     @openLink="(data) => callAction({action: 'openLink', value: {id: data.id, slug: props.item.related_table}})"
@@ -50,7 +51,7 @@
                     @clickOutside="() => callAction({action: 'openPopup', value: false})"
                 />
                 <AppTextarea 
-                    v-else-if="['number', 'password', 'text'].includes(props.item.type)"
+                    v-else-if="['number', 'password', 'text'].includes(props.item.type) && (!isDinamyc || (isDinamyc && props.item.key != 'product_sum'))"
                     :item="{
                         focus: false,
                         id: props.row.id,
@@ -67,7 +68,7 @@
                     :isUseEnter="false"
                     :mask="props.item.mask"
                     :isLink="Boolean(props.item.is_external_link)"
-                    :isReadOnly="Boolean(props.item.read_only || !props.row.isEdit)"
+                    :isReadOnly="Boolean(props.item.read_only || (!props.row.isEdit && !props.isPermanentEdit))"
                     @changeValue="(data) => changeValue(props.row.id, data)"
                     @clickOutside="() => callAction({action: 'openPopup', value: false})"
                 />
@@ -78,11 +79,18 @@
                     :isLink="Boolean(props.item.is_external_link)"
                     :link="typeof props.row[props.item.key] == 'object' && props.row[props.item.key] != null ? props.row[props.item.key].external_link : null"
                 />
+                <FormValue 
+                    v-else-if="isDinamyc && props.item.key == 'product_sum'"
+                    :isHTML="true"
+                    :value="calcSum"
+                    :isLink="Boolean(props.item.is_external_link)"
+                    :link="typeof props.row[props.item.key] == 'object' && props.row[props.item.key] != null ? props.row[props.item.key].external_link : null"
+                />
                 <AppActions 
                     v-else-if="item.type == 'actions'"
                     :item="{
                         title: 'Действие',
-                        slug: props.row.isEdit ? 'edit' : 'view'
+                        slug: props.row.isEdit ? 'edit' : props.actionType
                     }"
                     :disabled="!props.row.isChoose && actionState == 'saving'"
                     @clickOutside="() => callAction({action: 'openPopup', value: false})"
@@ -101,7 +109,7 @@
                     }"
                     :isCanCreate="false"
                     :isHaveNullOption="false"
-                    :isReadOnly="Boolean(props.item.read_only || !props.row.isEdit)"
+                    :isReadOnly="Boolean(props.item.read_only || (!props.row.isEdit && !props.isPermanentEdit))"
                     @click="() => callAction({action: 'openPopup', value: true})"
                     @clickOutside="() => callAction({action: 'openPopup', value: false})"
                     @changeValue="(data) => changeValue(props.row.id, data)"
@@ -109,7 +117,7 @@
                 <AppSelect 
                     v-else-if="props.item.type == 'select_dropdown'"
                     :item="{
-                        id: props.row.id,
+                        id: props.item.id,
                         key: props.item.key,
                         value: props.row[props.item.key],
                         focus: false,
@@ -118,7 +126,7 @@
                         options: props.item.options,
                         lockedOptions: []
                     }"
-                    :isReadOnly="Boolean(props.item.read_only || !props.row.isEdit)"
+                    :isReadOnly="Boolean((props.item.read_only || !props.row.isEdit) || (isDymanic && props.item.read_only))"
                     :isHaveNullOption="true"
                     :isMultiple="Boolean(props.item.is_plural)"
                     :isFiltered="true"
@@ -142,12 +150,11 @@
                     :isOneFile="true"
                     @changeValue="(data) => changeValue(props.row.id, data)"
                 />
-
                 <AppDate 
                     v-else-if="props.item.type == 'date'"
                     :item="{
                         id: props.row.id,
-                        required: true,
+                        required: Boolean(props.item.required),
                         title: props.item.title,
                         placeholder: null,
                         value: props.row[props.item.key],
@@ -155,9 +162,10 @@
                         focus: false
                     }"
                     :isMultiple="Boolean(props.item.is_plural)"
-                    :isReadOnly="Boolean(props.item.read_only || !props.row.isEdit)"
+                    :isReadOnly="Boolean(props.item.read_only || (!props.row.isEdit && !props.isPermanentEdit))"
+                    @openDatepicker="() => $emit('clickRow', true)"
+                    @changeValue="(data) => changeValue(props.row.id, data)"
                 />
-
                 <IconDrag 
                     v-else-if="props.item.type == 'iconDrag'"
                 />
@@ -171,13 +179,12 @@
 
 <script setup>
     import './Item.scss';
+    import { inject, ref, computed } from 'vue'
     
-    import { inject, ref } from 'vue'
-
-    import IconDrag from '@/components/AppIcons/Drag/Drag.vue'
-    import IconDelete from '@/components/AppIcons/Delete/Delete.vue'
-    import AppActions from '../Actions/Actions.vue'
     import AppDate from '@/components/AppInputs/Date/Date.vue'
+    import IconDrag from '@/components/AppIcons/Drag/Drag.vue'
+    import IconDelete from '@/components/AppIcons/Delete/Delete.vue'    
+    import AppActions from '../Actions/Actions.vue'
     import AppFile from '@/components/AppInputs/File/File.vue'
     import AppStatus from '@/components/AppSelects/Status/Status.vue'
     import AppSelect from '@/components/AppSelects/Select/Select.vue'
@@ -188,8 +195,10 @@
 
     const itemRef = ref(null)
     const bodyData = inject('bodyData')
+    const isDinamyc = inject('isDinamyc')
     const actionState = inject('actionState')
     const backupValues = inject('backupValues')
+    const skipChecking = inject('skipChecking')
     
     let clickSetting = ref({
         id: -1,
@@ -231,8 +240,16 @@
             default: false,
             type: Boolean
         },
+        isPermanentEdit: {
+            default: false,
+            type: Boolean
+        },
         slug: {
             default: '',
+            type: String
+        },
+        actionType: {
+            default: 'view',
             type: String
         }
     })
@@ -252,11 +269,26 @@
             } else if (bodyData.value.filter(p => p.isChoose).length == 0) {
                 actionState.value = null
             }
+        } 
+        
+        if (props.isPermanentEdit) {
+            skipChecking.value = true
+
+            if (actionState.value == null) {
+                actionState.value = props.isTrash ? 'restoring' : 'saving'
+            }
         }
     }
 
+    const calcSum = computed(() => {
+        return props.row.product_count * props.row.product_price
+    })
+
     // Симуляция двойного клика
     const doubleClick = (event) => {
+        let regexp = /<\/?[a-z][\s\S]*>/i
+        if (!regexp.test(event.target.innerHTML)) return
+
         clickSetting.value.clicks++;
         if (clickSetting.value.clicks === 1) {
             clickSetting.value.timer = setTimeout( () => {
@@ -264,13 +296,14 @@
             }, clickSetting.value.delay);
         } else {
             let regexp = /<\/?[a-z][\s\S]*>/i
-            if (!props.row.isEdit && props.item.key != 'actions' && regexp.test(event.target.innerHTML)) {
+            if (!props.row.isEdit && actionState.value != 'saving' && props.item.key != 'actions' && regexp.test(event.target.innerHTML)) {
+
                 callAction({action: 'showModal', value: null})
             }
             window.getSelection().empty();
-            clearTimeout(clickSetting.value.timer);  
+            clearTimeout(clickSetting.value.timer);
             clickSetting.value.clicks = 0;
-        }   
+        }
         clickSetting.value.id = props.item.id
     }
 
@@ -295,6 +328,17 @@
             bodyData.value[findedIndex].isEdit = true
             bodyData.value[findedIndex].isChoose = true
             actionState.value = 'saving'
+        }
+
+        // Редактирование строки
+        const untieRow = (value) => {
+            let findedIndex = bodyData.value.findIndex(row => row.id == value.id)
+            backupValues.value.push(JSON.parse(JSON.stringify(bodyData.value[findedIndex])))
+            bodyData.value[findedIndex].isChoose = true
+            emit('callAction', {
+                action: 'untie',
+                value: true
+            })
         }
 
         // Открытие попапа
@@ -329,6 +373,11 @@
             // Открытие попапа
             case 'openPopup':
                 openPopup(data.value)
+                break;
+
+            // Отвязка строки
+            case 'untieRow':
+                untieRow(data.value)
                 break;
 
             default:

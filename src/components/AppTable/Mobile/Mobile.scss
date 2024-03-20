@@ -27,6 +27,20 @@
                 font-size: 12px;
             }
         }
+
+        .form-item__file {
+            .file__list {
+                width: 40px;
+            }
+        }
+
+        .form-item__action {
+            width: max-content;
+        }
+
+        .relation__actions {
+            display: none;
+        }
     }
     
 }
@@ -37,6 +51,22 @@
 
     &:nth-child(even) {
         background: #f7fbff;
+    }
+
+    .relation__actions {
+        display: none;
+    }
+
+    &.table__row_edit {
+        background: #d9e4f0;
+        
+        .relation__actions {
+            display: flex;
+        }
+    }
+
+    &.table__row_choosed {
+        background: #eef3f8;
     }
 }
 

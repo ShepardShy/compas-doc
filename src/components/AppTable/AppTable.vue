@@ -12,11 +12,10 @@
             :class="props.table.loaderState == 'loading' ? 'table-template_loading' : props.table.loaderState == 'filtering' ? 'table-template_filtering' : ''"
         >
             <TableTop 
-                v-if="fields.length > 0"
                 :tableTitle="props.table.title"
                 @callAction="(data) => callAction(data)"
             />
-
+    
             <TableSocket 
                 v-show="socketRows.header.length > 0 || socketRows.body.length > 0"
                 :socketRows="socketRows"
@@ -30,19 +29,24 @@
                 @callAction="(data) => callAction(data)"
             />
             
-            <div v-else class="table-template__body section__scroll-area">
-                <table class="table" ref="tableRef" :class="[fields.length == 0 || bodyData.length == 0 ? 'table_empty' : '', props.isPermanentEdit ? 'table_permanent-edit' : '']">
-                    <TableHeader 
+            <div v-else class="table-template__body section__scroll-area" :class="[fields.length == 0 || bodyData.length == 0 ? 'table-template__body_empty' : '', props.isDinamyc ? 'table-template__body_dinamyc' : '']">
+                <table class="table" ref="tableRef" :class="[props.isPermanentEdit ? 'table_permanent-edit' : '']">
+                    <TableHeader
+                        v-if="props.table.loaderState != 'loading'"
                         :isTrash="props.isTrash"
                         @callAction="(data) => callAction(data)"
                     />
                     <TableBody 
+                        :actionType="props.actionType"
                         :slug="props.slug"
                         :isTrash="props.isTrash"
+                        :isPermanentEdit="props.isPermanentEdit"
                         @callAction="(data) => callAction(data)"
                     />
                 </table>
                 <ScrollButtons />
+
+                <TableTotal v-if="props.isDinamyc"/>
             </div>
 
             <TableFooter 
@@ -59,18 +63,18 @@
             />
         </AppSection>
     </div>
-
 </template>
 
 <script setup>
     import './AppTable.scss';
     
-    import { ref, onMounted, provide, watch } from 'vue'
+    import { ref, onMounted, provide, watch, toRaw } from 'vue'
 
     import _ from 'lodash'
     import TableTop from './Top/Top.vue'
     import TableBody from './Body/Body.vue'
     import ValidateField from './Validate.js'
+    import TableTotal from './Total/Total.vue'
     import TableHeader from './Header/Header.vue'
     import TableFooter from './Footer/Footer.vue'
     import TableSocket from './Socket/Socket.vue'
@@ -98,7 +102,7 @@
     let updatedRows = ref([])
     let invalidRows = ref([])
     let selectAll = ref(false)
-    let scrollPosition = ref(0)
+    let scrollPosition = ref(300)
     let sortItem = ref({
         key: 'id',
         order: 'asc'
@@ -108,10 +112,6 @@
         state: false,
         type: null
     })
-
-    let skipChecking = ref(false)
-    let updatedCategory = ref(null)
-    let categories = ref([])
 
     let menu = ref({
         tabs: [
@@ -148,32 +148,14 @@
                     title: 'Применить для всех',
                 }
             ],
-            options: [
-                {
-                    id: 0,
-                    sort: 0,
-                    key: 'key_11',
-                    title: 'Role 3.1',
-                    enabled: true
-                },
-                {
-                    id: 1,
-                    sort: 0,
-                    key: 'key_21',
-                    title: 'Role 3.2',
-                    enabled: false
-                },
-                {
-                    id: 2,
-                    sort: 0,
-                    key: 'key_31',
-                    title: 'Role 3.3',
-                    enabled: false
-                }
-            ],
+            options: [],
         },
         activeTab: null
     })
+
+    let skipChecking = ref(false)
+    let updatedCategory = ref(null)
+    let categories = ref([])
 
     const props = defineProps({
         table: {
@@ -185,8 +167,8 @@
                     activePage: 0,
                     count: 25
                 },
-                title: null,
-                loaderState: null
+                loaderState: null,
+                title: null
             },
             type: Object
         },
@@ -194,13 +176,21 @@
             default: false,
             type: Boolean
         },
+        isPermanentEdit: {
+            default: false,
+            type: Boolean
+        },
+        isDinamyc: {
+            default: false,
+            type: Boolean
+        },
         slug: {
             default: 'undefined',
             type: String
         },
-        isPermanentEdit: {
-            default: false,
-            type: Boolean
+        actionType: {
+            default: 'view',
+            type: String
         },
         isHaveCategories: {
             default: false,
@@ -219,16 +209,19 @@
     provide('menu', menu)
     provide('fields', fields)
     provide('isShow', isShow)
+    provide('isShow', isShow)
     provide('sortItem', sortItem)
     provide('tableRef', tableRef)
     provide('bodyData', bodyData)
     provide('selectAll', selectAll)
     provide('sectionRef', sectionRef)
     provide('footerData', footerData)
+    provide('categories', categories)
     provide('actionState', actionState)
+    provide('isDinamyc', props.isDinamyc)
     provide('invalidRows', invalidRows)
     provide('backupValues', backupValues)
-    provide('categories', categories)
+    provide('skipChecking', skipChecking)
     provide('scrollPosition', scrollPosition)
     provide('updatedCategory', updatedCategory)
     
@@ -241,6 +234,13 @@
         bodyData.value = callAction({action: 'setPropsValues', value: props.table.tableData})
         socketRows.value = JSON.parse(JSON.stringify(props.table.socketRows))
         categories.value = JSON.parse(JSON.stringify(props.categories))
+        if (props.isPermanentEdit) {
+            bodyData.value.forEach(row => {
+                backupValues.value.push(JSON.parse(JSON.stringify(row)))
+                row.isEdit = true
+                row.isChoose = true
+            });
+        }
     })
 
     // Проверка был ли уменьшен размер окна
@@ -284,6 +284,13 @@
                 row.isChoose = false
             }
 
+            if (!props.isPermanentEdit) {
+                backupValues.value = []
+            } else {
+                backupValues.value = JSON.parse(JSON.stringify(bodyData.value))
+            }
+
+            invalidRows.value = []
             actionState.value = null
             selectAll.value = false
         }
@@ -304,7 +311,7 @@
                     }
                 }
 
-                return flag == false ? null : updatedRow
+                return flag == false ? null : JSON.parse(JSON.stringify(updatedRow))
             }
 
             // Валидация полей
@@ -351,24 +358,49 @@
 
             // Инициализация сохранения строк
             const initSave = () => {
+                // Установка значения по умолчанию
+                const transformUpdatedRows = (row) => {
+                    for (let key in row) {
+                        let findedField = fields.value.find(p => p.key == key)
+                        if (findedField != undefined) {
+                            if (findedField.type == 'relation') {
+                                let findedIndex = bodyData.value.findIndex(p => p.id == row.id)
+                                let transformedItem = [null, undefined].includes(row[key]) ? null : row[key].value.filter(p => p != null)
+                                bodyData.value[findedIndex][key].value = toRaw(transformedItem)
+                                console.log(transformedItem);
+                                row[key] = toRaw(transformedItem)
+                            } else if (findedField.type == 'select_dropdown') {
+                                row[key] = Array.isArray(row[key]) || [null, undefined].includes(row[key]) ? row[key] : [row[key]]
+                            }
+                        }
+                    }
+                }
+
                 if (invalidFlag) {
                     isShow.value = {
                         state: true,
                         type: 'validation'
                     }
                 } else {
-                    backupValues.value = []
                     actionState.value = null
                     selectAll.value = false
                     updatedRows.value = updatedRows.value.filter(p => p != null)
 
-                    for (let row of bodyData.value) {
-                        delete row.isEdit
-                        row.isChoose = false
+                    for (let row of updatedRows.value) {
+                        transformUpdatedRows(row)
                     }
 
+                    if (!props.isPermanentEdit) {
+                        for (let row of bodyData.value) {
+                            delete row.isEdit
+                            row.isChoose = false
+                        }
+                        backupValues.value = []
+                    } else {
+                        backupValues.value = JSON.parse(JSON.stringify(bodyData.value))
+                    }
 
-                    if (updatedRows.value.length == 0 && !skipChecking.value) {
+                    if (updatedRows.value.length == 0) {
                         return
                     } else {
                         emit('callAction', {
@@ -390,6 +422,8 @@
             if (!skipChecking.value) {
                 updatedRows.value = []
                 checkingRows()
+            } else {
+                updatedRows.value = JSON.parse(JSON.stringify(bodyData.value))
             }
 
             initSave()
@@ -398,8 +432,10 @@
 
         // Инициализация удаления строк таблицы
         const initDeleteRows = (value) => {
-            let findedIndex = bodyData.value.findIndex(row => row.id == value.id)
-            bodyData.value[findedIndex].isChoose = true
+            if (typeof value == 'object') {
+                let findedIndex = bodyData.value.findIndex(row => row.id == value.id)
+                bodyData.value[findedIndex].isChoose = true
+            }
 
             isShow.value = {
                 state: true,
@@ -425,15 +461,16 @@
             }
             actionState.value = null
 
-            if (type == 'delete') {
-                emit('callAction', {action: 'delete', value: data})
-            } else if (type == 'restore') {
-                emit('callAction', {action: 'restore', value: data})
-            }
+            emit('callAction', {action: props.actionType == 'module' ? 'untie' : type, value: data})
         }
 
         // Инициализация восстановления строк 
-        const initRestoreRows = () => {
+        const initRestoreRows = (value) => {
+            if (typeof value == 'object') {
+                let findedIndex = bodyData.value.findIndex(row => row.id == value.id)
+                bodyData.value[findedIndex].isChoose = true
+            }
+
             isShow.value = {
                 state: true,
                 type: 'restore'
@@ -447,7 +484,13 @@
                 // Обновление значения поля
                 const updateFieldValue = (row, updatedRow) => {
                     for (let key in updatedRow) {
-                        row[key] = updatedRow[key]
+                        let findedField = fields.value.find(column => column.key == key)
+
+                        if (findedField.type == 'relation') {
+                            row[key].value = updatedRow[key]
+                        } else {
+                            row[key] = updatedRow[key]
+                        }
                     }
                 }
 
@@ -514,6 +557,7 @@
 
             updateBody()
             updateHeader()
+            emit('callAction', {action: 'clearSocket', value: null})
         }
 
         // Получить данные таблицы
@@ -528,8 +572,8 @@
         const moveRows = (data) => {
             actionState.value = 'saving'
             skipChecking.value = true
-            updatedRows.value = data
-            bodyData.value = data
+            updatedRows.value =  JSON.parse(JSON.stringify(data))
+            bodyData.value = JSON.parse(JSON.stringify(data))
         }
         
         // Удаление строки по иконке
@@ -537,7 +581,7 @@
             actionState.value = 'saving'
             skipChecking.value = true
             bodyData.value = bodyData.value.filter(row => row.id != id)
-            updatedRows.value = bodyData.value
+            updatedRows.value = JSON.parse(JSON.stringify(bodyData.value))
         }
 
         // Начало редактирования категории
@@ -615,6 +659,11 @@
                 deleteRows('delete')
                 break;
 
+            // Отвязка строки
+            case 'untie':
+                deleteRows('untie')
+                break;
+
             // Восстановление строк
             case 'initRestore':
                 initRestoreRows(data.value)
@@ -686,6 +735,12 @@
         deep: true
     })
 
+    watch(() => props.table.tableKeys, () => {
+        fields.value = callAction({action: 'setPropsValues', value: props.table.tableKeys})
+    }, {
+        deep: true
+    })
+
     watch(() => props.categories, () => {
         categories.value = JSON.parse(JSON.stringify(props.categories))
     }, {
@@ -696,5 +751,9 @@
         socketRows.value = JSON.parse(JSON.stringify(props.table.socketRows))
     }, {
         deep: true
+    })
+
+    watch(() => props.table.sortItem, () => {
+        sortItem.value = JSON.parse(JSON.stringify(props.table.sortItem))
     })
 </script>

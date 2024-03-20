@@ -23,8 +23,8 @@
 	import { inject } from 'vue'
 
 	import AppSection from '@/components/AppSection/AppSection.vue';
-    import SectionHeader from "@/components/AppSection/Header/Header.vue";
 	import ButtonText from '@/components/AppButton/ButtonText/ButtonText.vue';
+    import SectionHeader from "@/components/AppSection/Header/Header.vue";
 
 	import CategoryItem from './Item/Item.vue'
 

@@ -40,7 +40,7 @@
                 v-show="settingsTabs.saves.isShow"
                 @saveSettings="(role) => callAction({action: 'saveSettings', value: role})"
             />
-            <AppPopup class="popup__settings" :closeByClick="false" @clickOutside="() => callAction({action: 'changeSettingsTab', value: null})">
+            <AppPopup class="popup_right popup__settings" :closeByClick="false" @clickOutside="() => callAction({action: 'changeSettingsTab', value: null})">
                 <template #summary>
                     <IconSettings />
                 </template>

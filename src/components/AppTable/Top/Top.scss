@@ -27,35 +27,23 @@
     .popup__content {
         left: auto;
         right: 0px;
-        width: 260px;
-
-        .popup-option {
-            .icon__draggable {
-                position: static;
-                @include mixins.setSVGColor(variables.$color-blue-grey);
-
-                &:hover {
-                    @include mixins.setSVGColor(variables.$color-active);
-                }
-            }
-
-            &.popup-option__sublink_back {
-                flex-direction: row;
-                justify-content: flex-start;
-            }
-        }
+        width: 200px;
     }
 
     &.table-top__select {
         display: none;
 
         .select__popup {
+            * {
+                @include mixins.userSelect($value: none);
+            }
+
             .popup__summary {
                 .form-item__substring {
-                    top: 4px;
+                    top: 3px;
 
                     &::after {
-                        content: url('/public/icons/arrowBlue.svg');
+                        content: url('/icons/arrowBlue.svg');
                         transform: rotate(0deg);
                     }
                 }
@@ -81,6 +69,8 @@
         &.table-top__select_up {
             .select__popup {
                 .form-item__substring {
+                    top: 6px;
+                    
                     &::after {
                         transform: rotate(180deg);
                     }

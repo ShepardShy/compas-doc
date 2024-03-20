@@ -37,8 +37,12 @@
                 .table-item__content {
                     .form-item__relation {
                         .relation__item {
-                            &.relation__item_empty {
+                            &.relation__item_empty:not(.relation__item_hidden) {
                                 display: block;
+
+                                .popup {
+                                    pointer-events: auto;
+                                }
                             }
                         }
         
@@ -62,9 +66,14 @@
         &.table_row_clicked {
             z-index: 30;
             position: relative;
+            
+            .table__item {
+                overflow: visible;
+            }
         }
     }
 }
+
 
 .table {
     &.table_permanent-edit {

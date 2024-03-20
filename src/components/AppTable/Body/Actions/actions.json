@@ -29,6 +29,36 @@
             "children": []
         }
     ],
+    "module": [
+        {
+            "id": 0,
+            "title": "Открыть",
+            "class": "",
+            "action": "showModal",
+            "children": []
+        },
+        {
+            "id": 1,
+            "title": "Редактировать",
+            "class": "",
+            "action": "edit",
+            "children": []
+        },
+        {
+            "id": 3,
+            "title": "Скопировать",
+            "class": "",
+            "action": "copyRow",
+            "children": []
+        },
+        {
+            "id": 2,
+            "title": "Отвязать",
+            "class": "",
+            "action": "untieRow",
+            "children": []
+        }
+    ],
     "restore": [
         {
             "id": 0,
@@ -42,7 +72,7 @@
             "id": 1,
             "title": "Восстановить",
             "class": "",
-            "action": "restore",
+            "action": "initRestore",
             "children": []
         }
     ],

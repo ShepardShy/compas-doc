@@ -147,6 +147,22 @@
                         @changeValue="(data) => changeValue(row.id, data)"
                     />
 
+                    <AppDate 
+                        v-else-if="item.type == 'date'"
+                        :item="{
+                            id: row.id,
+                            required: true,
+                            title: item.title,
+                            placeholder: null,
+                            value: row[item.key],
+                            key: item.key,
+                            focus: false
+                        }"
+                        :isMultiple="Boolean(item.is_plural)"
+                        :isReadOnly="Boolean(item.read_only || !row.isEdit)"
+                        @changeValue="(data) => changeValue(row.id, data)"
+                    />
+
                     <div v-else>
                         {{ item.type }}
                     </div>
@@ -161,6 +177,7 @@
 
     import { inject, ref, onMounted, onUnmounted } from 'vue'
     
+    import AppDate from '@/components/AppInputs/Date/Date.vue'
     import AppFile from '@/components/AppInputs/File/File.vue'
     import AppLoader from '@/components/AppLoader/AppLoader.vue';
     import FormItem from '@/components/AppForm/FormItem/FormItem.vue';
@@ -218,19 +235,23 @@
 
     // Симуляция двойного клика
     const doubleClick = (event, row, item) => {
+        let regexp = /<\/?[a-z][\s\S]*>/i
+        if (!regexp.test(event.target.innerHTML)) return
+
         clickSetting.value.clicks++;
         if (clickSetting.value.clicks === 1) {
             clickSetting.value.timer = setTimeout( () => {
             clickSetting.value.clicks = 0
             }, clickSetting.value.delay);
         } else {
-            if (!row.isEdit && item.key != 'actions') {
+            let regexp = /<\/?[a-z][\s\S]*>/i
+            if (!row.isEdit && actionState.value != 'saving' && item.key != 'actions' && regexp.test(event.target.innerHTML)) {
                 callAction({action: 'showModal', value: row.id})
             }
             window.getSelection().empty();
-            clearTimeout(clickSetting.value.timer);  
+            clearTimeout(clickSetting.value.timer);
             clickSetting.value.clicks = 0;
-        }   
+        }
         clickSetting.value.id = item.id
     }
 

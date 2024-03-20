@@ -120,7 +120,7 @@
 
     const setClasses = computed(() => {
         return [
-            localImages.value.length === 1 && props.isReadOnly ? 'form-item__value_empty' : '',
+            localImages.value.length == 0 && props.isReadOnly ? 'form-item__value_empty' : '',
             props.isOneFile ? 'file-container_one-file' : ''
         ]
     })

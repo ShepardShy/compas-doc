@@ -111,7 +111,7 @@
     
     // Сохранение настроек
     const saveSettings = () => {
-        if (isShow.value.type == 'create' || isShow.value.type == 'createSubCategory') {
+        if (isShow.value.type == 'createCategory' || isShow.value.type == 'createSubCategory') {
             emit('callAction', {
                 action: 'createCategory',
                 value: category.value
@@ -122,10 +122,15 @@
                 value: category.value
             })
         }
+
+        isShow.value = {
+            state: false,
+            type: null
+        }
     }
 
     onMounted(() => {
-        getCategories(categories)
+        getCategories(categories.value)
 
         if (isShow.value.type == 'updateCategory' || isShow.value.type == 'createSubCategory') {
             let findedParentCategory = localCategories.value.find(p => p.value == updatedCategory.value.parent_id)

@@ -114,10 +114,10 @@
     // Открыть попап
     const openPopup = (state) => {
         if (state) {
-            popupRef.value.popupRef.closest('.table__item').classList.add('table__item_clicked')
+            popupRef.value != null ? popupRef.value.popupRef.closest('.table__item').classList.add('table__item_clicked') : ''
         } else {
             menu.value.activeTab = null
-            popupRef.value.popupRef.closest('.table__item').classList.remove('table__item_clicked')
+            popupRef.value != null ? popupRef.value.popupRef.closest('.table__item').classList.remove('table__item_clicked') : ''
         }
     }
 </script>

@@ -38,7 +38,7 @@
     width: 100%;
     display: none;
     position: absolute;
-    height: max-content;
+    height: auto;
     place-items: center;
     @include mixins.elemPositionOptions(calc(var(--stickyTop) + 50px), 0px);
 
@@ -61,4 +61,15 @@
             top: calc(var(--stickyTop) + 40px);
         }
     }
+}
+
+.table__empty-block {
+    left: 0px;
+    top: 0px;
+    white-space: nowrap;
+    height: 60vh;
+    place-items: center;
+    color:variables.$color-blue-grey;
+    position: sticky;
+    display: none;
 }

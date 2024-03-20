@@ -59,4 +59,10 @@
 
 .table-categories__popup {
 	margin-right: 15px;
+
+	&.popup_up {
+		.popup__content {
+			bottom: 20px;
+		}
+	}
 }

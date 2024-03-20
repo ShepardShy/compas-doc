@@ -13,13 +13,17 @@
             @mouseleave="() => mouseHover = false"                
         ></div>
     </div>
+
+    <div class="table__empty-block">
+        Нет данных
+    </div>
 </template>
 
 <script setup>
     import './ScrollButtons.scss';
     
     import _ from 'lodash'
-    import { ref, onMounted, inject, onUnmounted } from 'vue'
+    import { ref, onMounted, inject, onUnmounted, watch } from 'vue'
 
     import AppLoader from '@/components/AppLoader/AppLoader.vue';
 
@@ -29,6 +33,7 @@
     const buttonScrollLeftRef = ref(null)
     const buttonScrollRightRef = ref(null)
 
+    const fields = inject('fields')
     const tableRef = inject('tableRef')
     const sectionRef = inject('sectionRef')
     const scrollPosition = inject('scrollPosition')
@@ -36,11 +41,6 @@
     onMounted(async () => {
         window.addEventListener('scroll', throt_funScroll)
         tableRef.value.parentNode.addEventListener('scroll', scrollXThrottling)
-        
-        setTimeout(() => {
-            actionScroll({action: 'setButtonsVisible', value: tableRef.value.parentNode})
-            scrollPosition.value = actionScroll({action: 'setPosition', value: null})
-        }, 100);
     })
     
     onUnmounted(() => {
@@ -155,4 +155,11 @@
     const scrollXThrottling = _.throttle(() => {
         actionScroll({action: 'setButtonsVisible', value: tableRef.value.parentNode})
     }, 20)
+
+    watch(() => fields.value, () => {
+        setTimeout(() => {
+            actionScroll({action: 'setButtonsVisible', value: tableRef.value.parentNode})
+            scrollPosition.value = actionScroll({action: 'setPosition', value: null})
+        }, 1000);
+    })
 </script>

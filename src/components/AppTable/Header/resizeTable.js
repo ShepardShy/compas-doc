@@ -40,6 +40,7 @@ export default {
                 info.pageX = e.pageX;
 
                 table.classList.add('table_resizing')
+                document.body.classList.add('body__unselected')
                 let padding = paddingDiff(info.curCol);
                 info.curCol.querySelector('.table-item__border').classList.add('table-item__border_changing')
                 info.curColWidth = info.curCol.offsetWidth - padding;
@@ -89,6 +90,7 @@ export default {
 
                         setTimeout(() => {
                             table.classList.remove('table_resizing')
+                            document.body.classList.remove('body__unselected')
                         }, 10);
                     }
                 }
@@ -101,6 +103,9 @@ export default {
     
         let tableHeader = table.querySelector('.table__header')
         let sectionBody = table.parentNode
+
+        if ([null, undefined].includes(tableHeader)) return
+
         let row = tableHeader.querySelector('tr');
         let cols = row ? row.children : undefined;
         if (!cols) return;
@@ -130,6 +135,8 @@ export default {
         let rows = table.querySelectorAll('.table__row')
         let fixedFields = []
         let fieldPos = null
+
+        if (rows.length == 0) return
 
         let scrolledArea = table.parentNode.scrollLeft
         fixedFields = rows[0].querySelectorAll('.table__item_fixed:not(.table__item_hidden)')

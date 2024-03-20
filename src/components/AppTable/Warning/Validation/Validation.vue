@@ -25,6 +25,7 @@
                             is_link: item.is_link,
                             is_plural: item.is_plural,
                             hiddenOptions: item.choosed,
+                            required: Boolean(item.required),
                             related_table: item.related_table,
                             is_external_link: item.is_external_link,
                             options: ['status', 'relation'].includes(item.type) ? item.options : null,
@@ -51,6 +52,7 @@
                             hiddenOptions: item.choosed,
                             related_table: item.related_table,
                             is_external_link: item.is_external_link,
+                            required: Boolean(item.required),
                             options: ['status', 'relation'].includes(item.type) ? item.options : null,
                             external_link: activeRow[item.key].value != undefined ? activeRow[item.key].value.external_link : null,
                         }"
@@ -76,6 +78,7 @@
                                 related_table: item.related_table,
                                 is_external_link: false,
                                 options: item.options,
+                                required: Boolean(item.required),
                                 external_link: null,
                             }"
                             :isCanCreate="false"
@@ -104,6 +107,39 @@
                         :isFiltered="true"
                         @changeValue="(data) => changeValue(activeRow.id, data)"
                     />
+                    <AppDate 
+                        v-else-if="item.type == 'date'"
+                        :item="{
+                            id: activeRow.id,
+                            required: Boolean(item.required),
+                            title: item.title,
+                            placeholder: null,
+                            value: [null, undefined].includes(activeRow[item.key].value) ? null : String(activeRow[item.key].value),
+                            key: item.key,
+                            focus: false
+                        }"
+                        :isMultiple="Boolean(item.is_plural)"
+                        :isReadOnly="Boolean(item.read_only || !activeRow.isEdit)"
+                        @changeValue="(data) => changeValue(activeRow.id, data)"
+                    />
+
+                    <AppFile 
+                        v-else-if="item.type == 'file'"
+                        :item="{
+                            id: activeRow.id,
+                            title: item.title,
+                            key: item.key,
+                            required: Boolean(item.required),
+                            buttonName: null,
+                            value: [null, undefined].includes(activeRow[item.key].value) ? null : activeRow[item.key].value
+                        }"
+                        :isReadOnly="false"
+                        :isShowFileName="false"
+                        :isMultiple="true"
+                        :isOneFile="false"
+                        @changeValue="(data) => changeValue(activeRow.id, data)"
+                    />
+
                     <div class="warning-list__field-error">
                         {{ activeRow[item.key].error }}
                     </div>
@@ -139,6 +175,8 @@
     import AppButton from '@/components/AppButton/AppButton.vue';
     import AppWarning from '@/components/AppWarning/AppWarning.vue';
 
+    import AppDate from '@/components/AppInputs/Date/Date.vue'
+    import AppFile from '@/components/AppInputs/File/File.vue'
     import AppStatus from '@/components/AppSelects/Status/Status.vue'
     import AppSelect from '@/components/AppSelects/Select/Select.vue'
     import AppTextarea from "@/components/AppInputs/Textarea/Textarea.vue"
@@ -179,6 +217,7 @@
         activeRow.value = invalidRows.value[page]
     }
 
+    
     watch(() => invalidRows.value, () => {
         activePage.value = 0
         activeRow.value = invalidRows.value[0]
