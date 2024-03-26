@@ -50,6 +50,7 @@ body {
     
     &.body_uncscroll {
         overflow: hidden;
+        max-height: 100vh;
     }
 }
 
