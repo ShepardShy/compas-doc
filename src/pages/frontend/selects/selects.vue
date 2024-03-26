@@ -1,5 +1,5 @@
 <template>
-    <AppComponent 
+    <!-- <AppComponent 
         :title="'Статус'"
         :component="AppStatus"
         :codeProps="StatusProps"
@@ -13,7 +13,7 @@
         :codeProps="SelectProps"
         :codeEmits="SelectEmits"
         @changeValue="(data) => changeValue(data)"
-    /> 
+    />  -->
 
     <AppComponent 
         :title="'Ответственный'"

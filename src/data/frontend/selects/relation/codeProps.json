@@ -4,7 +4,7 @@
             "id": 0,
             "title": "Заголовок",
             "value": {
-                "value": [null],
+                "value": [1],
                 "localOptions": [{
                     "label": {
                         "id": 1,
@@ -32,6 +32,7 @@
                     "value": 1
                 }
             ],
+            "anotherTitle": null,
             "lockedOptions": []
         },
         "type": "Object"
@@ -41,6 +42,10 @@
         "type": "Boolean"
     },
     "isCanCreate": {
+        "default": true,
+        "type": "Boolean"
+    },
+    "isAnotherTitle": {
         "default": true,
         "type": "Boolean"
     },

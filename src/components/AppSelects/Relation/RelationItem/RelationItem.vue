@@ -6,6 +6,7 @@
         :isReadOnly="props.isReadOnly"
         :isCanCreate="props.isCanCreate" 
         :isShowId="true"
+        :anotherTitle="props.item.anotherTitle"
         :isLink="![null, undefined].includes(activeOption.id)"
         :class="[null, undefined].includes(activeOption.id) ? 'relation__item_empty' : ''"
         @clickOutside="() => emit('clickOutside', true)"
@@ -79,6 +80,10 @@
         isReadOnly: {
             default: false,
             type: Boolean
+        },
+        isAnotherTitle: {
+            default: false,
+            type: Boolean
         }
     })
 
@@ -140,6 +145,10 @@
             let findedOptions = backupOptions.value.filter(option => option.label.text.toLowerCase().includes(value.value.toLowerCase())) 
             localItem.value.options = findedOptions
             console.log('Поиск опций', findedOptions);
+            
+            if (props.isAnotherTitle) {
+                emit('changeAnotherTitle', {key: props.item.key, value: value.value})
+            }
         }
 
         // Открытие ссылки

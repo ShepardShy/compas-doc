@@ -7,9 +7,10 @@
         handle=".icon__draggable"
         @end="(event) => emit('callAction', {action: 'moveRows', value: event.to.__draggable_component__.modelValue})" 
     >
-        <template #item="{ element: row }">
+        <template #item="{ element: row, index }">
             <TableRow 
                 :row="row"
+                :rowId="index + 1"
                 :slug="props.slug"
                 :isTrash="props.isTrash"
                 :actionType="props.actionType"

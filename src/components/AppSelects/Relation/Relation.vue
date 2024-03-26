@@ -21,11 +21,13 @@
                     key: props.item.key,
                     options: localOptions,
                     lockedOptions: lockedOptions,
+                    anotherTitle: props.item.anotherTitle,
                     related_table: props.item.related_table
                 }"
                 :fieldId="props.item.id"
                 :isReadOnly="props.isReadOnly"
                 :isCanCreate="props.isCanCreate"
+                :isAnotherTitle="props.isAnotherTitle"
                 @openLink="(item) => emit('openLink', item)"
                 @callAction="(data) => callAction(data, index)"
                 @clickOutside="() => emit('clickOutside', true)"
@@ -73,7 +75,8 @@
                 focus: false,
                 key: null,
                 options: [],
-                lockedOptions: []
+                lockedOptions: [],
+                anotherTitle: null
             },
             type: Object
         },
@@ -87,6 +90,10 @@
         },
         isMultiple: {
             default: true,
+            type: Boolean
+        },
+        isAnotherTitle: {
+            default: false,
             type: Boolean
         },
         loaderStatus: {

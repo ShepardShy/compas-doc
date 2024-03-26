@@ -184,6 +184,10 @@
             default: false,
             type: Boolean
         },
+        isNumeric: {
+            default: false,
+            type: Boolean
+        },
         slug: {
             default: 'undefined',
             type: String
@@ -218,6 +222,7 @@
     provide('footerData', footerData)
     provide('categories', categories)
     provide('actionState', actionState)
+    provide('isNumeric', props.isNumeric)
     provide('isDinamyc', props.isDinamyc)
     provide('invalidRows', invalidRows)
     provide('backupValues', backupValues)

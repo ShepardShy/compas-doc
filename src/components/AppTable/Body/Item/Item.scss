@@ -67,6 +67,12 @@
         @include mixins.flexBlock($vertical: center, $horizontal: space-between, $gap: 5px);
     }
 
+    .table-item__icon {
+        gap: 5px;
+        display: flex;
+        align-items: center;
+    }
+
     .table-item__title {
         gap: 5px;
         display: flex;

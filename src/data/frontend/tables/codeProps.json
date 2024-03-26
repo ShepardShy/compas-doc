@@ -551,6 +551,10 @@
         "default": false,
         "type": "Boolean"
     },
+    "isNumeric": {
+        "default": true,
+        "type": "Boolean"
+    },
     "slug": {
         "default": "documentation",
         "type": "String"

@@ -1,23 +1,23 @@
 <template>
     <FormItem
-        class="form-item__autocomplete autocomplete" 
+        class="form-item__autocomplete autocomplete"
         :required="props.item.required"
     >
         <FormLabel
             v-show="props.item.title != null && props.item.title != ''"
             :title="props.item.title"
-        />    
+        />
 
-        <AppPopup 
-            ref="popupRef" 
-            class="autocomplete__popup" 
-            :closeByClick="false" 
+        <AppPopup
+            ref="popupRef"
+            class="autocomplete__popup"
+            :isHaveParent="true"
+            :closeByClick="false"
             :isReadOnly="props.isReadOnly"
-            :isHaveParent="false"
             @clickOutside="() => emit('clickOutside', true)"
             @click="(event) => preventClick(event)"
         >
-            <template #summary> 
+            <template #summary>
                 <slot name="icon"></slot>
                 <AppInput
                     :item="{
@@ -27,7 +27,7 @@
                         focus: false,
                         key: props.item.key,
                         placeholder: null,
-                        value: props.isReadOnly ? activeOption == null ? null : activeOption.text : search,
+                        value: props.isReadOnly ? (activeOption.id == null && props.item.type !== 'address') ? null : activeOption.text : search,
                         substring: props.isReadOnly ? null : activeOption.id == null ? ' ' : `ID: ${activeOption.id}`
                     }"
                     :mask="null"
@@ -37,8 +37,9 @@
                     :enabledAutocomplete="false"
                     @openLink="(item) => emit('openLink', item)"
                     @changeValue="(data) => callAction({action: 'searchOptions', value: data.value})"
+                    @mousedown="(event) => props.isReadOnly ? null : event.target.classList.contains('popup_prevent') ? event.preventDefault() : null"
                     @keydown.space="(event) => {event.preventDefault(); callAction({action: 'searchOptions', value: event.target.value + ' '})}"
-                > 
+                >
                     <slot name="link"></slot>
                     <div class="autocomplete__active-option" v-show="!props.isReadOnly && ([null, undefined].includes(search) || search == '')">
                         {{ activeOption.text }}
@@ -49,10 +50,10 @@
                 <PopupOption @click="() => callAction({action: 'changeValue', value: null})">
                     Не выбрано
                 </PopupOption>
-                <PopupOption 
-                    class="popup-option__root" 
-                    v-for="option in options" 
-                    :class="option.value == activeOption.id ? 'popup__option_active' : '', ![null, undefined].includes(props.item.lockedOptions) && props.item.lockedOptions.includes(option.value) ? 'popup__option_disabled' : ''" 
+                <PopupOption
+                    class="popup-option__root"
+                    v-for="option in options"
+                    :class="option.value == activeOption.id ? 'popup__option_active' : '', ![null, undefined].includes(props.item.lockedOptions) && props.item.lockedOptions.includes(option.value) ? 'popup__option_disabled' : ''"
                     @click="() => callAction({action: 'changeValue', value: option.value})"
                 >
                     <div class="popup-option__text">
@@ -73,7 +74,7 @@
 
 <script setup>
     import './Input.scss';
-    
+
     import { ref, onMounted, watch } from 'vue'
 
     import _ from 'lodash'
@@ -125,6 +126,10 @@
         isShowId: {
             default: false,
             type: Boolean
+        },
+        anotherTitle: {
+            default: null,
+            type: String
         }
     })
 
@@ -142,7 +147,9 @@
             event.preventDefault()
             popupRef.value.popupRef.removeAttribute('open')
         } else {
-            popupRef.value.popupRef.setAttribute('open', true)
+            if (event.target.closest('.form-item__substring') == null) {
+                popupRef.value.popupRef.setAttribute('open', true)
+            }
         } 
     }
 
@@ -154,7 +161,7 @@
             const isEmpty = (obj) => {
                 for (const prop in obj) {
                     if (Object.hasOwn(obj, prop)) {
-                    return false;
+                        return false;
                     }
                 }
                 return true;
@@ -178,9 +185,10 @@
             search.value = ''
             let findedOption = options.value == null ? null : options.value.find(option => _.isEqual(option.value, value))
             if ([null, undefined].includes(findedOption)) {
-                activeOption.value = nullOption 
+                activeOption.value = nullOption
             } else {
                 activeOption.value = findedOption.label
+                search.value = findedOption.label.text
             }
         }
 
@@ -192,18 +200,17 @@
 
         // Изменить значение поля
         const changeValue = (value) => {
-            if (value == null || [null, undefined].includes(props.item.lockedOptions) || (![null, undefined].includes(props.item.lockedOptions) && !props.item.lockedOptions.includes(value))) {
+            if (value == null || (![null, undefined].includes(props.item.lockedOptions) && !props.item.lockedOptions.includes(value) || props.item.type == 'address')) {
                 search.value = null
                 options.value = backupOptions.value
                 setActiveOption(value)
-                PopupScripts.hideDetails(popupRef.value.popupRef)
                 emit('changeValue', {
                     key: props.item.key,
                     value: value
                 })
 
                 setTimeout(() => {
-                    popupRef.value.popupRef.removeAttribute('open')
+                    PopupScripts.hideDetails(popupRef.value.popupRef)
                 }, 10);
             }
         }
@@ -230,7 +237,7 @@
                 break;
 
             // Получение опций
-            case 'getOptions': 
+            case 'getOptions':
                 getOptions()
                 break;
             default:
@@ -248,13 +255,14 @@
             action: 'setActiveOption',
             value: props.item.value
         })
+        search.value = props.anotherTitle
     })
 
     watch(() => props.item.options, () => {
         callAction({
             action: 'getOptions',
             value: null
-        })    
+        })
     })
 
     watch(() => props.item.value, () => {

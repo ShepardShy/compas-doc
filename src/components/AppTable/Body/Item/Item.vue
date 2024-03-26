@@ -166,9 +166,18 @@
                     @openDatepicker="() => $emit('clickRow', true)"
                     @changeValue="(data) => changeValue(props.row.id, data)"
                 />
-                <IconDrag 
-                    v-else-if="props.item.type == 'iconDrag'"
-                />
+
+                <div class="table-item__icon" v-else-if="props.item.type == 'iconDrag'">
+                    <IconDrag />
+                    <FormValue 
+                        v-show="isNumeric"
+                        :isHTML="false"
+                        :value="props.rowId"
+                        :isLink="false"
+                        :link="null"
+                    />
+                </div>
+
                 <IconDelete
                     v-else-if="props.item.type == 'iconDelete'"
                     @click="() => callAction({action: 'removeRow', value: props.row.id})"
@@ -195,6 +204,7 @@
 
     const itemRef = ref(null)
     const bodyData = inject('bodyData')
+    const isNumeric = inject('isNumeric')
     const isDinamyc = inject('isDinamyc')
     const actionState = inject('actionState')
     const backupValues = inject('backupValues')
@@ -251,6 +261,10 @@
         actionType: {
             default: 'view',
             type: String
+        },
+        rowId: {
+            default: 0,
+            type: Number
         }
     })
 

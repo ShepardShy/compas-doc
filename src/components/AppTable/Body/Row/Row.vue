@@ -10,6 +10,7 @@
             v-for="item in fields"
             :row="props.row"
             :item="item"
+            :rowId="props.rowId"
             :slug="props.slug"
             :isTrash="isTrash"
             :actionType="props.actionType"
@@ -37,6 +38,10 @@
             type: Boolean
         },
         row: {},
+        rowId: {
+            default: 0,
+            type: Number
+        },
         slug: {
             default: '',
             type: String
