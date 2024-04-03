@@ -6,7 +6,7 @@
 
         <template #body>
             <div class="warning__text">
-                Будет удалено поле {{ removingField.title }}. Продолжить?
+                Будет удалено поле <b> {{ removingField.title }} </b>. Продолжить?
             </div>
             <div class="warning__actions">
                 <AppButton class="button_red" @click="() => emit('callAction', {action: 'delete', value: true})">
@@ -26,7 +26,7 @@
     import { inject } from 'vue'
 
     import AppButton from '@/components/AppButton/AppButton.vue';
-    import AppWarning from '@/components/AppWarning/AppWarning.vue';
+    import AppWarning from '@/components/AppWarning/WarningNew/AppWarning.vue';
 
     const isShow = inject('isShow')
     const removingField = inject('removingField')

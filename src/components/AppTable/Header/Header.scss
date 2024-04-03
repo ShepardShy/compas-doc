@@ -46,8 +46,18 @@
 
 .table_resizing {
     .table__header {
-        .table-item__border {
-            height: 500vh;
+        .table__item {
+            &:hover {
+                .table-item__border {
+                    height: auto;
+                }
+            }
+
+            &.table__item_resizing {
+                .table-item__border {
+                    height: 500vh;
+                }
+            }
         }
     }
 }

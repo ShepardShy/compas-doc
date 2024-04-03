@@ -12,22 +12,25 @@
             </AppH2>
 
             <nav class="menu__list" v-if="settingsMenu.activeTab == null">
-                <a href="" class="menu__item" :class="activeLink.link == item.link ? 'menu__item_active' : ''" v-for="item in menuVisible" :key="item.id">
+                <NuxtLink @click="() => callAction({action: 'showMenu', value: false})" :to="item.link" class="menu__item" :class="activeLink.link == item.link ? 'menu__item_active' : ''" v-for="item in menuVisible" :key="item.id" v-show="item.enabled">
                     {{ item.name }}
-                </a>
+                </NuxtLink>
             </nav>
             <nav class="menu__list" v-else-if="settingsMenu.activeTab.tab == 'hidden'">
-                <a href="" class="menu__item" v-for="item in menuHidden" :key="item.id">
+                <NuxtLink @click="() => callAction({action: 'showMenu', value: false})" :to="item.link" class="menu__item" v-for="item in menuHidden" :key="item.id" v-show="item.enabled">
                     {{ item.name }}
-                </a>
+                </NuxtLink>
             </nav>
             <nav class="menu__list" v-else-if="settingsMenu.activeTab.tab == 'user'">
-                <a href="" class="menu__item">
+                <NuxtLink to="/profile" class="menu__item" @click="() => callAction({action: 'showMenu', value: false})">
                     Настройки
-                </a>
-                <a href="" class="menu__item menu__item_red">
+                </NuxtLink>
+                <button
+                    class="menu__item menu__item_btn-logout"
+                    @click="logOut"
+                >
                     Выйти
-                </a>
+                </button>
             </nav>
 
             <div 
@@ -43,10 +46,10 @@
                 <div 
                     class="menu__user menu-user">
                     <figure class='ibg menu-user__icon'>
-                        <img src='https://compas.pro/storage/thumbnails/default/9k/oh/2sx8nf8ckw08oo0c8oo0w.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FkxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png&s=https' alt=''>
+                        <img :src='user.avatar != undefined ? user.avatar.file : "/user/avatar.svg"' :alt="`${user.name} ${user.last_name}. Аватар`">
                     </figure>
                     <div class="menu-user__title">
-                        Денис Потемкин
+                        {{ user.name }} {{ user.last_name }}
                     </div>
                 </div>
                 <IconArrow />
@@ -63,8 +66,6 @@
 
     import AppH2 from '@/components/AppHeaders/H2/H2.vue'
 
-    import { ref, inject } from 'vue'
-
     let settingsMenu = ref({
         tabs: [
             {
@@ -80,6 +81,7 @@
         activeTab: null
     })    
 
+    const user = inject('user')
     const menuVisible = inject('menuVisible')
     const menuHidden = inject('menuHidden')
     const activeLink = inject('activeLink')
@@ -88,6 +90,9 @@
     const callAction = (data) => {
         // Показ/скрытие меню
         const showMenu = (state) => {
+            if (!state) {
+                settingsMenu.value.activeTab = null
+            }
             settingsMenu.value.isShow = state
         }
 
@@ -107,11 +112,16 @@
                 break;
         
             // Навигация по меню
-            case 'saveSettings':
+            case 'navigateMenu':
                 navigateMenu(data.value)
                 break;
             default:
                 break;
         }
+    }
+
+    // Выход из системы
+    const logOut = () => {
+        window.location.href = '/auth'
     }
 </script>

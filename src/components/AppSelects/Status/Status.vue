@@ -10,6 +10,7 @@
 
         <StatusField
             :item="props.item"
+            :focus="props.item.focus"
             :isReadOnly="props.isReadOnly"
             :isCanCreate="props.isCanCreate"
             :isCanSave="props.isCanSave"

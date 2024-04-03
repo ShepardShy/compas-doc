@@ -6,7 +6,8 @@
                     v-if="tab.childs != undefined"
                     class="popup__tabs" 
                     :closeByClick="true" 
-                    :class="tab.childs.find(p => p.alias == activeTab) != undefined ? 'tabs__item_active' : ''" 
+                    :isCanSelect="false"
+                    :class="tab.childs.find(p => p.alias == activeTab.tab) != undefined ? 'tabs__item_active' : ''" 
                 >
                     <template #summary>
                         <div class="tabs__item">
@@ -17,8 +18,8 @@
                     <template #content>
                         <PopupOption 
                             v-for="child in tab.childs" 
-                            :class="child.alias == activeTab ? 'popup__option_active' : ''" 
-                            @click="() => callAction({action: 'changeTab', value: child.alias})"
+                            :class="child.alias == activeTab.tab ? 'popup__option_active' : ''" 
+                            @click="() => callAction({action: 'changeTab', value: child.alias, type: 'module'})"
                         >
                             {{ child.title }}
                         </PopupOption>
@@ -27,10 +28,25 @@
                 <div 
                     v-else 
                     class="tabs__item" 
-                    :class="activeTab == tab.tab ? 'tabs__item_active' : ''"
-                    @click="() => callAction({action: 'changeTab', value: tab.tab})"
+                    :class="activeTab.tab == tab.tab ? 'tabs__item_active' : ''"
                 >
-                    {{ tab.title }}
+                    <span class="tabs__item-text" @click="() => callAction({action: 'changeTab', value: tab.tab})">
+                        {{ tab.title }}
+                    </span>
+
+                    <AppPopup class="popup__actions" :isCanSelect="false" :closeByClick="true" v-if="props.haveSettings">
+                        <template #summary>
+                            <IconSettings />
+                        </template>
+                        <template #content>
+                            <PopupOption @click="() => showSettingsTab(tab)">
+                                Настроить
+                            </PopupOption>
+                            <PopupOption @click="() => callAction({action: 'hideTab', value: tab})">
+                                Скрыть
+                            </PopupOption>
+                        </template>
+                    </AppPopup>
                 </div>
             </template>
         </div>
@@ -40,7 +56,7 @@
                 v-show="settingsTabs.saves.isShow"
                 @saveSettings="(role) => callAction({action: 'saveSettings', value: role})"
             />
-            <AppPopup class="popup_right popup__settings" :closeByClick="false" @clickOutside="() => callAction({action: 'changeSettingsTab', value: null})">
+            <AppPopup class="popup__settings" :isCanSelect="false" :closeByClick="false" @clickOutside="() => callAction({action: 'changeSettingsTab', value: null})">
                 <template #summary>
                     <IconSettings />
                 </template>
@@ -76,7 +92,7 @@
                                 @end="(event) => callAction({action: 'dragEnd', value: event})" 
                             >
                                 <template #item="{ element: option }">
-                                    <PopupOption class="popup-option__sublink" v-show="option.enabled">
+                                    <PopupOption @dragstart="(event) => copyField(event)" class="popup-option__sublink" v-show="option.enabled">
                                         <IconDrag /> 
                                         {{ option.title }}
                                     </PopupOption>
@@ -103,13 +119,17 @@
                 </template>
             </AppPopup>
         </div>
+
+        <AppWarning 
+            @callAction="(data) => callAction(data)"
+        />
     </div>
 </template>
 
 <script setup>
     import './Tabs.scss';
     
-    import { onMounted, ref } from 'vue'
+    import { onMounted, ref, inject } from 'vue'
     import draggable from 'vuedraggable'
 
     import IconDrag from '@/components/AppIcons/Drag/Drag.vue'
@@ -121,11 +141,16 @@
     import PopupSave from '@/components/AppPopup/Save/Save.vue'
     import AppCheckbox from '@/components/AppInputs/Checkbox/Checkbox.vue'
     import PopupOption from '@/components/AppPopup/PopupOption/PopupOption.vue'
+    import AppWarning from './Warning/Warning.vue'
 
     const props = defineProps({
         tabs: {
             default: [],
             type: Object
+        },
+        haveSettings: {
+            default: true,
+            type: Boolean
         }
     })
 
@@ -133,7 +158,17 @@
         'callAction'
     ])
 
+    let activeTab = inject('activeTab')
+    let settingsTab = ref(null)
+    let isShow = ref({
+        state: false,
+        type: null
+    })
+
     let tabs = ref([])
+
+    provide('isShow', isShow)
+    provide('settingsTab', settingsTab)
 
     let settingsTabs = ref({
         tabs: [
@@ -152,7 +187,18 @@
         activeTab: null
     })
 
-    let activeTab = ref(null)
+    // Копирование секции
+    const copyField = (event) => {
+        let parentElem = document.createElement("div")
+        let elem = event.target.cloneNode(true)
+        parentElem.appendChild(elem)
+        parentElem.id = "clone-elem";
+        parentElem.classList.add('clone-elem')
+        parentElem.classList.add('popup-option__draggable')
+        elem.style.width = `${ event.target.offsetWidth}px`
+        document.body.appendChild(parentElem);
+        event.dataTransfer.setDragImage(parentElem, 5, 8);
+    }
 
     // Вызов действий
     const callAction = (data) => {
@@ -182,18 +228,30 @@
             settingsTabs.value.saves.isShow = true
         }
 
+        // Скрытие вкладки
+        const hideTab = (tab) => {
+            tabs.value.find(p => p.id == tab.id).enabled = false
+            saveSettings('myself')
+        }
+
         // Смена вкладки
-        const changeTab = (data) => {
-            activeTab.value = data
+        const changeTab = (data, type = null) => {
+            activeTab.value.tab = data
+            activeTab.value.type = type
             emit('callAction', {
                 action: 'changeTab',
-                value: data
+                value: data,
+                type: type
             })
         }
 
         // Конец перетаскивания плашки
         const settingsDragEnd = () => {
             settingsTabs.value.saves.isShow = true
+
+            document.querySelectorAll('#clone-elem').forEach(element => {
+                element.remove()
+            });
         }
 
         switch (data.action) {
@@ -219,7 +277,12 @@
 
             // Смена вкладки
             case 'changeTab': 
-                changeTab(data.value)
+                changeTab(data.value, data.type)
+                break;
+
+            // Скрытие вкладки
+            case 'hideTab':
+                hideTab(data.value)
                 break;
 
             default:
@@ -227,8 +290,23 @@
         }
     }
 
+    const showSettingsTab = (tab) => {
+        isShow.value = {
+            type: 'updateTabs',
+            state: true
+        }
+        settingsTab.value = tab
+    }
+
     onMounted(() => {
         tabs.value = props.tabs
-        activeTab.value = Array.isArray(tabs.value) ? tabs.value.length > 0 ? tabs.value[0].tab : null : null
+        activeTab.value.tab = Array.isArray(tabs.value) ? tabs.value.length > 0 ? tabs.value[0].tab : null : null
+    })
+
+    watch(() => props.tabs, () => {
+        tabs.value = props.tabs
+        activeTab.value.tab = Array.isArray(tabs.value) ? tabs.value.length > 0 ? tabs.value[0].tab : null : null
+    }, {
+        deep: true
     })
 </script>

@@ -2,8 +2,6 @@
 @use '@/assets/mixins.scss' as mixins;
 
 .table-mobile {
-    min-height: 70vh;
-
     &.table-mobile_empty {
         &::after {
             content: 'Нет данных';
@@ -48,6 +46,7 @@
 .table-mobile__row {
     border-bottom: 1px solid #eeeff1;
     padding: 15px;
+    @include mixins.sortableGhost();
 
     &:nth-child(even) {
         background: #f7fbff;
@@ -74,11 +73,33 @@
     &:not(:last-child) {
         margin-bottom: 15px;
     }
+
+    .table-item__icon {
+        .icon__draggable {
+            position: static;
+        }
+    }
+
+    .file {
+        .fancybox-item {
+            .fancybox-item__link {
+                min-height: 40px;
+
+                .fancybox-item__img {
+                    min-height: 40px;
+                }
+            }
+        }
+    }
 }
 
 .table-template_loading {
     .table-mobile {
-        height: 100vh;
+        height: 100%;
         opacity: 0;
+
+        .table-template__loader {
+            top: var(--stickyTop);
+        }
     }
 }

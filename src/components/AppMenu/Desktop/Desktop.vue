@@ -1,8 +1,8 @@
 <template>
     <aside class="menu menu_desktop" ref="menuRef">
-        <a :href="menu.length > 0 ? menu[0].link : '/'" class="menu__logo">
+        <NuxtLink :to="menu.length > 0 ? menu[0].link : '/'" class="menu__logo">
             <IconLogo />
-        </a>
+        </NuxtLink>
 
         <div class="menu__content">
             <draggable 
@@ -13,18 +13,21 @@
                 itemKey="menu-visible"
                 v-model="menuVisible" 
                 handle=".icon__draggable"
-                @start="() => callAction({action: 'dragStart', value: event})"
-                @end="(event) => callAction({action: 'dragEnd', value: event})" 
+                :forceFallback="true"
+                @start="(event) => callAction({action: 'dragStart', value: event})"
+                @end="(event) => callAction({action: 'dragEnd', value: event})"
             >
                 <template #item="{ element: item }">
-                    <li class="menu__item" 
-                        :key="item.id" 
+                    <NuxtLink
+                        class="menu__item" 
                         v-show="item.enabled"
+                        :to="item.link"
+                        :key="item.id" 
                         :class="activeLink.link == item.link ? 'menu__item_active' : ''"
                     >
                         <IconDrag />
                         {{ item.name }}
-                    </li>
+                    </NuxtLink>
                 </template>
             </draggable>
 
@@ -48,30 +51,32 @@
                         itemKey="menu-hidden"
                         v-model="menuHidden" 
                         handle=".icon__draggable"
+                        :forceFallback="true"
                         @start="() => callAction({action: 'dragStart', value: event})"
                         @end="(event) => callAction({action: 'dragEnd', value: event})" 
                     >
                         <template #item="{ element: item }">
-                            <li class="menu__item" 
-                                :key="item.id" 
+                            <NuxtLink class="menu__item" 
                                 v-show="item.enabled"
+                                :key="item.id" 
+                                :to="item.link"
                                 :class="activeLink.link == item.link ? 'menu__item_active' : ''"
                             >
                                 <IconDrag />
                                 {{ item.name }}
-                            </li>
+                            </NuxtLink>
                         </template>
                     </draggable>
 
-                    <li class="menu__item menu__item-close" @click="() => detailsMenuRef.removeAttribute('open')">
+                    <p class="menu__item menu__item-close" @click="() => detailsMenuRef.removeAttribute('open')">
                         Скрыть
-                    </li>
+                    </p>
                 </nav>
             </details>
         </div>
 
         <div class="menu__settings">
-            <AppPopup class="popup__settings" :closeByClick="false" @clickOutside="() => callAction({action: 'changeTab', value: null})">
+            <AppPopup class="popup__settings" :isCanSelect="false" :closeByClick="false" @clickOutside="() => callAction({action: 'changeTab', value: null})">
                 <template #summary>
                     <IconSettings />
                 </template>
@@ -153,24 +158,31 @@
             />
         </div>
 
-        <AppPopup :closeByClick="true" class="popup__menu">
+        <AppPopup :closeByClick="true" :isCanSelect="false" class="popup__menu">
             <template #summary>
                 <div class="menu__user menu-user menu__item">
                     <figure class='ibg menu-user__icon'>
-                        <img src='https://compas.pro/storage/thumbnails/default/9k/oh/2sx8nf8ckw08oo0c8oo0w.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FkxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png&s=https' alt=''>
+                        <img :src='user.avatar != undefined ? user.avatar.file : "/user/avatar.svg"' :alt="`${user.name} ${user.last_name}. Аватар`">
                     </figure>
                     <div class="menu-user__title">
-                        Денис Потемкин
+                        {{ user.name }} {{ user.last_name }}
                     </div>
                 </div>
             </template>
             <template #content>
-                <PopupOption>
-                    Настройки
-                </PopupOption>
-                <PopupOption class="popup__option_red">
-                    Выйти
-                </PopupOption>
+                <NuxtLink to="/profile">
+                    <PopupOption>
+                        Настройки
+                    </PopupOption>
+                </NuxtLink>
+                <button
+                    class="menu-user__btn-logout"
+                    @click="logOut"
+                >
+                    <PopupOption class="popup__option_red">
+                        Выйти
+                    </PopupOption>
+                </button>
             </template>
         </AppPopup>
     </aside>
@@ -179,7 +191,6 @@
 <script setup>
     import './Desktop.scss'
 
-    import { ref, inject } from 'vue'
     import draggable from 'vuedraggable'
 
     import IconDrag from '@/components/AppIcons/Drag/Drag.vue'
@@ -212,10 +223,13 @@
     const menuRef = ref(null)
     const detailsMenuRef = ref(null)
 
+    const user = inject('user')
     const menu = inject('menu')
     const menuVisible = inject('menuVisible')
     const menuHidden = inject('menuHidden')
     const activeLink = inject('activeLink')
+
+    const menuHiddenIsHidden = ref(false)
 
     const emit = defineEmits([
        'callAction'
@@ -234,12 +248,16 @@
         const changeValue = (data) => {
             let findedOption = menu.value.find(option => option.slug == data.key)
             findedOption[settingsMenu.value.activeTab.tab] = data.value
-            saveSettings('myself')
+            settingsMenu.value.saves.isShow = true
         }
 
         // Начало перетаскивания опции
         const dragStart = () => {
+            // Запоминаем было ли скрыто скрытое меню при перетаскивании
+            menuHiddenIsHidden.value = !detailsMenuRef.value.hasAttribute('open')
+
             menuRef.value.classList.add('menu_draggable')
+            detailsMenuRef.value.setAttribute('open', true)
         }
 
         // Конец перетаскивания опции
@@ -252,10 +270,15 @@
                 menuVisible.value[findIndex].is_hidden = 0
             }
 
+            // Скрываем скрытое меню, если оно было скрыто ранее
+            if (menuHiddenIsHidden.value) {
+                detailsMenuRef.value.removeAttribute('open')
+            }
+
             menu.value = menuVisible.value.concat(menuHidden.value)
             menuRef.value.classList.remove('menu_draggable')
 
-            callAction({action: 'showSaves', value:true})
+            showSaves(true)
         }
 
         // Конец перетаскивания опции в настройках
@@ -275,6 +298,11 @@
         // Сохранение настроек полей для выбранной роли
         const saveSettings = (role) => {
             showSaves(false)
+            
+            menu.value.forEach((element, index) => {
+                element.sort = index
+            });
+
             emit('callAction', {
                 action: 'saveSettings',
                 value: {
@@ -308,6 +336,7 @@
             // Конец перетаскивания опции в настройках
             case 'settingsDragEnd':
                 settingsDragEnd(data.value)
+                break;
 
             // Изменение значений опций
             case "changeValue":
@@ -327,6 +356,11 @@
             default:
                 break;
         }
+    }
+
+    // Выход из системы
+    const logOut = () => {
+        window.location.href = '/auth'
     }
 </script>
     

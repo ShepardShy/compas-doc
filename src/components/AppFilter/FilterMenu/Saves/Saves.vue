@@ -29,7 +29,7 @@
                     :enabledAutocomplete="false"
                     @changeValue="(data) => changeValue(data)"
                 />
-                <AppPopup class="filter-save__actions" :closeByClick="true">
+                <AppPopup class="filter-save__actions" :closeByClick="true" :isCanSelect="false">
                     <template #summary>
                         <IconDots />
                     </template>
@@ -54,8 +54,6 @@
 
 <script setup>
     import './Saves.scss';
-
-    import { inject } from 'vue'
 
     import ButtonText from '@/components/AppButton/ButtonText/ButtonText.vue';
     import IconDots from '@/components/AppIcons/Dots/Dots.vue';

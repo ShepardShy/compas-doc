@@ -19,6 +19,7 @@
                     placeholder: null,
                     focus: false,
                     key: props.item.key,
+                    anotherKey: props.item.anotherKey,
                     options: localOptions,
                     lockedOptions: lockedOptions,
                     anotherTitle: props.item.anotherTitle,
@@ -26,9 +27,10 @@
                 }"
                 :fieldId="props.item.id"
                 :isReadOnly="props.isReadOnly"
+                :isHaveLink="props.isHaveLink"
                 :isCanCreate="props.isCanCreate"
                 :isAnotherTitle="props.isAnotherTitle"
-                @openLink="(item) => emit('openLink', item)"
+                @openLink="(item) => props.isHaveLink ? emit('openLink', item) : null"
                 @callAction="(data) => callAction(data, index)"
                 @clickOutside="() => emit('clickOutside', true)"
                 @createOption="(data) => emit('createOption', data)"
@@ -50,7 +52,6 @@
     import './Relation.scss';
     
     import _ from 'lodash'
-    import { ref, onMounted, watch } from 'vue'
 
     import FormItem from '@/components/AppForm/FormItem/FormItem.vue';
     import FormLabel from '@/components/AppForm/FormLabel/FormLabel.vue';
@@ -99,6 +100,10 @@
         loaderStatus: {
             default: false,
             type: Boolean
+        },
+        isHaveLink: {
+            default: true,
+            type: Boolean
         }
     })
 
@@ -138,7 +143,8 @@
                 key: props.item.key,
                 value: {
                     value: values.value,
-                    localOptions: localOptions.value
+                    localOptions: localOptions.value,
+                    selectedOption: value.label
                 }
             })
         }
@@ -164,7 +170,6 @@
 
                 values.value = JSON.parse(JSON.stringify(localValues))
             }
-
             lockedOptions.value = Array.from(new Set(props.item.lockedOptions)).concat(values.value.filter(item => item != null))
         }
 
@@ -173,9 +178,13 @@
             let filteredLocalOptions = props.item.value != null && props.item.value.localOptions != null ? props.item.value.localOptions.filter(p => ![null, undefined].includes(p) && typeof p == 'object') : []
             let options = JSON.parse(JSON.stringify(props.item.options.concat(filteredLocalOptions)))
 
-            localOptions.value = _.uniqBy(options, (o) => {
+            localOptions.value = _.uniqBy(options.filter(p => p != null), (o) => {
                 return o.value;
             })
+        }
+
+        const changeAnotherTitle = () => {
+            emit('changeValue', data.value)
         }
 
         switch (data.action) {
@@ -198,6 +207,12 @@
             case "getOptions":
                 getOptions()
                 break;
+
+            // Изменить альтернативный заголовок
+            case 'changeAnotherTitle':
+                changeAnotherTitle();
+                break;
+
             default:
                 break;
         }

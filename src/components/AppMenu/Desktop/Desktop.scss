@@ -17,17 +17,36 @@
         }
     
         &.menu_draggable {
-            .menu__item {
-                &:hover {
-                    background: inherit;
-    
-                    .icon__draggable {
-                        opacity: 0;
-                    }
+            .menu__item, .menu__item:hover {
+                @include mixins.userSelect($value: none);
+                background: inherit;
+
+                .icon__draggable {
+                    opacity: 0;
                 }
             }
         }
     
+        .menu__content {
+            overflow: auto;
+            
+            /* scrollbar для Chrome/Edge/Safari */
+            &::-webkit-scrollbar {
+                border-radius: 5px;
+                @include mixins.elemResolutionOptions(4px, 4px);
+            }
+
+            &::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                border: none;
+                background-color: variables.$color-orange;
+                border-radius: 5px;
+            }
+        }
+
         .icon__logo {
             @include mixins.flexBlock($vertical: center);
         }
@@ -47,6 +66,14 @@
             @include mixins.sortableGhost();
             @include mixins.userSelect(none);
             @include mixins.flexBlock($vertical: center, $gap: 0px);
+
+            &.sortable-fallback {
+                background: variables.$color-dark;
+
+                .icon__draggable {
+                    opacity: 1;
+                }
+            }
     
             &:hover {
                 background: variables.$color-dark;
@@ -83,8 +110,20 @@
             }
 
             .icon__draggable {
-                left: 8px;
+                left: 3px;
                 opacity: 0;
+                padding: 0px 5px;
+            }
+        }
+
+        .menu-user__btn-logout {
+            width: 100%;
+            text-align: left;
+            padding: 0;
+            background: inherit;
+
+            &:hover {
+                filter: none;
             }
         }
     
@@ -128,7 +167,7 @@
                 }
 
                 &::after {
-                    content: url('/public/icons/arrow.svg');
+                    content: url('/icons/arrow.svg');
                 }
             }
         }
@@ -161,11 +200,15 @@
     
             &::after {
                 transform: rotate(180deg);
-                content: url('/public/icons/arrow.svg');
+                content: url('/icons/arrow.svg');
             }
         }
     
         .popup__menu {
+            .popup__summary {
+                width: 100%;
+            }
+
             .popup__content {
                 bottom: 60px;
                 width: calc(100% - 20px);
@@ -178,7 +221,7 @@
                 border-top: 1px solid variables.$color-grey;
                 @include mixins.flexBlock($vertical: center, $gap: 10px);
             }
-        
+            
             .menu-user__title {
                 font-size: 14px;
             }
@@ -188,19 +231,11 @@
             overflow: hidden;
             border-radius: 50%;
             @include mixins.elemResolutionOptions(30px, 30px);
-        
-            img {
-                object-fit: contain;
-            }
         }
         
         .menu__settings {
             padding: 10px 30px 10px 25px;
             @include mixins.flexBlock($vertical: center, $gap: 10px);
-        
-            .icon__save {
-                display: flex;
-            }
         
             .popup {
                 opacity: 0;
@@ -212,6 +247,20 @@
                 .popup__content {
                     top: auto;
                     bottom: 30px;
+                }
+
+                &.popup__settings, &.popup_save {
+                    font-family: PT Sans;
+
+                    &[open], &:hover {
+                        .popup__summary {
+                            svg {
+                                * {
+                                    fill: variables.$color-orange;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -234,6 +283,10 @@
                 .menu__item-subtitle, &::after, &::before {
                     background-color: variables.$color-blue-grey;
                 }
+            }
+
+            .icon__draggable {
+                position: relative;
             }
         }
     }

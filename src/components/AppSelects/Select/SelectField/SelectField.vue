@@ -17,6 +17,7 @@
         class="select__popup" 
         :closeByClick="false" 
         ref="popupRef" 
+        :isCanSelect="true"
         :class="props.isMultiple ? 'select__popup_multiply' : ''"
         :isReadOnly="props.isReadOnly"
         @click="(event) =>  props.isReadOnly ? event.preventDefault() : callAction({action: 'showContent', value: true})"
@@ -91,8 +92,6 @@
 <script setup>
     import './SelectField.scss';
 
-    import { ref, onMounted, watch } from 'vue'
-    
     import AppPopup from '@/components/AppPopup/Popup.vue';
     import AppInput from '@/components/AppInputs/Input/Input.vue';
     import IconDelete from '@/components/AppIcons/Delete/Delete.vue';
@@ -292,6 +291,7 @@
     }
 
     onMounted(async () => {
+
         await callAction({
             action: 'getOptions',
             value: null

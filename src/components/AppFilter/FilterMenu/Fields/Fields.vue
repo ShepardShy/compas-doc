@@ -6,24 +6,41 @@
         itemKey="filter-fields"
         v-model="activeFields" 
         handle=".icon__draggable"
+        @start="(event) => dragStart(event)" 
         @end="(event) => dragEnd(event)" 
     >
         <template #item="{ element: field }">
-            <div class="filter__field">
+            <div class="filter__field" @dragstart="(event) => cloningDraggableComponent(event)">
                 <IconDrag />
                 <component 
                     :is="field.component"
-                    :item="field"
+                    :item="{
+                        id: field.id,
+                        title: field.title,
+                        type: field.type,
+                        read_only: Boolean(field.read_only),
+                        can_edit: Boolean(field.can_edit),
+                        color: field.color,
+                        is_plural: Boolean(field.is_plural),
+                        required: Boolean(field.required),
+                        key: field.key,
+                        value: field.value,
+                        enabled: Boolean(field.enabled),
+                        options: field.options,
+                        lockedOptions: []
+                    }"
+                    :isHaveNullOption="true"
                     :enabledAutocomplete="false"
                     @changeValue="(data) => changeValue(data)"
+                    @searchOptions="(data) => searchOptions(data)"
                 />
 
-                <AppPopup :closeByClick="true">
+                <AppPopup :closeByClick="true" :isCanSelect="false">
                     <template #summary> 
                         <IconSettings />
                     </template>
                     <template #content>
-                        <PopupOption @click="() => actionFilter(field)">
+                        <PopupOption @click="() => hideField(field)">
                             Скрыть
                         </PopupOption>
                     </template>
@@ -47,6 +64,8 @@
     import IconDrag from '@/components/AppIcons/Drag/Drag.vue'
     import IconSettings from '@/components/AppIcons/Settings/Settings.vue'
     import PopupOption from '@/components/AppPopup/PopupOption/PopupOption.vue'
+    
+    import commonScriptsGlobal from '@/commonScripts/commonScripts.js'
 
     const activeFields = inject('activeFields')
 
@@ -56,16 +75,30 @@
 
     // Изменение значения в поле
     const changeValue = (data) => {
+        console.log(data);
         let field = activeFields.value.find((field) => field.key === data.key)
         field.value = data.value
     }
 
+    // Поиск опций
+    const searchOptions = async (data) => {
+        console.log(data);
+        let findedField = activeFields.value.find((field) => field.key === data.key)
+        let request = await commonScriptsGlobal.getInfoAutocomplete(data.value.toLowerCase(), findedField.id)
+        findedField.options = request
+    }
+
     // Скрытие поля
-    const actionFilter = (field) => {
+    const hideField = (field) => {
         emit('actionFilter', {action: 'enabledField', value: {
             value: !field.enabled, 
             key: field.key
         }})
+    }
+
+    // Начало переноса поля
+    const dragStart = (event) => {
+        event.from.classList.add('filter__fields_dragging')
     }
 
     // Изменение порядка полей
@@ -81,5 +114,23 @@
         });
 
         emit('actionFilter', {action: 'changeOrder', value: {fields: event.to.__draggable_component__.modelValue, requestFields: data}})
+
+        event.from.classList.remove('tile-section__body_dragging')
+        document.querySelectorAll('#clone-elem').forEach(element => {
+            element.remove()
+        });
+    }
+
+    // Клонирование перетаскиваемого элемента c созданием родителя
+    const cloningDraggableComponent = (event) => {
+        let parentElem = document.createElement("div")
+        let elem = event.target.cloneNode(true)
+        parentElem.appendChild(elem)
+        parentElem.id = "clone-elem";
+        parentElem.classList.add('clone-elem')
+        parentElem.classList.add('filter__fields')
+        elem.style.width = `${ event.target.offsetWidth}px`
+        document.body.appendChild(parentElem);
+        event.dataTransfer.setDragImage(parentElem, 5, 8);
     }
 </script>

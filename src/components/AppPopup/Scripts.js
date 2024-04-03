@@ -17,6 +17,7 @@ export default {
                     element.removeAttribute('open')
                     element.classList.remove('popup_up')
                     element.classList.remove('popup_visible')
+                    element.classList.remove('popup_right')
                 });
                 break
             // Удаление у определенного элемента 
@@ -24,6 +25,7 @@ export default {
                 element.removeAttribute('open')
                 element.classList.remove('popup_up')
                 element.classList.remove('popup_visible')
+                element.classList.remove('popup_right')
             break;
         }
     },
@@ -33,10 +35,11 @@ export default {
         let scrollBlock = null
         scrollBlock = element.closest('.section__scroll-area')
 
-        if (element != null) {
+        if (element != null && !element.classList.contains('popup_visible')) {
             setTimeout(() => {
                 let dropdown = element.querySelector('.popup__content')
                 let dropdownRect = dropdown.getBoundingClientRect()
+
                 if (scrollBlock != null) {
                     let scrollBlockRect = scrollBlock.getBoundingClientRect()
                     if (

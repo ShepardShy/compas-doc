@@ -1,6 +1,6 @@
 <template>
-    <div class="tile-section__footer">
-        <AppPopup :closeByClick="true">
+    <div class="tile-section__footer" v-if="isEditableSettings">
+        <AppPopup :closeByClick="true" :isCanSelect="false">
             <template #summary>
                 <ButtonText>
                     Добавить
@@ -45,4 +45,5 @@
     ])
 
     const hiddenFields = inject('hiddenFields')
+    const isEditableSettings = inject('isEditableSettings')
 </script>

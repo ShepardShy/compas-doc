@@ -29,7 +29,7 @@
                 v-show="menu.saves.isShow"
                 @saveSettings="(role) => callAction({action: 'saveSettings', value: role})"
             />
-            <AppPopup class="table-top__item table-top__item_excel" :closeByClick="true">
+            <AppPopup :isCanSelect="false" class="table-top__item table-top__item_excel" :closeByClick="true">
                 <template #summary>
                     <IconDots />
                 </template>
@@ -39,7 +39,7 @@
                     </PopupOption>
                 </template>
             </AppPopup>
-            <AppPopup class="table-top__item" :closeByClick="false" @clickOutside="() => callAction({action: 'changeTab', value: null})">
+            <AppPopup :isCanSelect="false" class="table-top__item" :closeByClick="false" @clickOutside="() => callAction({action: 'changeTab', value: null})">
                 <template #summary>
                     <IconSettings />
                 </template>
@@ -70,7 +70,7 @@
                                 @start="(event) => callAction({action: 'dragStart', value: event})" 
                             >
                                 <template #item="{ element: option }">
-                                    <PopupOption class="popup-option__sublink" v-show="option.enabled" @dragStart="(event) => callAction({action: 'cloningDraggableComponent', event: event})">
+                                    <PopupOption class="popup-option__sublink" v-show="option.enabled" @dragstart="(event) => callAction({action: 'cloningDraggableComponent', event: event})">
                                         <IconDrag /> 
                                         {{ option.title }}
                                     </PopupOption>
@@ -176,6 +176,10 @@
             let cols = row ? row.children : undefined;
             resizeTable.setDefaultWidth(cols, fields.value)
             showSaves(true)
+
+            document.querySelectorAll('#clone-elem').forEach(element => {
+                element.remove()
+            });
         }
 
         // Сохранение настроек полей для выбранной роли
@@ -211,17 +215,15 @@
 
         // Клонирование перетаскиваемого элемента c созданием родителя
         const cloningDraggableComponent = (event) => {
-            if (document.getElementById('clone-elem') == null) {
-                let parentElem = document.createElement("div")
-                let elem = event.target.cloneNode(true)
-                parentElem.classList.add(event.target.parentNode.classList[0])
-                parentElem.appendChild(elem)
-                parentElem.id = "clone-elem";
-                parentElem.classList.add('clone-elem')
-                elem.style.width = `${ event.target.offsetWidth}px`
-                document.body.appendChild(parentElem);
-                event.dataTransfer.setDragImage(parentElem, 5, 8);
-            }
+            let parentElem = document.createElement("div")
+            let elem = event.target.cloneNode(true)
+            parentElem.appendChild(elem)
+            parentElem.id = "clone-elem";
+            parentElem.classList.add('clone-elem')
+            parentElem.classList.add('popup-option__draggable')
+            elem.style.width = `${ event.target.offsetWidth}px`
+            document.body.appendChild(parentElem);
+            event.dataTransfer.setDragImage(parentElem, 5, 8);
         }
 
         switch (data.action) {

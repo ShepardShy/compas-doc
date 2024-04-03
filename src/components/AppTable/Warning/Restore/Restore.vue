@@ -26,7 +26,7 @@
     import { inject } from 'vue'
 
     import AppButton from '@/components/AppButton/AppButton.vue';
-    import AppWarning from '@/components/AppWarning/AppWarning.vue';
+    import AppWarning from '@/components/AppWarning/WarningNew/AppWarning.vue';
 
     const isShow = inject('isShow')
     const bodyData = inject('bodyData')

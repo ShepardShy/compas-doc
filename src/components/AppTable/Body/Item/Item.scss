@@ -82,8 +82,8 @@
     .table-item__drag-area {
         height: 100%;
         position: absolute;
-        width: calc(100% - 10px);
-        @include mixins.elemPositionOptions(0px, 5px);
+        width: calc(100% - 40px);
+        @include mixins.elemPositionOptions(0px, 20px);
         z-index: 3;
     }
 
@@ -189,9 +189,17 @@
                             display: none;
                         }
 
+                        &:not(:last-child) {
+                            padding: 0px 0px 10px;
+                        }
+
                         border: none;
                         background: inherit;
-                        padding: 0px 0px 10px;
+                        padding: 0px;
+
+                        .popup__summary {
+                            overflow: hidden;
+                        }
                     }
                 }
 
@@ -200,6 +208,16 @@
                         &.popup_up {
                             .popup__content {
                                 bottom: 45px;
+                            }
+                        }
+                    }
+                }
+
+                .select__popup {
+                    .popup__summary {
+                        .form-item__input {
+                            .form-item__substring {
+                                top: 6px;
                             }
                         }
                     }

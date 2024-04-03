@@ -7,14 +7,20 @@
                 :style="`--modalOrder: ${50 * (index >= 3 ? 2 : index)}px; --index: ${index}`"
             >
                 <div class="modal__background"></div>
-                <div class="modal__close" :style="`--backgroundColor: ${item.color}`" @click="() => modals.pop()">
+                <div class="modal__close" :style="`--backgroundColor: ${item.color}`" @click="() => deletePage()">
                     <IconClose />
                     <span class="modal__close-text">
                         {{ item.title }}
                     </span>
                 </div>
                 <div class="modal__content">
-                    <slot></slot>
+                    <TableDetailsPage 
+                        :id="item.id"
+                        :slug="item.slug"
+                        :isCreate="item.isCreate"
+                        @closeModal="() => modals.pop()"
+                        @showModal="(data) => $emit('showModal', data)"
+                    />
                 </div>
             </div>
         </div>
@@ -27,10 +33,12 @@
     import { onMounted, onUnmounted, inject, watch, toRaw, ref } from 'vue'; 
 
     import IconClose from '@/components/AppIcons/Close/Close.vue'
-
+    import TableDetailsPage from '@/components/TableDetailsPage/TableDetailsPage.vue'
+    import commonScripts from '@/commonScripts/commonScripts';
     const modals = inject('modals')
     const parentPage = toRaw(window.location.href)
-
+    
+    const router = useRouter();
     const modalRef = ref()
     let preventClick = ref(null)
     let mouseEventDown = ref(null)
@@ -50,17 +58,35 @@
     // Открытие нового модального окна
     const openModal = () => {
         if (modals.value.length >= 11 || window.innerWidth <= 660) {
+            router.push({ path: modals.value[modals.value.length - 1].link });
             window.location.replace(modals.value[modals.value.length - 1].link)
+            window.history.pushState("", "Title", modals.value[modals.value.length - 1].link);
         } else {
             window.history.pushState("", "Title", modals.value[modals.value.length - 1].link);
+
+            preventClick.value = true
+
+            setTimeout(() => {
+                preventClick.value = false
+                commonScripts.clearSelection()
+            }, 1000);
         }
     }
 
     // Закрытие модального окна
     const closeModal = (event) => {
         if (event.target.classList.contains('modal__background') && !preventClick.value && mouseEventDown.value.classList.contains('modal__background')) {
-            modals.value.pop()
+            deletePage()
         }
+    }
+
+    const deletePage = () => {
+        let activeModal = modals.value[modals.value.length - 1]
+            
+        if (activeModal.isCreate) {
+            // tableScripts.deleteRows([activeModal.id], activeModal.slug)
+        }
+        modals.value.pop()
     }
 
     // Опускание мыши

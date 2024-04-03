@@ -8,7 +8,7 @@
         :isShowId="true"
         :anotherTitle="props.item.anotherTitle"
         :isLink="![null, undefined].includes(activeOption.id)"
-        :class="[null, undefined].includes(activeOption.id) ? 'relation__item_empty' : ''"
+        :class="[[null, undefined].includes(activeOption.id) ? 'relation__item_empty' : '', !props.isHaveLink ? 'relation__item_disabled' : '']"
         @clickOutside="() => emit('clickOutside', true)"
         @createOption="(data) => emit('createOption', data)"
         @openLink="() => callAction({action: 'openLink', value: localItem})"
@@ -17,7 +17,7 @@
     >
         <template #icon>
             <figure 
-                v-if="![null, undefined].includes(activeOption)" 
+                v-if="![null, undefined].includes(activeOption) && props.isHaveLink" 
                 class='ibg relation__icon popup_prevent' 
                 @click="(event) => {event.preventDefault(); callAction({action: 'openLink', value: localItem})}"
             >
@@ -27,7 +27,7 @@
                     :alt='activeOption.text' 
                 />
                 <figcaption v-else :style="`--backgroundColor: ${[null, undefined].includes(activeOption.color) || activeOption.color == '' ? '#a6b7d4' : activeOption.color}`">
-                    {{ activeOption.text.substring(0, 1) }}
+                    {{ String(activeOption.text).substring(0, 1) }}
                 </figcaption>
             </figure>
         </template>
@@ -41,9 +41,8 @@
 <script setup>
     import './RelationItem.scss';
     
-    import { ref, onMounted, watch } from 'vue'
-
-    import AppAutocomplete from '@/components/Appautocomplete/input.vue';
+    import commonScriptsGlobal from '@/commonScripts/commonScripts.js'
+    import AppAutocomplete from '@/components/AppAutocomplete/Input.vue';
 
     let activeOption = ref(null)
     let localItem = ref(null)
@@ -83,6 +82,10 @@
         },
         isAnotherTitle: {
             default: false,
+            type: Boolean
+        },
+        isHaveLink: {
+            default: true,
             type: Boolean
         }
     })
@@ -139,15 +142,12 @@
         }
 
         // Поиск опций
-        const searchOptions = (value) => {
-            /* Удалить код и вставить свой метод на поиск опций */
+        const searchOptions = async (value) => {
+            let request = await commonScriptsGlobal.getInfoAutocomplete(value.value.toLowerCase(), props.fieldId)
+            localItem.value.options = request
 
-            let findedOptions = backupOptions.value.filter(option => option.label.text.toLowerCase().includes(value.value.toLowerCase())) 
-            localItem.value.options = findedOptions
-            console.log('Поиск опций', findedOptions);
-            
             if (props.isAnotherTitle) {
-                emit('changeAnotherTitle', {key: props.item.key, value: value.value})
+                emit('callAction', {action: 'changeAnotherTitle', value: {key: props.item.anotherKey, value: value.value}})
             }
         }
 

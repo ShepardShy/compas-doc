@@ -41,8 +41,8 @@
             </template>
         </draggable>
 
-        <div class="file-container__circle" v-if="props.isOneFile && props.isReadOnly && localImages.length > 2">
-            {{ localImages.length - 1 }}
+        <div class="file-container__circle" v-if="props.isOneFile && props.isReadOnly && localImages.length > 1">
+            {{ localImages.length }}
         </div>
     </FansyBox>
 </template>
@@ -52,10 +52,7 @@
 
     import draggable from 'vuedraggable'
 
-    // import {useUserStore} from "~/stores/userStore";
-    // import commonScripts from "~/commonScripts/commonScripts";
-
-    import {toast} from 'vue3-toastify';
+    import commonScripts from "~/commonScripts/commonScripts";
 
     import FansyBox from '@/components/AppFansyBox/FansyBox.vue';
     import FansyBoxImage from '@/components/AppFansyBox/FansyBoxImage/FansyBoxImage.vue';
@@ -103,8 +100,6 @@
         'changeValue',
         'initEdit'
     ])
-
-    // const userStore = useUserStore()
 
     // Получение значении
     const getValues = () => {
@@ -222,8 +217,7 @@
 
                     ajax.open('POST', 'https://opt6.compas.pro/api/files/store', true);
 
-                    ajax.setRequestHeader("Authorization", `Bearer ${import.meta.env.VITE_USER_TOKEN}`);
-
+                    ajax.setRequestHeader("Authorization", `Bearer `);
                     ajax.send(data);
                 }
 
@@ -231,12 +225,11 @@
             }
 
             data.value.forEach(async (file) => {
-                if (!supportedExtensions.includes(file.name.split('.').splice(-1)[0])) {
-                    // Здесь должен использоваться toast
-                    // await commonScripts.showNotification({
-                    //     title: 'Ошибка загрузки файла',
-                    //     description: `Поддерживаемыей файлы ${supportedExtensions.join(', ')}`
-                    // }, 'error')
+                if (!supportedExtensions.includes(file.name.split('.').splice(-1)[0].toLowerCase())) {
+                    commonScripts.showNotification({
+                        title: 'Ошибка загрузки файла',
+                        description: `Поддерживаемыей файлы ${supportedExtensions.join(', ')}`
+                    }, 'error')
                     return
                 }
 

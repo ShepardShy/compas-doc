@@ -25,7 +25,7 @@
     &.popup_up {
         .popup__content {
             top: auto;
-            bottom: 50px;
+            bottom: calc(var(--popupHeight) + 10px);
         }
     }
 
@@ -40,6 +40,10 @@
         .popup__content {
             opacity: 1;
         }
+    }
+
+    * {
+        @include mixins.userSelect($value: none);
     }
 }
 
@@ -62,61 +66,13 @@
     top: 20px;
     left: 0px;
     opacity: 0;
-    z-index: 9999;
+    z-index: 999;
     min-width: 200px;
-    overflow-y: auto;
     max-height: 300px;
+    overflow-y: auto;
     position: absolute;
     border-radius: 5px;
     @include mixins.scrollBar();
     background: variables.$color-white;
     box-shadow: 0 0 3px #000, inset 0 1px 2px #ffffff80;
-
-    .popup-option__draggable {
-        .popup__option {
-            padding: 10px;
-
-            .icon__draggable {
-                left: 5px;
-                position: static;
-            }
-
-            &.sortable-ghost {
-                height: 37px;
-            }
-
-            &.popup-option__sublink {
-                justify-content: flex-start;
-            }
-            
-            &.sortable-ghost {
-                @include mixins.sortableGhost();
-            
-                font-size: 0;
-        
-                * {
-                    opacity: 0;
-                }
-            }
-
-            svg {
-                * {
-                    fill: #a6b7d4;
-                }
-            }
-        }
-
-        &.popup-option__draggable_dragging {
-            .popup-option {
-                &:hover {
-                    background: transparent !important;
-    
-                    .icon__draggable {
-                        @include mixins.setSVGColor(variables.$color-blue-grey)
-                    }
-                }
-            }
-        }
-    }
 }
-

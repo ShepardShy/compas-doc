@@ -4,11 +4,16 @@
 .menu {
     &.menu_mobile {
         display: none;
-        
+        z-index: 10000;
+        position: absolute;
+        @include mixins.elemPositionOptions(30px, 15px);
+
         .menu__content {
             width: 100%;
-            position: absolute;
-            z-index: 9999;
+            height: 100vh;
+            position: fixed;
+            z-index: 10000;
+            padding: 15px 10px;
             background: variables.$color-white;
             @include mixins.elemPositionOptions(0px, 0px);
         }
@@ -68,11 +73,17 @@
             border: 1px solid variables.$color-light-grey;
 
             &:hover, &.menu__item_active {
-                border: 1px solid variables.$color-orange;
+                filter: none;
+                border: 1px solid variables.$color-orange !important;
             }
 
             &.menu__item_red {
                 color: variables.$color-red;
+            }
+
+            &.menu__item_btn-logout {
+                text-align: left;
+                font-family: Verdana, sans-serif;
             }
         }
 

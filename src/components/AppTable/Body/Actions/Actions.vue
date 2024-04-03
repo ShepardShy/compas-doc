@@ -10,6 +10,7 @@
         <AppPopup 
             class="popup_actions" 
             ref="popupRef" 
+            :isCanSelect="false"
             :closeByClick="false" 
             @click="(e) => props.disabled ? e.preventDefault() : openPopup(true)" 
             @clickOutside="() => openPopup(false)"

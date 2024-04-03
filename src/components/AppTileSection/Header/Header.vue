@@ -2,23 +2,26 @@
     <div class="tile-section__header">
         <div 
             class="tile-section__title" 
-            :class="Boolean(stateTitle) ? 'tile-section__title_edit' : ''" 
         >
-            <IconDrag />
+            <IconDragSection v-if="isEditableSettings"/>
 
             <AppH3Editable 
+                v-if="isEditableSettings"
                 :item="{
-                    value: section.title,
+                    value: section.name,
                     key: 'tileHeader',
                 }"
                 @saveTitle="(data) => emit('callAction', { 
                     action: 'changeTitle', 
                     value: {
                         id: section.id,
-                        title: data
+                        name: data
                     } 
                 })"
             />
+            <AppH3 v-else>
+                {{ section.name }}
+            </AppH3>
         </div>
         <div class="tile-section__header-actions">
             <ButtonText @click="() => emit('callAction', { action: 'changeState', value: null })">
@@ -26,7 +29,7 @@
 
             </ButtonText>
 
-            <AppPopup :closeByClick="true">
+            <AppPopup :isCanSelect="false" :closeByClick="true" v-if="isEditableSettings">
                 <template #summary>
                     <IconSettings />
                 </template>
@@ -46,8 +49,9 @@
     import { inject } from 'vue';
 
     import AppPopup from '@/components/AppPopup/Popup.vue';
-    import IconDrag from '@/components/AppIcons/Drag/Drag.vue';
+    import IconDragSection from '@/components/AppIcons/DragSection/DragSection.vue';
     import AppH3Editable from '@/components/AppHeaders/H3/Editable/Editable.vue';
+    import AppH3 from '@/components/AppHeaders/H3/H3.vue';
     import IconSettings from '@/components/AppIcons/Settings/Settings.vue';
     import ButtonText from '@/components/AppButton/ButtonText/ButtonText.vue';
     import PopupOption from '@/components/AppPopup/PopupOption/PopupOption.vue';
@@ -57,4 +61,5 @@
     ])
 
     const section = inject('section')
+    const isEditableSettings = inject('isEditableSettings')
 </script>

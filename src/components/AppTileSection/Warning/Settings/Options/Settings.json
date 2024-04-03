@@ -29,6 +29,10 @@
             "label": "Программное"
         },
         {
+            "value": "date",
+            "label": "Дата"
+        },
+        {
             "value": "address",
             "label": "Программное"
         }

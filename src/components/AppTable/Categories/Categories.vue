@@ -24,7 +24,7 @@
 
 	import AppSection from '@/components/AppSection/AppSection.vue';
 	import ButtonText from '@/components/AppButton/ButtonText/ButtonText.vue';
-    import SectionHeader from "@/components/AppSection/Header/Header.vue";
+    import SectionHeader from "@/components/AppSection/SectionHeader/SectionHeader.vue";
 
 	import CategoryItem from './Item/Item.vue'
 

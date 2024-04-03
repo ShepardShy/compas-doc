@@ -12,6 +12,17 @@
         align-items: center;
         color: variables.$color-blue-grey;
     }
+
+    &.filter__fields_dragging {
+        .icon__draggable, 
+        .icon__settings {
+            opacity: 0;
+        }
+    }
+
+    &.clone-elem {
+        background: variables.$color-white;
+    }
 }
 
 .filter__field {
@@ -42,12 +53,24 @@
     .popup {
         position: absolute;
         top: 0px;
-        right: 0px;
+        right: 12px;
 
         .icon__settings {
             svg {
                 @include mixins.elemResolutionOptions(12px, 12px);
             }
+        }
+
+        &.status__popup, &.select__popup {
+            position: relative;
+            right: auto;
+            top: auto;
+        }
+
+        &.autocomplete__popup {
+            position: relative;
+            right: auto;
+            top: auto;
         }
     }
 

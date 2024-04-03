@@ -26,7 +26,7 @@
 
     import OptionsComponent from './Options/Options.vue'
     import AppButton from '@/components/AppButton/AppButton.vue';
-    import AppWarning from '@/components/AppWarning/AppWarning.vue';
+    import AppWarning from '@/components/AppWarning/WarningNew/AppWarning.vue';
 
     const changedKeys = ref({})
     
@@ -54,7 +54,7 @@
         } else {
             changedKeys.value.id = edittingField.value.id
             emit('callAction', {
-                action: 'updateSettings',
+                action: 'updateField',
                 value: changedKeys.value
             })
         }

@@ -2,6 +2,7 @@
     <AppPopup 
         class="status__popup" 
         :closeByClick="false" 
+        :isCanSelect="true"
         ref="popupRef" 
         @clickOutside="() => {emit('clickOutside', true); callActionColorPicker({action: 'toggleColorPicker', data: false})}"
         @click="(event) => props.isReadOnly ? event.preventDefault() : null"
@@ -47,10 +48,9 @@
 <script setup>
     import './StatusField.scss';
 
-    import { ref, onMounted, watch } from 'vue'
-
-    import PopupScripts from '@/components/AppPopup/Scripts.js';
+    import api from "~/helpers/api";
     import AppPopup from '@/components/AppPopup/Popup.vue';
+    import PopupScripts from '@/components/AppPopup/Scripts.js';
     import StatusOption from '../StatusOption/StatusOption.vue';
     import IconArrow from '@/components/AppIcons/Arrow/Arrow.vue';
     import ColorPicker from '@/components/AppColorPicker/ColorPicker.vue';
@@ -90,6 +90,10 @@
                 }],
             },
             type: Object
+        },
+        focus: {
+            default: false,
+            type: Boolean
         },
         isCanCreate: {
             default: false,
@@ -158,32 +162,16 @@
             }
                 
             // Отправка созданной скрытой опции на сервер
-            const getHiddenOption = () => {
-                console.log('Создание нового скрытого цвета', {
-                    key: props.item.key,
+            const getHiddenOption = async () => {
+                let response = await api.callMethod("POST", `field/status`, {
                     field_id: props.item.id,
                     color: colorPicker.value.color,
-                });
+                })
 
-                setTimeout(() => {
-                    let response = {
-                        label: {
-                            id: 15,
-                            sort: 0,
-                            file: null,
-                            is_hidden: 1,
-                            field_id: 1,
-                            color: colorPicker.value.color,
-                            text: null
-                        },
-                        value: 15
-                    }
-
-                    options.value = options.value.filter(option => !option.is_new)
-                    options.value.push(response)
-                    activeOption.value = response.label
-                    emit('changeValue', {key: props.item.key, value: response.value})
-                }, 3000);
+                options.value = options.value.filter(option => !option.is_new)
+                options.value.push(response)
+                activeOption.value = response.label
+                emit('changeValue', {key: props.item.key, value: response.value})
             }
 
             createHiddenOption()
@@ -262,11 +250,15 @@
         }
     })
 
-    watch(() => props.item.focus, () => {
-        if (props.item.focus) {
-            popupRef.value.popupRef.setAttribute('open', true)
-            PopupScripts.setDropdownPosition(popupRef.value.popupRef)
-        }
+    watch(() => props.focus, () => {
+        setTimeout(() => {
+            if (props.item.focus) {
+                popupRef.value.popupRef.setAttribute('open', true)
+                PopupScripts.setDropdownPosition(popupRef.value.popupRef)
+            }
+        }, 10);
+    }, {
+        deep: true
     })
 
     watch(() => props.item.options, () => {

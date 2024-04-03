@@ -3,14 +3,6 @@
         <div class="total__list">
             <div class="total__item">
                 <div class="total__title">
-                    Сумма:
-                </div>
-                <div class="total__value">
-                    {{ setSum }} Руб.
-                </div>
-            </div>
-            <div class="total__item">
-                <div class="total__title">
                     Количество:
                 </div>
                 <div class="total__value">
@@ -23,6 +15,17 @@
                 </div>
                 <div class="total__value">
                     {{ setWeight }} кг
+                </div>
+            </div>
+        </div>
+
+        <div class="total__list">
+            <div class="total__item">
+                <div class="total__title">
+                    Сумма:
+                </div>
+                <div class="total__value">
+                    {{ setSum }} Руб.
                 </div>
             </div>
         </div>

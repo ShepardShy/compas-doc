@@ -30,6 +30,7 @@
                                     </div>
                                 </div>
                                 <figure 
+                                    :title="field.user.name"
                                     class='ibg history-item__user' 
                                     :style="`--backgroundColor: ${field.user.color};`"
                                     @click="() => emit('callAction', { action: 'showModal', value: {
@@ -68,14 +69,14 @@
 
         </div>
         <div class="history__footer" v-show="props.history.current_page < props.history.last_page">
-            <AppButton class="button_white" @click="() => emit('callAction', {
+            <AppButton class="button_white" :disabled="props.loaderState == 'loadHistory'" :class="props.loaderState == 'loadHistory' ? 'button_loading' : ''" @click="() => emit('callAction', {
                 action: 'showMore',
                 value: {
                     page: props.history.current_page + 1,
                     per_page: props.history.per_page
                 }
             })">
-                Показать еще
+                Показать еще {{ props.loaderState }}
             </AppButton>
         </div>
     </div>
@@ -99,6 +100,10 @@
                 current_page: 1,
             },
             type: Object
+        },
+        loaderState: {
+            default: null,
+            type: String
         }
     })
 
@@ -148,6 +153,9 @@
     })
 
     watch(() => props.history.data, () => {
+        console.log(props.history.data);
         getValue(props.history.data)
+    }, {
+        deep: true
     })
 </script>

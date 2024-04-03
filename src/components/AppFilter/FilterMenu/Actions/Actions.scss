@@ -4,13 +4,27 @@
 .filter__actions {
     padding-left: 15px;
 
-    .popup__summary {
-        cursor: pointer;
-        color: variables.$color-blue-grey;
-        @include mixins.userSelect($value: none);
-
-        &:hover {
-            color: variables.$color-active;
+    .popup {
+        &.popup_up {
+            .popup__content {
+                bottom: 30px;
+            }
+        }
+    
+        .popup__summary {
+            cursor: pointer;
+            color: variables.$color-blue-grey;
+            @include mixins.userSelect($value: none);
+    
+            &:hover {
+                color: variables.$color-active;
+            }
+        }
+    
+        &[open] {
+            .popup__summary {
+                color: variables.$color-active;
+            }
         }
     }
 }

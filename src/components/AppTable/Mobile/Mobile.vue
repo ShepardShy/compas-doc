@@ -1,180 +1,216 @@
 <template>
     <div class="table-template__body_mobile">
         <AppLoader class="table-template__loader" ref="loaderRef"/>
-
-        <div class="table-mobile" :class="bodyData.length == 0 ? 'table-mobile_empty' : ''">
-            <div 
-                v-for="row in bodyData" 
-                class="table-mobile__row table__row" 
-                :class="row.isEdit ? 'table__row_edit' : row.isChoose ? 'table__row_choosed' : '', row.isUpdated ? 'table__row_updated' : ''"
+            <draggable 
+                tag="div"
+                class="table-mobile"
+                itemKey="table-mobile"
+                :class="bodyData.length == 0 ? 'table-mobile_empty' : ''"
+                v-model="bodyData" 
+                handle=".icon__draggable"
+                @start="() => dragStart()"
+                @end="(event) => emit('callAction', {action: 'moveRows', value: event.to.__draggable_component__.modelValue})" 
             >
-                <div 
-                    v-for="item in fields" 
-                    class="table-mobile__field table__item" 
-                    :class="!item.enabled ? 'table__item_hidden' : ''"
-                    @click="(event) => doubleClick(event, row, item)" 
-                >
-                    <AppCheckbox 
-                        v-if="item.type == 'checkbox'"
-                        :item="{
-                            isHTML: false,
-                            id: row.id,
-                            key: item.key,
-                            title: item.title,
-                            value: row[item.key],
-                            required: Boolean(item.required)
-                        }"
-                        :disabled="actionState == 'saving'"
-                        @changeValue="(data) => changeValue(row.id, data)"
-                    />
-                    <AppRelation 
-                        v-else-if="item.type == 'relation'"
-                        :item="{
-                            focus: false,
-                            id: row.id,
-                            placeholder: null,
-                            key: item.key,
-                            title: item.title,
-                            value: row[item.key],
-                            required: Boolean(item.required),
-                            options: ['status', 'relation'].includes(item.type) ? item.options : null,
-                            lockedOptions: item.choosed,
-                        }"
-                        :isCanCreate="true"
-                        :isMultiple="Boolean(item.is_plural)"
-                        :isReadOnly="Boolean(item.read_only || !row.isEdit)"
-                        @changeValue="(data) => changeValue(row.id, data)"
-                        @openLink="(data) => callAction({action: 'openLink', value: {id: data.id, slug: item.related_table}})"
-                        @showAll="() => callAction({action: 'openLink', value: {id: row.id, slug: props.slug, tab: item.related_table}})"
-                        @createOption="() => emit('callAction', {action: 'createOption', value: item.related_table})"
-                    />
-                    <AppTextarea 
-                        v-else-if="['number', 'password', 'text'].includes(item.type)"
-                        :item="{
-                            focus: false,
-                            id: row.id,
-                            placeholder: null,
-                            key: item.key,
-                            type: item.type,
-                            title: item.title,
-                            substring: item.unit,
-                            required: Boolean(item.required),
-                            external_link: ![null, undefined].includes(row[item.key]) && row[item.key] != '' ? row[item.key].external_link : null,
-                            value: [null, undefined].includes(row[item.key]) ? null : typeof row[item.key] == 'object' ? String(row[item.key].value) : String(row[item.key]),
-                        }"
-                        :disabled="false"
-                        :isUseEnter="false"
-                        :mask="item.mask"
-                        :isLink="Boolean(item.is_external_link)"
-                        :isReadOnly="Boolean(item.read_only || !row.isEdit)"
-                        @changeValue="(data) => changeValue(row.id, data)"
-                    />
-                    <FormItem 
-                        v-else-if="item.type == 'json'"
-                        class="form-item__value" 
-                        :required="Boolean(item.required)"
+                <template #item="{ element: row, index }">
+                    <div 
+                        v-show="props.loaderState != 'loading'"
+                        class="table-mobile__row table__row" 
+                        :class="
+                            row.isEdit ? 'table__row_edit' : row.isChoose ? 'table__row_choosed' : '', 
+                            row.isUpdated ? 'table__row_updated' : ''
+                        "
                     >
-                        <FormLabel
-                            v-show="item.title != null && item.title != ''"
-                            :title="item.title"
-                        />
+                        <div 
+                            v-for="item in fields" 
+                            class="table-mobile__field table__item" 
+                            :class="!item.enabled ? 'table__item_hidden' : ''"
+                            @click="(event) => doubleClick(event, row, item)" 
+                        >
+                            <AppCheckbox 
+                                v-if="item.type == 'checkbox'"
+                                :item="{
+                                    isHTML: false,
+                                    id: row.id,
+                                    key: item.key,
+                                    title: item.title,
+                                    value: row[item.key],
+                                    required: Boolean(item.required)
+                                }"
+                                :disabled="actionState == 'saving'"
+                                @changeValue="(data) => changeValue(row.id, data)"
+                            />
+                            <AppRelation 
+                                v-else-if="item.type == 'relation'"
+                                :item="{
+                                    focus: false,
+                                    id: row.id,
+                                    placeholder: null,
+                                    key: item.key,
+                                    title: item.title,
+                                    value: row[item.key],
+                                    required: Boolean(item.required),
+                                    anotherKey: isDinamyc ? 'product_name' : null,
+                                    anotherTitle: isDinamyc ? props.row.product_name : null,
+                                    options: ['status', 'relation'].includes(item.type) ? item.options : null,
+                                    lockedOptions: item.choosed,
+                                }"
+                                :isCanCreate="true"
+                                :isAnotherTitle="isDinamyc"
+                                :isMultiple="Boolean(item.is_plural)"
+                                :isReadOnly="Boolean(item.read_only || !row.isEdit)"
+                                @changeValue="(data) => changeValue(row.id, data)"
+                                @openLink="(data) => callAction({action: 'openLink', value: {id: data.id, slug: item.related_table}})"
+                                @showAll="() => callAction({action: 'openLink', value: {id: row.id, slug: props.slug, tab: item.related_table}})"
+                                @createOption="() => emit('callAction', {action: 'createOption', value: item.related_table})"
+                            />
+                            <AppTextarea 
+                                v-else-if="['number', 'password', 'text'].includes(item.type) && (!isDinamyc || (isDinamyc && item.key != 'product_sum'))"
+                                :item="{
+                                    focus: false,
+                                    id: row.id,
+                                    placeholder: null,
+                                    key: item.key,
+                                    type: item.type,
+                                    title: item.title,
+                                    substring: item.unit,
+                                    required: Boolean(item.required),
+                                    external_link: ![null, undefined].includes(row[item.key]) && row[item.key] != '' ? row[item.key].external_link : null,
+                                    value: [null, undefined].includes(row[item.key]) ? null : typeof row[item.key] == 'object' ? String(row[item.key].value) : String(row[item.key]),
+                                }"
+                                :disabled="false"
+                                :isUseEnter="false"
+                                :mask="item.mask"
+                                :isLink="Boolean(item.is_external_link)"
+                                :isReadOnly="Boolean(item.read_only || !row.isEdit)"
+                                @changeValue="(data) => changeValue(row.id, data)"
+                            />
+                            <FormItem 
+                                v-else-if="item.type == 'json'"
+                                class="form-item__value" 
+                                :required="Boolean(item.required)"
+                            >
+                                <FormLabel
+                                    v-show="item.title != null && item.title != ''"
+                                    :title="item.title"
+                                />
 
-                        <FormValue 
-                            :isHTML="true"
-                            :value="row[item.key]"
-                            :isLink="Boolean(item.is_external_link)"
-                            :link="typeof row[item.key] == 'object' && row[item.key] != null ? row[item.key].external_link : null"
-                        />
-                    </FormItem>
-                    <AppActions 
-                        v-else-if="item.type == 'actions'"
-                        :item="{
-                            title: 'Действие',
-                            slug: row.isEdit ? 'edit' : 'view'
-                        }"
-                        :disabled="!row.isChoose && actionState == 'saving'"
-                        @callAction="(data) => callAction({action: data.value, value: row})"
-                    />
-                    <AppStatus 
-                        v-else-if="item.type == 'status'"
-                        :item="{
-                            focus: false,
-                            id: row.id,
-                            key: item.key,
-                            title: item.title,
-                            options: item.options,
-                            value: row[item.key],
-                            required: Boolean(item.required),
-                        }"
-                        :isCanCreate="false"
-                        :isHaveNullOption="false"
-                        :isReadOnly="Boolean(item.read_only || !row.isEdit)"
-                        @changeValue="(data) => changeValue(row.id, data)"
-                    />
-                    <AppSelect 
-                        v-else-if="item.type == 'select_dropdown'"
-                        :item="{
-                            id: row.id,
-                            key: item.key,
-                            value: row[item.key],
-                            focus: false,
-                            required: Boolean(item.required),
-                            title: item.title,
-                            options: item.options,
-                            lockedOptions: []
-                        }"
-                        :isReadOnly="Boolean(item.read_only || !row.isEdit)"
-                        :isHaveNullOption="true"
-                        :isMultiple="Boolean(item.is_plural)"
-                        :isFiltered="true"
-                        @changeValue="(data) => changeValue(row.id, data)"
-                    />
+                                <FormValue 
+                                    :isHTML="true"
+                                    :value="row[item.key]"
+                                    :isLink="Boolean(item.is_external_link)"
+                                    :link="typeof row[item.key] == 'object' && row[item.key] != null ? row[item.key].external_link : null"
+                                />
+                            </FormItem>
+                            <FormValue 
+                                v-else-if="isDinamyc && item.key == 'product_sum'"
+                                :isHTML="true"
+                                :value="calcSum(row)"
+                                :isLink="Boolean(item.is_external_link)"
+                                :link="typeof row[item.key] == 'object' && row[item.key] != null ? row[item.key].external_link : null"
+                            />
+                            <AppActions 
+                                v-else-if="item.type == 'actions'"
+                                :item="{
+                                    title: 'Действие',
+                                    slug: row.isEdit ? 'edit' : 'view'
+                                }"
+                                :disabled="!row.isChoose && actionState == 'saving'"
+                                @callAction="(data) => callAction({action: data.value, value: row})"
+                            />
+                            <AppStatus 
+                                v-else-if="item.type == 'status'"
+                                :item="{
+                                    focus: false,
+                                    id: row.id,
+                                    key: item.key,
+                                    title: item.title,
+                                    options: item.options,
+                                    value: row[item.key],
+                                    required: Boolean(item.required),
+                                }"
+                                :isCanCreate="false"
+                                :isHaveNullOption="false"
+                                :isReadOnly="Boolean(item.read_only || !row.isEdit)"
+                                @changeValue="(data) => changeValue(row.id, data)"
+                            />
+                            <AppSelect 
+                                v-else-if="item.type == 'select_dropdown'"
+                                :item="{
+                                    id: row.id,
+                                    key: item.key,
+                                    value: row[item.key],
+                                    focus: false,
+                                    required: Boolean(item.required),
+                                    title: item.title,
+                                    options: item.options,
+                                    lockedOptions: []
+                                }"
+                                :isReadOnly="Boolean(item.read_only || !row.isEdit)"
+                                :isHaveNullOption="true"
+                                :isMultiple="Boolean(item.is_plural)"
+                                :isFiltered="true"
+                                @changeValue="(data) => changeValue(row.id, data)"
+                            />
+                            <AppFile 
+                                v-else-if="item.type == 'file'"
+                                :item="{
+                                    id: row.id,
+                                    title: item.title,
+                                    key: item.key,
+                                    required: Boolean(item.required),
+                                    buttonName: null,
+                                    value: row[item.key]
+                                }"
+                                :isReadOnly="true"
+                                :isShowFileName="false"
+                                :isMultiple="false"
+                                :isOneFile="true"
+                                @changeValue="(data) => changeValue(row.id, data)"
+                            />
+                            <AppDate 
+                                v-else-if="item.type == 'date'"
+                                :item="{
+                                    id: row.id,
+                                    required: true,
+                                    title: item.title,
+                                    placeholder: null,
+                                    value: row[item.key],
+                                    key: item.key,
+                                    focus: false
+                                }"
+                                :isMultiple="Boolean(item.is_plural)"
+                                :isReadOnly="Boolean(item.read_only || !row.isEdit)"
+                                @changeValue="(data) => changeValue(row.id, data)"
+                            />
+                            <div class="table-item__icon" v-else-if="item.type == 'iconDrag'">
+                                <IconDrag />
+                                <FormValue 
+                                    v-show="isNumeric"
+                                    :isHTML="false"
+                                    :value="index + 1"
+                                    :isLink="false"
+                                    :link="null"
+                                />
+                            </div>
 
-                    <AppFile 
-                        v-else-if="item.type == 'file'"
-                        :item="{
-                            id: row.id,
-                            title: item.title,
-                            key: item.key,
-                            required: Boolean(item.required),
-                            buttonName: null,
-                            value: row[item.key]
-                        }"
-                        :isReadOnly="true"
-                        :isShowFileName="false"
-                        :isMultiple="false"
-                        :isOneFile="true"
-                        @changeValue="(data) => changeValue(row.id, data)"
-                    />
-
-                    <AppDate 
-                        v-else-if="item.type == 'date'"
-                        :item="{
-                            id: row.id,
-                            required: true,
-                            title: item.title,
-                            placeholder: null,
-                            value: row[item.key],
-                            key: item.key,
-                            focus: false
-                        }"
-                        :isMultiple="Boolean(item.is_plural)"
-                        :isReadOnly="Boolean(item.read_only || !row.isEdit)"
-                        @changeValue="(data) => changeValue(row.id, data)"
-                    />
-
-                    <div v-else>
-                        {{ item.type }}
+                            <IconDelete
+                                v-else-if="item.type == 'iconDelete'"
+                                @click="() => callAction({action: 'removeRow', value: index + 1})"
+                            />
+                            <div v-else>
+                                {{ item.type }}
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                </template>
+        </draggable>
     </div>
 </template>
 
 <script setup>
     import './Mobile.scss';
 
+    import draggable from 'vuedraggable'
     import { inject, ref, onMounted, onUnmounted } from 'vue'
     
     import AppDate from '@/components/AppInputs/Date/Date.vue'
@@ -189,13 +225,19 @@
     import AppCheckbox from "@/components/AppInputs/Checkbox/Checkbox.vue"
     import AppTextarea from "@/components/AppInputs/Textarea/Textarea.vue"
     import AppRelation from "@/components/AppSelects/Relation/Relation.vue"
+    import IconDrag from '@/components/AppIcons/Drag/Drag.vue'
+    import IconDelete from '@/components/AppIcons/Delete/Delete.vue'    
 
     const fields = inject('fields')
     const bodyData = inject('bodyData')
+    const backupRows = inject('backupRows')
+    const sectionRef = inject('sectionRef')
     const actionState = inject('actionState')
     const backupValues = inject('backupValues')
-    const sectionRef = inject('sectionRef')
     const scrollPosition = inject('scrollPosition')
+    const skipChecking = inject('skipChecking')
+    const isNumeric = inject('isNumeric')
+    const isDinamyc = inject('isDinamyc')
 
     let clickSetting = ref({
         id: -1,
@@ -212,6 +254,10 @@
         isTrash: {
             default: false,
             type: Boolean
+        },
+        loaderState: {
+            default: null,
+            type: String
         }
     })
 
@@ -229,6 +275,31 @@
                 actionState.value = props.isTrash ? 'restoring' : 'editting'
             } else if (bodyData.value.filter(p => p.isChoose).length == 0) {
                 actionState.value = null
+            }
+        }
+
+        if (props.isPermanentEdit) {
+            skipChecking.value = true
+
+            if (actionState.value == null) {
+                backupRows.value =  JSON.parse(JSON.stringify(bodyData.value))
+                actionState.value = props.isTrash ? 'restoring' : 'saving'
+            }
+
+            backupValues.value = JSON.parse(JSON.stringify(bodyData.value))
+        }
+
+        if (isDinamyc && data.key == 'product_id') {
+            findedRow.id = data.value.selectedOption ? data.value.selectedOption.id : null
+            findedRow.product_price = data.value.selectedOption ? data.value.selectedOption.price : null
+            findedRow.product_weight = data.value.selectedOption ? data.value.selectedOption.weight : null
+            findedRow.product_count = 1
+
+            if (data.value.value != null) {
+                findedRow[data.key].localOptions = [{
+                    label: data.value.selectedOption,
+                    value:  data.value.selectedOption.id
+                }]
             }
         }
     }
@@ -271,7 +342,7 @@
        
         // Редактирование строки
         const editRow = (value) => {
-            let findedIndex = bodyData.value.findIndex(row => row.id == value.id)
+            let findedIndex = bodyData.value.findIndex(row => row.id == value.id)         
             backupValues.value.push(JSON.parse(JSON.stringify(bodyData.value[findedIndex])))
             bodyData.value[findedIndex].isEdit = true
             bodyData.value[findedIndex].isChoose = true
@@ -326,6 +397,16 @@
                 return window.innerHeight / 2 + window.scrollY - startPosScrollBlock - 41
             }
         }
+    }
+
+    const dragStart = () => {
+        if (actionState.value != 'saving') {
+            backupRows.value = JSON.parse(JSON.stringify(bodyData.value))
+        }
+    }
+
+    const calcSum = (row) => {
+        return (row.product_count * row.product_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
     }
 
     onMounted(async () => {

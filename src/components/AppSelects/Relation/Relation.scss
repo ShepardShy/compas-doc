@@ -15,4 +15,8 @@
 
 .relation__actions {
     @include mixins.flexBlock($vertical: center, $horizontal: flex-start, $gap: 30px);
+    
+    .button-text {
+        overflow: visible;
+    }
 }

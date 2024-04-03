@@ -17,12 +17,12 @@
 <script setup>
     import './Filter.scss';
 
-    import { ref, onMounted, watch, provide, onUnmounted } from 'vue'
-
+    import { ref, onMounted, provide, onUnmounted } from 'vue'
+    
     import _ from 'lodash'
     import FilterMenu from './FilterMenu/FilterMenu.vue';
     import FilterHeader from './FilterHeader/FilterHeader.vue';
-    import renderScripts from "@/scripts/renderScripts/renderScripts"
+    import renderScripts from "@/commonScripts/renderScripts/renderScripts"
 
     let tabs = ref([])
     let saves = ref([])
@@ -80,7 +80,6 @@
         activeFields.value = fields.value.filter(field => field.enabled)
     })
 
-    // Установка активных плашек фильтра
     const setTabsFields = () => {
         if (!_.isEmpty(props.tabs)) {
             for (let field in props.tabs) {
@@ -129,10 +128,11 @@
                 } else if (field.type == 'select_dropdown') {
                     return field.options.find(option => option.value == field.value).label
                 } else if (field.type == 'relation') {
-                    return field.options.find(option => option.value == field.value).label
+                    let findedOption = field.options.find(option => option.value == field.value)
+                    return findedOption ? findedOption.label.text : null
                 } else if (field.type == 'status') {
                     let label = field.options.find(option => option.value == field.value).label
-                    return [null, undefined].includes(label.value) || label.value == '' ? label.color : label.value
+                    return [null, undefined].includes(label.text) || label.text == '' ? label.color : label.text
                 } else {
                     return field.value
                 }

@@ -5,10 +5,17 @@
                 <img :src="props.image.url" :alt="props.image.name" :title="props.image.name" />
             </figure>
 
-            <LoaderProgress
+            <IconLoaderProgress
                 v-if="props.loading"
                 :progressImage="progressImage"
             />
+
+            <div
+                v-if="props.isShowFileName && ![null, undefined].includes(props.image.name)"
+                class="fancybox-item__title"
+            >
+                {{ setName }}
+            </div>
         </a>
 
         <FansyBoxImageDetails
@@ -17,13 +24,6 @@
             :image="props.image"
             @callAction="(data) => emit('callAction', data)"
         />
-
-        <div
-            v-if="props.isShowFileName && ![null, undefined].includes(props.image.name)"
-            class="fancybox-item__title"
-        >
-            {{ setName }}
-        </div>
     </div>
 </template>
 
@@ -33,7 +33,7 @@
     import {computed} from "vue";
 
     import FansyBoxImageDetails from './FansyBoxImageDetails/FansyBoxImageDetails.vue';
-    import LoaderProgress from "@/components/AppIcons/LoaderProgress/LoaderProgress.vue";
+    import IconLoaderProgress from "@/components/AppIcons/LoaderProgress/LoaderProgress.vue";
     
     const props = defineProps({
         id: {
@@ -91,7 +91,7 @@
 
     // Провекра расширения файла и возврат нужной ссылкы
     const setHref = computed(() => {
-        return ['png', 'svg', 'jpeg', 'jpg', 'webp', 'pdf', 'gif', 'mp4', 'mp3'].includes(props.image.extension) ? props.image.file : props.image.preview
+        return ['png', 'svg', 'jpeg', 'jpg', 'webp', 'pdf', 'gif', 'mp4', 'mp3'].includes(props.image.extension) ? props.image.file : props.image.url
     })
 
     // Проверка блока на состояние перетаскивания

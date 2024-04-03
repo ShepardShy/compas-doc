@@ -6,7 +6,8 @@
 }
 
 .tabs__list {
-    @include mixins.flexBlock($vertical: center, $horizontal: flex-start, $gap: 5px 35px);
+    flex-wrap: wrap;
+    @include mixins.flexBlock($vertical: center, $horizontal: flex-start, $gap: 5px 25px);
 }
 
 .tabs__actions {
@@ -15,21 +16,53 @@
     .icon__save {
         @include mixins.flexBlock($vertical: center, $horizontal: flex-start, $gap: 0px);
     }
+
+    .popup {
+        &.popup_up {
+            .popup__content {
+                bottom: 20px;
+            }
+        }
+    }
 }
 
 .tabs__item {
     cursor: pointer;
     font-weight: 600;
     color: variables.$color-active;
-    @include mixins.flexBlock($vertical: center, $horizontal: flex-start, $gap: 10px);
+    @include mixins.flexBlock($vertical: center, $horizontal: flex-start, $gap: 5px);
 
     &.tabs__item_active {
         cursor: text;
         color: variables.$color-black;
     }
+
+    &:hover {
+        .popup__actions {
+            opacity: 1;    
+        }
+    }
+
+    .popup__actions {
+        font-weight: 400;
+        color: variables.$color-black;
+        opacity: 0;
+
+        &[open] {
+            opacity: 1;
+        }
+
+        .icon__settings {
+            svg {
+                @include mixins.elemResolutionOptions(13px, 13px);
+            }
+        }
+    }
 }
 
 .popup__tabs {
+    margin-right: 20px;
+    
     &[open] {
         .icon__triangle {
             transform: rotate(180deg);

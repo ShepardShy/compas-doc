@@ -1,5 +1,6 @@
 <template>
-    <details class="popup" ref="popupRef" 
+    <details class="popup" ref="popupRef"
+        :style="`--popupHeight: ${popupHeight}px`" 
         :class="props.isReadOnly ? 'popup_readonly' : ''"
         @mouseup="(event) => mouseDownEvent = null" 
         @mousedown="(event) => mouseDownEvent = event" 
@@ -23,6 +24,7 @@
 
     const popupRef = ref(null)
     let mouseDownEvent = ref(null)
+    let popupHeight = ref(null)
 
     const props = defineProps({
         closeByClick: {
@@ -31,6 +33,10 @@
         },
         isReadOnly: {
             default: false,
+            type: Boolean
+        },
+        isCanSelect: {
+            default: true,
             type: Boolean
         }
     })
@@ -41,7 +47,12 @@
 
     // Отслеживание вызова клика за пределами компонента
     const clickOutside = (event) => {
-        if (mouseDownEvent.value == null || mouseDownEvent.value.target.closest('.popup') == null) {
+        if (props.isCanSelect) {
+            if (mouseDownEvent.value == null || mouseDownEvent.value.target.closest('.popup') == null) {
+                emit('clickOutside', event)
+                PopupScripts.hideDetails(popupRef.value)
+            }
+        } else {
             emit('clickOutside', event)
             PopupScripts.hideDetails(popupRef.value)
         }
@@ -52,6 +63,14 @@
     const showDetail = () => {
         PopupScripts.setDropdownPosition(popupRef.value)
     }
+
+    const setHeight = () => {
+        popupHeight.value = popupRef.value == null ? 40 : popupRef.value.offsetHeight
+    }
+
+    onMounted(() => {
+        new ResizeObserver(setHeight).observe(popupRef.value)
+    })
 
     defineExpose({
         popupRef

@@ -13,6 +13,16 @@
             display: none;
         }
 
+        .form-item__value {
+            cursor: pointer;
+            text-decoration: underline;
+            color: variables.$color-blue-two;
+    
+            &:hover {
+                text-decoration: none;
+            }
+        }
+
         .relation__icon {
             border-radius: 50%; 
             overflow: hidden;
@@ -109,7 +119,18 @@
                 width: calc(100% - 40px);
             }  
         }
+
+        &.relation__item_disabled {
+            .form-item__value {
+                color:variables.$color-black;
+                text-decoration: none;
+            }
+        }
+    }
+
+    .popup__option_disabled {
+        &::after {
+            content: url('/icons/success.svg');
+        }
     }
 }
-
-

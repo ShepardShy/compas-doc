@@ -1,16 +1,26 @@
 <template>
     <draggable
+        ref="sectionBodyRef"
         v-model="section.fields" 
         class="tile-section__body"
         group="tile-section__body" 
         handle=".tile-section__drag"
-        :itemKey="`tile-section__${section.id}`"
+        :itemKey="String(section.id)"
+        :role="`tile-section_${prefix}`"
+        :key="`tile-section_${prefix}`"
         :class="section.fields.length == 0 ? 'tile-section__body_empty' : ''"
+        @start="(event) => dragStart(event)"
         @end="(event) => dragEnd(event)"
     >
         <template #item="{ element: field }">
-            <div class="tile-section__item" :style="`--textColor: ${field.set_color ? field.color : '#000'}`" :class="setClasses(field)" @click="(event) => editField(event, field)">
-                <IconDrag class="tile-section__drag"/>
+            <div 
+                class="tile-section__item" 
+                :style="`--textColor: ${field.set_color ? field.color : '#000'}`" 
+                :class="setClasses(field)" 
+                @click="(event) => editField(event, field)"
+                @dragstart="(event) => copyField(event)"
+            >
+                <IconDrag class="tile-section__drag" v-if="isEditableSettings"/>
 
                 <AppRelation 
                     v-if="field.type == 'relation'"
@@ -28,9 +38,10 @@
                     :isCanCreate="true"
                     :isMultiple="Boolean(field.is_plural)"
                     :isReadOnly="Boolean(!field.isEdit || !field.can_edit)"
+                    :isHaveLink="field.key != 'role_id'"
                     @changeValue="(data) => changeValue(field.id, data)"
                     @openLink="(data) => openLink({id: data.id, slug: field.related_table})"
-                    @showAll="() => openLink({id: field.id, slug: props.slug, tab: field.related_table})"
+                    @showAll="() => openLink({id: field.id, slug: props.slug, tab: field.key, key: field.related_table})"
                     @createOption="() => emit('callAction', {action: 'createOption', value: field.related_table})"
                 />
                 <AppInput 
@@ -87,6 +98,7 @@
                         required: Boolean(field.required),
                     }"
                     :isCanCreate="true"
+                    :isCanSave="true"
                     :isHaveNullOption="false"
                     :isReadOnly="Boolean(!field.isEdit || !field.can_edit)"
                     @changeValue="(data) => changeValue(field.id, data)"
@@ -129,7 +141,7 @@
                     v-else-if="field.type == 'date'"
                     :item="{
                         id: field.id,
-                        required: true,
+                        required: Boolean(field.required),
                         title: field.title,
                         placeholder: null,
                         value: field.value,
@@ -151,7 +163,7 @@
                         placeholder: null,
                         value: null,
                         key: field.key,
-                        focus: false,
+                        focus: field.focus,
                         subfields: field.subfields
                     }"
                     :isReadOnly="Boolean(!field.isEdit || !field.can_edit)"
@@ -166,7 +178,7 @@
                         required: Boolean(field.required),
                         focus: field.focus,
                         value: field.value,
-                        options: field.options,
+                        options: field.options ?? [],
                         lockedOptions: []
                     }"
                     :isReadOnly="Boolean(!field.isEdit || !field.can_edit)"
@@ -174,7 +186,7 @@
                     :isSelectSeveral="true"
                     @changeValue="(data) => changeValue(field.id, data)"
                 />
-                <AppPopup class="tile-section__settings" :closeByClick="true">
+                <AppPopup class="tile-section__settings" :isCanSelect="false" :closeByClick="true" v-if="isEditableSettings">
                     <template #summary>
                         <IconSettings />
                     </template>
@@ -197,7 +209,7 @@
                                     title: 'Показывать всегда',
                                     key: 'visible_always'
                                 }"
-                                @changeValue="(data) => updateSettings(field.id, {
+                                @changeValue="(data) => updateField(field.id, {
                                     visible_always: data.value
                                 })"
                             />
@@ -274,8 +286,11 @@
     import AppRelation from "@/components/AppSelects/Relation/Relation.vue"
     import AppInputGroup from '@/components/AppInputs/InputGroup/InputGroup.vue';
 
+    const prefix = ref(0)
+    const sectionBodyRef = ref(null)
     const section = inject('section')
-    
+    const isEditableSettings = inject('isEditableSettings')
+
     const props = defineProps({
         slug: {
             default: null,
@@ -287,6 +302,24 @@
         'callAction'
     ])
 
+    // Начало переноса поля
+    const dragStart = (event) => {
+        event.from.classList.add('tile-section__body_dragging')
+    }
+
+    // Копирование секции
+    const copyField = (event) => {
+        let parentElem = document.createElement("div")
+        let elem = event.target.cloneNode(true)
+        parentElem.appendChild(elem)
+        parentElem.id = "clone-elem";
+        parentElem.classList.add('clone-elem')
+        parentElem.classList.add('tile-section__body')
+        elem.style.width = `${ event.target.offsetWidth}px`
+        document.body.appendChild(parentElem);
+        event.dataTransfer.setDragImage(parentElem, 5, 8);
+    }
+
     // Конец переноса поля
     const dragEnd = (event) => {
         let fields = []
@@ -297,24 +330,30 @@
                 sort: i
             })
         }
+        
+        event.from.classList.remove('tile-section__body_dragging')
+        prefix.value++
+        document.querySelectorAll('#clone-elem').forEach(element => {
+            element.remove()
+        });
 
         emit('callAction', {
             action: 'changeOrder',
             value: {
                 fields: fields,
                 id: event.item._underlying_vm_.id,
-                section_id: Number(event.to.__draggable_component__.itemKey)
-            },
-            sections: {
-                from: {
-                    id: event.from.__draggable_component__.itemKey,
-                    fields: event.from.__draggable_component__.modelValue
-                },
-                to: {
-                    id: event.to.__draggable_component__.itemKey,
-                    fields: event.to.__draggable_component__.modelValue
+                section_id: Number(event.to.__draggable_component__.itemKey),
+                sections: {
+                    from: {
+                        id: event.from.__draggable_component__.itemKey,
+                        fields: event.from.__draggable_component__.modelValue
+                    },
+                    to: {
+                        id: event.to.__draggable_component__.itemKey,
+                        fields: event.to.__draggable_component__.modelValue
+                    }
                 }
-            }
+            },
         })
     }
 
@@ -329,6 +368,8 @@
                 } else {
                     if (field.type == 'text_group') {
                         return field.subfields.filter(subfield => subfield.value != null && subfield.value != '').length == 0 ? 'tile-section__item_hidden' : ''
+                    } else if (field.type == 'relation') {
+                        return field.value == null || field.value.value.length == 0 ? 'tile-section__item_hidden' : ''
                     } else {
                         return [null, undefined].includes(field.value) || field.value == '' ? 'tile-section__item_hidden' : ''
                     }
@@ -347,34 +388,47 @@
 
             if (!section.value.state) {
                 section.value.state = true
-                emit('callAction', {
-                    action: 'editSection',
-                    value: section.value.fields
-                })
             }
+            emit('callAction', {
+                action: 'editField',
+                value: field
+            })
         }
     }
 
     // Изменение значения
     const changeValue = (id, data) => {
         let findedField = section.value.fields.find(field => field.id == id)
-
         if (!findedField.isEdit) {
             section.value.state = true
             findedField.isEdit = true
+
+            emit('callAction', {
+                action: 'editField',
+                value: findedField
+            })
         }
 
         if (data.key == 'external_link') {
-            if (findedField.value == null) {
+            if (findedField.value == null ) {
                 findedField.value = {
                     external_link: data.value,
                     value: ''
                 }
-            }  else {
+            } else if (typeof findedField.value != 'object') {
+                let newValue = toRaw({
+                    external_link: data.value,
+                    value: findedField.value
+                })
+                
+                findedField.value = newValue
+            } else {
                 findedField.value.external_link = data.value
             }
+        } else if (findedField.type == 'text_group') {
+            findedField.subfields = data
         } else {
-            if (['number', 'text'].includes(findedField.type) && !findedField.is_plural) {
+            if (['text'].includes(findedField.type) && !findedField.is_plural) {
                 if (findedField.value == null || typeof findedField.value != 'object') {
                     findedField.value = {
                         external_link: '',
@@ -396,13 +450,14 @@
             value: {
                 id: value.id,
                 slug: value.slug,
-                tab: [null, undefined].includes(value.tab) ? null : value.tab
+                tab: [null, undefined].includes(value.tab) ? null : value.tab,
+                key: [null, undefined].includes(value.key) ? null : value.key
             }
         })
     }
 
     // Изменение настроек
-    const updateSettings = (id, data) => {
+    const updateField = (id, data) => {
         let findedField = section.value.fields.find(field => field.id == id)
         data.id = id
 
@@ -412,7 +467,7 @@
 
 
         emit('callAction', {
-            action: 'updateSettings',
+            action: 'updateField',
             value: data
         })
     }

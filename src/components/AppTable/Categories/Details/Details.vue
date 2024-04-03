@@ -1,5 +1,5 @@
 <template>
-    <AppPopup :closeByClick="true" class="table-categories__popup">
+    <AppPopup :closeByClick="true" :isCanSelect="false" class="table-categories__popup">
         <template #summary>
             <IconDots />
         </template>

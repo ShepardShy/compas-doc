@@ -110,6 +110,7 @@
                     .popup__content {
                         right: auto;
                         @include mixins.elemPositionOptions(35px, 5px);
+                        bottom: auto;
                     }
                 }
 

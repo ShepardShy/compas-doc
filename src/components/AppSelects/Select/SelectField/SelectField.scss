@@ -16,7 +16,7 @@
         white-space: nowrap;
         padding: 5px 5px 5px 10px;
         background-color: variables.$color-hover;
-        @include mixins.elemResolutionOptions(min-content, 36px);
+        @include mixins.elemResolutionOptions(min-content, 34px);
         @include mixins.borderOptions(1px, solid, variables.$color-active, 5px);
         @include mixins.flexBlock($vertical: center, $horizontal: flex-start, $gap: 5px);
     }
@@ -97,6 +97,7 @@
                     height: 36px;
                     padding: 10px;
                     min-width: 40px;
+                    min-height: 36px;
                     pointer-events: none;
                 }
             }
@@ -112,7 +113,7 @@
     
             .form-item__mirror {
                 opacity: 0;
-                height: 36px;
+                height: 34px;
                 padding: 10px;
                 display: flex;
                 min-width: 40px;
@@ -144,7 +145,9 @@
             }
 
             & > input {
-                padding: 10px 30px 10px 15px;
+                height: 38px;
+                min-height: 38px;
+                padding: 9px 30px 9px 15px;
             }
         }
 

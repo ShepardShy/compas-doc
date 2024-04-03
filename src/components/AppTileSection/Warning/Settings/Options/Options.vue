@@ -5,12 +5,12 @@
             :item="{
                 id: 0,
                 key: 'type',
-                value: isShow.type == 'settings' ? edittingField.type : edittingField.type,
+                value: edittingField.type ,
                 focus: false,
                 required: false,
                 title: 'Тип поля',
                 lockedOptions: [],
-                options: SettingsOptions.types.filter(p => !['relation', 'address'].includes(p.value))
+                options: isShow.type == 'settings' ? SettingsOptions.types : SettingsOptions.types.filter(p => !['relation', 'address'].includes(p.value))
             }"
             :isReadOnly="isShow.type == 'settings'"
             :isHaveNullOption="false"
@@ -152,9 +152,9 @@
         <div class="warning-list__subtitle">
             Сохраненные элементы
         </div>
-        <div class="warning-list__field" v-for="(field, index) in edittingField.options">
+        <div class="warning-list__field" v-for="(field, index) in edittingField.options.filter(p => !p.label.is_hidden)">
             <div class="settings-status">
-                <AppPopup class="settings-status__popup">
+                <AppPopup class="settings-status__popup" :isCanSelect="true">
                     <template #summary> 
                         <div class="settings-status__summary" :style="`--statusColor: ${field.label.color};`">
                             <IconPipette />
@@ -310,7 +310,7 @@
                     required: false,
                     title: 'Роли',
                     lockedOptions: [],
-                    options: SettingsOptions.roles
+                    options: userStore.roles
                 }"
                 :isReadOnly="false"
                 :isHaveNullOption="false"
@@ -345,7 +345,7 @@
                     required: false,
                     title: 'Роли',
                     lockedOptions: [],
-                    options: SettingsOptions.roles
+                    options: userStore.roles
                 }"
                 :isReadOnly="false"
                 :isHaveNullOption="false"
@@ -369,7 +369,7 @@
             @changeValue="(data) => changeValue(data)"
         />
         
-        <AppPopup class="settings__popup" v-if="['text', 'number'].includes(edittingField.type)">
+        <AppPopup class="settings__popup" :isCanSelect="true" v-if="['text', 'number'].includes(edittingField.type)">
             <template #summary> 
                 <AppCheckbox
                     :item="{
@@ -423,6 +423,9 @@
     const changedKeys = inject('changedKeys')
     const edittingField = inject('edittingField')
     
+    import { useUserStore } from '@/stores/userStore.js'
+    const userStore = useUserStore()
+
     // Изменение значения
     const changeValue = (data) => {
         switch (data.key) {

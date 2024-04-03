@@ -69,5 +69,13 @@
         .button-text {
             font-size: variables.$font-size-label;
         }
+
+        .popup {
+            &.popup_up {
+                .popup__content {
+                    bottom: 20px;
+                }
+            }
+        }
     }
 }

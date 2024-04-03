@@ -1,6 +1,6 @@
 <template>
     <div class="filter__actions filter-actions">
-        <AppPopup :closeByClick="false">
+        <AppPopup :closeByClick="false" :isCanSelect="true">
             <template #summary>
                 Выбрать поле
             </template>

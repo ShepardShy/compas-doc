@@ -1,10 +1,6 @@
 @use '@/assets/variables.scss' as variables;
 @use '@/assets/mixins.scss' as mixins;
 
-.history {
-    margin-bottom: 30px;
-}
-
 .history__header {
     margin-bottom: 40px;
 }
@@ -16,20 +12,25 @@
 }
 
 .history__footer {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+    
     button {
-        width: 100%;
+        width: calc(100% - 40px);
     }
 }
 
 .history__body {
-    margin-bottom: 25px;
+    gap: 20px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    padding-left: 20px;
 }
 
 .history__section {
     position: relative;
+    margin-left: 15px;
 
     &::before {
         background-color: variables.$color-light-grey;
@@ -164,16 +165,15 @@
     }
 }
 
-.history-item__body {
-    gap: 10px;
-    display: flex;
-    align-items: flex-start;
-}
 .history-item__field {
     color:variables.$color-grey;
+    display: inline-block;
+    margin-right: 20px;
 }
 
 .history-item__action {
+    display: inline;
+
     & > * {
         display: inline;
     }
@@ -181,10 +181,21 @@
     .history-item__action-icon {
         margin: 0px 10px;
     }
+
+    .history-item__text {
+        word-break: break-word;
+    }
 }
 .history-item__before {
 }
 .history-item__action-icon {
 }
 .history-item__after {
+}
+
+
+@media (max-width: 560px) {
+    .history-item__body {
+        flex-wrap: wrap;
+    }
 }

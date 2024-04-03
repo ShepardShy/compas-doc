@@ -173,7 +173,7 @@
     import { ref, inject, onMounted, watch } from 'vue'
 
     import AppButton from '@/components/AppButton/AppButton.vue';
-    import AppWarning from '@/components/AppWarning/AppWarning.vue';
+    import AppWarning from '@/components/AppWarning/WarningNew/AppWarning.vue';
 
     import AppDate from '@/components/AppInputs/Date/Date.vue'
     import AppFile from '@/components/AppInputs/File/File.vue'

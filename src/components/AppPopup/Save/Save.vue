@@ -1,5 +1,5 @@
 <template>
-    <AppPopup class="popup_save" ref="popupSavesRef" :closeByClick="false" @clickOutside="() => changeSaveTab(null)">
+    <AppPopup class="popup_save" ref="popupSavesRef" :isCanSelect="false" :closeByClick="false" @clickOutside="() => changeSaveTab(null)">
         <template #summary>
             <IconSave />
         </template>
@@ -27,7 +27,7 @@
 <script setup>
     import './Save.scss';
 
-    import { ref, onMounted } from 'vue'
+    import { ref } from 'vue'
 
     import IconSave from '@/components/AppIcons/Save/Save.vue'
     import IconArrow from '@/components/AppIcons/Arrow/Arrow.vue'
@@ -58,29 +58,7 @@
                     title: 'Применить для всех',
                 }
             ],
-            options: [
-                {
-                    id: 0,
-                    sort: 0,
-                    key: 'key_11',
-                    label: 'Role 3.1',
-                    enabled: true
-                },
-                {
-                    id: 1,
-                    sort: 0,
-                    key: 'key_21',
-                    label: 'Role 3.2',
-                    enabled: false
-                },
-                {
-                    id: 2,
-                    sort: 0,
-                    key: 'key_31',
-                    label: 'Role 3.3',
-                    enabled: false
-                }
-            ],
+            options: [],
         },
         activeTab: null
     })
@@ -95,13 +73,9 @@
             menu.value.saves.activeTab = tab
 
             if (tab != null && tab.key != 'roles') {
-                emit('saveSettings', tab.key)
+                emit('saveSettings', tab.key ?? tab.id)
                 popupSavesRef.value.popupRef.removeAttribute('open')
             }
         }, 10);
     }
-
-    onMounted(() => {
-        // menu.value.saves.options = []
-    })
 </script>

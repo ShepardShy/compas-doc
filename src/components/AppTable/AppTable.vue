@@ -5,10 +5,19 @@
             @callAction="(data) => callAction(data)"
         />
 
+        <AppSection class="table-details__product-actions" v-if="props.isDinamyc">
+            <AppButton class="button_add button_blue" @click="() => callAction({
+                action: 'addRow',
+                value: null
+            })">
+                Добавить строку
+            </AppButton>
+        </AppSection>
+
         <AppSection 
             ref="sectionRef" 
             class="section__table table-template" 
-            :style="`--stickyTop: ${scrollPosition}px`" 
+            :style="`--stickyTop: ${scrollPosition}px; --sectionWidth: ${sectionRef ? sectionRef.sectionRef.offsetWidth : 0}px`" 
             :class="props.table.loaderState == 'loading' ? 'table-template_loading' : props.table.loaderState == 'filtering' ? 'table-template_filtering' : ''"
         >
             <TableTop 
@@ -26,6 +35,7 @@
                 v-if="isMobile"
                 :slug="props.slug"
                 :isTrash="props.isTrash"
+                :loaderState="props.table.loaderState"
                 @callAction="(data) => callAction(data)"
             />
             
@@ -44,7 +54,7 @@
                         @callAction="(data) => callAction(data)"
                     />
                 </table>
-                <ScrollButtons />
+                <ScrollButtons v-show="props.table.loaderState != 'loading'"/>
 
                 <TableTotal v-if="props.isDinamyc"/>
             </div>
@@ -81,6 +91,7 @@
     import TableMobile from './Mobile/Mobile.vue'
     import TableWarning from './Warning/Warning.vue';
     import TableCategory from './Categories/Categories.vue'
+    import AppButton from '@/components/AppButton/AppButton.vue';
     import ScrollButtons from './ScrollButtons/ScrollButtons.vue';
     import AppSection from '@/components/AppSection/AppSection.vue';
     import SectionActions from '@/components/AppSection/Actions/Actions.vue';
@@ -90,6 +101,7 @@
     let footerData = ref({})
     let actionState = ref(null)
     let backupValues = ref([])
+    let backupRows = ref([])
     let socketRows = ref({
         header: [],
         body: []
@@ -223,6 +235,7 @@
     provide('categories', categories)
     provide('actionState', actionState)
     provide('isNumeric', props.isNumeric)
+    provide('backupRows', backupRows)
     provide('isDinamyc', props.isDinamyc)
     provide('invalidRows', invalidRows)
     provide('backupValues', backupValues)
@@ -293,6 +306,7 @@
                 backupValues.value = []
             } else {
                 backupValues.value = JSON.parse(JSON.stringify(bodyData.value))
+                bodyData.value = JSON.parse(JSON.stringify(backupRows.value))
             }
 
             invalidRows.value = []
@@ -370,9 +384,8 @@
                         if (findedField != undefined) {
                             if (findedField.type == 'relation') {
                                 let findedIndex = bodyData.value.findIndex(p => p.id == row.id)
-                                let transformedItem = [null, undefined].includes(row[key]) ? null : row[key].value.filter(p => p != null)
+                                let transformedItem = [null, undefined].includes(row[key]) || row[key].value == null ? null : row[key].value.filter(p => p != null)
                                 bodyData.value[findedIndex][key].value = toRaw(transformedItem)
-                                console.log(transformedItem);
                                 row[key] = toRaw(transformedItem)
                             } else if (findedField.type == 'select_dropdown') {
                                 row[key] = Array.isArray(row[key]) || [null, undefined].includes(row[key]) ? row[key] : [row[key]]
@@ -393,6 +406,9 @@
 
                     for (let row of updatedRows.value) {
                         transformUpdatedRows(row)
+                        delete row.isEdit
+                        delete row.iconDrag
+                        delete row.iconDelete
                     }
 
                     if (!props.isPermanentEdit) {
@@ -578,14 +594,18 @@
             actionState.value = 'saving'
             skipChecking.value = true
             updatedRows.value =  JSON.parse(JSON.stringify(data))
-            bodyData.value = JSON.parse(JSON.stringify(data))
+            bodyData.value = data
         }
         
         // Удаление строки по иконке
         const removeRow = (id) => {
+            if (actionState.value != 'saving') {
+                backupRows.value =  JSON.parse(JSON.stringify(bodyData.value))
+            }
+
             actionState.value = 'saving'
             skipChecking.value = true
-            bodyData.value = bodyData.value.filter(row => row.id != id)
+            bodyData.value.splice(id - 1, 1)
             updatedRows.value = JSON.parse(JSON.stringify(bodyData.value))
         }
 
@@ -632,6 +652,38 @@
             }
 
             emit('callAction', {action: 'deleteCategory', value: data})
+        }
+
+        const addRow = () => {
+            if (actionState.value != 'saving') {
+                backupRows.value =  JSON.parse(JSON.stringify(bodyData.value))
+                actionState.value = 'saving'
+            }
+
+            let newRow = {
+                isEdit: true
+            }
+
+            for (let column of fields.value) {
+                switch (column.type) {
+                    case 'checkbox':
+                        newRow[column.key] = false
+                        break;
+
+                    case 'relation':
+                        newRow[column.key] = {
+                            value: null,
+                            localOptions: []
+                        }
+                        break;
+
+                    default:
+                        newRow[column.key] = null
+                        break;
+                }
+            }
+
+            bodyData.value.push(newRow)
         }
 
         switch (data.action) {
@@ -722,6 +774,11 @@
             // Удаление категории
             case 'deleteCategory':
                 deleteCategory(data.value)
+                break;
+
+            // Добавление новой строки
+            case 'addRow':
+                addRow()
                 break;
 
             default:

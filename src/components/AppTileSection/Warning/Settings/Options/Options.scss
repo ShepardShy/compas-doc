@@ -4,7 +4,7 @@
 .warning_settings {
     .warning__list_other {
         position: relative;
-        margin-top: -10px;
+        margin-top: 0px;
         padding: 10px 0px;
         
         &::before {
@@ -157,6 +157,8 @@
     }
 
     .warning__list_checkboxes {
+        margin-top: 20px;
+        
         & > *:not(:last-child) {
             margin-bottom: 10px;
         }

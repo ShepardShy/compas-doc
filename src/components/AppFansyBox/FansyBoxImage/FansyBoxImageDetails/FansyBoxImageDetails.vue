@@ -1,16 +1,16 @@
 <template>
-    <AppPopup class="fancybox-item__details popup_actions" :closeByClick="true">
+    <AppPopup class="fancybox-item__details popup_actions" :isCanSelect="false" :closeByClick="true">
         <template #summary>
             <IconDots />
         </template>
         <template #content>
-            <PopupOption :data-fancybox="`galleryDetails_${props.id}`" :href="checkExtension ? props.image.file : props.image.preview">
+            <PopupOption :data-fancybox="`galleryClick_${props.id}`" :href="checkExtension ? props.image.file : props.image.url">
                 Посмотреть
             </PopupOption>
             <PopupOption @click="() => emit('callAction', { action: 'downloadFile', value: props.image })">
                 Скачать
             </PopupOption>
-            <PopupOption class="popup__option_red" @click="() => emit('callAction', { action: 'deleteImage', value: props.image.id })">
+            <PopupOption class="popup__option_red" @click="() => emit('callAction', { action: 'deleteFile', value: props.image.id })">
                 Удалить
             </PopupOption>
         </template>

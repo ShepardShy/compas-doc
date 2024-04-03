@@ -22,7 +22,7 @@
 <script setup>
     import './AppTileSection.scss';
 
-    import { ref, provide, onMounted, watch } from 'vue';
+    import { ref, provide, onMounted, watch, inject } from 'vue';
 
     import AppSection from '@/components/AppSection/AppSection.vue';
 
@@ -41,7 +41,10 @@
     let removingField = ref(null)
     let edittingField = ref(null)
 
-    let hiddenFields = ref([])
+    const isCreate = inject('isCreate')
+    const hiddenFields = inject('hiddenFields')
+    const backupFields = inject('backupFields')
+    
     let isShow = ref({
         state: false,
         type: null
@@ -56,10 +59,6 @@
             default: {},
             type: Object
         },
-        hiddenFields: {
-            default: [],
-            type: Array
-        },
         slug: {
             default: null,
             type: String
@@ -67,6 +66,10 @@
         sections: {
             default: [],
             type: Array
+        },
+        isEditableSettings: {
+            default: true,
+            type: Boolean
         }
     })
 
@@ -76,7 +79,8 @@
     provide('removingField', removingField)
     provide('edittingField', edittingField)
     provide('sections', props.sections)
-
+    provide('isEditableSettings', props.isEditableSettings)
+    
     // Действие с секцией
     const callActionSection = (data) => {
         // Изменение заголовка
@@ -88,9 +92,9 @@
         }
 
         // Удаление секции
-        const deleteSection = (data) => {
+        const initDeleteSection = (data) => {
             emit('callAction', {
-                action: 'deleteSection',
+                action: 'initDeleteSection',
                 value: data
             })
         }
@@ -102,17 +106,19 @@
             if (section.value.state) {
                 section.value.fields.forEach((field) => {
                     field.isEdit = true
+                    callActionFields({action: 'editField', value: field})
                 })
             } else {
                 section.value.fields.forEach((field) => {
                     delete field.isEdit
+
+                    let findedBackupField = backupFields.value.find(p => p.id == field.id)
+                    if (findedBackupField) {
+                        field.value = findedBackupField.value
+                        backupFields.value = backupFields.value.filter(p => p.id != field.id)
+                    }
                 })
             }
-
-            emit('callAction', {
-                action: 'changeState',
-                value: section.value.state      
-            })
         }
 
         switch (data.action) {
@@ -128,7 +134,7 @@
 
             // Удаление секции
             case 'delete':
-                deleteSection(data.value)
+                initDeleteSection(data.value)
                 break;
 
             default:
@@ -142,7 +148,6 @@
         const getFields = () => {
             section.value = JSON.parse(JSON.stringify(props.section))
             section.value.state = false
-            hiddenFields.value = JSON.parse(JSON.stringify(props.hiddenFields))
         }
 
         // Изменить видимость поля
@@ -152,14 +157,17 @@
                 section.value.fields = section.value.fields.filter(field => field.id != data.field.id)
                 emit('callAction', {
                     action: 'changeHiddenFields',
-                    value: hiddenFields.value
+                    value: hiddenFields.value.map((field) => field.id),
+                    section_id: section.value.id
                 })
             } else if (data.state == 'visible') {
                 section.value.fields.push(data.field)
                 hiddenFields.value = hiddenFields.value.filter(field => field.id != data.field.id)
+
                 emit('callAction', {
-                    action: 'changeHiddenFields',
-                    value: hiddenFields.value
+                    action: 'changeVisibleField',
+                    value: data.field,
+                    section_id: section.value.id
                 })
             }
         }
@@ -252,7 +260,7 @@
         }
 
         // Обновление настроек поля
-        const updateSettings = (keys) => {
+        const updateField = (keys) => {
             let findedField = section.value.fields.find(field => field.id == keys.id)
 
             for (let key in keys) {
@@ -265,8 +273,21 @@
             }
 
             emit('callAction', {
-                action: 'updateSettings',
+                action: 'updateField',
                 value: keys
+            })
+        }
+
+        // Редактирование секции
+        const editField = (field) => {
+            console.log(backupFields.value);
+            if (!backupFields.value.find(p => p.id == field.id)) {
+                backupFields.value.push(JSON.parse(JSON.stringify(field)))
+            }
+
+            emit('callAction', {
+                action: 'editField',
+                value: field
             })
         }
 
@@ -312,8 +333,12 @@
                 break;
 
             // Изменение настроек поля
-            case 'updateSettings':
-                updateSettings(data.value)
+            case 'updateField':
+                updateField(data.value)
+                break;
+
+            case 'editField':
+                editField(data.value)
                 break;
 
             default:
@@ -326,10 +351,19 @@
         callActionFields({
             action: 'getFields'
         })
+
+        if (isCreate.value) {
+            callActionSection({
+                action: 'changeState',
+                value: true
+            })
+        }
     })
 
-    watch(() => props.hiddenFields, () => {
-        hiddenFields.value = JSON.parse(JSON.stringify(props.hiddenFields))
+    watch(props.section, () => {
+        callActionFields({
+            action: 'getFields'
+        })
     }, {
         deep: true
     })

@@ -23,9 +23,10 @@
                         required: Boolean(props.item.required)
                     }"
                     :disabled="actionState == 'saving'"
-                    @changeValue="(data) => changeValue(props.row.id, data)"
+                    @changeValue="(data) => changeValue(props.rowId, data)"
                     @clickOutside="() => callAction({action: 'openPopup', value: false})"
                 />
+
                 <AppRelation 
                     v-else-if="props.item.type == 'relation'"
                     :item="{
@@ -35,16 +36,19 @@
                         key: props.item.key,
                         title: props.item.title,
                         value: props.row[props.item.key],
+                        anotherKey: isDinamyc ? 'product_name' : null,
+                        anotherTitle: isDinamyc ? props.row.product_name : null,
                         related_table: props.item.related_table,
                         required: Boolean(props.item.required),
                         options: ['status', 'relation'].includes(props.item.type) ? props.item.options : null,
                         lockedOptions: props.item.choosed,
                     }"
                     :isCanCreate="true"
+                    :isAnotherTitle="isDinamyc"
                     :isMultiple="Boolean(props.item.is_plural)"
                     :isReadOnly="Boolean(props.item.read_only || (!props.row.isEdit && !props.isPermanentEdit))"
                     @click="() => callAction({action: 'openPopup', value: true})"
-                    @changeValue="(data) => changeValue(props.row.id, data)"
+                    @changeValue="(data) => changeValue(props.rowId, data)"
                     @openLink="(data) => callAction({action: 'openLink', value: {id: data.id, slug: props.item.related_table}})"
                     @showAll="() => callAction({action: 'openLink', value: {id: props.row.id, slug: props.slug, tab: props.item.related_table}})"
                     @createOption="() => emit('callAction', {action: 'createOption', value: props.item.related_table})"
@@ -66,10 +70,11 @@
                     }"
                     :disabled="false"
                     :isUseEnter="false"
+                    :isTableItem="true"
                     :mask="props.item.mask"
                     :isLink="Boolean(props.item.is_external_link)"
                     :isReadOnly="Boolean(props.item.read_only || (!props.row.isEdit && !props.isPermanentEdit))"
-                    @changeValue="(data) => changeValue(props.row.id, data)"
+                    @changeValue="(data) => changeValue(props.rowId, data)"
                     @clickOutside="() => callAction({action: 'openPopup', value: false})"
                 />
                 <FormValue 
@@ -112,7 +117,7 @@
                     :isReadOnly="Boolean(props.item.read_only || (!props.row.isEdit && !props.isPermanentEdit))"
                     @click="() => callAction({action: 'openPopup', value: true})"
                     @clickOutside="() => callAction({action: 'openPopup', value: false})"
-                    @changeValue="(data) => changeValue(props.row.id, data)"
+                    @changeValue="(data) => changeValue(props.rowId, data)"
                 />
                 <AppSelect 
                     v-else-if="props.item.type == 'select_dropdown'"
@@ -132,7 +137,7 @@
                     :isFiltered="true"
                     @click="() => callAction({action: 'openPopup', value: true})"
                     @clickOutside="() => callAction({action: 'openPopup', value: false})"
-                    @changeValue="(data) => changeValue(props.row.id, data)"
+                    @changeValue="(data) => changeValue(props.rowId, data)"
                 />
                 <AppFile 
                     v-else-if="props.item.type == 'file'"
@@ -148,7 +153,7 @@
                     :isShowFileName="false"
                     :isMultiple="false"
                     :isOneFile="true"
-                    @changeValue="(data) => changeValue(props.row.id, data)"
+                    @changeValue="(data) => changeValue(props.rowId, data)"
                 />
                 <AppDate 
                     v-else-if="props.item.type == 'date'"
@@ -164,7 +169,7 @@
                     :isMultiple="Boolean(props.item.is_plural)"
                     :isReadOnly="Boolean(props.item.read_only || (!props.row.isEdit && !props.isPermanentEdit))"
                     @openDatepicker="() => $emit('clickRow', true)"
-                    @changeValue="(data) => changeValue(props.row.id, data)"
+                    @changeValue="(data) => changeValue(props.rowId, data)"
                 />
 
                 <div class="table-item__icon" v-else-if="props.item.type == 'iconDrag'">
@@ -180,7 +185,7 @@
 
                 <IconDelete
                     v-else-if="props.item.type == 'iconDelete'"
-                    @click="() => callAction({action: 'removeRow', value: props.row.id})"
+                    @click="() => callAction({action: 'removeRow', value: props.rowId})"
                 />
         </div>
     </td>
@@ -209,7 +214,8 @@
     const actionState = inject('actionState')
     const backupValues = inject('backupValues')
     const skipChecking = inject('skipChecking')
-    
+    const backupRows = inject('backupRows')
+
     let clickSetting = ref({
         id: -1,
         delay: 500,
@@ -274,7 +280,7 @@
 
     // Изменение значения в поле
     const changeValue = (id, data) => {
-        let findedRow = bodyData.value.find(row => row.id == id)
+        let findedRow = bodyData.value[id - 1]
         findedRow[data.key] = data.value
 
         if (data.key == 'isChoose') {
@@ -289,13 +295,32 @@
             skipChecking.value = true
 
             if (actionState.value == null) {
+                backupRows.value =  JSON.parse(JSON.stringify(bodyData.value))
                 actionState.value = props.isTrash ? 'restoring' : 'saving'
             }
+
+            backupValues.value = JSON.parse(JSON.stringify(bodyData.value))
         }
+
+        if (isDinamyc && data.key == 'product_id') {
+            findedRow.id = data.value.selectedOption ? data.value.selectedOption.id : null
+            findedRow.product_price = data.value.selectedOption ? data.value.selectedOption.price : null
+            findedRow.product_weight = data.value.selectedOption ? data.value.selectedOption.weight : null
+            findedRow.product_count = 1
+
+            if (data.value.value != null) {
+                findedRow[data.key].localOptions = [{
+                    label: data.value.selectedOption,
+                    value:  data.value.selectedOption.id
+                }]
+            }
+        }
+
+        console.log(findedRow);
     }
 
     const calcSum = computed(() => {
-        return props.row.product_count * props.row.product_price
+        return (props.row.product_count * props.row.product_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
     })
 
     // Симуляция двойного клика
@@ -310,8 +335,7 @@
             }, clickSetting.value.delay);
         } else {
             let regexp = /<\/?[a-z][\s\S]*>/i
-            if (!props.row.isEdit && actionState.value != 'saving' && props.item.key != 'actions' && regexp.test(event.target.innerHTML)) {
-
+            if (!props.row.isEdit && actionState.value != 'saving' && event.target.closest('.popup_actions') == null && regexp.test(event.target.innerHTML)) {
                 callAction({action: 'showModal', value: null})
             }
             window.getSelection().empty();
@@ -338,6 +362,7 @@
         // Редактирование строки
         const editRow = (value) => {
             let findedIndex = bodyData.value.findIndex(row => row.id == value.id)
+
             backupValues.value.push(JSON.parse(JSON.stringify(bodyData.value[findedIndex])))
             bodyData.value[findedIndex].isEdit = true
             bodyData.value[findedIndex].isChoose = true
