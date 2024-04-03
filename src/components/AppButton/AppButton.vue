@@ -1,5 +1,5 @@
 <template>
-    <button :disabled="props.disabled">
+    <button :disabled="props.disabledOption">
         <span>
             <slot> </slot>
         </span>
@@ -10,7 +10,7 @@
     import './AppButton.scss';
     
     const props = defineProps({
-        disabled: {
+        disabledOption: {
             default: false,
             type: Boolean
         }

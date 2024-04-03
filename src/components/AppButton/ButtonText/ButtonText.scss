@@ -13,4 +13,9 @@
     &:hover {
         color: variables.$color-active
     }
+
+    &.button-text__copy_disabled {
+        color: variables.$color-blue-grey;
+        cursor: text;
+    }
 }

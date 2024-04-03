@@ -4,7 +4,8 @@
 .button-details {
     display: flex;
     align-items: center;
-
+    height: 100%;
+    
     button {
         border-radius: 5px 0px 0px 5px;
     }
@@ -12,7 +13,7 @@
 
 .button-details__popup {
     border-left: 1px solid variables.$color-white;
-    @include mixins.elemResolutionOptions(42px, 100%);
+    @include mixins.elemResolutionOptions(42px, 40px);
 
     &[open] {
         .popup__summary {
@@ -25,14 +26,15 @@
     }
 
     .popup__summary {
-        display: grid;
-        place-items: center;
         border-radius: 0px 5px 5px 0px;
         background: variables.$color-blue;
         @include mixins.elemResolutionOptions(100%, 100%);
+        @include mixins.flexBlock($vertical: center, $horizontal: center, $gap: 0px);
     }
 
     .popup__content {
         top: 45px;
+        left: auto;
+        right: 0px;
     }
 }

@@ -32,10 +32,6 @@
         isReadOnly: {
             default: false,
             type: Boolean
-        },
-        isHaveParent: {
-            default: false,
-            type: Boolean
         }
     })
 
@@ -54,10 +50,6 @@
 
     // Показать выплывающее меню
     const showDetail = () => {
-        if (props.isHaveParent) {
-            popupRef.value.setAttribute('open', true)
-        }
-        
         PopupScripts.setDropdownPosition(popupRef.value)
     }
 

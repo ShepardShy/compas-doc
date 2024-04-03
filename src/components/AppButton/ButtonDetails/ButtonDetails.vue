@@ -1,10 +1,10 @@
 <template>
     <div class="button-details">
-        <AppButton class="button_blue" :class="props.loaderButton ? 'button_loading' : ''" @click="() => emit('mainAction', props.mainAction)">
+        <AppButton class="button_blue button_add" :class="props.loaderButton ? 'button_loading' : ''" @click="() => emit('mainAction', true)">
             <slot></slot>
         </AppButton>
 
-        <AppPopup class="button-details__popup" :closeByClick="true">
+        <AppPopup class="button-details__popup" :isCanSelect="false" :closeByClick="true">
             <template #summary> 
                 <IconTriangle />
             </template>
@@ -29,10 +29,6 @@
         options: {
             default: [],
             type: Array
-        },
-        mainAction: {
-            default: null,
-            type: String
         },
         loaderButton: {
             default: false,

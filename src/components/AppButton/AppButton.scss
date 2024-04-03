@@ -5,7 +5,7 @@ button {
     font-size: variables.$font-size-default;
     transition: 0.2s;
     padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 7px;
     background: #F0F0F0;
     outline: none;
 
@@ -14,6 +14,7 @@ button {
 
         &.button_blue {
             background: variables.$color-blue;
+            filter: opacity(0.5);
         }
     }
 
@@ -24,18 +25,6 @@ button {
     &.button_blue {
         background: variables.$color-blue;
         color: variables.$color-white;
-
-        svg {
-            * {
-                fill: variables.$color-white;
-            }
-        }
-    }
-
-    &.button_white {
-        background: variables.$color-white;
-        border: 1px solid variables.$color-light-grey;
-        box-shadow: 0 5px 20px variables.$color-light-grey;
     }
 
     &.button_orange {
@@ -48,6 +37,12 @@ button {
                 border-top-color: variables.$color-orange;
             }
         }
+    }
+
+    &.button_white {
+        background: variables.$color-white;
+        border: 1px solid variables.$color-light-grey;
+        box-shadow: 0 5px 20px variables.$color-light-grey;
     }
 
     &.button_non-background {
@@ -64,13 +59,12 @@ button {
         }
     }
 
-    &.button_red {
-        background: variables.$color-red;;
-        color: variables.$color-white;
+    &.button_delete {
+        color: variables.$color-red;
 
         svg {
             path {
-                fill: variables.$color-white
+                fill: variables.$color-red
             }
         }
     }
@@ -78,6 +72,14 @@ button {
     &.button_loading {
         position: relative;
         cursor: not-allowed;
+
+        &:hover {
+            opacity: 0.9;
+        }
+
+        span {
+            visibility: hidden;
+        }
 
         &::after {
             content: "";
@@ -99,25 +101,17 @@ button {
             content: none;
         }
 
-        &:hover {
-            opacity: 0.9;
-        }
-
         &.button_blue {
             &::after {
                 border: 4px solid variables.$color-white;
                 border-top-color: transparent;
               }
         }
-
-        span {
-            visibility: hidden;
-        }
     }
 }
 
 
-@media (max-width: 648px) {
+@media (max-width: 650px) {
     section {
         button {
             &.button_mobile {

@@ -14,6 +14,7 @@
             :isHaveParent="true"
             :closeByClick="false"
             :isReadOnly="props.isReadOnly"
+            :isCanSelect="true"
             @clickOutside="() => emit('clickOutside', true)"
             @click="(event) => preventClick(event)"
         >
@@ -27,7 +28,7 @@
                         focus: false,
                         key: props.item.key,
                         placeholder: null,
-                        value: props.isReadOnly ? (activeOption.id == null && props.item.type !== 'address') ? null : activeOption.text : search,
+                        value: props.isReadOnly ? (activeOption.id == null && props.item.type != 'address') ? null : activeOption.text : search,
                         substring: props.isReadOnly ? null : activeOption.id == null ? ' ' : `ID: ${activeOption.id}`
                     }"
                     :mask="null"
@@ -38,7 +39,6 @@
                     @openLink="(item) => emit('openLink', item)"
                     @changeValue="(data) => callAction({action: 'searchOptions', value: data.value})"
                     @mousedown="(event) => props.isReadOnly ? null : event.target.classList.contains('popup_prevent') ? event.preventDefault() : null"
-                    @keydown.space="(event) => {event.preventDefault(); callAction({action: 'searchOptions', value: event.target.value + ' '})}"
                 >
                     <slot name="link"></slot>
                     <div class="autocomplete__active-option" v-show="!props.isReadOnly && ([null, undefined].includes(search) || search == '')">
@@ -149,6 +149,13 @@
         } else {
             if (event.target.closest('.form-item__substring') == null) {
                 popupRef.value.popupRef.setAttribute('open', true)
+            } else {
+                event.preventDefault()
+                if (popupRef.value.popupRef.hasAttribute('open')) {
+                    popupRef.value.popupRef.removeAttribute('open')
+                }  else {
+                    popupRef.value.popupRef.setAttribute('open', true)
+                }
             }
         } 
     }
@@ -255,7 +262,12 @@
             action: 'setActiveOption',
             value: props.item.value
         })
-        search.value = props.anotherTitle
+
+        if (![null, undefined].includes(props.anotherTitle) && typeof props.anotherTitle == 'string' && props.anotherTitle != '') {
+            search.value = props.anotherTitle == null ? null : props.anotherTitle
+        } else {
+            search.value = activeOption.value.id == null ? null : activeOption.value.text
+        }
     })
 
     watch(() => props.item.options, () => {
