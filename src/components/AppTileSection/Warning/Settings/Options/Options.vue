@@ -310,7 +310,7 @@
                     required: false,
                     title: 'Роли',
                     lockedOptions: [],
-                    options: userStore.roles
+                    options: []
                 }"
                 :isReadOnly="false"
                 :isHaveNullOption="false"
@@ -345,7 +345,7 @@
                     required: false,
                     title: 'Роли',
                     lockedOptions: [],
-                    options: userStore.roles
+                    options: []
                 }"
                 :isReadOnly="false"
                 :isHaveNullOption="false"
@@ -423,9 +423,6 @@
     const changedKeys = inject('changedKeys')
     const edittingField = inject('edittingField')
     
-    import { useUserStore } from '@/stores/userStore.js'
-    const userStore = useUserStore()
-
     // Изменение значения
     const changeValue = (data) => {
         switch (data.key) {

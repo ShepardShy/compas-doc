@@ -3,30 +3,28 @@
         class="address form-item__address"
         :required="props.item.required"
     >
-        <FormLabel
-            v-show="props.item.title != null && props.item.title != ''"
+
+        <FormLabel 
+            v-show="props.isShowLabel && props.item.title != null && props.item.title != ''"
             :title="props.item.title"
         />
 
-        <Field
+        <MapField 
             :item="props.item"
-            :isReadOnly="props.isReadOnly"
             :isShowMap="props.isShowMap"
-            :isSelectSeveral="props.isSelectSeveral"
-            @changeValue="(data) => emit('changeValue', (data))"
-            @searchOptions="(data) => emit('searchOptions', (data))"
-            @selectPoints="(data) => emit('selectPoints', (data))"
+            :isReadOnly="props.isReadOnly"
+            :isCanSelect="props.isCanSelect"
         />
 
     </FormItem>
 </template>
 
 <script setup>
-    import './Address.scss';
+    import './Map.scss';
 
-    import FormLabel from "@/components/AppForm/FormLabel/FormLabel.vue";
+    import FormLabel from '@/components/AppForm/FormLabel/FormLabel.vue';
     import FormItem from "@/components/AppForm/FormItem/FormItem.vue";
-    import Field from "@/components/AppInputs/Address/Field/Field.vue";
+    import MapField from './Field/Field.vue'
 
     const props = defineProps({
         item: {
@@ -36,11 +34,8 @@
                 key: "address",
                 required: false,
                 value: {
-                    text: "",
-                    coords: [
-                        "55.642606",
-                        "37.547414"
-                    ]
+                    text: null,
+                    coords: []
                 }
             },
             type: Object
@@ -53,15 +48,17 @@
             default: false,
             type: Boolean
         },
-        isSelectSeveral: {
+        isCanSelect: {
+            default: false,
+            type: Boolean
+        },
+        isShowLabel: {
             default: false,
             type: Boolean
         }
     })
 
     const emit = defineEmits([
-        'changeValue',
-        'searchOptions',
-        'selectPoints'
+        'changeValue'
     ])
 </script>

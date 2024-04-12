@@ -5,6 +5,7 @@
         @mouseup="(event) => mouseDownEvent = null" 
         @mousedown="(event) => mouseDownEvent = event" 
         v-click-out-side="(event) => clickOutside(event)"
+        @keyup.space="(event) => event.preventDefault()"
     >
         <summary class="popup__summary" @click="() => showDetail()">
             <slot name="summary"></slot>
@@ -18,7 +19,7 @@
 <script setup>
     import './Popup.scss';
 
-    import { ref } from 'vue'
+    import { ref, onMounted, watch } from 'vue'
     import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside'
     import PopupScripts from './Scripts.js'
 

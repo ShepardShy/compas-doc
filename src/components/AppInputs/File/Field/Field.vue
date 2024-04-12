@@ -52,7 +52,7 @@
 
     import draggable from 'vuedraggable'
 
-    import commonScripts from "~/commonScripts/commonScripts";
+    import commonScripts from "@/commonScripts/commonScripts";
 
     import FansyBox from '@/components/AppFansyBox/FansyBox.vue';
     import FansyBoxImage from '@/components/AppFansyBox/FansyBoxImage/FansyBoxImage.vue';

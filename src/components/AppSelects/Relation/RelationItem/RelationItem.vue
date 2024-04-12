@@ -40,8 +40,10 @@
 
 <script setup>
     import './RelationItem.scss';
+
+    import { ref, onMounted, watch } from 'vue'
     
-    import commonScriptsGlobal from '@/commonScripts/commonScripts.js'
+    import commonScripts from '@/commonScripts/commonScripts.js'
     import AppAutocomplete from '@/components/AppAutocomplete/Input.vue';
 
     let activeOption = ref(null)
@@ -143,12 +145,12 @@
 
         // Поиск опций
         const searchOptions = async (value) => {
-            let request = await commonScriptsGlobal.getInfoAutocomplete(value.value.toLowerCase(), props.fieldId)
-            localItem.value.options = request
+            // let request = await commonScripts.getInfoAutocomplete(value.value.toLowerCase(), props.fieldId)
+            // localItem.value.options = request
 
-            if (props.isAnotherTitle) {
-                emit('callAction', {action: 'changeAnotherTitle', value: {key: props.item.anotherKey, value: value.value}})
-            }
+            // if (props.isAnotherTitle) {
+            //     emit('callAction', {action: 'changeAnotherTitle', value: {key: props.item.anotherKey, value: value.value}})
+            // }
         }
 
         // Открытие ссылки

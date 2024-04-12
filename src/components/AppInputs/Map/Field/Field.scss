@@ -1,0 +1,21 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.map {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+
+    .button-text {
+        font-size: 15px;
+    }
+}
+
+.map__container {
+    position: relative;
+
+    .ymaps-2-1-79-copyrights-pane,
+    .ymaps-2-1-79-controls__toolbar {
+        display: none;
+    }
+}

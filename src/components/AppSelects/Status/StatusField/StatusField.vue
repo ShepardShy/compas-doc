@@ -48,7 +48,7 @@
 <script setup>
     import './StatusField.scss';
 
-    import api from "~/helpers/api";
+    import api from "@/helpers/api";
     import AppPopup from '@/components/AppPopup/Popup.vue';
     import PopupScripts from '@/components/AppPopup/Scripts.js';
     import StatusOption from '../StatusOption/StatusOption.vue';

@@ -59,8 +59,8 @@ export default {
         {
             id: 10,
             name: 'Адрес',
-            slug: 'address',
-            component: markRaw(defineAsyncComponent(() => import('@/pages/frontend/address/address.vue')))
+            slug: 'map',
+            component: markRaw(defineAsyncComponent(() => import('@/pages/frontend/map/map.vue')))
         },
         {
             id: 11,

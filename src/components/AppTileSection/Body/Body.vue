@@ -169,7 +169,7 @@
                     :isReadOnly="Boolean(!field.isEdit || !field.can_edit)"
                     @changeValue="(data) => changeValue(field.id, data)"
                 />
-                <AppAddress 
+                <AppMap 
                     v-if="field.type == 'address'"
                     :item="{
                         id: field.id,
@@ -280,7 +280,7 @@
     import AppInput from '@/components/AppInputs/Input/Input.vue';
     import AppStatus from '@/components/AppSelects/Status/Status.vue'
     import AppSelect from '@/components/AppSelects/Select/Select.vue'
-    import AppAddress from '@/components/AppInputs/Address/Address.vue';
+    import AppMap from '@/components/AppInputs/Map/Map.vue';
     import AppCheckbox from "@/components/AppInputs/Checkbox/Checkbox.vue"
     import AppTextarea from "@/components/AppInputs/Textarea/Textarea.vue"
     import AppRelation from "@/components/AppSelects/Relation/Relation.vue"

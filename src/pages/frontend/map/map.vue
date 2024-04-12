@@ -1,19 +1,17 @@
 <template>
     <AppComponent
         :title="'Поле адреса'"
-        :component="AppAddress"
+        :component="AppMap"
         :codeProps="localPropsAddress"
         :codeEmits="AddressEmits"
-        @searchOptions="(data) => searchOptions(data)"
         @changeValue="(data) => changeValue(data)"
-        @selectPoints="(data) => selectPoints(data)"
     />
 </template>
 
 <script setup>
-    import './address.scss'
+    import './map.scss'
 
-    import AppAddress from "@/components/AppInputs/Address/Address.vue";
+    import AppMap from "@/components/AppInputs/Map/Map.vue";
     import AddressEmits from "@/data/frontend/inputs/address/codeEmits.json";
     import AppComponent from "@/components/AppComponent/AppComponent.vue";
 
@@ -23,23 +21,10 @@
 
     const localPropsAddress = ref(null)
 
-    // Поиск опций
-    const searchOptions = (data) => {
-
-        /* Вставить свой метод на поиск опций */
-
-        console.log('Поиск опций', data);
-    }
-
     // Изменение значений
     const changeValue = (data) => {
         localPropsAddress.value.item.default.value = data
         console.log('Изменение значений', data);
-    }
-
-    // Получение точек попадающих в лассо
-    const selectPoints = (data) => {
-        console.log('Выбранные точки', data);
     }
 
     // Инициализация пропсов для компонентов

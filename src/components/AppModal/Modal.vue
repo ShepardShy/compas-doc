@@ -13,15 +13,7 @@
                         {{ item.title }}
                     </span>
                 </div>
-                <div class="modal__content">
-                    <TableDetailsPage 
-                        :id="item.id"
-                        :slug="item.slug"
-                        :isCreate="item.isCreate"
-                        @closeModal="() => modals.pop()"
-                        @showModal="(data) => $emit('showModal', data)"
-                    />
-                </div>
+                <div class="modal__content"></div>
             </div>
         </div>
     </div>
@@ -33,7 +25,6 @@
     import { onMounted, onUnmounted, inject, watch, toRaw, ref } from 'vue'; 
 
     import IconClose from '@/components/AppIcons/Close/Close.vue'
-    import TableDetailsPage from '@/components/TableDetailsPage/TableDetailsPage.vue'
     import commonScripts from '@/commonScripts/commonScripts';
     const modals = inject('modals')
     const parentPage = toRaw(window.location.href)

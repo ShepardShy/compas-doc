@@ -49,7 +49,7 @@
                             required: false,
                             title: 'Роли',
                             lockedOptions: [],
-                            options: userStore.roles
+                            options: []
                         }"
                         :isReadOnly="false"
                         :isHaveNullOption="false"
@@ -79,12 +79,9 @@
 
     import AppButton from '@/components/AppButton/AppButton.vue';
     import AppInput from '@/components/AppInputs/Input/Input.vue';
-    import AppWarning from '@/components/AppWarning/WarningNew/AppWarning.vue';
+    import AppWarning from '@/components/AppWarning/AppWarning.vue';
     import AppSelect from '@/components/AppSelects/Select/Select.vue';
     import AppCheckbox from '@/components/AppInputs/Checkbox/Checkbox.vue';
-
-    import { useUserStore } from '@/stores/userStore.js'
-    const userStore = useUserStore()
 
     const isShow = inject('isShow')
     const settingsTab = inject('settingsTab')

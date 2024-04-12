@@ -65,7 +65,7 @@
     import IconSettings from '@/components/AppIcons/Settings/Settings.vue'
     import PopupOption from '@/components/AppPopup/PopupOption/PopupOption.vue'
     
-    import commonScriptsGlobal from '@/commonScripts/commonScripts.js'
+    import commonScripts from '@/commonScripts/commonScripts.js'
 
     const activeFields = inject('activeFields')
 
@@ -84,7 +84,7 @@
     const searchOptions = async (data) => {
         console.log(data);
         let findedField = activeFields.value.find((field) => field.key === data.key)
-        let request = await commonScriptsGlobal.getInfoAutocomplete(data.value.toLowerCase(), findedField.id)
+        let request = await commonScripts.getInfoAutocomplete(data.value.toLowerCase(), findedField.id)
         findedField.options = request
     }
 

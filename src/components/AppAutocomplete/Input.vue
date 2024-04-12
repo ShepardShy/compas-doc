@@ -258,6 +258,7 @@
             value: null
         })
         backupOptions.value = JSON.parse(JSON.stringify(options.value))
+        console.log(props.item.options);
         callAction({
             action: 'setActiveOption',
             value: props.item.value

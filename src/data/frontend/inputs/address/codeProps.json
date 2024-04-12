@@ -7,10 +7,10 @@
             "required": false,
             "focus": false,
             "value": {
-                "text": "Россия, 54 Москва, улица Бутлерова, 38к7",
+                "text": "Россия, Свердловская область, Екатеринбург",
                 "coords": [
-                    "38.642606",
-                    "56.547414"
+                    56.838011,
+                    60.597474
                 ]
             },
             "options": [
@@ -21,8 +21,8 @@
                     "value": {
                         "text": "Россия, Москва, улица Бутлерова, 38к4",
                         "coords": [
-                            "37.642606",
-                            "55.547414"
+                            55.642606, 
+                            37.547414
                         ]
                     }
                 }
@@ -32,15 +32,19 @@
         "type": "Object" 
     },
     "isReadOnly": {
-        "default": false,
+        "default": true,
         "type": "Boolean"
     },
     "isShowMap": {
         "default": true,
         "type": "Boolean"
     },
-    "isSelectSeveral": {
-        "default": true,
+    "isCanSelect": {
+        "default": false,
+        "type": "Boolean"
+    },
+    "isShowLabel": {
+        "default": false,
         "type": "Boolean"
     }
 }
