@@ -74,18 +74,21 @@
     let localOptions = ref([])
     let value = ref({
         text: null,
-        coords: []
+        coords: [55.755864, 37.617698]
     })
 
     onMounted(async () => {
         await loadYmap(settings);
-        value.value = JSON.parse(JSON.stringify(props.item.value))
-        localOptions.value.push({
-            label: {
-                text: props.item.value.text
-            },
-            value: props.item.value
-        })
+
+        if (![null, undefined].includes(props.item.value) && props.item.value != '') {
+            value.value = JSON.parse(JSON.stringify(props.item.value))
+            localOptions.value.push({
+                label: {
+                    text: props.item.value.text
+                },
+                value: props.item.value
+            })
+        }
 
         if (props.isShowMap) {
             ymaps.ready(['Map', 'Polygon']).then(function () {
