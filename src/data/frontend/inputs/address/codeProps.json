@@ -6,7 +6,13 @@
             "key": "address",
             "required": false,
             "focus": false,
-            "value": null,
+            "value": {
+                "text": "Россия, Свердловская область, Екатеринбург",
+                "coords": [
+                    56.838011,
+                    60.597474
+                ]
+            },
             "options": [
                 {
                     "label": {

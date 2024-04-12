@@ -2,7 +2,7 @@
     <AppComponent
         :title="'Поле адреса'"
         :component="AppMap"
-        :codeProps="localPropsAddress"
+        :codeProps="AddressProps"
         :codeEmits="AddressEmits"
         @changeValue="(data) => changeValue(data)"
     />
@@ -15,18 +15,10 @@
     import AddressEmits from "@/data/frontend/inputs/address/codeEmits.json";
     import AppComponent from "@/components/AppComponent/AppComponent.vue";
 
-    import {ref} from "vue";
-
     import AddressProps from "@/data/frontend/inputs/address/codeProps.json";
-
-    const localPropsAddress = ref(null)
 
     // Изменение значений
     const changeValue = (data) => {
-        localPropsAddress.value.item.default.value = data
         console.log('Изменение значений', data);
     }
-
-    // Инициализация пропсов для компонентов
-    localPropsAddress.value = JSON.parse(JSON.stringify(AddressProps))
 </script>

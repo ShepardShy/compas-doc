@@ -14,6 +14,7 @@
             :isShowMap="props.isShowMap"
             :isReadOnly="props.isReadOnly"
             :isCanSelect="props.isCanSelect"
+            @changeValue="(data) => emit('changeValue', data)"
         />
 
     </FormItem>
