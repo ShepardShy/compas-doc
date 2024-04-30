@@ -169,7 +169,7 @@
                     :isReadOnly="Boolean(!field.isEdit || !field.can_edit)"
                     @changeValue="(data) => changeValue(field.id, data)"
                 />
-                <AppMap 
+                <AppMap
                     v-if="field.type == 'address'"
                     :item="{
                         id: field.id,
@@ -183,7 +183,8 @@
                     }"
                     :isReadOnly="Boolean(!field.isEdit || !field.can_edit)"
                     :isShowMap="true"
-                    :isSelectSeveral="true"
+                    :isCanSelect="false"
+                    :isShowLabel="true"
                     @changeValue="(data) => changeValue(field.id, data)"
                 />
                 <AppPopup class="tile-section__settings" :isCanSelect="false" :closeByClick="true" v-if="isEditableSettings">

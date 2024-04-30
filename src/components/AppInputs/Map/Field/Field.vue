@@ -324,7 +324,7 @@
                 },
                 value: {
                     text: option.text,
-                    coords: option.coords.reverse()
+                    coords: option.coords
                 }
             })
         }

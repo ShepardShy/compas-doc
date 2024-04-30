@@ -182,6 +182,26 @@
                                 :isReadOnly="Boolean(item.read_only || !row.isEdit)"
                                 @changeValue="(data) => changeValue(row.id, data)"
                             />
+
+                            <AppMap 
+                                v-else-if="item.type == 'address'"
+                                :item="{
+                                    id: row.id,
+                                    title: item.title,
+                                    key: item.key,
+                                    required: Boolean(item.required),
+                                    focus: item.focus,
+                                    value: row[item.key],
+                                    options: [],
+                                    lockedOptions: []
+                                }"
+                                :isReadOnly="Boolean(!item.isEdit || !item.can_edit)"
+                                :isShowMap="false"
+                                :isCanSelect="false"
+                                :isShowLabel="false"
+                                @changeValue="(data) => changeValue(row.id, data)"
+                            />
+
                             <div class="table-item__icon" v-else-if="item.type == 'iconDrag'">
                                 <IconDrag />
                                 <FormValue 
@@ -213,6 +233,7 @@
     import draggable from 'vuedraggable'
     import { inject, ref, onMounted, onUnmounted } from 'vue'
     
+    import AppMap from '@/components/AppInputs/Map/Map.vue';
     import AppDate from '@/components/AppInputs/Date/Date.vue'
     import AppFile from '@/components/AppInputs/File/File.vue'
     import AppLoader from '@/components/AppLoader/AppLoader.vue';

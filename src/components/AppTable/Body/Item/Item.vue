@@ -171,7 +171,24 @@
                     @openDatepicker="() => $emit('clickRow', true)"
                     @changeValue="(data) => changeValue(props.rowId, data)"
                 />
-
+                <AppMap 
+                    v-else-if="props.item.type == 'address'"
+                    :item="{
+                        id: props.row.id,
+                        title: props.item.title,
+                        key: props.item.key,
+                        required: Boolean(props.item.required),
+                        focus: props.item.focus,
+                        value: props.row[props.item.key],
+                        options: [],
+                        lockedOptions: []
+                    }"
+                    :isReadOnly="Boolean(!props.item.isEdit || !props.item.can_edit)"
+                    :isShowMap="false"
+                    :isCanSelect="false"
+                    :isShowLabel="false"
+                    @changeValue="(data) => changeValue(props.rowId, data)"
+                />
                 <div class="table-item__icon" v-else-if="props.item.type == 'iconDrag'">
                     <IconDrag />
                     <FormValue 
@@ -195,6 +212,7 @@
     import './Item.scss';
     import { inject, ref, computed } from 'vue'
     
+    import AppMap from '@/components/AppInputs/Map/Map.vue';
     import AppDate from '@/components/AppInputs/Date/Date.vue'
     import IconDrag from '@/components/AppIcons/Drag/Drag.vue'
     import IconDelete from '@/components/AppIcons/Delete/Delete.vue'    
