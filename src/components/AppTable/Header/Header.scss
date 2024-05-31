@@ -10,12 +10,13 @@
 
         .table-item__title, .form-item__checkbox {
             overflow: hidden;
+            @include mixins.userSelect(none);
         }
 
         &.sortable-ghost {
             border-radius:  5px 5px 0px 0px;
             border-bottom: none;
-            border-right: 2px dashed variables.$color-blue-grey;
+            border-right: 2px dashed variables.$color-draggable;
             
         }
 
@@ -42,6 +43,16 @@
             height: 500vh;
         }
     }
+
+    &.table__header_copy {
+        position: fixed;
+        top: 0px;
+        max-width: var(--sectionWidth);
+        overflow: hidden;
+        z-index: 100;
+        background: variables.$color-white;
+        pointer-events: none;
+    }
 }
 
 .table_resizing {
@@ -57,6 +68,21 @@
                 .table-item__border {
                     height: 500vh;
                 }
+            }
+        }
+    }
+}
+
+.table-template__body_empty {
+    .table__header {
+        .table__item {
+            .table-item__border {
+                height: 100%;
+            }
+
+            &.sortable-ghost {
+                border-radius:  5px;
+                border: 2px dashed variables.$color-draggable;
             }
         }
     }

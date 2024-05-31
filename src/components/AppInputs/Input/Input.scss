@@ -7,7 +7,7 @@
     &::after {
         content: var(--substring);
         pointer-events: none;
-        color: variables.$color-grey;
+        color: variables.$color-subtext;
         background: variables.$color-white;
         bottom: 12px;
         position: absolute;

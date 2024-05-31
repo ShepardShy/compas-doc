@@ -101,8 +101,8 @@ export default {
             div.setAttribute('setListener', 'true')
         }
     
-        let tableHeader = table.querySelector('.table__header')
-        let sectionBody = table.parentNode
+        let tableHeader = table ? table.querySelector('.table__header') : null
+        let sectionBody = table ? table.parentNode : null
 
         if ([null, undefined].includes(tableHeader)) return
 
@@ -184,7 +184,7 @@ const onMouseMoveThrottle = _.throttle(async function (table, tableHeader, secti
         setCellWidth([...rowFields][info.index], width)
     });
 
-    if (table.offsetWidth <= sectionBody.offsetWidth) {
+    if (table.offsetWidth <= sectionBody.offsetWidth + 1) {
         setCellsWidthDefference(tableHeader, sectionBody)
     }
 

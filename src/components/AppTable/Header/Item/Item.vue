@@ -26,14 +26,14 @@
                 @changeValue="(data) => selectAllRows(data)"
             />
             
-            <div 
+            <!-- <div 
                 class="table-item__drag-area"
                 :draggable="true"
                 @dragover.prevent
                 @dragenter.prevent
                 @dragstart="(event) => $emit('dragStart', event)"
                 @dragend="(event) => $emit('dragEnd', event)"
-            ></div>
+            ></div> -->
             <div class="table-item__border"></div>
         </div>
 
@@ -43,14 +43,14 @@
             </span>
             <IconSort v-if="sortItem.key == props.item.key" :class="sortItem.order == 'asc' ? 'icon__sort_up' : ''"/>
 
-            <div 
+            <!-- <div 
                 class="table-item__drag-area"
                 :draggable="props.headerRef != null && !props.headerRef.parentNode.classList.contains('table_resizing') && tableItemRef != null && !tableItemRef.classList.contains('table__item_sticky')"
                 @dragover.prevent
                 @dragenter.prevent
                 @dragstart="(event) => $emit('dragStart', event)"
                 @dragend="(event) => $emit('dragEnd', event)"
-            ></div>
+            ></div> -->
 
             <div class="table-item__border"></div>
         </div>

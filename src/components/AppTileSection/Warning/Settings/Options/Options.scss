@@ -48,14 +48,14 @@
     
                     svg {
                         * {
-                            fill:variables.$color-grey;
+                            fill:variables.$color-subtext;
                         }
                     }
     
                     &:hover {
                         svg {
                             * {
-                                fill:variables.$color-active;
+                                fill:variables.$color-blue-two;
                             }
                         }
                     }
@@ -76,7 +76,7 @@
                         @include mixins.elemResolutionOptions(40px, 40px);
 
                         .file-upload {
-                            border: 1px solid variables.$color-grey;
+                            border: 1px solid variables.$color-border;
                             border-top: none;
                             border-bottom: none;
                             border-radius: 0px;

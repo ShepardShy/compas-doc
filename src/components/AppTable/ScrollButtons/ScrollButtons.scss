@@ -3,10 +3,22 @@
 
 .table-template__buttons {
     display: flex;
-    width: 100%;
     z-index: 300;
-    position: absolute;
-    @include mixins.elemPositionOptions(calc(var(--stickyTop) + 16px), 0px);
+    position: fixed;
+    left: 255px;
+    width: var(--sectionWidth);
+
+    &.table-template__buttons_start {
+        top: calc(50%);
+    }
+
+    &.table-template__buttons_center {
+        top: calc(50% - 90px);
+    }
+
+    &.table-template__buttons_end {
+        top: calc(50% - 70px);
+    }
 }
 
 .scroll-button {
@@ -54,6 +66,20 @@
         .table-template__loader {
             display: grid;
         }
+
+        .table-template__buttons {
+            display: none;
+        }        
+
+        .table-template__body {
+            height: 100%;
+
+            &.table-template__body_empty {
+                .table__empty-block {
+                    display: none;
+                }
+            }
+        }
     }
 
     &.table-template_filtering {
@@ -67,9 +93,23 @@
     left: 0px;
     top: 0px;
     white-space: nowrap;
-    height: 60vh;
+    height: 100%;
+    width: var(--sectionWidth);
     place-items: center;
-    color:variables.$color-blue-grey;
+    color:variables.$color-settings;
     position: sticky;
     display: none;
+}
+
+
+.table-template__body {
+    &.table-template__body_empty {
+        height: 100%;
+        display: grid;
+        grid-template-rows: auto 1fr;
+
+        .table__empty-block {
+            display: grid;
+        }
+    }
 }

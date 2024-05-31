@@ -7,7 +7,7 @@
             "type": "date",
             "title": "Заголовок",
             "placeholder": "__.__.____",
-            "value": "2024-02-01",
+            "value": [],
             "key": "dateKey",
             "focus": false
         },
@@ -18,7 +18,7 @@
         "type": "Boolean"
     },
     "isMultiple": {
-        "default": false,
+        "default": true,
         "type": "Boolean"
     },
     "isReadOnly": {

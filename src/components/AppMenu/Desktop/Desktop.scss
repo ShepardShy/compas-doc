@@ -218,7 +218,7 @@
         
         .menu-user {
             &.menu__item {
-                border-top: 1px solid variables.$color-grey;
+                border-top: 1px solid variables.$color-subtext;
                 @include mixins.flexBlock($vertical: center, $gap: 10px);
             }
             
@@ -270,7 +270,7 @@
                 &[open] {
                     svg {
                         * {
-                            fill: variables.$color-blue-grey;
+                            fill: variables.$color-settings;
                         }
                     }
                 }
@@ -281,7 +281,7 @@
                 padding: 0px 10px;
         
                 .menu__item-subtitle, &::after, &::before {
-                    background-color: variables.$color-blue-grey;
+                    background-color: variables.$color-settings;
                 }
             }
 

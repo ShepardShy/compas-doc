@@ -2,6 +2,8 @@
     <div class="table-container" :class="props.isHaveCategories ? 'table-container_categories' : ''">
         <TableCategory 
             v-if="props.isHaveCategories"
+            :categoryType="props.categoryType"
+            :activeCategory="props.activeCategory"
             @callAction="(data) => callAction(data)"
         />
 
@@ -12,13 +14,18 @@
             })">
                 Добавить строку
             </AppButton>
+
+            <TableTotal v-if="props.isDinamyc"/>
         </AppSection>
 
         <AppSection 
             ref="sectionRef" 
             class="section__table table-template" 
-            :style="`--stickyTop: ${scrollPosition}px; --sectionWidth: ${sectionRef ? sectionRef.sectionRef.offsetWidth : 0}px`" 
-            :class="props.table.loaderState == 'loading' ? 'table-template_loading' : props.table.loaderState == 'filtering' ? 'table-template_filtering' : ''"
+            :style="`--stickyTop: ${scrollPosition}px; --sectionWidth: ${sectionWidth}px`" 
+            :class="
+                socketRows.header.length > 0 || socketRows.body.length > 0 ? 'table-template_updating' : '', 
+                props.table.loaderState == 'loading' ? 'table-template_loading' : props.table.loaderState == 'filtering' ? 'table-template_filtering' : ''
+            "
         >
             <TableTop 
                 :tableTitle="props.table.title"
@@ -36,10 +43,11 @@
                 :slug="props.slug"
                 :isTrash="props.isTrash"
                 :loaderState="props.table.loaderState"
+                :isPermanentEdit="props.isPermanentEdit"
                 @callAction="(data) => callAction(data)"
             />
             
-            <div v-else class="table-template__body section__scroll-area" :class="[fields.length == 0 || bodyData.length == 0 ? 'table-template__body_empty' : '', props.isDinamyc ? 'table-template__body_dinamyc' : '']">
+            <div ref="scrollAreaRef" v-else class="table-template__body section__scroll-area" :class="[fields.length == 0 || bodyData.length == 0 ? 'table-template__body_empty' : '']">
                 <table class="table" ref="tableRef" :class="[props.isPermanentEdit ? 'table_permanent-edit' : '']">
                     <TableHeader
                         v-if="props.table.loaderState != 'loading'"
@@ -54,9 +62,7 @@
                         @callAction="(data) => callAction(data)"
                     />
                 </table>
-                <ScrollButtons v-show="props.table.loaderState != 'loading'"/>
-
-                <TableTotal v-if="props.isDinamyc"/>
+                <ScrollButtons :tableRef="tableRef" v-if="tableRef != null"/>
             </div>
 
             <TableFooter 
@@ -65,6 +71,7 @@
 
             <SectionActions 
                 :actionState="actionState"
+                :loaderState="props.table.loaderState"
                 @callAction="(data) => callAction(data)"
             />
 
@@ -109,6 +116,7 @@
 
     const tableRef = ref(null)
     const sectionRef = ref(null)
+    const scrollAreaRef = ref(null)
 
     let isMobile = ref(false)
     let updatedRows = ref([])
@@ -168,6 +176,7 @@
     let skipChecking = ref(false)
     let updatedCategory = ref(null)
     let categories = ref([])
+    let sectionWidth = ref(0)
 
     const props = defineProps({
         table: {
@@ -215,6 +224,14 @@
         categories: {
             default: [],
             type: Array
+        },
+        categoryType: {
+            default: 'default',
+            type: String
+        },
+        activeCategory: {
+            default: null,
+            type: String
         }
     })
 
@@ -224,7 +241,6 @@
 
     provide('menu', menu)
     provide('fields', fields)
-    provide('isShow', isShow)
     provide('isShow', isShow)
     provide('sortItem', sortItem)
     provide('tableRef', tableRef)
@@ -242,10 +258,10 @@
     provide('skipChecking', skipChecking)
     provide('scrollPosition', scrollPosition)
     provide('updatedCategory', updatedCategory)
+    provide('isPermanentEdit', props.isPermanentEdit)
     
     onMounted(async () => {
         isMobile.value = window.innerWidth <= 660
-        window.addEventListener('resize', checkingWindowWidth);
         sortItem.value = JSON.parse(JSON.stringify(props.table.sortItem))
         footerData.value = JSON.parse(JSON.stringify(props.table.tableFooter))
         fields.value = callAction({action: 'setPropsValues', value: props.table.tableKeys})
@@ -259,12 +275,16 @@
                 row.isChoose = true
             });
         }
+
+        if (sectionRef.value) {
+            new ResizeObserver(changeWidth).observe(sectionRef.value.sectionRef)
+        }
     })
 
-    // Проверка был ли уменьшен размер окна
-    const checkingWindowWidth = _.throttle(() => {
+    const changeWidth = () => {
         isMobile.value = window.innerWidth <= 660
-    }, 100)
+        sectionWidth.value = scrollAreaRef.value ? scrollAreaRef.value.offsetWidth : 0
+    }
 
     // Вызов действия в таблице
     const callAction = (data) => {
@@ -324,7 +344,11 @@
                 }
 
                 for (let key in row) {
-                    if (!['isEdit', 'isChoose'].includes(key) && !_.isEqual(row[key], backupRow[key])) {
+                    let findedField = fields.value.find(p => p.key == key)
+                    if (findedField && findedField.type == 'status' && !_.isEqual(String(row[key]), String(backupRow[key]))) {
+                        flag = true
+                        updatedRow[key] = row[key]
+                    } else if (findedField && !['isEdit', 'isChoose'].includes(key) && findedField.type != 'status' && !_.isEqual(row[key], backupRow[key])) {
                         flag = true
                         updatedRow[key] = row[key]
                     }
@@ -340,6 +364,10 @@
                 let fieldError = {}
 
                 for (let field of fields.value) {
+                    if (field.type == 'status') {
+                        row[field.key] = setStatusValue(field, row[field.key])
+                    }
+
                     error = ValidateField(field, row[field.key])
                     
                     if (error.state) {
@@ -359,20 +387,36 @@
                 }
             }
 
+            // Установка базового значения поля статус
+            const setStatusValue = (field, value) => {
+                let options = field.options.filter((option) => option.label.is_hidden == 0 || option.label.field_id == field.id)
+                let findedOption = options == null ? null : options.find((option) => option.value == value)
+                
+                if ([null, undefined].includes(findedOption)) {
+                    if (options == null || options.length == 0) {
+                        return null
+                    } else {
+                        return options[0].value
+                    }
+                } else {
+                    return findedOption.value
+                }
+            }
+
             // Проверка строк на валидацию
             const checkingRows = () => {
                 for (let backupRow of backupValues.value) {
-                findedIndex = bodyData.value.findIndex(p => p.id == backupRow.id)
+                    findedIndex = bodyData.value.findIndex(p => p.id == backupRow.id)
 
-                let error = validateFields(bodyData.value[findedIndex])
+                    let error = validateFields(bodyData.value[findedIndex])
 
-                if (!error) {
-                    updatedRows.value.push(getUpdatedFields(bodyData.value[findedIndex], backupRow))
-                } else {
-                    invalidFlag = true
-                    invalidRows.value.push(error)
+                    if (!error) {
+                        updatedRows.value.push(getUpdatedFields(bodyData.value[findedIndex], backupRow))
+                    } else {
+                        invalidFlag = true
+                        invalidRows.value.push(error)
+                    }
                 }
-            }
             }
 
             // Инициализация сохранения строк
@@ -444,6 +488,15 @@
                 updatedRows.value = []
                 checkingRows()
             } else {
+                if (fields.value.find(p => p.key == 'product_id')) {
+                    bodyData.value = bodyData.value.filter(p => p.product_id != null && p.product_id.value != null)
+
+                    for (let item of bodyData.value) {
+                        if (item.product_sum == null) {
+                            item.product_sum = 0
+                        }
+                    }
+                }
                 updatedRows.value = JSON.parse(JSON.stringify(bodyData.value))
             }
 
@@ -505,13 +558,7 @@
                 // Обновление значения поля
                 const updateFieldValue = (row, updatedRow) => {
                     for (let key in updatedRow) {
-                        let findedField = fields.value.find(column => column.key == key)
-
-                        if (findedField.type == 'relation') {
-                            row[key].value = updatedRow[key]
-                        } else {
-                            row[key] = updatedRow[key]
-                        }
+                        row[key] = updatedRow[key]
                     }
                 }
 
@@ -654,6 +701,44 @@
             emit('callAction', {action: 'deleteCategory', value: data})
         }
 
+        // Начало редактирования роли
+        const initUpdateRole = (data) => {
+            isShow.value = {
+                state: true,
+                type: 'updateRole'
+            }
+            updatedCategory.value = data
+        }
+
+        // Начало создания роли
+        const initCreateRole = () => {
+            isShow.value = {
+                state: true,
+                type: 'createRole'
+            }
+        }
+
+        // Начало удаления роли
+        const initDeleteRole = (data) => {
+            isShow.value = {
+                state: true,
+                type: 'deleteRole'
+            }
+            updatedCategory.value = data
+        }
+
+        // Удаление роли
+        const deleteRole = (data) => {
+            isShow.value = {
+                state: false,
+                type: null
+            }
+
+            categories.value = categories.value.filter(p => p.id != data)
+            emit('callAction', {action: 'deleteRole', value: data})
+        }
+
+        // Добавление строки в динамическую таблицу
         const addRow = () => {
             if (actionState.value != 'saving') {
                 backupRows.value =  JSON.parse(JSON.stringify(bodyData.value))
@@ -776,6 +861,26 @@
                 deleteCategory(data.value)
                 break;
 
+            // Начало редактирования роли    
+            case 'initUpdateRole': 
+                initUpdateRole(data.value)
+                break;
+
+            // Начало создания роли    
+            case 'initCreateRole': 
+                initCreateRole(data.value)
+                break;
+
+            // Начало удаления роли    
+            case 'initDeleteRole': 
+                initDeleteRole(data.value)
+                break;
+
+            // Удаление роли    
+            case 'deleteRole': 
+                deleteRole(data.value)
+                break;
+
             // Добавление новой строки
             case 'addRow':
                 addRow()
@@ -792,6 +897,11 @@
         bodyData.value = callAction({action: 'setPropsValues', value: props.table.tableData})
         if (props.isPermanentEdit) {
             backupValues.value = callAction({action: 'setPropsValues', value: props.table.tableData})
+            bodyData.value.forEach(row => {
+                backupValues.value.push(JSON.parse(JSON.stringify(row)))
+                row.isEdit = true
+                row.isChoose = true
+            });
         }
     }, {
         deep: true

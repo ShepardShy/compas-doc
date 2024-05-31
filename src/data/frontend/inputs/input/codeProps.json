@@ -3,8 +3,8 @@
         "default": {
             "id": 0,
             "required": true,
-            "substring": "руб.",
-            "type": "number",
+            "substring": null,
+            "type": "password",
             "title": "Заголовок",
             "placeholder": "Введите текст",
             "value": null,

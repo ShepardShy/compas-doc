@@ -21,7 +21,7 @@
                 height: 25px;
                 padding: 0px 0px 8px;
                 background-color: variables.$color-white;
-                @include mixins.borderOptions(1px, solid, variables.$color-grey, 0px 5px 5px 0px);
+                @include mixins.borderOptions(1px, solid, variables.$color-border, 0px 5px 5px 0px);
             }
         }
     }

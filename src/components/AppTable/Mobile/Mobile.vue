@@ -5,7 +5,7 @@
                 tag="div"
                 class="table-mobile"
                 itemKey="table-mobile"
-                :class="bodyData.length == 0 ? 'table-mobile_empty' : ''"
+                :class="bodyData.length == 0 ? 'table-mobile_empty' : '', props.isPermanentEdit ? 'table-mobile_permanent-edit' : ''"
                 v-model="bodyData" 
                 handle=".icon__draggable"
                 @start="() => dragStart()"
@@ -50,7 +50,7 @@
                                     value: row[item.key],
                                     required: Boolean(item.required),
                                     anotherKey: isDinamyc ? 'product_name' : null,
-                                    anotherTitle: isDinamyc ? props.row.product_name : null,
+                                    anotherTitle: isDinamyc ? row.product_name : null,
                                     options: ['status', 'relation'].includes(item.type) ? item.options : null,
                                     lockedOptions: item.choosed,
                                 }"
@@ -195,7 +195,7 @@
                                     options: [],
                                     lockedOptions: []
                                 }"
-                                :isReadOnly="Boolean(!item.isEdit || !item.can_edit)"
+                                :isReadOnly="Boolean(item.read_only || !row.isEdit)"
                                 :isShowMap="false"
                                 :isCanSelect="false"
                                 :isShowLabel="false"
@@ -279,6 +279,10 @@
         loaderState: {
             default: null,
             type: String
+        },
+        isPermanentEdit: {
+            default: false,
+            type: Boolean
         }
     })
 
@@ -337,7 +341,7 @@
             }, clickSetting.value.delay);
         } else {
             let regexp = /<\/?[a-z][\s\S]*>/i
-            if (!row.isEdit && actionState.value != 'saving' && item.key != 'actions' && regexp.test(event.target.innerHTML)) {
+            if (!row.isEdit && actionState.value != 'saving' && event.target.closest('.popup_actions') == null && regexp.test(event.target.innerHTML)) {
                 callAction({action: 'showModal', value: row.id})
             }
             window.getSelection().empty();

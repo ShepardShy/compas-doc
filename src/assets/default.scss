@@ -131,7 +131,7 @@ input, textarea {
     background-color: variables.$color-white;
     caret-color: variables.$color-black;
     @include mixins.elemResolutionOptions(100%, 40px);
-    @include mixins.borderOptions(1px, solid,  variables.$color-grey, 5px);
+    @include mixins.borderOptions(1px, solid,  variables.$color-border, 5px);
 
     &:focus {
         border: 1px solid variables.$color-blue
@@ -188,7 +188,7 @@ input, textarea {
             @include mixins.elemResolutionOptions(18px, 18px);
 
             * {
-                fill: variables.$color-grey;
+                fill: variables.$color-subtext;
             }
         }
     }

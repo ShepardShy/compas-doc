@@ -37,7 +37,6 @@
     const menu = inject('menu')
     const fields = inject('fields')
     const tableRef = inject('tableRef')
-    const isDinamyc = inject('isDinamyc')
     
     let draggingItem = ref(null)
     let tableCopy = ref(null)
@@ -167,10 +166,7 @@
             copyTable()
             setDragImage(value.event)
             document.addEventListener("dragover", onMouseMove);
-
-            if (isDinamyc) {
-                tableRef.value.closest('.table-template__body_dinamyc').classList.add('table-template__body_drag')
-            }
+            tableRef.value.closest('.table-template__body').classList.add('table-template__body_drag')
         }
 
         // Конец перетаскивания
@@ -195,10 +191,7 @@
                 tableCopy.value.remove()
                 tableRef.value.classList.remove('table_hidden')
                 removeDragImage()
-
-                if (isDinamyc) {
-                    tableRef.value.closest('.table-template__body_dinamyc').classList.remove('table-template__body_drag')
-                }
+                tableRef.value.closest('.table-template__body').classList.remove('table-template__body_drag')
             }, 10);
         }
 
@@ -275,13 +268,10 @@
     }, 10)
 
     onMounted(() => {
-        if (isDinamyc) {
-            setTimeout(() => {
-                resizeTable.resizableGrid(tableRef.value, fields.value)
-            }, 100);            
-        } else {
+        setTimeout(() => {
             resizeTable.resizableGrid(tableRef.value, fields.value)
-        }
+        }, 100);     
+ 
         tableRef.value.parentNode.addEventListener('scroll', scrollTable)
         document.addEventListener('mouseup', updateTableHeader)
         document.addEventListener('mousedown', (e) => {

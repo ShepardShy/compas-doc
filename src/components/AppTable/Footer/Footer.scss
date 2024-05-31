@@ -65,9 +65,11 @@
 }
 
 @media (max-width: 410px) {
-    .table-footer__pagination {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
+    .pagination {
+        &.table-footer__pagination {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
     }
 }

@@ -49,14 +49,14 @@
                 @include mixins.elemResolutionOptions(13px, 13px);
 
                 * {
-                    fill: variables.$color-blue-grey;
+                    fill: variables.$color-settings;
                 }
             }
 
             &:hover {
                 svg {
                     * {
-                        fill: variables.$color-active;
+                        fill: variables.$color-blue-two;
                     }
                 }
             }

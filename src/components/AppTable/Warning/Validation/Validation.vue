@@ -39,7 +39,7 @@
                         @changeValue="(data) => changeValue(activeRow.id, data)"
                     />
                     <AppTextarea 
-                        v-else-if="['number', 'password', 'text'].includes(item.type)"
+                        v-else-if="item.type == 'text' && item.is_plural"
                         :item="{
                             key: item.key,
                             type: item.type,
@@ -122,7 +122,31 @@
                         :isReadOnly="Boolean(item.read_only || !activeRow.isEdit)"
                         @changeValue="(data) => changeValue(activeRow.id, data)"
                     />
-
+                    <AppInput
+                        v-else-if="['number', 'password'].includes(item.type) || (item.type == 'text' && !item.is_plural)"
+                        :item="{
+                            key: item.key,
+                            type: item.type,
+                            id: item.id,
+                            title: item.title,
+                            substring: item.unit,
+                            value: [null, undefined].includes(activeRow[item.key].value) ? null : typeof activeRow[item.key].value == 'object' ? activeRow[item.key].value.value : activeRow[item.key].value,
+                            is_link: item.is_link,
+                            is_plural: item.is_plural,
+                            hiddenOptions: item.choosed,
+                            related_table: item.related_table,
+                            is_external_link: item.is_external_link,
+                            required: Boolean(item.required),
+                            options: null,
+                            external_link: activeRow[item.key].value != undefined ? activeRow[item.key].value.external_link : null,
+                        }"
+                        :isCanCreate="true"
+                        :isUseEnter="false"
+                        :enabledAutocomplete="false"
+                        :isReadOnly="false"
+                        :isMultiple="Boolean(item.is_plural)"
+                        @changeValue="(data) => changeValue(activeRow.id, data)"
+                    />
                     <AppFile 
                         v-else-if="item.type == 'file'"
                         :item="{
@@ -181,6 +205,7 @@
     import AppSelect from '@/components/AppSelects/Select/Select.vue'
     import AppTextarea from "@/components/AppInputs/Textarea/Textarea.vue"
     import AppRelation from "@/components/AppSelects/Relation/Relation.vue"
+    import AppInput from '@/components/AppInputs/Input/Input.vue'
 
     const isShow = inject('isShow')
     const fields = inject('fields')

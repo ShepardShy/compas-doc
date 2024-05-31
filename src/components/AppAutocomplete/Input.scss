@@ -33,7 +33,7 @@
                 @include mixins.flexBlock($vertical: center, $horizontal: flex-start, $gap: 10px);
                 right: 10px;
                 top: 8px;
-                color: variables.$color-grey;
+                color: variables.$color-subtext;
 
                 &::after {
                     content: url('/public/icons/arrow.svg');

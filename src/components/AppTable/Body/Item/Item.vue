@@ -2,7 +2,7 @@
     <td 
         ref="itemRef" 
         class="table__item"
-        :style="`--colorItem: ${props.item.color};`"
+        :style="`--colorItem: ${props.item.color}; --defaultWidth: ${props.item.width};`"
         :data-key="props.item.key" 
         :class="[
             props.item.fixed ? 'table__item_fixed' : '', 
@@ -132,7 +132,7 @@
                         lockedOptions: []
                     }"
                     :isReadOnly="Boolean((props.item.read_only || !props.row.isEdit) || (isDymanic && props.item.read_only))"
-                    :isHaveNullOption="true"
+                    :isHaveNullOption="Boolean(props.item.have_null_option) ?? true"
                     :isMultiple="Boolean(props.item.is_plural)"
                     :isFiltered="true"
                     @click="() => callAction({action: 'openPopup', value: true})"
@@ -183,12 +183,13 @@
                         options: [],
                         lockedOptions: []
                     }"
-                    :isReadOnly="Boolean(!props.item.isEdit || !props.item.can_edit)"
+                    :isReadOnly="Boolean(props.item.read_only || (!props.row.isEdit && !props.isPermanentEdit))"
                     :isShowMap="false"
                     :isCanSelect="false"
                     :isShowLabel="false"
                     @changeValue="(data) => changeValue(props.rowId, data)"
                 />
+
                 <div class="table-item__icon" v-else-if="props.item.type == 'iconDrag'">
                     <IconDrag />
                     <FormValue 
@@ -212,7 +213,6 @@
     import './Item.scss';
     import { inject, ref, computed } from 'vue'
     
-    import AppMap from '@/components/AppInputs/Map/Map.vue';
     import AppDate from '@/components/AppInputs/Date/Date.vue'
     import IconDrag from '@/components/AppIcons/Drag/Drag.vue'
     import IconDelete from '@/components/AppIcons/Delete/Delete.vue'    
@@ -224,6 +224,7 @@
     import AppCheckbox from "@/components/AppInputs/Checkbox/Checkbox.vue"
     import AppTextarea from "@/components/AppInputs/Textarea/Textarea.vue"
     import AppRelation from "@/components/AppSelects/Relation/Relation.vue"
+    import AppMap from '@/components/AppInputs/Map/Map.vue';
 
     const itemRef = ref(null)
     const bodyData = inject('bodyData')
@@ -299,6 +300,16 @@
     // Изменение значения в поле
     const changeValue = (id, data) => {
         let findedRow = bodyData.value[id - 1]
+
+        if (props.isPermanentEdit) {
+            skipChecking.value = true
+
+            if (actionState.value == null) {
+                backupRows.value =  JSON.parse(JSON.stringify(bodyData.value))
+                actionState.value = props.isTrash ? 'restoring' : 'saving'
+            }
+        }
+
         findedRow[data.key] = data.value
 
         if (data.key == 'isChoose') {
@@ -308,23 +319,13 @@
                 actionState.value = null
             }
         } 
-        
-        if (props.isPermanentEdit) {
-            skipChecking.value = true
-
-            if (actionState.value == null) {
-                backupRows.value =  JSON.parse(JSON.stringify(bodyData.value))
-                actionState.value = props.isTrash ? 'restoring' : 'saving'
-            }
-
-            backupValues.value = JSON.parse(JSON.stringify(bodyData.value))
-        }
 
         if (isDinamyc && data.key == 'product_id') {
             findedRow.id = data.value.selectedOption ? data.value.selectedOption.id : null
             findedRow.product_price = data.value.selectedOption ? data.value.selectedOption.price : null
             findedRow.product_weight = data.value.selectedOption ? data.value.selectedOption.weight : null
             findedRow.product_count = 1
+            findedRow.product_name = data.value.selectedOption.text
 
             if (data.value.value != null) {
                 findedRow[data.key].localOptions = [{
@@ -333,8 +334,6 @@
                 }]
             }
         }
-
-        console.log(findedRow);
     }
 
     const calcSum = computed(() => {

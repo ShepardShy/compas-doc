@@ -9,10 +9,16 @@
 
 				svg {
 					* {
-						fill:variables.$color-active;
+						fill:variables.$color-blue-two;
 					}
 				}
 			}
+		}
+	}
+
+	&.table-categories__details_active {
+		.table-categories__header {
+			background-color: variables.$color-hover;
 		}
 	}
 }
@@ -24,6 +30,10 @@
 	cursor: pointer;
 
 	&:hover {
+		background-color: variables.$color-hover;
+	}
+
+	&.table-categories__item_active {
 		background-color: variables.$color-hover;
 	}
 }
@@ -39,9 +49,13 @@
 	.icon__triangle {
 		svg {
 			* {
-				fill:variables.$color-blue-grey;
+				fill:variables.$color-settings;
 			}
 		}
+	}
+
+	&.table-categories__header_active {
+		background-color: variables.$color-hover;
 	}
 
 	&:hover {
@@ -55,10 +69,19 @@
 	gap: 5px;
 	width: 100%;
 	padding: 10px 15px 10px calc(15px * var(--itemIndex));
+
+	&.table-categories__title_admin {
+		&::after {
+			content: '[admin]';
+			color: variables.$color-red;
+		}
+	}
 }
 
 .table-categories__popup {
-	margin-right: 15px;
+	.popup__summary {
+		padding: 0px 15px;
+	}
 
 	&.popup_up {
 		.popup__content {

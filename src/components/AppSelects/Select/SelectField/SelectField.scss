@@ -17,7 +17,7 @@
         padding: 5px 5px 5px 10px;
         background-color: variables.$color-hover;
         @include mixins.elemResolutionOptions(min-content, 34px);
-        @include mixins.borderOptions(1px, solid, variables.$color-active, 5px);
+        @include mixins.borderOptions(1px, solid, variables.$color-blue-two, 5px);
         @include mixins.flexBlock($vertical: center, $horizontal: flex-start, $gap: 5px);
     }
 
@@ -67,7 +67,7 @@
 
     &.select__popup_multiply {
         .popup__summary {
-            @include mixins.borderOptions(1px, solid, variables.$color-grey, 5px);
+            @include mixins.borderOptions(1px, solid, variables.$color-border, 5px);
         }
     
         .select__active-option {
@@ -136,7 +136,7 @@
             .form-item__substring {
                 top: 9px;
                 right: 10px;
-                color: variables.$color-grey;
+                color: variables.$color-subtext;
                 @include mixins.flexBlock($vertical: center, $horizontal: flex-start, $gap: 10px);
 
                 &::after {
@@ -161,7 +161,7 @@
             &:hover {
                 svg {
                     * {
-                        fill: variables.$color-active;
+                        fill: variables.$color-blue-two;
                     }
                 }
             }

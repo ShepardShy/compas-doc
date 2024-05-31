@@ -62,8 +62,8 @@
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: variables.$color-grey;
-        @include borderOptions(2px, solid, variables.$color-grey, 5px)
+        background-color: variables.$color-subtext;
+        @include borderOptions(2px, solid, variables.$color-border, 5px)
     }
 }
 
@@ -118,7 +118,7 @@
         position: relative;
         z-index: 2000;
         background: #fbfcfd;
-        @include borderOptions(2px, dashed, variables.$color-blue-grey, 5px);
+        @include borderOptions(2px, dashed, variables.$color-draggable, 5px);
 
         & > * {
             visibility: hidden;
@@ -132,7 +132,7 @@
         .table__item {
             z-index: 2000;
             background: #fbfcfd;
-            @include borderOptions(2px, dashed, variables.$color-blue-grey, 0px);
+            @include borderOptions(2px, dashed, variables.$color-draggable, 0px);
             border-left: none;
             border-right: none;
     
@@ -141,12 +141,12 @@
             }
 
             &:first-child {
-                border-left: 2px dashed variables.$color-blue-grey;
+                border-left: 2px dashed variables.$color-draggable;
                 border-radius: 5px 0px 0px 5px;
             }
             &:last-child {
                 border-radius:  0px 5px 5px 0px;
-                border-right: 2px dashed variables.$color-blue-grey;
+                border-right: 2px dashed variables.$color-draggable;
             }
         }        
     }

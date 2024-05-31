@@ -3,19 +3,35 @@
 
 .table-mobile {
     &.table-mobile_empty {
+        position: relative;
+        min-height: 50vh;
+
         &::after {
             content: 'Нет данных';
             position: absolute;
             display: grid;
             place-items: center;
-            color: variables.$color-blue-grey;
+            color: variables.$color-empty;
             @include mixins.elemPositionOptions(0px, 0px);
             @include mixins.elemResolutionOptions(100%, 100%);
         }
     }
 
+    &.table-mobile_permanent-edit {
+        .table-mobile__row {
+            &.table__row_edit {
+                background: transparent;
+
+                &:nth-child(even) {
+                    background: variables.$color-light-blue;
+                }
+            }
+        }
+    }
+
     .table__item {
         overflow: visible;
+        @include mixins.userSelect(auto);
 
         .form-item__checkbox {
             flex-direction: column;
@@ -78,6 +94,10 @@
         .icon__draggable {
             position: static;
         }
+    }
+    
+    .form-item__title {
+        width: max-content;
     }
 
     .file {

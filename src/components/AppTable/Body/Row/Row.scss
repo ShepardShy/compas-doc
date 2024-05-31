@@ -7,7 +7,7 @@
             .table__item {
                 &.sortable-ghost {
                     border-radius: 0px 0px 5px 5px;
-                    border-bottom: 2px dashed variables.$color-blue-grey;
+                    border-bottom: 2px dashed variables.$color-draggable;
                 }
             }
         }

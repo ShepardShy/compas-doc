@@ -19,7 +19,7 @@
     > 
         <template #right-sidebar>
             <div class="datapicker__preset-days">
-                <div class="datapicker__preset-item" v-for="day in presetDates[props.isMultiple ? 'plural' : 'default']" @click="changeValue(day.day)">
+                <div class="datapicker__preset-item" v-for="day in presetDates[props.isMultiple ? 'plural' : 'default']" :class="setClasses(day)" @click="changeValue(day.day)">
                     {{ day.title }}
                 </div>
             </div>
@@ -76,7 +76,8 @@
     import './DateField.scss';
     
     import { ref, onMounted, watch } from 'vue'
-
+    
+    import _ from 'lodash'
     import AppButton from '@/components/AppButton/AppButton.vue'
     import AppInput from '@/components/AppInputs/Input/Input.vue';
 
@@ -114,6 +115,7 @@
     let localDate = ref(null)
     let rangeStart = ref('')
     let rangeEnd = ref('')
+    const datepicker = ref(null)
 
     let presetDates = {
         plural: [
@@ -174,11 +176,6 @@
 
     // Изменение значения в календаре
     const changeValue = (value) => {
-        // Трансформирование значения
-        const transformValue = (value) => {
-            return value == null || value == '' ? null : new Date(value).toLocaleDateString("fr-CA", {year:"numeric", month: "2-digit", day:"2-digit"})
-        }
-
         // Изменение в множественном календаре
         const changeMultiple = (value) => {
             let request = []
@@ -194,6 +191,12 @@
                 request[0] = rangeStart.value.split('.').reverse().join('-')
                 request[1] = rangeEnd.value.split('.').reverse().join('-')
             }
+
+
+            datepicker.value.closeMenu()
+            setTimeout(() => {
+                datepicker.value.openMenu()
+            }, 1);
 
             emit('changeValue', {key: props.item.key, value: request})
         }
@@ -216,9 +219,27 @@
     const setValue = () => {
         if (props.isMultiple) {
             localDate.value = Array.isArray(props.item.value) ? JSON.parse(JSON.stringify(props.item.value)) : []
+
+            if (Array.isArray(props.item.value) && props.item.value.length > 0) {
+                rangeStart.value = transformValue(props.item.value[0]).split('-').reverse().join('.')
+                rangeEnd.value = transformValue(props.item.value[1]).split('-').reverse().join('.')
+            }
         } else {
             localDate.value = typeof props.item.value != 'string' || [null, undefined].includes(props.item.value) ? null : JSON.parse(JSON.stringify(new Date(props.item.value)))
         }
+    }
+
+    const setClasses = (day) => {
+        if (props.isMultiple) {
+            if (rangeStart.value != null && rangeEnd.value != null) {
+                return _.isEqual([transformValue(day.day[0]), transformValue(day.day[1])], [rangeStart.value.split('.').reverse().join('-'), rangeEnd.value.split('.').reverse().join('-')]) ? 'datapicker__preset-item_active' : '' 
+            }
+        }
+    }
+
+    // Трансформирование значения
+    const transformValue = (value) => {
+        return value == null || value == '' ? null : new Date(value).toLocaleDateString("fr-CA", {year:"numeric", month: "2-digit", day:"2-digit"})
     }
 
     // Действия с инпутами в множественном календаре
@@ -257,8 +278,135 @@
         }
     }
 
+    const categories = [
+    {
+        "id": 1,
+        "name": "Водитель34",
+        "deleted_at": null,
+        "choosed_at": null,
+        "user_id": 1,
+        "children": [
+            {
+                "id": 109,
+                "name": "Новая категория34",
+                "deleted_at": null,
+                "choosed_at": null,
+                "user_id": 1,
+                "children": [
+                    {
+                        "id": 127,
+                        "name": "Новая категория 35",
+                        "deleted_at": null,
+                        "choosed_at": null,
+                        "user_id": 1,
+                        "children": []
+                    },
+                    {
+                        "id": 128,
+                        "name": "Новая категория33",
+                        "deleted_at": null,
+                        "choosed_at": null,
+                        "user_id": 1,
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Менеджер",
+        "deleted_at": null,
+        "choosed_at": null,
+        "user_id": 1,
+        "children": [
+            {
+                "id": 95,
+                "name": "Общение с клиентом",
+                "deleted_at": null,
+                "choosed_at": null,
+                "user_id": 1,
+                "children": []
+            },
+            {
+                "id": 97,
+                "name": "Работа с CRM",
+                "deleted_at": null,
+                "choosed_at": null,
+                "user_id": 1,
+                "children": []
+            },
+            {
+                "id": 98,
+                "name": "Доставка",
+                "deleted_at": null,
+                "choosed_at": null,
+                "user_id": 1,
+                "children": []
+            },
+            {
+                "id": 99,
+                "name": "Синхронизация с 1С",
+                "deleted_at": null,
+                "choosed_at": null,
+                "user_id": 1,
+                "children": []
+            }
+        ]
+    },
+    {
+        "id": 31,
+        "name": "Оператор отгрузки",
+        "deleted_at": null,
+        "choosed_at": null,
+        "user_id": 1,
+        "children": []
+    },
+    {
+        "id": 112,
+        "name": "Новая категория",
+        "deleted_at": null,
+        "choosed_at": null,
+        "user_id": 8,
+        "children": []
+    },
+    {
+        "id": 119,
+        "name": "ЧУДЕСА",
+        "deleted_at": null,
+        "choosed_at": null,
+        "user_id": 1,
+        "children": []
+    },
+    {
+        "id": null,
+        "name": "Все категории",
+        "is_permanent": true,
+        "children": []
+    }
+]
+
+    let data = ref([])
+
+    const updateCategories = (categories) => {
+        for (let category of categories) {
+            if (category.children.length > 0) {
+                updateCategories(category.children)
+            }
+
+            data.value.push({
+                label: category.name,
+                children: category.children,
+                value: category.id
+            })
+        }
+    }
+
+
     onMounted(() => {
         setValue()
+        updateCategories(categories)
+        console.log(data.value.reverse());
     })
 
     watch(() => props.item.value, () => {

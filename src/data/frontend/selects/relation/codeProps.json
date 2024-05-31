@@ -9,11 +9,11 @@
                     "label": {
                         "id": 1,
                         "sort": 0,
-                        "text": "Локальная опция 1",
+                        "text": "linear-gradient(to bottom, #aeee90 2%, #65dd78 100%)",
                         "color": "linear-gradient(to bottom, #90aeee 2%, #65dd78 100%)",
                         "file": null
                     },
-                    "value": 2
+                    "value": 1
                 }]
             },
             "focus": false,
@@ -25,15 +25,35 @@
                     "label": {
                         "id": 1,
                         "sort": 0,
-                        "text": "Опция 1",
+                        "text": "Пользователь 1",
                         "color": "linear-gradient(to bottom, #aeee90 2%, #65dd78 100%)",
                         "file": null
                     },
                     "value": 1
+                },
+                {
+                    "label": {
+                        "id": 2,
+                        "sort": 0,
+                        "text": "Пользователь 2",
+                        "color": "linear-gradient(to bottom, #aeee90 2%, #65dd78 100%)",
+                        "file": null
+                    },
+                    "value": 2
+                },
+                {
+                    "label": {
+                        "id": 3,
+                        "sort": 0,
+                        "text": "Пользователь 3",
+                        "color": "linear-gradient(to bottom, #aeee90 2%, #65dd78 100%)",
+                        "file": null
+                    },
+                    "value": 3
                 }
             ],
             "anotherTitle": null,
-            "lockedOptions": []
+            "lockedOptions": [2]
         },
         "type": "Object"
     },

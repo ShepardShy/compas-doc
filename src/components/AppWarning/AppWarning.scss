@@ -41,14 +41,14 @@
 
         svg {
             * {
-                fill: variables.$color-grey;
+                fill: variables.$color-subtext;
             }
         }
 
         &:hover {
             svg {
                 * {
-                    fill: variables.$color-active;
+                    fill: variables.$color-blue-two;
                 }
             }   
         }
@@ -100,7 +100,7 @@
         display: flex;    
         align-items: center;
         justify-content: center;
-        color:variables.$color-blue-grey;
+        color:variables.$color-empty;
         margin-bottom: 0px;
     }
 }
@@ -113,6 +113,6 @@
 
 .warning__progress {
     font-size: 16px;
-    color:variables.$color-dark-grey;
+    color:variables.$color-subtext-dark;
 }
 

@@ -13,6 +13,19 @@
 		@maska="(e) => $emit('changeValue', {key: props.item.key, value: e.target.value})"
     />
 
+    <div class="input__group" v-else-if="props.item.type == 'password'">
+        <input
+            ref="inputRef"
+            :type="passwordType"
+            :value="props.item.value"
+            :disabled="props.disabled"
+            :placeholder="props.item.placeholder"
+            :autocomplete="props.enabledAutocomplete"
+            @input="(e) => $emit('changeValue', {key: props.item.key, value: e.target.value})"
+        />
+        <IconPasswordEye  :class="passwordType == 'text' ? 'icon__password-eye_active' : ''" @click="changePasswordType"/>
+    </div>
+
     <input
         v-else
 		ref="inputRef"
@@ -29,8 +42,11 @@
 	import './InputField.scss';
 
     import { ref, watch, onMounted } from 'vue'
+    import IconPasswordEye from '@/components/AppIcons/PasswordEye/PasswordEye.vue'
 
     const inputRef = ref()
+
+    let passwordType = ref('password')
 
     const props = defineProps({
         item: {
@@ -57,6 +73,14 @@
             type: String
         }
     })
+
+    const changePasswordType = () => {
+        if (passwordType.value == 'password') {
+            passwordType.value = 'text'
+        } else {
+            passwordType.value = 'password'
+        }
+    }
 
     watch(() => props.item.focus, () => {
         if (props.item.focus) {

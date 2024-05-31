@@ -13,17 +13,17 @@
     
         .popup__summary {
             cursor: pointer;
-            color: variables.$color-blue-grey;
+            color: variables.$color-settings-text;
             @include mixins.userSelect($value: none);
     
             &:hover {
-                color: variables.$color-active;
+                color: variables.$color-blue-two;
             }
         }
     
         &[open] {
             .popup__summary {
-                color: variables.$color-active;
+                color: variables.$color-blue-two;
             }
         }
     }
