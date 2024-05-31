@@ -4,11 +4,13 @@
     <div class="table-template__buttons" :class="`table-template__buttons_${buttonsPos}`">
         <div class="scroll-button scroll-button_left"
             ref="buttonScrollLeftRef"
+            :style="`--buttonPos: ${leftButtonPos}px`"
             @mouseover ="() => actionScroll({action: 'scrollingBlock', value: 'left'})"
             @mouseleave="() => mouseHover = false"
         ></div>
         <div class="scroll-button scroll-button_right"
             ref="buttonScrollRightRef"
+            :style="`--buttonPos: ${rightButtonPos}px`"
             @mouseover ="() => actionScroll({action: 'scrollingBlock', value: 'right'})"
             @mouseleave="() => mouseHover = false"                
         ></div>
@@ -35,11 +37,21 @@
     const tableHeadRef = ref(null)
     const buttonsPos = ref('start')
 
+    let leftButtonPos = ref(0)
+    let rightButtonPos = ref(0)
+
     const tableHeadCopy = ref(null)
 
     const tableRef = inject('tableRef')
+    const isCanSort = inject('isCanSort')
     const sectionRef = inject('sectionRef')
     const scrollPosition = inject('scrollPosition')
+    const sortItem = inject('sortItem')
+    const menu = inject('menu')
+    const footerData = inject('footerData')
+    const selectAll = inject('selectAll')
+    const bodyData = inject('bodyData')
+    const actionState = inject('actionState')
 
     const props = defineProps({
         tableRef: {
@@ -47,18 +59,31 @@
         }
     })
 
+    const emit = defineEmits([
+        'callAction'
+    ])
+
+    let clickSetting = ref({
+        id: -1,
+        delay: 500,
+        clicks: 0,
+        timer: null
+    })
+
     onMounted(async () => {
-        tableHeadRef.value = props.tableRef.querySelector('thead')
+        tableHeadRef.value = tableRef.value.querySelector('.table__header')
         window.addEventListener('scroll', throt_funScroll)
-        props.tableRef.parentNode.addEventListener('scroll', scrollXThrottling)
-        
-        if (props.tableRef) {
-            new ResizeObserver(resizeTable).observe(props.tableRef)
+        tableRef.value.parentNode.addEventListener('scroll', scrollXThrottling)
+        if (tableRef.value) {
+            new ResizeObserver(resizeTable).observe(tableRef.value)
         }
+
+        window.addEventListener('resize', setButtonPos);
     })
     
     onUnmounted(() => {
-        window.removeEventListener('scroll', throt_funScroll)
+        window.removeEventListener('scroll', throt_funScroll);
+        window.removeEventListener('resize', setButtonPos);
     })
 
     // Скролл таблицы и кнопок
@@ -66,7 +91,7 @@
         // Установка позиции у кнопок
         const setPosition = () => {           
             // старт таблицы
-            if (sectionRef.value.sectionRef.getBoundingClientRect().top > 0) {
+            if (sectionRef.value && sectionRef.value.sectionRef.getBoundingClientRect().top > 0) {
                 const rect = sectionRef.value.sectionRef.getBoundingClientRect();
                 const isFullyVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
                 buttonsPos.value = 'start'
@@ -79,7 +104,7 @@
             // конец таблицы
             } else {
                 let startPosScrollBlock = sectionRef.value.sectionRef.getBoundingClientRect().top +  window.pageYOffset - document.body.clientTop
-                if (sectionRef.value.sectionRef.getBoundingClientRect().height + startPosScrollBlock < window.scrollY + window.innerHeight) {
+                if (sectionRef.value && sectionRef.value.sectionRef.getBoundingClientRect().height + startPosScrollBlock < window.scrollY + window.innerHeight) {
                     buttonsPos.value = 'end'
                     return window.innerHeight / 2 + (window.scrollY - startPosScrollBlock - startPosScrollBlock + 5)
                 }
@@ -94,18 +119,40 @@
 
         // Отображение псевдошапки
         const showCopyHeader = () => {
-            let tableBodyTop = props.tableRef.querySelector('.table__body').getBoundingClientRect().top
-            if (tableBodyTop > 0) {
-                if (tableHeadCopy.value != null) {
-                    tableHeadCopy.value = null
-                    props.tableRef.querySelector('.table__header_copy').remove()
+            let localTableHeader = tableRef.value.querySelector('.table__header')
+            if (!localTableHeader) return  
+            let tableBodyTop = localTableHeader.getBoundingClientRect().top
+            let copyHeader = tableRef.value.querySelector('.table__header_copy')
+
+            const getWidth = () => {
+                let cellsWidth = []
+                for (let cell of localTableHeader.querySelectorAll('.table__item')) {
+                    cellsWidth.push(cell.offsetWidth)
+                }
+                return cellsWidth
+            }
+
+            const setWidth = () => {
+                let arrWidth = getWidth()
+                copyHeader.querySelectorAll('.table__item').forEach((element, index) => {
+                    element.width = `${arrWidth[index]}px`
+                    element.style.setProperty("--defaultWidth", `${arrWidth[index].toFixed(2)}px`)
+                });
+            }
+
+            if (tableBodyTop <= 0) {
+                if (copyHeader == null) {
+                    copyHeader = localTableHeader.cloneNode(true);
+                    setWidth()
+                    copyHeader.classList.add('table__header_copy')
+                    tableRef.value.appendChild(copyHeader)
+                    copyHeader.addEventListener('click', doubleClick)
                 }
             } else {
-                if (tableHeadCopy.value == null) {
-                    tableHeadCopy.value = props.tableRef.querySelector('.table__header').cloneNode(true);
-                    tableHeadCopy.value.classList.add('table__header_copy')
-                    props.tableRef.appendChild(tableHeadCopy.value)
-                    tableHeadCopy.value.scroll(props.tableRef.parentNode.scrollLeft, 0)
+                if (copyHeader) {
+                    copyHeader.removeEventListener('click', doubleClick)
+                    copyHeader.remove()
+                    tableHeadCopy.value = null
                 }
             }
         }
@@ -143,7 +190,7 @@
             }
 
             mouseHover.value = true
-            scrollX(props.tableRef.parentNode, pos)
+            scrollX(tableRef.value.parentNode, pos)
         }
 
         // Отображение видимости кнопок
@@ -194,17 +241,90 @@
         actionScroll({action: 'showCopyHeader', value: null})
     }
 
+    // Двойной клик для псевдошапки
+    const doubleClick = (event) => {
+        let eventKey =  event.target.closest('.table__item').getAttribute('data-key')
+
+        if (event.target.closest('.form-item__checkbox') != null && eventKey == 'isChoose') {
+            selectAllRows(!selectAll.value)
+        }
+
+        clickSetting.value.clicks++;
+        if (clickSetting.value.clicks === 1) {
+            clickSetting.value.timer = setTimeout( () => {
+            clickSetting.value.clicks = 0
+            }, clickSetting.value.delay);
+        } else {
+            if (isCanSort && (eventKey != 'isChoose') && (eventKey != 'actions')) {
+                sortItem.value = {
+                    key: eventKey,
+                    order: sortItem.value.key == eventKey ? (sortItem.value.order == 'desc' ? 'asc' : 'desc') : 'desc'
+                }
+                menu.value.saves.isShow = true
+                footerData.value.activePage = 1
+
+                let copyHeader = tableRef.value.querySelector('.table__header_copy')
+                let findedIcon = copyHeader.querySelector('.icon__sort').cloneNode(true)
+
+                if (sortItem.value.order == 'asc')  {
+                    findedIcon.classList.add('icon__sort_up')
+                } else {
+                    findedIcon.classList.remove('icon__sort_up') 
+                }
+                
+                copyHeader.querySelectorAll('.icon__sort').forEach(item => {
+                    item.remove()
+                })
+
+                let findedField = [...copyHeader.querySelectorAll('.table__item')].find(p => p.getAttribute('data-key') == eventKey)
+                findedField.querySelector('.table-item__content').appendChild(findedIcon)
+
+                emit('callAction', {
+                    action: 'getTableData',
+                    value: null
+                })
+            }
+            window.getSelection().empty();
+            clearTimeout(clickSetting.value.timer);  
+            clickSetting.value.clicks = 0;
+        }   
+    }  
+
+    // Выбор всех строк
+    const selectAllRows = (data) => {
+        selectAll.value = data
+        bodyData.value.forEach(row => {
+            row.isChoose = selectAll.value
+        });
+
+        if (data) {
+            actionState.value = props.isTrash ? 'restoring' : 'editting'
+        } else {
+            actionState.value = null
+        }
+    }
+    
+    // Установка положения кнопок
+    const setButtonPos = () => {
+        leftButtonPos.value = tableRef.value.parentNode.getBoundingClientRect().left
+        rightButtonPos.value = tableRef.value.parentNode.getBoundingClientRect().left + tableRef.value.parentNode.offsetWidth - 40
+    }
+
     // Троттлинг скролла по горизонтали
     const scrollXThrottling = _.throttle(() => {
-        actionScroll({action: 'setButtonsVisible', value: props.tableRef.parentNode})
-
+        actionScroll({action: 'setButtonsVisible', value: tableRef.value.parentNode})
+        tableHeadCopy.value = tableRef.value.querySelector('.table__header_copy')
+        
         if (tableHeadCopy.value != null) {
-            tableHeadCopy.value.scroll(props.tableRef.parentNode.scrollLeft, 0)
+            tableHeadCopy.value.scroll(tableRef.value.parentNode.scrollLeft, 0)
         }
     }, 5)
 
     const resizeTable = () => {
-        actionScroll({action: 'setButtonsVisible', value: props.tableRef.parentNode})
+        if (tableRef.value) {
+            actionScroll({action: 'setButtonsVisible', value: tableRef.value.parentNode})
+        }
         scrollPosition.value = actionScroll({action: 'setPosition', value: null})
+        setButtonPos()
     }
 </script>

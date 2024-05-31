@@ -1,6 +1,6 @@
 <template>
     <div class="actions__content">
-        <AppButton class= "button_blue action-button" @click="() => !props.loaderButton ? emit('callAction', {action: 'initRestore', value: true}) : ''">
+        <AppButton class= "button_blue action-button" :disabled="props.loaderState == 'actionLoad'" :class="props.loaderState == 'actionLoad' ? 'button_loading' : ''" @click="() => !props.loaderButton ? emit('callAction', {action: 'initRestore', value: true}) : ''">
             Восстановить
         </AppButton>
         <AppButton class= "action-button" @click="() => !props.loaderButton ? emit('callAction', {action: 'cancel', value: true}) : ''">
@@ -22,6 +22,10 @@
         loading: {
             default: false,
             type: Boolean
+        },
+        loaderState: {
+            default: null,
+            type: String
         }
     })
 </script>

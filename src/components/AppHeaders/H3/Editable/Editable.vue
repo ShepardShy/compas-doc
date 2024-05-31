@@ -1,5 +1,5 @@
 <template>
-    <div class="h-editable_h3 h-editable">
+    <div class="h-editable_h3 h-editable" ref="H3Ref">
         <AppTextarea 
             v-if="isEdit"
             :item="{
@@ -42,6 +42,7 @@
 
     let localTitle = ref(null)
     let isEdit = ref(false)
+    const H3Ref = ref(null)
 
     const props = defineProps({
         item: {
@@ -79,6 +80,16 @@
     // Изменение состояния редактирования
     const changeState = (state) => {
         isEdit.value = state
+
+        if (state) {
+            H3Ref.value.classList.remove('h-editable_h3-long')
+        } else {
+            if (H3Ref.value.offsetHeight > 25) {
+                H3Ref.value.classList.add('h-editable_h3-long')
+            } else {
+                H3Ref.value.classList.remove('h-editable_h3-long')
+            }
+        }
     }
 
     // Сохранение заголовка

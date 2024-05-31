@@ -5,7 +5,7 @@
     display: flex;
     z-index: 300;
     position: fixed;
-    left: 255px;
+    left: 0px;
     width: var(--sectionWidth);
 
     &.table-template__buttons_start {
@@ -27,7 +27,7 @@
     }
 
     &.scroll-button_left {
-        left: 0px;
+        left: var(--buttonPos);
         position: absolute;
 
         &::before {
@@ -36,7 +36,7 @@
     }
 
     &.scroll-button_right {
-        right: 0px;
+        left: var(--buttonPos);
         position: absolute;
 
         &::before {
@@ -96,7 +96,7 @@
     height: 100%;
     width: var(--sectionWidth);
     place-items: center;
-    color:variables.$color-settings;
+    color:variables.$color-blue-grey;
     position: sticky;
     display: none;
 }

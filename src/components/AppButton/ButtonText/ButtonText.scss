@@ -7,15 +7,15 @@
     overflow: hidden;
     white-space: nowrap;
     @include mixins.userSelect(none);
-    color: variables.$color-settings-text;
+    color: variables.$color-blue-grey;
     @include mixins.textOptions(15px, 400, normal);
 
     &:hover {
-        color: variables.$color-blue-two
+        color: variables.$color-active
     }
 
     &.button-text__copy_disabled {
-        color: variables.$color-settings-text;
+        color: variables.$color-blue-grey;
         cursor: text;
     }
 }

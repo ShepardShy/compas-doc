@@ -25,7 +25,7 @@
     
     import { ref, watch, onMounted, onUnmounted} from 'vue'
 
-    import AppH3 from '@/components/AppHeaders/H3/H3.vue'
+    import AppH3 from '@/components/AppHeaders/H3/H3.vue';
     import IconDelete from '@/components/AppIcons/Delete/Delete.vue';
 
     const props = defineProps({
@@ -39,6 +39,7 @@
         'closeModal'
     ])
 
+    const modalRef = ref(null)
     const warningRef = ref(null)
     let mouseEventDown = ref(null)
 
@@ -79,12 +80,32 @@
     })
 
     onMounted(() => {
+        modalRef.value = document.querySelector('.modal')
+        if (modalRef.value) {
+            modalRef.value.classList.add('modal_warning')
+        }
         document.body.parentNode.classList.add('body_uncscroll')
+
+        document.querySelectorAll('.modal__content').forEach(elem => {
+            elem.classList.add('modal__content_unset')
+        })
     })
 
     onUnmounted(() => {
         if (document.querySelector('.modal-container') == null) {
             document.body.parentNode.classList.remove('body_uncscroll')
         }
+
+        if (modalRef.value) {
+            modalRef.value.classList.remove('modal_warning')
+        }
+
+        document.querySelectorAll('.modal__content').forEach(elem => {
+            elem.classList.remove('modal__content_unset')
+        })
+    })
+
+    defineExpose({
+        warningRef
     })
 </script>

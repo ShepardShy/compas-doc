@@ -2,11 +2,13 @@
     <MenuDesktop 
         @callAction="(data) => callAction(data)"
     />
-    <MenuMobile />
+    <MenuMobile v-if="!['/settings', '/trash'].includes(route.path)"/>
 </template>
 
 <script setup>
     import './AppMenu.scss';
+
+    import { ref, provide, watch, onMounted } from 'vue'
 
    import MenuDesktop from './Desktop/Desktop.vue'
    import MenuMobile from './Mobile/Mobile.vue'
@@ -22,7 +24,9 @@
     let menuHidden = ref([])
     let activeLink = ref({})
 
-    const route = useRoute()
+    const route = {
+        path: '/'
+    }
 
     provide('menu', menu)
     provide('user', user)
@@ -83,7 +87,11 @@
                 return routeMatch != null
             }
 
-            activeLink.value = menu.value.find(option => matchLink(option.link)) ?? menu.value[0]
+            if (route.path.includes('objects/users') || route.path.includes('profile')) {
+                activeLink.value = menu.value.find(option => option.link == '/settings') ?? menu.value[0]
+            } else {
+                activeLink.value = menu.value.find(option => matchLink(option.link)) ?? menu.value[0]
+            }
         }
 
         // Сохранение значений в настройках

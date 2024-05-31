@@ -1,11 +1,14 @@
 <template>
     <AppSection class="tile-section">
         <TileHeader 
+            :permissions="props.permissions"
+            :isCanRemove="props.isCanRemove"
             @callAction="(data) => callActionSection(data)"
         />
 
         <TileBody 
             :slug="props.slug"
+            :loaderState="props.loaderState"
             @callAction="(data) => callActionFields(data)"
         />
 
@@ -14,6 +17,8 @@
         />
 
         <TileWarning 
+            :sections="props.sections"
+            :loaderState="props.loaderState"
             @callAction="(data) => callActionFields(data)"
         />
     </AppSection>
@@ -41,7 +46,6 @@
     let removingField = ref(null)
     let edittingField = ref(null)
 
-    const isCreate = inject('isCreate')
     const hiddenFields = inject('hiddenFields')
     const backupFields = inject('backupFields')
     
@@ -70,6 +74,34 @@
         isEditableSettings: {
             default: true,
             type: Boolean
+        },
+        loaderState: {
+            default: null, 
+            type: String
+        },
+        is_admin: {
+            default: false,
+            type: Boolean
+        },
+        userRole: {
+            default: null,
+            type: Boolean
+        },
+        pageId: {
+            default: null,
+            type: Number
+        },
+        permissions: {
+            default: {},
+            type: Object
+        },
+        isCreate: {
+            default: false,
+            type: Boolean
+        },
+        isCanRemove: {
+            default: true,
+            type: Boolean
         }
     })
 
@@ -78,9 +110,11 @@
     provide('hiddenFields', hiddenFields)
     provide('removingField', removingField)
     provide('edittingField', edittingField)
-    provide('sections', props.sections)
+    provide('is_admin', props.is_admin)
+    provide('userRole', props.userRole)
     provide('isEditableSettings', props.isEditableSettings)
-    
+    provide('pageId', props.pageId)
+
     // Действие с секцией
     const callActionSection = (data) => {
         // Изменение заголовка
@@ -138,6 +172,10 @@
                 break;
 
             default:
+                emit('callAction', {
+                    action: data.action,
+                    value: data.value
+                })
                 break;
         }
     }
@@ -201,13 +239,11 @@
 
         // Создание поля
         const createField = (field) => {
+            field.can_edit = 1
             emit('callAction', {
                 action: 'createField',
                 value: JSON.parse(JSON.stringify(field))
             })
-
-            field.can_edit = 1
-            section.value.fields.push(field)
 
             isShow.value = {
                 state: false,
@@ -267,20 +303,16 @@
                 findedField[key] = keys[key]
             }
 
-            isShow.value = {
-                state: false,
-                type: null
-            }
-
             emit('callAction', {
                 action: 'updateField',
-                value: keys
+                value: keys,
+                isEdit: findedField.isEdit,
+                fieldValue: findedField.value
             })
         }
 
         // Редактирование секции
         const editField = (field) => {
-            console.log(backupFields.value);
             if (!backupFields.value.find(p => p.id == field.id)) {
                 backupFields.value.push(JSON.parse(JSON.stringify(field)))
             }
@@ -290,6 +322,24 @@
                 value: field
             })
         }
+
+        // Поиск опций
+        const searchOptions = async (data) => {
+            let findedField = section.value.fields.find(p => p.key == data.key)
+            
+            if (findedField.url == null) {
+                let propsField = props.section.fields.find(p => p.key == data.key)
+                findedField.options = propsField.options.filter(p => p.label.text.toLowerCase().includes(data.value.toLowerCase()))
+            } else {
+                // let response = await api.callMethod("GET", `${findedField.url}&${findedField.urlKey}=${data.value.toLowerCase()}`)
+                findedField.options = response.map(option => option = {
+                    label: {
+                        text: option
+                    },
+                    value: option
+                })
+            }
+         }
 
         switch (data.action) {
             // Получение полей
@@ -341,6 +391,10 @@
                 editField(data.value)
                 break;
 
+            case 'searchOptions':
+                searchOptions(data.value)
+                break;
+
             default:
                 emit('callAction', data)
                 break;
@@ -352,7 +406,7 @@
             action: 'getFields'
         })
 
-        if (isCreate.value) {
+        if (props.isCreate) {
             callActionSection({
                 action: 'changeState',
                 value: true
@@ -367,4 +421,13 @@
     }, {
         deep: true
     })
+
+    watch(() => props.loaderState, (next, prev) => {
+        if (prev == 'updateField' && next == null) {
+            isShow.value = {
+                state: false,
+                type: null
+            }
+        }
+    })  
 </script>

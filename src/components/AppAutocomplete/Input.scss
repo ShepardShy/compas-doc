@@ -1,6 +1,15 @@
 @use '@/assets/variables.scss' as variables;
 @use '@/assets/mixins.scss' as mixins;
 
+
+.autocomplete {
+    &.autocomplete_empty {
+        .form-item__value {
+            color:variables.$color-grey;
+        }
+    }
+}
+
 .autocomplete__popup {
     &[open] {
         .autocomplete__active-option {
@@ -16,6 +25,13 @@
         }
     }
 
+    .popup__loader {
+        z-index: 10;
+        position: absolute;
+        background: #ffffff90;
+        @include mixins.elemResolutionOptions(100%, 100%);
+    }
+
     .popup__summary {
         width: 100%;
         @include mixins.flexBlock($vertical: center, $horizontal: flex-start, $gap: 10px);
@@ -23,20 +39,20 @@
         .form-item__input {
             width: 100%;
             overflow: hidden;
-            min-width: 120px;
+            min-width: 140px;
             
             input {
-                padding: 10px 35px 10px 15px;
+                padding: 10px 20px 10px 15px;
             }
 
             .form-item__substring {
                 @include mixins.flexBlock($vertical: center, $horizontal: flex-start, $gap: 10px);
                 right: 10px;
                 top: 8px;
-                color: variables.$color-subtext;
+                color: variables.$color-grey;
 
                 &::after {
-                    content: url('/public/icons/arrow.svg');
+                    content: url('/icons/arrow.svg');
                 }
 
                 &::before {

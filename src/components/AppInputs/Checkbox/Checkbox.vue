@@ -1,5 +1,5 @@
 <template>
-    <FormItem class="form-item__checkbox" :class="props.disabled ? 'form-item__checkbox_disabled' : ''" @click="(event) => changeValue(event)">
+    <FormItem class="form-item__checkbox" :class="props.disabled ? 'form-item__checkbox_disabled' : ''" @click="(event) => props.changeValueLabel ? changeValue(event) : null">
         <CheckboxLabel 
             :title="props.item.title"
             :isHTML="props.item.isHTML"
@@ -9,7 +9,9 @@
                 id: props.item.id,
                 value: props.item.value
             }"
+            :changeValueLabel="props.changeValueLabel"
             :disabled="props.disabled"
+            @changeValue="(data) => changeValue(data)"
         />
     </FormItem>
 </template>
@@ -33,6 +35,10 @@
         },
         disabled: {
             default: false,
+            type: Boolean
+        },
+        changeValueLabel: {
+            default: true,
             type: Boolean
         }
     })

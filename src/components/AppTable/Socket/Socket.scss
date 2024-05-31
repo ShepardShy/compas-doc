@@ -4,13 +4,13 @@
 
 .table-socket {
     background: #fffbe2;
-    color: variables.$color-subtext-dark;
+    color: variables.$color-dark-grey;
     @include mixins.elemResolutionOptions(100%, 40px);
     @include mixins.flexBlock($vertical: center, $horizontal: center, $gap: 10px);
 
     .button-text {
         text-decoration: underline;
-        color: variables.$color-blue-two;
+        color: variables.$color-active;
 
         &:hover {
             text-decoration: none;

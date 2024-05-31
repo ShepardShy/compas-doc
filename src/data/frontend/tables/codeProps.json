@@ -509,6 +509,734 @@
                     "product_sum": 111,
                     "product_count": 222,
                     "product_weight": 333
+                },
+                {
+                    "id": 130301,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": null,
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 11,
+                    "product_sum": 11,
+                    "product_count": 22,
+                    "product_weight": 33
+                },
+                {
+                    "id": 130303,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": [
+                        {
+                            "id": 1696445350884,
+                            "name": "Group 6 Copy 2.png",
+                            "preview": "https://compas.pro/storage/thumbnails/default/9k/oh/2sx8nf8ckw08oo0c8oo0w.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FkxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png&s=https",
+                            "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png",
+                            "extension": "png"
+                        }
+                    ],
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 111,
+                    "product_sum": 111,
+                    "product_count": 222,
+                    "product_weight": 333
+                },
+                {
+                    "id": 130301,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": null,
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 11,
+                    "product_sum": 11,
+                    "product_count": 22,
+                    "product_weight": 33
+                },
+                {
+                    "id": 130303,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": [
+                        {
+                            "id": 1696445350884,
+                            "name": "Group 6 Copy 2.png",
+                            "preview": "https://compas.pro/storage/thumbnails/default/9k/oh/2sx8nf8ckw08oo0c8oo0w.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FkxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png&s=https",
+                            "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png",
+                            "extension": "png"
+                        }
+                    ],
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 111,
+                    "product_sum": 111,
+                    "product_count": 222,
+                    "product_weight": 333
+                },
+                {
+                    "id": 130301,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": null,
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 11,
+                    "product_sum": 11,
+                    "product_count": 22,
+                    "product_weight": 33
+                },
+                {
+                    "id": 130303,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": [
+                        {
+                            "id": 1696445350884,
+                            "name": "Group 6 Copy 2.png",
+                            "preview": "https://compas.pro/storage/thumbnails/default/9k/oh/2sx8nf8ckw08oo0c8oo0w.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FkxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png&s=https",
+                            "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png",
+                            "extension": "png"
+                        }
+                    ],
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 111,
+                    "product_sum": 111,
+                    "product_count": 222,
+                    "product_weight": 333
+                },
+                {
+                    "id": 130301,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": null,
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 11,
+                    "product_sum": 11,
+                    "product_count": 22,
+                    "product_weight": 33
+                },
+                {
+                    "id": 130303,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": [
+                        {
+                            "id": 1696445350884,
+                            "name": "Group 6 Copy 2.png",
+                            "preview": "https://compas.pro/storage/thumbnails/default/9k/oh/2sx8nf8ckw08oo0c8oo0w.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FkxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png&s=https",
+                            "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png",
+                            "extension": "png"
+                        }
+                    ],
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 111,
+                    "product_sum": 111,
+                    "product_count": 222,
+                    "product_weight": 333
+                },
+                {
+                    "id": 130301,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": null,
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 11,
+                    "product_sum": 11,
+                    "product_count": 22,
+                    "product_weight": 33
+                },
+                {
+                    "id": 130303,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": [
+                        {
+                            "id": 1696445350884,
+                            "name": "Group 6 Copy 2.png",
+                            "preview": "https://compas.pro/storage/thumbnails/default/9k/oh/2sx8nf8ckw08oo0c8oo0w.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FkxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png&s=https",
+                            "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png",
+                            "extension": "png"
+                        }
+                    ],
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 111,
+                    "product_sum": 111,
+                    "product_count": 222,
+                    "product_weight": 333
+                },
+                {
+                    "id": 130301,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": null,
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 11,
+                    "product_sum": 11,
+                    "product_count": 22,
+                    "product_weight": 33
+                },
+                {
+                    "id": 130303,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": [
+                        {
+                            "id": 1696445350884,
+                            "name": "Group 6 Copy 2.png",
+                            "preview": "https://compas.pro/storage/thumbnails/default/9k/oh/2sx8nf8ckw08oo0c8oo0w.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FkxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png&s=https",
+                            "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png",
+                            "extension": "png"
+                        }
+                    ],
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 111,
+                    "product_sum": 111,
+                    "product_count": 222,
+                    "product_weight": 333
+                },
+                {
+                    "id": 130301,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": null,
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 11,
+                    "product_sum": 11,
+                    "product_count": 22,
+                    "product_weight": 33
+                },
+                {
+                    "id": 130303,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": [
+                        {
+                            "id": 1696445350884,
+                            "name": "Group 6 Copy 2.png",
+                            "preview": "https://compas.pro/storage/thumbnails/default/9k/oh/2sx8nf8ckw08oo0c8oo0w.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FkxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png&s=https",
+                            "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png",
+                            "extension": "png"
+                        }
+                    ],
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 111,
+                    "product_sum": 111,
+                    "product_count": 222,
+                    "product_weight": 333
+                },
+                {
+                    "id": 130301,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": null,
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 11,
+                    "product_sum": 11,
+                    "product_count": 22,
+                    "product_weight": 33
+                },
+                {
+                    "id": 130303,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": [
+                        {
+                            "id": 1696445350884,
+                            "name": "Group 6 Copy 2.png",
+                            "preview": "https://compas.pro/storage/thumbnails/default/9k/oh/2sx8nf8ckw08oo0c8oo0w.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FkxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png&s=https",
+                            "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png",
+                            "extension": "png"
+                        }
+                    ],
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 111,
+                    "product_sum": 111,
+                    "product_count": 222,
+                    "product_weight": 333
+                },
+                {
+                    "id": 130301,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": null,
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 11,
+                    "product_sum": 11,
+                    "product_count": 22,
+                    "product_weight": 33
+                },
+                {
+                    "id": 130303,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": [
+                        {
+                            "id": 1696445350884,
+                            "name": "Group 6 Copy 2.png",
+                            "preview": "https://compas.pro/storage/thumbnails/default/9k/oh/2sx8nf8ckw08oo0c8oo0w.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FkxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png&s=https",
+                            "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png",
+                            "extension": "png"
+                        }
+                    ],
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 111,
+                    "product_sum": 111,
+                    "product_count": 222,
+                    "product_weight": 333
+                },
+                {
+                    "id": 130301,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": null,
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 11,
+                    "product_sum": 11,
+                    "product_count": 22,
+                    "product_weight": 33
+                },
+                {
+                    "id": 130303,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": [
+                        {
+                            "id": 1696445350884,
+                            "name": "Group 6 Copy 2.png",
+                            "preview": "https://compas.pro/storage/thumbnails/default/9k/oh/2sx8nf8ckw08oo0c8oo0w.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FkxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png&s=https",
+                            "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png",
+                            "extension": "png"
+                        }
+                    ],
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 111,
+                    "product_sum": 111,
+                    "product_count": 222,
+                    "product_weight": 333
+                },
+                {
+                    "id": 130301,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": null,
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 11,
+                    "product_sum": 11,
+                    "product_count": 22,
+                    "product_weight": 33
+                },
+                {
+                    "id": 130303,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": [
+                        {
+                            "id": 1696445350884,
+                            "name": "Group 6 Copy 2.png",
+                            "preview": "https://compas.pro/storage/thumbnails/default/9k/oh/2sx8nf8ckw08oo0c8oo0w.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FkxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png&s=https",
+                            "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png",
+                            "extension": "png"
+                        }
+                    ],
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 111,
+                    "product_sum": 111,
+                    "product_count": 222,
+                    "product_weight": 333
+                },
+                {
+                    "id": 130301,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": null,
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 11,
+                    "product_sum": 11,
+                    "product_count": 22,
+                    "product_weight": 33
+                },
+                {
+                    "id": 130303,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": [
+                        {
+                            "id": 1696445350884,
+                            "name": "Group 6 Copy 2.png",
+                            "preview": "https://compas.pro/storage/thumbnails/default/9k/oh/2sx8nf8ckw08oo0c8oo0w.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FkxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png&s=https",
+                            "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png",
+                            "extension": "png"
+                        }
+                    ],
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 111,
+                    "product_sum": 111,
+                    "product_count": 222,
+                    "product_weight": 333
+                },
+                {
+                    "id": 130301,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": null,
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 11,
+                    "product_sum": 11,
+                    "product_count": 22,
+                    "product_weight": 33
+                },
+                {
+                    "id": 130303,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": [
+                        {
+                            "id": 1696445350884,
+                            "name": "Group 6 Copy 2.png",
+                            "preview": "https://compas.pro/storage/thumbnails/default/9k/oh/2sx8nf8ckw08oo0c8oo0w.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FkxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png&s=https",
+                            "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png",
+                            "extension": "png"
+                        }
+                    ],
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 111,
+                    "product_sum": 111,
+                    "product_count": 222,
+                    "product_weight": 333
+                },
+                {
+                    "id": 130301,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": null,
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 11,
+                    "product_sum": 11,
+                    "product_count": 22,
+                    "product_weight": 33
+                },
+                {
+                    "id": 130303,
+                    "client_id": {
+                        "value": [],
+                        "localOptions": []
+                    },
+                    "name": "128687",
+                    "trebovaniia_k_masine_log": null,
+                    "fail_2249": [
+                        {
+                            "id": 1696445350884,
+                            "name": "Group 6 Copy 2.png",
+                            "preview": "https://compas.pro/storage/thumbnails/default/9k/oh/2sx8nf8ckw08oo0c8oo0w.png?heighten=200&p=opt6.compas.pro%2Fstorage%2Ftenantopt6%2Fapp%2Fpublic%2Ffiles%2FkxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png&s=https",
+                            "file": "https://opt6.compas.pro/storage/tenantopt6/app/public/files/kxEq2hibJKYASgJ73AXf3xbRPKSIbnWv71Ki4yvb.png",
+                            "extension": "png"
+                        }
+                    ],
+                    "point_status": 404,
+                    "products": "[{\"name\":\"Кварцевый песок 0,5-0,8 мм, окатанный, 1т\",\"price\":5200,\"count\":6,\"weight\":null,\"sum\":31200}]",
+                    "address": null,
+                    "created_at": "2023-05-29T03:07:07.000000Z",
+                    "yjdjt_2358": null,
+                    "gh_2360": null,
+                    "pole_2385": null,
+                    "par_2394": null,
+                    "product_price": 111,
+                    "product_sum": 111,
+                    "product_count": 222,
+                    "product_weight": 333
                 }
             ],
             "tableFooter": {

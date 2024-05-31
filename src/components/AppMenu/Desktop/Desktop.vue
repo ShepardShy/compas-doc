@@ -18,16 +18,17 @@
                 @end="(event) => callAction({action: 'dragEnd', value: event})"
             >
                 <template #item="{ element: item }">
-                    <NuxtLink
+                    <div 
                         class="menu__item" 
                         v-show="item.enabled"
-                        :to="item.link"
                         :key="item.id" 
                         :class="activeLink.link == item.link ? 'menu__item_active' : ''"
                     >
-                        <IconDrag />
-                        {{ item.name }}
-                    </NuxtLink>
+                        <IconDrag v-if="Boolean(props.is_admin)"/>
+                        <NuxtLink :to="item.link">
+                            {{ item.name }}
+                        </NuxtLink>
+                    </div>
                 </template>
             </draggable>
 
@@ -56,15 +57,17 @@
                         @end="(event) => callAction({action: 'dragEnd', value: event})" 
                     >
                         <template #item="{ element: item }">
-                            <NuxtLink class="menu__item" 
+                            <div 
+                                class="menu__item"
                                 v-show="item.enabled"
                                 :key="item.id" 
-                                :to="item.link"
                                 :class="activeLink.link == item.link ? 'menu__item_active' : ''"
                             >
-                                <IconDrag />
-                                {{ item.name }}
-                            </NuxtLink>
+                                <IconDrag v-if="Boolean(props.is_admin)" />
+                                <NuxtLink :to="item.link">
+                                    {{ item.name }}
+                                </NuxtLink>
+                            </div>
                         </template>
                     </draggable>
 
@@ -75,7 +78,7 @@
             </details>
         </div>
 
-        <div class="menu__settings">
+        <div class="menu__settings" v-if="Boolean(props.is_admin)">
             <AppPopup class="popup__settings" :isCanSelect="false" :closeByClick="false" @clickOutside="() => callAction({action: 'changeTab', value: null})">
                 <template #summary>
                     <IconSettings />
@@ -126,7 +129,7 @@
                                 @end="(event) => callAction({action: 'settingsDragEnd', value: event})" 
                             >
                                 <template #item="{ element: option }">
-                                    <PopupOption class="popup-option__sublink" v-show="option.is_hidden">
+                                    <PopupOption class="popup-option__sublink" v-show="option.is_hidden && option.enabled">
                                         <IconDrag /> 
                                         {{ option.name }}
                                     </PopupOption>
@@ -162,7 +165,10 @@
             <template #summary>
                 <div class="menu__user menu-user menu__item">
                     <figure class='ibg menu-user__icon'>
-                        <img :src='user.avatar != undefined ? user.avatar.file : "/user/avatar.svg"' :alt="`${user.name} ${user.last_name}. Аватар`">
+                        <img v-if="user.avatar != undefined && user.avatar != ''" :src='user.avatar.file' :alt="`${user.name} ${user.last_name}. Аватар`">
+                        <figcaption v-else :style="`--backgroundColor: ${[null, undefined].includes(user.color) || user.color == '' ? '#a6b7d4' : user.color}`">
+                            {{ String(user.name).substring(0, 1) }}
+                        </figcaption>
                     </figure>
                     <div class="menu-user__title">
                         {{ user.name }} {{ user.last_name }}
@@ -190,6 +196,8 @@
     
 <script setup>
     import './Desktop.scss'
+
+    import {ref, inject} from 'vue'
 
     import draggable from 'vuedraggable'
 
@@ -234,6 +242,13 @@
     const emit = defineEmits([
        'callAction'
     ])
+
+    const props = defineProps({
+        is_admin: {
+            default: true,
+            type: Boolean
+        }
+    })
 
     // Вызов действий
     const callAction = (data) => {

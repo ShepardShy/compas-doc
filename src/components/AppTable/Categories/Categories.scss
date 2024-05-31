@@ -9,7 +9,7 @@
 
 				svg {
 					* {
-						fill:variables.$color-blue-two;
+						fill:variables.$color-active;
 					}
 				}
 			}
@@ -35,6 +35,10 @@
 
 	&.table-categories__item_active {
 		background-color: variables.$color-hover;
+		
+		.table-categories__title {
+			pointer-events: none;
+		}
 	}
 }
 
@@ -49,7 +53,7 @@
 	.icon__triangle {
 		svg {
 			* {
-				fill:variables.$color-settings;
+				fill:variables.$color-blue-grey;
 			}
 		}
 	}
@@ -79,9 +83,9 @@
 }
 
 .table-categories__popup {
-	.popup__summary {
-		padding: 0px 15px;
-	}
+	// .popup__summary {
+	// 	padding: 0px 15px;
+	// }
 
 	&.popup_up {
 		.popup__content {

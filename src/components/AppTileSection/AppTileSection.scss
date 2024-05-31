@@ -2,6 +2,7 @@
 @use '@/assets/mixins.scss' as mixins;
 
 .tile-section {
+    padding-bottom: 15px;
     @include mixins.sortableGhost();
 
     &.tile-section_hidden {

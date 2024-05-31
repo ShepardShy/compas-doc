@@ -38,10 +38,10 @@
         </div>
 
         <div class="relation__actions">
-            <ButtonText v-show="values.length >= 5" @click="() => callAction({action: 'showAll', value: true})"> 
-                Всего {{ values.length }}, посмотреть все 
+            <ButtonText  v-show="values.length >= 5" @click="() => callAction({action: 'showAll', value: true})"> 
+                Всего <span class="relation__actions-all">{{ values.length }}</span>, посмотреть все 
             </ButtonText>
-            <ButtonText v-if="props.isMultiple" @click="() => callAction({action: 'changeValue', value: {value: null, isNew: true}})"> 
+            <ButtonText v-if="props.isCanEdit && props.isMultiple" @click="() => callAction({action: 'changeValue', value: {value: null, isNew: true}})"> 
                 + Добавить 
             </ButtonText>
         </div>
@@ -63,6 +63,7 @@
     let values = ref([])
     let lockedOptions = ref([])
     let localOptions = ref([])
+    let prevValue = ref(null)
 
     const props = defineProps({
         item: {
@@ -106,6 +107,10 @@
         isHaveLink: {
             default: true,
             type: Boolean
+        },
+        isCanEdit: {
+            default: false,
+            type: Boolean
         }
     })
 
@@ -123,6 +128,7 @@
         // Изменение значения
         const changeValue = (value) => {
             if (props.loaderStatus === 'save') return
+            prevValue.value = toRaw(values.value[index])
 
             if (data.value.isNew) {
                 values.value.push(null)
@@ -140,13 +146,14 @@
                 callAction({action: 'getOptions', value: true})
             }
 
-            lockedOptions.value = Array.from(new Set(props.item.lockedOptions)).concat(values.value)
+            lockedOptions.value = Array.from(new Set(props.item.lockedOptions)).concat(values.value).filter(p => p != prevValue.value)
             emit('changeValue', {
                 key: props.item.key,
                 value: {
                     value: values.value,
                     localOptions: localOptions.value,
-                    selectedOption: value.label
+                    selectedOption: value.label,
+                    lockedOptions: lockedOptions.value
                 }
             })
         }
@@ -172,7 +179,7 @@
 
                 values.value = JSON.parse(JSON.stringify(localValues))
             }
-            lockedOptions.value = Array.from(new Set(props.item.lockedOptions)).concat(values.value.filter(item => item != null))
+            lockedOptions.value = Array.from(new Set(props.item.lockedOptions)).concat(values.value.filter(item => item != null)).filter(p => p != prevValue.value)
         }
 
         // Получение опций
@@ -227,7 +234,6 @@
 
     watch(() => props.item.value, () => {
         callAction({action: 'getValues', value: true})
-        callAction({action: 'getOptions', value: true})
     }, {
         deep: true
     })

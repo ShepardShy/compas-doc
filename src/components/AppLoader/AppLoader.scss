@@ -18,18 +18,24 @@
       border: 4px solid variables.$color-blue;
       border-top-color: variables.$color-white;
       border-radius: 50%;
-      // animation: button-loading-spinner 1s ease infinite;
+      animation: button-loading-spinner 1s ease infinite;
     }
 
     &.loader_grey {
       &::after {
-          border: 4px solid variables.$color-settings;
+          border: 4px solid variables.$color-blue-grey;
           border-top-color: variables.$color-white;
       }
     }
 
     &.loader_action {
       padding: 20px 10px;
+
+      //&:after {
+      //  height: 37.8px;
+      //  width: 37.8px;
+      //}
+
     }
 
   &.loader_page {

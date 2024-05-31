@@ -13,6 +13,9 @@
             v-if="props.isReadOnly"
             :value="props.item.value"
             :isHTML="true"
+            :isLink="props.isLink"
+            :link="props.item.external_link"
+            :substring="props.item.substring"
         />
 
         <TextareaField
@@ -21,6 +24,7 @@
             :mask="props.item.type == 'number' ? '#######################' : props.mask"
             :disabled="props.disabled"
             :isUseEnter="props.isUseEnter"
+            :isTableItem="props.isTableItem"
             @focus="(data) => $emit('focus', data)"
             @blur="(data) => $emit('blur', data)"
             @changeValue="(data) => $emit('changeValue', data)"
@@ -75,6 +79,14 @@
             type: Boolean
         },
         isReadOnly: {
+            default: false,
+            type: Boolean
+        },
+        isLink: {
+            default: false,
+            type: Boolean
+        },
+        isTableItem: {
             default: false,
             type: Boolean
         }

@@ -29,7 +29,7 @@
                 required: false,
                 title: 'Раздел',
                 lockedOptions: [],
-                options: sections
+                options: props.sections
             }"
             :isReadOnly="false"
             :isHaveNullOption="false"
@@ -152,7 +152,7 @@
         <div class="warning-list__subtitle">
             Сохраненные элементы
         </div>
-        <div class="warning-list__field" v-for="(field, index) in edittingField.options.filter(p => !p.label.is_hidden)">
+        <div class="warning-list__field" v-for="(field, index) in options">
             <div class="settings-status">
                 <AppPopup class="settings-status__popup" :isCanSelect="true">
                     <template #summary> 
@@ -369,7 +369,13 @@
             @changeValue="(data) => changeValue(data)"
         />
         
-        <AppPopup class="settings__popup" :isCanSelect="true" v-if="['text', 'number'].includes(edittingField.type)">
+        <AppPopup 
+            class="settings__popup" 
+            :isCanSelect="true" 
+            v-if="['text', 'number'].includes(edittingField.type)" 
+            @click="() => openColorPicker(true)"
+            @clickOutside="() => openColorPicker(false)"
+        >
             <template #summary> 
                 <AppCheckbox
                     :item="{
@@ -380,6 +386,7 @@
                         title: 'Выбрать цвет',
                         key: 'set_color'
                     }"
+                    :changeValueLabel="false"
                     :disabled="false"
                     :style="`--textColor: ${edittingField.color};`"
                     @changeValue="(data) => changeValue(data)"
@@ -419,28 +426,46 @@
     import PopupOption from '@/components/AppPopup/PopupOption/PopupOption.vue';
     
     const isShow = inject('isShow')
-    const sections = inject('sections')
+    const warningRef = inject('warningRef')
     const changedKeys = inject('changedKeys')
     const edittingField = inject('edittingField')
     
+    const props = defineProps({
+        sections: {
+            default: [],
+            type: Array
+        }
+    })
+
+    // Открыть колорпикер
+    const openColorPicker = (status) => {
+        if (status) {
+            warningRef.value.warningRef.classList.add('warning_disabled-select')
+        } else {
+            warningRef.value.warningRef.classList.remove('warning_disabled-select')
+        }
+    }
+
     // Изменение значения
     const changeValue = (data) => {
+        let localOptions = edittingField.value.options ? edittingField.value.options : []
+
         switch (data.key) {
             // Изменение цвета у опции статуса
             case "optionsColor":
-                edittingField.value.options[data.id].label.color = data.value
+                localOptions.filter(p => !p.label.is_hidden)[data.id].label.color = data.value
                 changedKeys.value.options = edittingField.value.options
                 break;
                 
             // Изменение иконки у опции статуса
             case "optionsIcon":
-                edittingField.value.options[data.id].label.file = [null, undefined].includes(data.value) ? null : data.value.url
+                localOptions.filter(p => !p.label.is_hidden)[data.id].label.file = [null, undefined].includes(data.value) ? null : data.value.url
                 changedKeys.value.options = edittingField.value.options
                 break;
                 
             // Изменение заголовка у опции статуса
             case "optionsTitle":
-                edittingField.value.options[data.id].label.text = data.value
+                localOptions.filter(p => !p.label.is_hidden)[data.id].label.text = data.value
                 changedKeys.value.options = edittingField.value.options
                 break;
                 
@@ -542,4 +567,8 @@
                 break;
         }
     }
+
+    const options = computed(() => {
+        return edittingField.value.options ? edittingField.value.options.filter(p => !p.label.is_hidden) : []
+    })
 </script>

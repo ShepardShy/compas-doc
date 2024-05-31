@@ -3,7 +3,7 @@
 
 .form-item__value {
     &.form-item__value_empty {
-        color: variables.$color-subtext;
+        color: variables.$color-grey;
     
         &::before {
             content: 'не заполнено';
@@ -12,6 +12,7 @@
     
     &.form-item__value_html {
         white-space: break-spaces;
+        word-break: auto-phrase;
     }
 
     &.form-item__value_link {
@@ -24,19 +25,13 @@
         }
     }
 
-    &.form-item__value_has-substring {
+    &.form-item__value_substring {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 5px;
 
         .form-item__substring {
             position: static;
-        }
-        
-        &.form-item__value_empty {
-            .form-item__substring {
-                opacity: 0;
-            }
         }
     }
 }

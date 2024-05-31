@@ -15,6 +15,8 @@
             :isMultiple="props.isMultiple"
             :isOneFile="props.isOneFile"
             :isIcon="props.isIcon"
+            :pageId="props.pageId"
+            :isDraggable="props.isDraggable"
             @changeValue="(data) => emit('changeValue', data)"
             @initEdit="(event) => emit('initEdit', event)"
         />
@@ -42,6 +44,10 @@
             },
             type: Object
         },
+        pageId: {
+            default: null,
+            type: Number
+        },
         isReadOnly: {
             default: false,
             type: Boolean
@@ -60,6 +66,10 @@
         },
         isIcon: {
             default: false,
+            type: Boolean
+        },
+        isDraggable: {
+            default: true,
             type: Boolean
         }
     })

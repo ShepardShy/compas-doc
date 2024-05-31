@@ -13,6 +13,18 @@
             display: none;
         }
 
+        .popup {
+            * {
+                @include mixins.userSelect(auto);
+            }
+
+            .popup_prevent {
+                * {
+                    @include mixins.userSelect(none);
+                }
+            }
+        }
+
         .form-item__value {
             cursor: pointer;
             text-decoration: underline;
@@ -73,6 +85,12 @@
                 display: none;
             }
 
+            .form-item__value {
+                cursor: default;
+                color: variables.$color-grey;
+                text-decoration: none;
+            }
+
             .popup {
                 .popup__summary {
                     .form-item__input {
@@ -124,6 +142,19 @@
             .form-item__value {
                 color:variables.$color-black;
                 text-decoration: none;
+            }
+
+            .form-item__substring {
+                opacity: 0;
+            }
+
+            .popup__content {
+                left: 0px;
+                width: 100%;
+
+                .popup-option__substring {
+                    opacity: 0;
+                }
             }
         }
     }

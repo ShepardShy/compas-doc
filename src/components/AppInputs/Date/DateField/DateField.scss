@@ -118,12 +118,12 @@
     }
 
     .dp__input {
-        border: 1px solid variables.$color-border;
+        border: 1px solid variables.$color-grey;
         font-size: variables.$font-size-default;
         padding: 7px 15px;
 
         &:hover {
-            border: 1px solid variables.$color-border;
+            border: 1px solid variables.$color-grey;
         }
 
         &.dp__input_focus {
@@ -164,7 +164,7 @@
     }
 
     .dp__menu_index {
-        z-index: 3;
+        z-index: 40;
         background: variables.$color-white;
         border-radius: 5px;
         overflow: hidden;

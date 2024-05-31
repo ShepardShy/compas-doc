@@ -1,0 +1,20 @@
+@use '@/assets/variables.scss' as variables;
+@use '@/assets/mixins.scss' as mixins;
+
+.main__title {
+    margin-bottom: 30px;
+}
+
+.main__content {
+    display: grid;
+    grid-gap: 70px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.main__content_tile-section {
+    grid-template-columns: repeat(2, 1fr);
+
+    .tile-section {
+        grid-column: 1/3;
+    }
+}

@@ -75,14 +75,12 @@
 
     // Изменение значения в поле
     const changeValue = (data) => {
-        console.log(data);
         let field = activeFields.value.find((field) => field.key === data.key)
         field.value = data.value
     }
 
     // Поиск опций
     const searchOptions = async (data) => {
-        console.log(data);
         let findedField = activeFields.value.find((field) => field.key === data.key)
         let request = await commonScripts.getInfoAutocomplete(data.value.toLowerCase(), findedField.id)
         findedField.options = request
@@ -115,10 +113,13 @@
 
         emit('actionFilter', {action: 'changeOrder', value: {fields: event.to.__draggable_component__.modelValue, requestFields: data}})
 
-        event.from.classList.remove('tile-section__body_dragging')
         document.querySelectorAll('#clone-elem').forEach(element => {
             element.remove()
         });
+
+        setTimeout(() => {
+            event.from.classList.remove('filter__fields_dragging')
+        }, 100);
     }
 
     // Клонирование перетаскиваемого элемента c созданием родителя

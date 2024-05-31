@@ -4,6 +4,7 @@
             type="text"
             ref="textareaRef"
             autocomplete="off"
+            autocorrect="off"
             :disabled="props.disabled"
             :value="mirrorText"
             :placeholder="props.item.placeholder"
@@ -51,6 +52,10 @@
         isUseEnter: {
             default: true,
             type: Boolean
+        },
+        isTableItem: {
+            default: false,
+            type: Boolean
         }
     })
 
@@ -68,6 +73,9 @@
                         break;
                     case 'A': 
                         newReg += `[а-яa-zА-ЯA-Z]{1}`
+                        break;
+                    case 'R':
+                        newReg += `[а-яА-Я]{1}`
                         break;
                     default: 
                         if (Number(symb) != NaN) {
@@ -145,16 +153,19 @@
         }
         new ResizeObserver(resize).observe(textareaRef.value)
 
-        if (props.item.focus) {
-            textareaRef.value.focus()
-        }
+
+        setTimeout(() => {
+            if (props.item.focus) {
+                textareaRef.value.focus()
+            }
+        }, 10);
     })
 
     const resize = () => {
         if (textareaRef.value != null) {
             let textareaMirror = textareaRef.value.closest('.textarea').querySelector('.textarea__mirror');
             textareaMirror.style.height = "1px";
-            textareaMirror.style.height = (6 + textareaRef.value.scrollHeight) + "px";
+            textareaMirror.style.height = ((props.isTableItem ? 2 : 6) + textareaRef.value.scrollHeight) + "px";
         }
     }
 

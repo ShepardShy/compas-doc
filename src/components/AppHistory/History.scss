@@ -12,12 +12,12 @@
 }
 
 .history__footer {
-    margin-top: 30px;
+    margin-top: 20px;
     display: flex;
     justify-content: flex-end;
     
     button {
-        width: calc(100% - 40px);
+        width: calc(100% - 36px);
     }
 }
 
@@ -143,10 +143,22 @@
 
 .history-item__title {
     font-weight: 600;
+    color: var(--TitleColor);
+
+    span {
+        cursor: pointer;
+        color: variables.$color-blue-two;
+        font-weight: 400;
+        text-decoration: underline;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
 }
 
 .history-item__date {
-    color:variables.$color-subtext;
+    color:variables.$color-grey;
 }
 
 .history-item__user {
@@ -166,7 +178,7 @@
 }
 
 .history-item__field {
-    color:variables.$color-subtext;
+    color:variables.$color-grey;
     display: inline-block;
     margin-right: 20px;
 }
@@ -184,6 +196,23 @@
 
     .history-item__text {
         word-break: break-word;
+
+        &.history-item__text_empty {
+            &::after {
+                content: 'не заполнено';
+                color:variables.$color-grey;
+            }
+        }
+
+        a {
+            color: variables.$color-blue-two;
+            font-weight: 400;
+            text-decoration: underline;
+    
+            &:hover {
+                text-decoration: none;
+            }
+        }
     }
 }
 .history-item__before {

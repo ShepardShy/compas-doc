@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            <div class="group-input__fields" v-else>
+            <div class="group-input__fields" ref="fieldsRef" v-else>
                     <AppInput
                         class="group-input__field"
                         v-for="field of props.item.subfields"
@@ -46,12 +46,14 @@
 <script setup>
     import './InputGroup.scss';
 
-    import { ref } from 'vue'
+    import { ref, watch } from 'vue'
 
     import AppInput from '@/components/AppInputs/Input/Input.vue';
     import FormItem from '@/components/AppForm/FormItem/FormItem.vue';
     import FormLabel from '@/components/AppForm/FormLabel/FormLabel.vue';
     import FormValue from '@/components/AppForm/FormValue/FormValue.vue';
+
+    const fieldsRef = ref(null)
 
     const props = defineProps({
         item: {
@@ -96,4 +98,10 @@
         findedField.value = data.value
         emit('changeValue', subfields.value)
     }
+
+    watch(() => props.item.focus, () => {
+        setTimeout(() => {
+            fieldsRef.value.querySelector('input').focus()
+        }, 10);
+    })
 </script>

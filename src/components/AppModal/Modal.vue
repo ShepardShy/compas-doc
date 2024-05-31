@@ -7,13 +7,15 @@
                 :style="`--modalOrder: ${50 * (index >= 3 ? 2 : index)}px; --index: ${index}`"
             >
                 <div class="modal__background"></div>
-                <div class="modal__close" :style="`--backgroundColor: ${item.color}`" @click="() => deletePage()">
+                <div class="modal__close" :style="`--backgroundColor: ${item.color}`" @click="() => modals.pop()">
                     <IconClose />
                     <span class="modal__close-text">
                         {{ item.title }}
                     </span>
                 </div>
-                <div class="modal__content"></div>
+                <div class="modal__content">
+                    Modal Content
+                </div>
             </div>
         </div>
     </div>
@@ -26,16 +28,19 @@
 
     import IconClose from '@/components/AppIcons/Close/Close.vue'
     import commonScripts from '@/commonScripts/commonScripts';
-    const modals = inject('modals')
+
     const parentPage = toRaw(window.location.href)
     
-    const router = useRouter();
     const modalRef = ref()
     let preventClick = ref(null)
     let mouseEventDown = ref(null)
+    let parentScroll = ref(0)
+
+    const modals = inject('modals')
 
     onMounted(() => {
         openModal()
+        parentScroll.value = window.scrollY
         document.body.classList.add('body_uncscroll')
         modalRef.value.addEventListener('mousedown', mouseDown)
         modalRef.value.addEventListener('mouseup', closeModal)
@@ -44,40 +49,53 @@
     onUnmounted(() => {
         document.body.classList.remove('body_uncscroll')
         window.history.pushState("", "Title", parentPage);
+
+        setTimeout(() => {
+            window.scrollBy(0, parentScroll.value)
+        }, 1);
     })
+
+    const savePage = (data, item) => {
+        let lastModal = modals.find(p => p.id == item.id)
+        lastModal.link = `/objects/${lastModal.slug}/${data.id}`
+        lastModal.isCreate = false
+
+        if (window.innerWidth <= 660) {
+            window.location.replace(lastModal.link)
+        }
+    }
 
     // Открытие нового модального окна
     const openModal = () => {
-        if (modals.value.length >= 11 || window.innerWidth <= 660) {
-            router.push({ path: modals.value[modals.value.length - 1].link });
-            window.location.replace(modals.value[modals.value.length - 1].link)
-            window.history.pushState("", "Title", modals.value[modals.value.length - 1].link);
-        } else {
-            window.history.pushState("", "Title", modals.value[modals.value.length - 1].link);
+        let lastModal = modals ? [modals.length - 1] : null
 
-            preventClick.value = true
-
-            setTimeout(() => {
-                preventClick.value = false
-                commonScripts.clearSelection()
-            }, 1000);
+        if (lastModal) {
+            if (modals.length >= 11 || window.innerWidth <= 660) {
+                window.location.replace(lastModal.link)
+                lastModal.isCreate ? window.history.pushState("", "Title", `/objects/${lastModal.slug}/0`) : window.history.pushState("", "Title", lastModal.link)
+            } else {
+                lastModal.isCreate ? window.history.pushState("", "Title", `/objects/${lastModal.slug}/0`) : window.history.pushState("", "Title", lastModal.link)
+                preventClick.value = true
+    
+                setTimeout(() => {
+                    preventClick.value = false
+                    commonScripts.clearSelection()
+                }, 1000);
+            }
         }
     }
 
     // Закрытие модального окна
     const closeModal = (event) => {
-        if (event.target.classList.contains('modal__background') && !preventClick.value && mouseEventDown.value.classList.contains('modal__background')) {
-            deletePage()
+        if (modals && modals.length > 0) {
+            if ([modals.length - 1].loaderState == 'actionLoad') {
+                return
+            }
         }
-    }
 
-    const deletePage = () => {
-        let activeModal = modals.value[modals.value.length - 1]
-            
-        if (activeModal.isCreate) {
-            // tableScripts.deleteRows([activeModal.id], activeModal.slug)
+        if (event.target.classList.contains('modal__background') && !preventClick.value && mouseEventDown.value.classList.contains('modal__background')) {
+            modals.value ? modals.pop() : null
         }
-        modals.value.pop()
     }
 
     // Опускание мыши
@@ -85,7 +103,7 @@
         mouseEventDown.value = event.target
     }
 
-    watch(() => modals.value, () => {
+    watch(() => modals, () => {
         openModal()
     }, {deep: true})
 </script>

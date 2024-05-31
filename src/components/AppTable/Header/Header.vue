@@ -225,7 +225,7 @@
                     }
                 })
 
-                event.dataTransfer.setDragImage(table, event.offsetX, event.OffsetY);
+                event.dataTransfer.setDragImage(table, event.offsetX, event.offsetY);
             }
         }
 
@@ -263,6 +263,7 @@
         }
     }
 
+    // Скролл таблицы по горизонтали
     const scrollTable = _.throttle(async function () {
         resizeTable.setStickyClass(tableRef.value)
     }, 10)

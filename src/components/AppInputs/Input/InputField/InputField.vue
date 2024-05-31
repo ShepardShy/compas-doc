@@ -6,6 +6,7 @@
         data-maska-tokens="A:[a-zA-Zа-яА-Я]|#:[0-9]"
         :data-maska="props.item.type == 'number' ? '#######################' : props.mask"
 		:type="'text'"
+        autocorrect="off"
 		:value="props.item.value"
 		:disabled="props.disabled"
 		:placeholder="props.item.placeholder"
@@ -16,6 +17,7 @@
     <div class="input__group" v-else-if="props.item.type == 'password'">
         <input
             ref="inputRef"
+            autocorrect="off"
             :type="passwordType"
             :value="props.item.value"
             :disabled="props.disabled"
@@ -28,7 +30,8 @@
 
     <input
         v-else
-		ref="inputRef"
+        autocorrect="off"
+        ref="inputRef"
 		:type="props.item.type"
 		:value="props.item.value"
 		:disabled="props.disabled"

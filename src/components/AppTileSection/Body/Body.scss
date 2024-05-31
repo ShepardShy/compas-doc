@@ -19,6 +19,18 @@
         flex-direction: column;
         @include mixins.sortableGhost();
     
+        &.tile-section__item_permanent {
+            .form-item__title {
+                color: variables.$color-grey;
+            }
+
+            .popup__option  {
+                .form-item__title {
+                    color: variables.$color-black;
+                }
+            }
+        }
+
         .tile-section__settings {
             top: 0px;
             opacity: 0;
@@ -89,14 +101,21 @@
             }
 
             &.form-item__value_empty {
-                color: variables.$color-subtext;
+                color: variables.$color-grey;
             }
+        }
+
+        .map {
+            background: variables.$color-pale-grey;
+            border: 1px solid variables.$color-light-grey;
+            border-radius: 10px;
+            padding: 15px;
         }
     }
 
     .address__wrapper {
         .__ymap {
-            max-height: 240px;
+            max-height: 350px;
             height: 65vh !important;
         }
 

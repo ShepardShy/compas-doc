@@ -79,8 +79,8 @@
             }
 
             // Обрезание середины текста в названии
-            if (name.length > 22) {
-                return `${name.substr(0,9)}...${name.substr(name.length - 7)}`
+            if (name.length > 28) {
+                return `${name.substr(0,15)}...${name.substr(name.length - 7)}`
             } else {
                 return name
             }
@@ -91,7 +91,7 @@
 
     // Провекра расширения файла и возврат нужной ссылкы
     const setHref = computed(() => {
-        return ['png', 'svg', 'jpeg', 'jpg', 'webp', 'pdf', 'gif', 'mp4', 'mp3'].includes(props.image.extension) ? props.image.file : props.image.url
+        return ['png', 'svg', 'heic', 'jpeg', 'jpg', 'webp', 'pdf', 'gif', 'mp4', 'mp3'].includes(props.image.extension) ? props.image.file : props.image.url
     })
 
     // Проверка блока на состояние перетаскивания

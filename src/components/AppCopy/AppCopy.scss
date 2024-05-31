@@ -6,9 +6,10 @@
 	position: relative;
 
 	.button-text__mirror {
-		position: absolute;
-		@include mixins.elemPositionOptions(0, 0);
-		@include mixins.userSelect($value: auto);
+		top: 0px;
+		left: 0px;
 		opacity: 0;
+		position: absolute;
+		@include mixins.userSelect($value: auto);
 	}
 }

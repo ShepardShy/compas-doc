@@ -6,7 +6,7 @@
         &.file-container_empty {
             &::after {
                 content: 'не заполнено';
-                color: variables.$color-subtext;
+                color: variables.$color-grey;
                 margin-bottom: auto;
             }
 
@@ -36,7 +36,7 @@
         .file-container__circle {
             display: grid;
             opacity: 0.6;
-            background-color: variables.$color-settings;
+            background-color: variables.$color-blue-grey;
             place-items: center;
             padding: 3px;
             color: variables.$color-white;
@@ -57,7 +57,7 @@
 
             &.sortable-ghost {
                 border: none;
-                outline: 2px dashed variables.$color-draggable;
+                outline: 2px dashed variables.$color-blue-grey;
             }
 
             &.fancybox-item {
@@ -65,7 +65,7 @@
                     border-radius: 5px;
                     background: variables.$color-white;
                     overflow: hidden;
-                    @include mixins.borderOptions(1px, solid, variables.$color-border, 5px);
+                    @include mixins.borderOptions(1px, solid, variables.$color-grey, 5px);
                     @include mixins.elemResolutionOptions(100px, 100px);
 
                     img {
@@ -75,7 +75,7 @@
 
                 .fancybox-item__title {
                     margin-top: 5px;
-                    color: variables.$color-subtext;
+                    color: variables.$color-grey;
                     @include mixins.elemResolutionOptions(100px, 100%);
                     @include mixins.textVerticalHidden();
                     display: none;

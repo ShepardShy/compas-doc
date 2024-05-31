@@ -192,7 +192,6 @@
                 request[1] = rangeEnd.value.split('.').reverse().join('-')
             }
 
-
             datepicker.value.closeMenu()
             setTimeout(() => {
                 datepicker.value.openMenu()
@@ -278,135 +277,8 @@
         }
     }
 
-    const categories = [
-    {
-        "id": 1,
-        "name": "Водитель34",
-        "deleted_at": null,
-        "choosed_at": null,
-        "user_id": 1,
-        "children": [
-            {
-                "id": 109,
-                "name": "Новая категория34",
-                "deleted_at": null,
-                "choosed_at": null,
-                "user_id": 1,
-                "children": [
-                    {
-                        "id": 127,
-                        "name": "Новая категория 35",
-                        "deleted_at": null,
-                        "choosed_at": null,
-                        "user_id": 1,
-                        "children": []
-                    },
-                    {
-                        "id": 128,
-                        "name": "Новая категория33",
-                        "deleted_at": null,
-                        "choosed_at": null,
-                        "user_id": 1,
-                        "children": []
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "id": 4,
-        "name": "Менеджер",
-        "deleted_at": null,
-        "choosed_at": null,
-        "user_id": 1,
-        "children": [
-            {
-                "id": 95,
-                "name": "Общение с клиентом",
-                "deleted_at": null,
-                "choosed_at": null,
-                "user_id": 1,
-                "children": []
-            },
-            {
-                "id": 97,
-                "name": "Работа с CRM",
-                "deleted_at": null,
-                "choosed_at": null,
-                "user_id": 1,
-                "children": []
-            },
-            {
-                "id": 98,
-                "name": "Доставка",
-                "deleted_at": null,
-                "choosed_at": null,
-                "user_id": 1,
-                "children": []
-            },
-            {
-                "id": 99,
-                "name": "Синхронизация с 1С",
-                "deleted_at": null,
-                "choosed_at": null,
-                "user_id": 1,
-                "children": []
-            }
-        ]
-    },
-    {
-        "id": 31,
-        "name": "Оператор отгрузки",
-        "deleted_at": null,
-        "choosed_at": null,
-        "user_id": 1,
-        "children": []
-    },
-    {
-        "id": 112,
-        "name": "Новая категория",
-        "deleted_at": null,
-        "choosed_at": null,
-        "user_id": 8,
-        "children": []
-    },
-    {
-        "id": 119,
-        "name": "ЧУДЕСА",
-        "deleted_at": null,
-        "choosed_at": null,
-        "user_id": 1,
-        "children": []
-    },
-    {
-        "id": null,
-        "name": "Все категории",
-        "is_permanent": true,
-        "children": []
-    }
-]
-
-    let data = ref([])
-
-    const updateCategories = (categories) => {
-        for (let category of categories) {
-            if (category.children.length > 0) {
-                updateCategories(category.children)
-            }
-
-            data.value.push({
-                label: category.name,
-                children: category.children,
-                value: category.id
-            })
-        }
-    }
-
-
     onMounted(() => {
         setValue()
-        updateCategories(categories)
-        console.log(data.value.reverse());
     })
 
     watch(() => props.item.value, () => {

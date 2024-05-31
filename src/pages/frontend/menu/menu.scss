@@ -5,3 +5,12 @@
     height: 100%;
     position: relative;
 }
+
+.component_menu {
+    .menu {
+        &.menu_desktop {
+            position: static;
+            height: 50vh;
+        }
+    }
+}

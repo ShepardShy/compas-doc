@@ -24,6 +24,7 @@
                             v-for="item in fields" 
                             class="table-mobile__field table__item" 
                             :class="!item.enabled ? 'table__item_hidden' : ''"
+                            :style="`--colorItem: ${item.color}`"
                             @click="(event) => doubleClick(event, row, item)" 
                         >
                             <AppCheckbox 
@@ -38,6 +39,14 @@
                                 }"
                                 :disabled="actionState == 'saving'"
                                 @changeValue="(data) => changeValue(row.id, data)"
+                            />
+                            <ButtonPayment 
+                                v-else-if="item.type == 'payment'"
+                                :item="row[item.key]"
+                                @click="callAction({
+                                    action: 'initPayment',
+                                    value: row[item.key]
+                                })"
                             />
                             <AppRelation 
                                 v-else-if="item.type == 'relation'"
@@ -57,6 +66,7 @@
                                 :isCanCreate="true"
                                 :isAnotherTitle="isDinamyc"
                                 :isMultiple="Boolean(item.is_plural)"
+                                :isCanEdit="Boolean(item.can_edit)"
                                 :isReadOnly="Boolean(item.read_only || !row.isEdit)"
                                 @changeValue="(data) => changeValue(row.id, data)"
                                 @openLink="(data) => callAction({action: 'openLink', value: {id: data.id, slug: item.related_table}})"
@@ -112,9 +122,13 @@
                                 v-else-if="item.type == 'actions'"
                                 :item="{
                                     title: 'Действие',
-                                    slug: row.isEdit ? 'edit' : 'view'
+                                    slug: row.isEdit ? 'edit' : props.actionType
                                 }"
                                 :disabled="!row.isChoose && actionState == 'saving'"
+                                :permissions="permissions"
+                                :userID="userID"
+                                :is_admin="is_admin"
+                                :relationID="row.user_id.value"
                                 @callAction="(data) => callAction({action: data.value, value: row})"
                             />
                             <AppStatus 
@@ -248,6 +262,7 @@
     import AppRelation from "@/components/AppSelects/Relation/Relation.vue"
     import IconDrag from '@/components/AppIcons/Drag/Drag.vue'
     import IconDelete from '@/components/AppIcons/Delete/Delete.vue'    
+    import ButtonPayment from '@/components/AppButton/ButtonPayment/ButtonPayment.vue';
 
     const fields = inject('fields')
     const bodyData = inject('bodyData')
@@ -259,6 +274,9 @@
     const skipChecking = inject('skipChecking')
     const isNumeric = inject('isNumeric')
     const isDinamyc = inject('isDinamyc')
+    const permissions = inject('permissions')
+    const is_admin = inject('is_admin')
+    const userID = inject('userID')
 
     let clickSetting = ref({
         id: -1,
@@ -277,13 +295,16 @@
             type: Boolean
         },
         loaderState: {
-            default: null,
-            type: String
+            default: null
         },
         isPermanentEdit: {
             default: false,
             type: Boolean
-        }
+        },
+        actionType: {
+            default: 'view',
+            type: String
+        },
     })
 
     const emit = defineEmits([

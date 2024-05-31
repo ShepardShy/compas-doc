@@ -58,12 +58,12 @@
     }
 
     &::-webkit-scrollbar-track {
-        background: variables.$color-light-grey;
+        background: transparent;
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: variables.$color-subtext;
-        @include borderOptions(2px, solid, variables.$color-border, 5px)
+        background-color: variables.$color-grey;
+        @include borderOptions(2px, solid, variables.$color-grey, 5px)
     }
 }
 
@@ -110,6 +110,7 @@
     -khtml-user-select: $value;
     -ms-user-select: $value;  
     user-select: $value;
+    -webkit-tap-highlight-color: transparent;
 }
 
 // Стили для перетаскиваемого элемента
@@ -118,7 +119,7 @@
         position: relative;
         z-index: 2000;
         background: #fbfcfd;
-        @include borderOptions(2px, dashed, variables.$color-draggable, 5px);
+        @include borderOptions(2px, dashed, variables.$color-blue-grey, 5px);
 
         & > * {
             visibility: hidden;
@@ -132,7 +133,7 @@
         .table__item {
             z-index: 2000;
             background: #fbfcfd;
-            @include borderOptions(2px, dashed, variables.$color-draggable, 0px);
+            @include borderOptions(2px, dashed, variables.$color-blue-grey, 0px);
             border-left: none;
             border-right: none;
     
@@ -141,16 +142,17 @@
             }
 
             &:first-child {
-                border-left: 2px dashed variables.$color-draggable;
+                border-left: 2px dashed variables.$color-blue-grey;
                 border-radius: 5px 0px 0px 5px;
             }
             &:last-child {
                 border-radius:  0px 5px 5px 0px;
-                border-right: 2px dashed variables.$color-draggable;
+                border-right: 2px dashed variables.$color-blue-grey;
             }
         }        
     }
 }
+
 
 // Наведение на блок
 @mixin hoverElem() {

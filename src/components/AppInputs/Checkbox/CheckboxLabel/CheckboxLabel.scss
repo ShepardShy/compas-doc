@@ -8,11 +8,4 @@
         font-size: variables.$font-size-default;
         @include mixins.userSelect($value: none);
     }
-
-    &.form-item__checkbox_disabled {
-        label, .form-item__title {
-            filter: opacity(0.6)
-
-        }
-    }
 }

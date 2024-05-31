@@ -44,16 +44,16 @@
     // Установка CSS-классов
     const setClasses = computed(() => {
         return [
-            [null, undefined].includes(props.value) || props.value == '' ? 'form-item__value_empty' : '',
+            [null, undefined].includes(props.value) || String(props.value) == '' ? 'form-item__value_empty' : '',
             props.isHTML ? 'form-item__value_html' : '',
-            props.isLink ? 'form-item__value_link' : '',
-            ![null, undefined].includes(props.substring) && props.substring != '' ? 'form-item__value_has-substring' : ''
+            ![null, undefined].includes(props.substring) && props.substring != '' ? 'form-item__value_substring' : '',
+            props.isLink && ![null, undefined].includes(props.link) && props.link != '' ? 'form-item__value_link' : ''
         ]
     })
 
     // Открытие ссылки в новой вкладке
     const openLink = () => {
-        if (![null, undefined].includes(props.link) && props.link != '') {
+        if (![null, undefined].includes(props.link)) {
             window.open(props.link, '_blank')
         }
     }

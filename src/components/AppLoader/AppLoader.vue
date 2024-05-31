@@ -1,11 +1,8 @@
 <template>
-    <div class="loader" ref="loaderRef"></div>
+    <div class="loader"></div>
 </template>
 
 <script setup>
     import './AppLoader.scss';
     
-    import { ref } from 'vue'
-
-    const loaderRef = ref(null)
 </script>

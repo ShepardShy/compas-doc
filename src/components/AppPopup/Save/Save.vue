@@ -27,7 +27,7 @@
 <script setup>
     import './Save.scss';
 
-    import { ref } from 'vue'
+    import { ref, onMounted, watch } from 'vue'
 
     import IconSave from '@/components/AppIcons/Save/Save.vue'
     import IconArrow from '@/components/AppIcons/Arrow/Arrow.vue'
@@ -63,6 +63,17 @@
         activeTab: null
     })
 
+    const props = defineProps({
+        is_admin: {
+            default: true,
+            type: Boolean
+        },
+        roles: {
+            default: [],
+            type: Array
+        }
+    })
+
     const emit = defineEmits([
         'saveSettings'
     ])
@@ -78,4 +89,34 @@
             }
         }, 10);
     }
+
+    onMounted(() => {
+        if (!props.is_admin) {
+            menu.value.saves.tabs = [
+                {
+                    tab: 'myself',
+                    key: 'myself',
+                    title: 'Применить для себя',
+                }
+            ]
+        }
+
+        menu.value.saves.options = props.roles
+    })
+
+    watch(() => props.roles, () => {
+        if (!props.is_admin) {
+            menu.value.saves.tabs = [
+                {
+                    tab: 'myself',
+                    key: 'myself',
+                    title: 'Применить для себя',
+                }
+            ]
+        }
+
+        menu.value.saves.options = props.roles
+    }, {
+        deep: true
+    })
 </script>

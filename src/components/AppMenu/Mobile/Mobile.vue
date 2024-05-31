@@ -26,7 +26,7 @@
                     Настройки
                 </NuxtLink>
                 <button
-                    class="menu__item menu__item_btn-logout"
+                    class="menu__item menu__button"
                     @click="logOut"
                 >
                     Выйти
@@ -46,7 +46,10 @@
                 <div 
                     class="menu__user menu-user">
                     <figure class='ibg menu-user__icon'>
-                        <img :src='user.avatar != undefined ? user.avatar.file : "/user/avatar.svg"' :alt="`${user.name} ${user.last_name}. Аватар`">
+                        <img v-if="user.avatar != undefined && user.avatar != ''" :src='user.avatar.file' :alt="`${user.name} ${user.last_name}. Аватар`">
+                        <figcaption v-else :style="`--backgroundColor: ${[null, undefined].includes(user.color) || user.color == '' ? '#a6b7d4' : user.color}`">
+                            {{ String(user.name).substring(0, 1) }}
+                        </figcaption>
                     </figure>
                     <div class="menu-user__title">
                         {{ user.name }} {{ user.last_name }}
@@ -60,6 +63,8 @@
 
 <script setup>
     import './Mobile.scss';
+
+    import {ref, inject, watch, onMounted} from 'vue'
 
     import IconArrow from '@/components/AppIcons/Arrow/Arrow.vue'
     import IconGamburger from '@/components/AppIcons/Gamburger/Gamburger.vue'
@@ -94,6 +99,12 @@
                 settingsMenu.value.activeTab = null
             }
             settingsMenu.value.isShow = state
+
+            if (state) {
+                document.body.classList.add('body_uncscroll')
+            } else {
+                document.body.classList.remove('body_uncscroll')
+            }
         }
 
         // Навигация по меню
@@ -103,6 +114,11 @@
             } else {
                 settingsMenu.value.activeTab = settingsMenu.value.tabs.find(tab => tab.tab == value) ?? null
             }
+        }
+
+        // Установка пользователя
+        const setUser = () => {
+            settingsMenu.value.tabs[1].title = user.value.name
         }
 
         switch (data.action) {
@@ -115,6 +131,12 @@
             case 'navigateMenu':
                 navigateMenu(data.value)
                 break;
+
+            // Установка пользователя
+            case 'setUser': 
+                setUser();
+                break;
+                
             default:
                 break;
         }
@@ -124,4 +146,12 @@
     const logOut = () => {
         window.location.href = '/auth'
     }
+
+    watch(() => user.value, () => {
+        callAction({action: 'setUser', value: null})
+    })
+
+    onMounted(() => {
+        callAction({action: 'setUser', value: null})
+    })
 </script>

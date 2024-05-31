@@ -1,5 +1,6 @@
 <template>
     <AppComponent 
+        class="component_menu"
         :component="AppMenu"
         :codeProps="menuProps"
         :codeEmits="menuEmits"

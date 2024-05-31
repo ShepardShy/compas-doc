@@ -2,7 +2,7 @@
     <td 
         ref="itemRef" 
         class="table__item"
-        :style="`--colorItem: ${props.item.color}; --defaultWidth: ${props.item.width};`"
+        :style="`--colorItem: ${Boolean(props.item.set_color) ? props.item.color : '#000'}; --defaultWidth: ${props.item.width};`"
         :data-key="props.item.key" 
         :class="[
             props.item.fixed ? 'table__item_fixed' : '', 
@@ -27,6 +27,15 @@
                     @clickOutside="() => callAction({action: 'openPopup', value: false})"
                 />
 
+                <ButtonPayment 
+                    v-else-if="props.item.type == 'payment'"
+                    :item="props.row[props.item.key]"
+                    @click="callAction({
+                        action: 'initPayment',
+                        value: props.row[props.item.key]
+                    })"
+                />
+
                 <AppRelation 
                     v-else-if="props.item.type == 'relation'"
                     :item="{
@@ -36,8 +45,8 @@
                         key: props.item.key,
                         title: props.item.title,
                         value: props.row[props.item.key],
-                        anotherKey: isDinamyc ? 'product_name' : null,
-                        anotherTitle: isDinamyc ? props.row.product_name : null,
+                        anotherKey: props.item.isAnotherTitle ? 'product_name' : null,
+                        anotherTitle: props.item.isAnotherTitle ? props.row.product_name : null,
                         related_table: props.item.related_table,
                         required: Boolean(props.item.required),
                         options: ['status', 'relation'].includes(props.item.type) ? props.item.options : null,
@@ -45,6 +54,7 @@
                     }"
                     :isCanCreate="true"
                     :isAnotherTitle="isDinamyc"
+                    :isCanEdit="Boolean(props.item.can_edit)"
                     :isMultiple="Boolean(props.item.is_plural)"
                     :isReadOnly="Boolean(props.item.read_only || (!props.row.isEdit && !props.isPermanentEdit))"
                     @click="() => callAction({action: 'openPopup', value: true})"
@@ -68,6 +78,7 @@
                         external_link: ![null, undefined].includes(props.row[props.item.key]) && props.row[props.item.key] != '' ? props.row[props.item.key].external_link : null,
                         value: [null, undefined].includes(props.row[props.item.key]) ? null : typeof props.row[props.item.key] == 'object' ? String(props.row[props.item.key].value) : String(props.row[props.item.key]),
                     }"
+                    :class="Boolean(props.item.read_only || (!props.row.isEdit && !props.isPermanentEdit)) ? 'table-item__content_read-only' : ''"
                     :disabled="false"
                     :isUseEnter="false"
                     :isTableItem="true"
@@ -98,6 +109,10 @@
                         slug: props.row.isEdit ? 'edit' : props.actionType
                     }"
                     :disabled="!props.row.isChoose && actionState == 'saving'"
+                    :permissions="permissions"
+                    :userID="userID"
+                    :is_admin="is_admin"
+                    :relationID="props.row.user_id ? props.row.user_id.value : null"
                     @clickOutside="() => callAction({action: 'openPopup', value: false})"
                     @callAction="(data) => callAction({action: data.value, value: row})"
                 />
@@ -191,7 +206,13 @@
                 />
 
                 <div class="table-item__icon" v-else-if="props.item.type == 'iconDrag'">
-                    <IconDrag />
+                    <IconDrag 
+                        :draggable="true"
+                        @dragover.prevent
+                        @dragenter.prevent
+                        @dragstart="(event) => $emit('dragRowStart', event)"
+                        @dragend="(event) => $emit('dragRowEnd', event)"
+                    />
                     <FormValue 
                         v-show="isNumeric"
                         :isHTML="false"
@@ -225,6 +246,7 @@
     import AppTextarea from "@/components/AppInputs/Textarea/Textarea.vue"
     import AppRelation from "@/components/AppSelects/Relation/Relation.vue"
     import AppMap from '@/components/AppInputs/Map/Map.vue';
+    import ButtonPayment from '@/components/AppButton/ButtonPayment/ButtonPayment.vue';
 
     const itemRef = ref(null)
     const bodyData = inject('bodyData')
@@ -234,6 +256,9 @@
     const backupValues = inject('backupValues')
     const skipChecking = inject('skipChecking')
     const backupRows = inject('backupRows')
+    const permissions = inject('permissions')
+    const is_admin = inject('is_admin')
+    const userID = inject('userID')
 
     let clickSetting = ref({
         id: -1,
@@ -303,10 +328,15 @@
 
         if (props.isPermanentEdit) {
             skipChecking.value = true
-
+            
             if (actionState.value == null) {
                 backupRows.value =  JSON.parse(JSON.stringify(bodyData.value))
                 actionState.value = props.isTrash ? 'restoring' : 'saving'
+                console.log(bodyData.value);
+                emit('callAction', {
+                    action: "changeStateTab",
+                    value: false
+                })
             }
         }
 
@@ -321,10 +351,12 @@
         } 
 
         if (isDinamyc && data.key == 'product_id') {
+            console.log(data.value.selectedOption);
             findedRow.id = data.value.selectedOption ? data.value.selectedOption.id : null
             findedRow.product_price = data.value.selectedOption ? data.value.selectedOption.price : null
             findedRow.product_weight = data.value.selectedOption ? data.value.selectedOption.weight : null
             findedRow.product_count = 1
+            findedRow.quantity = data.value.selectedOption ? data.value.selectedOption.quantity ?? 0 : 0
             findedRow.product_name = data.value.selectedOption.text
 
             if (data.value.value != null) {

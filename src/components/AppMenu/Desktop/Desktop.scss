@@ -61,11 +61,18 @@
             cursor: pointer;
             line-height: 120%;
             position: relative;
-            padding: 10px 30px 10px 25px;
+            padding: 0px 30px 0px 25px;
             color: variables.$color-white;
             @include mixins.sortableGhost();
             @include mixins.userSelect(none);
+            font-size: variables.$font-size-default;
             @include mixins.flexBlock($vertical: center, $gap: 0px);
+
+            a {
+                color: variables.$color-white;
+                padding: 10px 0px;
+                width: 100%;
+            }
 
             &.sortable-fallback {
                 background: variables.$color-dark;
@@ -82,9 +89,17 @@
                     opacity: 1;
                 }
             }
+
+            &.menu__user {
+                padding: 10px 30px 10px 25px;
+            }
     
             &.menu__item_active {
                 color: variables.$color-orange;
+
+                a {
+                    color: variables.$color-orange;
+                }
     
                 &::before { 
                     content: '';
@@ -218,7 +233,7 @@
         
         .menu-user {
             &.menu__item {
-                border-top: 1px solid variables.$color-subtext;
+                border-top: 1px solid variables.$color-grey;
                 @include mixins.flexBlock($vertical: center, $gap: 10px);
             }
             
@@ -231,6 +246,15 @@
             overflow: hidden;
             border-radius: 50%;
             @include mixins.elemResolutionOptions(30px, 30px);
+
+            figcaption {
+                background: var(--backgroundColor);
+                width: 100%;
+                height: 100%;
+                display: grid;
+                place-items: center;
+                color: variables.$color-white;
+            }
         }
         
         .menu__settings {
@@ -270,7 +294,7 @@
                 &[open] {
                     svg {
                         * {
-                            fill: variables.$color-settings;
+                            fill: variables.$color-blue-grey;
                         }
                     }
                 }
@@ -281,7 +305,7 @@
                 padding: 0px 10px;
         
                 .menu__item-subtitle, &::after, &::before {
-                    background-color: variables.$color-settings;
+                    background-color: variables.$color-blue-grey;
                 }
             }
 

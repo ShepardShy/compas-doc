@@ -13,7 +13,7 @@
             :key="props.item.key"
             :disabled="props.isOneFile"
             handle=".fancybox-item__link"
-            draggable=".file-list__item:not(.file-list__item_undraggable)"
+            :draggable="props.isDraggable ? '.file-list__item:not(.file-list__item_undraggable)' : '.file-list__item-none'"
             @end="(event) => callAction(event)"
         >
             <template #item="{ element: image }" >
@@ -93,6 +93,14 @@
         isIcon: {
             default: false,
             type: Boolean
+        },
+        isDraggable: {
+            default: true,
+            type: Boolean
+        },
+        pageId: {
+            default: null,
+            type: Boolean
         }
     })
 
@@ -122,7 +130,7 @@
 
     // Вызов деиствий и изменение значений
     const callAction = (data) => {
-        const supportedExtensions = ['png', 'svg', 'jpeg', 'jpg', 'webp', 'pdf', 'gif', 'mp4', 'xlsx', 'xls', 'mp3', 'doc', 'docx', 'txt', 'pptx'];
+        const supportedExtensions = ['png', 'heic', 'svg', 'jpeg', 'jpg', 'webp', 'pdf', 'gif', 'mp4', 'xlsx', 'xls', 'mp3', 'doc', 'docx', 'txt', 'pptx'];
 
         // Скачивание файла
         const downloadFile = async () => {
@@ -215,8 +223,8 @@
                         }
                     };
 
-                    ajax.open('POST', 'https://opt6.compas.pro/api/files/store', true);
-
+                    ajax.open('POST', `https://opt6.compas.pro/api/files/store?field_id=${props.item.id}&page_id=${props.pageId}`, true);
+                    // ${userStore.userToken}
                     ajax.setRequestHeader("Authorization", `Bearer `);
                     ajax.send(data);
                 }

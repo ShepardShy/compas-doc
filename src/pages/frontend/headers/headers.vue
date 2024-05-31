@@ -15,6 +15,10 @@
             value: 'Редактируемый заголовок 1',
             key: 'h1'
         }"
+        :isCanEdit="true"
+        :isRestore="false"
+        :isCreate="false"
+        :loaderState="null"
         @callAction="(data) => callAction(data)"
     />
 

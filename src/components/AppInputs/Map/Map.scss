@@ -2,5 +2,8 @@
 @use '@/assets/mixins' as mixins;
 
 .yandex-container {
-    min-height: 50vh;
+    border-radius: 5px;
+    overflow: hidden;
+    height: 350px;
+    width: 100%;
 }

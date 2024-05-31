@@ -6,11 +6,11 @@
     cursor: pointer;
     @include mixins.gridCenter();
     @include mixins.userSelect($value: none);
-    @include mixins.borderOptions(1px, solid, variables.$color-border, 0px);
+    @include mixins.borderOptions(1px, solid, variables.$color-grey, 0px);
     @include mixins.elemResolutionOptions(37px, 31px);
     
     &:first-child {
-        @include mixins.borderOptions(1px, solid, variables.$color-border, 5px 0px 0px 5px);
+        @include mixins.borderOptions(1px, solid, variables.$color-grey, 5px 0px 0px 5px);
     }
 
     &:last-child {
@@ -50,7 +50,7 @@
         grid-column: var(--paginationColumnPrev)/var(--paginationColumnNext);
 
         &:hover {
-            color: variables.$color-blue-two;
+            color: variables.$color-active;
         }
     }
 }

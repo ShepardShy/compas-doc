@@ -11,7 +11,7 @@
             position: absolute;
             display: grid;
             place-items: center;
-            color: variables.$color-empty;
+            color: variables.$color-blue-grey;
             @include mixins.elemPositionOptions(0px, 0px);
             @include mixins.elemResolutionOptions(100%, 100%);
         }
@@ -98,6 +98,13 @@
     
     .form-item__title {
         width: max-content;
+    }
+
+    .form-item__textarea {
+        .form-item__value_substring {
+            display: inline;
+            color: var(--colorItem);
+        }
     }
 
     .file {

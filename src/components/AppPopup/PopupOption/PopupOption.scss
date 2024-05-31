@@ -27,6 +27,10 @@
     &.popup__option_disabled {
         filter: opacity(0.8);
         cursor: default;
+        
+        .popup-option__text {
+            filter: opacity(0.5);
+        }
     }
 
     &.popup-option__sublink {
@@ -53,10 +57,10 @@
     }
 
     &.popup__option_create {
-        color: variables.$color-settings-text;
+        color: variables.$color-blue-grey;
 
         &:hover {
-            color: variables.$color-blue-two;
+            color: variables.$color-active;
         }
     }
 
@@ -68,7 +72,7 @@
     
         .popup-option__substring {
             white-space: nowrap;
-            color: variables.$color-subtext;
+            color: variables.$color-grey;
         }
     
         .popup-option__text {
@@ -96,7 +100,7 @@
     }
 
     &.popup__option_empty {
-        color: variables.$color-empty;
+        color: variables.$color-blue-grey;
 
         &:hover {
             background: transparent;
@@ -111,7 +115,7 @@
                 background: transparent;
 
                 .icon__draggable {
-                    @include mixins.setSVGColor(variables.$color-draggable)
+                    @include mixins.setSVGColor(variables.$color-blue-grey)
                 }
             }
         }
@@ -121,11 +125,11 @@
         padding: 10px;
 
         .icon__draggable {
-            position: static;
-            @include mixins.setSVGColor(variables.$color-draggable);
+            position: relative;
+            @include mixins.setSVGColor(variables.$color-blue-grey);
 
             &:hover {
-                @include mixins.setSVGColor(variables.$color-blue-two);
+                @include mixins.setSVGColor(variables.$color-active);
             }
         }
 

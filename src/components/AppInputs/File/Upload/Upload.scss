@@ -4,7 +4,7 @@
 .file-upload {
     position: relative;
     @include mixins.hoverElem();
-    @include mixins.borderOptions(2px, dashed, variables.$color-draggable, 6px);
+    @include mixins.borderOptions(2px, dashed, variables.$color-blue-grey, 6px);
     @include mixins.elemResolutionOptions(100px, 100px);
     @include mixins.flexBlock($vertical: center, $horizontal: center, $gap: 10px);
     flex-direction: column;
@@ -78,7 +78,7 @@
 
     .file-upload__button-title {
         text-align: center;
-        color: variables.$color-subtext;
+        color: variables.$color-grey;
         padding: 0 10px;
         @include mixins.textVerticalHidden()
     }
@@ -87,7 +87,7 @@
 
 .file-upload:focus, .file-upload:hover, .file-upload_dragover {
     background: transparent;
-    border: 2px dashed variables.$color-blue-two;
+    border: 2px dashed variables.$color-active;
 
     .file-upload__button-title {
         color: variables.$color-black;
@@ -95,7 +95,7 @@
 
     svg {
         * {
-            fill: variables.$color-blue-two;
+            fill: variables.$color-active;
         }
     }
 }

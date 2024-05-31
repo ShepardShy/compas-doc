@@ -6,6 +6,7 @@
         :isReadOnly="props.isReadOnly"
         :isCanCreate="props.isCanCreate" 
         :isShowId="true"
+        :loaderStatus="loaderStatus"
         :anotherTitle="props.item.anotherTitle"
         :isLink="![null, undefined].includes(activeOption.id)"
         :class="[[null, undefined].includes(activeOption.id) ? 'relation__item_empty' : '', !props.isHaveLink ? 'relation__item_disabled' : '']"
@@ -48,6 +49,7 @@
 
     let activeOption = ref(null)
     let localItem = ref(null)
+    const loaderStatus = ref(false)
 
     const nullOption = {
         id: null,
@@ -145,12 +147,19 @@
 
         // Поиск опций
         const searchOptions = async (value) => {
-            // let request = await commonScripts.getInfoAutocomplete(value.value.toLowerCase(), props.fieldId)
-            // localItem.value.options = request
+            try {
+                loaderStatus.value = true
+                let request = await commonScripts.getInfoAutocomplete(value.value.toLowerCase(), props.fieldId)
+                localItem.value.options = request
+            } catch (error) {   
+                console.log(error);
+            } finally {
+                loaderStatus.value = false
+            }
 
-            // if (props.isAnotherTitle) {
-            //     emit('callAction', {action: 'changeAnotherTitle', value: {key: props.item.anotherKey, value: value.value}})
-            // }
+            if (props.isAnotherTitle) {
+                emit('callAction', {action: 'changeAnotherTitle', value: {key: props.item.anotherKey, value: value.value}})
+            }
         }
 
         // Открытие ссылки

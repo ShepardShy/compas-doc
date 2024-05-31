@@ -32,7 +32,7 @@
                             value: settingsTab.has_roles_read,
                             isHTML: false,
                             required: false,
-                            title: 'Ограничить редактирование поля',
+                            title: 'Ограничить видимость раздела',
                             key: 'has_roles_read'
                         }"
                         :disabled="false"

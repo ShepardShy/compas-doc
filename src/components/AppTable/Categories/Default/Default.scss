@@ -4,6 +4,10 @@
 .table-categories__list {
 	display: flex;
 	flex-direction: column-reverse;
+
+	&.table-categories__list_roles {
+		flex-direction: column;
+	}
 }
 
 .table-categories__details {
@@ -14,7 +18,7 @@
 
 				svg {
 					* {
-						fill:variables.$color-blue-two;
+						fill:variables.$color-active;
 					}
 				}
 			}
@@ -44,7 +48,7 @@
 	.icon__triangle {
 		svg {
 			* {
-				fill:variables.$color-settings;
+				fill:variables.$color-blue-grey;
 			}
 		}
 	}

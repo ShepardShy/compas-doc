@@ -6,6 +6,7 @@
         :checked="props.item.value"
         :disabled="props.disabled"
         :id="`checkbox_${props.item.id}`"
+        @change="() => props.changeValueLabel ? null : $emit('changeValue', {id: props.item.id, value: !props.item.value})"
     />
 
     <label :for="`checkbox_${props.item.id}`">
@@ -28,6 +29,10 @@
         },
         disabled: {
             default: false,
+            type: Boolean
+        }, 
+        changeValueLabel: {
+            default: true,
             type: Boolean
         }
     })

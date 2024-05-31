@@ -27,7 +27,7 @@
         "type": "Boolean"
     },
     "isReadOnly": {
-        "default": true,
+        "default": false,
         "type": "Boolean"
     },
     "isLink": {

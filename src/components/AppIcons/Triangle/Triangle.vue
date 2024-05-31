@@ -7,4 +7,5 @@
 
 <script setup>
     import './Triangle.scss';
+    
 </script>

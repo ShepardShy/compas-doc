@@ -1,14 +1,16 @@
 <template>
-    <AppWarning class="warning_settings" @closeModal="() => showWarning(false)" :isShow="isShow.state">
+    <AppWarning ref="warningRef" class="warning_settings" @closeModal="() => showWarning(false)" :isShow="isShow.state">
         <template #title>
             Настройки поля
         </template>
 
         <template #body>
-            <OptionsComponent />
+            <OptionsComponent 
+                :sections="props.sections"
+            />
 
             <div class="warning__actions">
-                <AppButton class="button_blue" @click="() => saveSettings()">
+                <AppButton class="button_blue" :disabledOption="props.loaderState == 'updateField' || props.loaderState == 'createField'" :class="props.loaderState == 'updateField' || props.loaderState == 'createField'  ? 'button_loading' : ''" @click="() => saveSettings()">
                     Сохранить
                 </AppButton>
                 <AppButton @click="() => showWarning(false)">
@@ -30,10 +32,12 @@
 
     const changedKeys = ref({})
     
+    const warningRef = ref(null)
     const isShow = inject('isShow')
     const edittingField = inject('edittingField')
     
     provide('changedKeys', changedKeys)
+    provide('warningRef', warningRef)
 
     const emit = defineEmits([
         'callAction'
@@ -59,4 +63,15 @@
             })
         }
     }
+
+    const props = defineProps({
+        loaderState: {
+            default: null,
+            type: String
+        },
+        sections: {
+            default: [],
+            type: Array
+        }
+    })
 </script>

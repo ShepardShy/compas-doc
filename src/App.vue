@@ -7,7 +7,7 @@
           @changeLink="(link) => changeLink(link)"
         />
       </aside>
-      <AppMain 
+      <MainTemplate 
         :activeLink="activeLink"
       />
     </div>
@@ -20,8 +20,8 @@
 
   import { ref } from 'vue'
 
-  import DocMenu from './components/DocMenu/DocMenu.vue';
-  import AppMain from './components/AppMain/AppMain.vue';
+  import DocMenu from './components/AppTemplates/DocMenu/DocMenu.vue';
+  import MainTemplate from './components/AppTemplates/Main/Main.vue';
 
   let activeLink = ref({});
 

@@ -8,7 +8,7 @@
             v-show="props.isShowLabel && props.item.title != null && props.item.title != ''"
             :title="props.item.title"
         />
-
+        
         <MapField 
             :item="props.item"
             :isShowMap="props.isShowMap"

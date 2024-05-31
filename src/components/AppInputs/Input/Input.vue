@@ -13,7 +13,7 @@
             v-if="props.isReadOnly"
             :isHTML="false"
             :isLink="props.isLink"
-            :value="props.item.value"
+            :value="props.item.type == 'password' ? '**********' : props.item.value"
             :link="props.item.external_link"
             :substring="props.item.substring"
             @click="() => props.isLink ? $emit('openLink', props.item) : ''"

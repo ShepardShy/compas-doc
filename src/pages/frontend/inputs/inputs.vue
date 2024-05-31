@@ -7,15 +7,15 @@
         :codeEmits="DateEmits"
         @changeValue="(data) => changeValue(data)"
     />
-    <!-- <AppComponent
+    <AppComponent
         :title="'Стандартный инпут'"
         :component="AppInput"
         :codeProps="InputProps"
         :codeEmits="InputEmits"
         @changeValue="(data) => changeValue(data)"
-    /> -->
+    />
 
-    <!-- <AppComponent 
+    <AppComponent 
         :title="'Чекбокс'"
         :component="AppCheckbox"
         :codeProps="checkboxProps"
@@ -46,7 +46,7 @@
         :codeProps="inputGroupProps"
         :codeEmits="inputGroupEmits"
         @changeValue="(data) => changeValue(data)"
-    /> -->
+    />
 </template>
 
 <script setup>

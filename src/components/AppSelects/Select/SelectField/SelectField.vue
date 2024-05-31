@@ -20,7 +20,7 @@
         :isCanSelect="true"
         :class="props.isMultiple ? 'select__popup_multiply' : ''"
         :isReadOnly="props.isReadOnly"
-        @click="(event) =>  props.isReadOnly ? event.preventDefault() : callAction({action: 'showContent', value: true})"
+        @click="(event) =>  callAction({action: 'initShowContent', event: event})"
         @clickOutside="() => emit('clickOutside', true)"
     >
         <template #summary> 
@@ -156,16 +156,29 @@
     const callAction = async (data) => {
         // Открытие/скрытие всплывающего окна
         const showContent = (state) => {
-            if (state) {
-                setTimeout(() => {
+            setTimeout(() => {
+                if (state) {
                     if (props.isMultiple) {
                         mirrorRef.value.focus()
                     } else {
-                        inputRef.value.inputRef.inputRef.focus()
+                        if (popupRef.value.popupRef.hasAttribute('open')) {
+                            inputRef.value.inputRef.inputRef.focus()
+                        } else {
+                            inputRef.value.inputRef.inputRef.blur()
+                        }
                     }
-                }, 10);
+                } else {
+                    popupRef.value.popupRef.removeAttribute('open')
+                    inputRef.value.inputRef.inputRef.blur()
+                }    
+            }, 10);
+        }
+
+        const initShowContent = (event) => {
+            if (props.isReadOnly) {
+                event.preventDefault()
             } else {
-                popupRef.value.popupRef.removeAttribute('open')
+                showContent(true)
             }
         }
 
@@ -191,8 +204,8 @@
 
             // Нахождение выбранной опции
             const findOption = (value) => {
-                let findedOption = options.value == null ? null : options.value.find(option => option.value == value)
-                if (Array.isArray(value) || [null, undefined].includes(findedOption)) {
+                let findedOption = options.value == null ? null : options.value.find(option => option.value == (value == null ? null : String(value)))
+                if ([null, undefined].includes(findedOption)) {
                     return nullOption 
                 } else {
                     return findedOption
@@ -215,7 +228,7 @@
         // Поиск опций
         const searchOptions = (value) => {
             search.value = value
-            options.value = backupOptions.value.filter(option => option.label.toLowerCase().includes(search.value.toLowerCase()))
+            options.value = backupOptions.value.filter(option => String(option.label).toLowerCase().includes(String(search.value).toLowerCase()))
 
             if (!popupRef.value.popupRef.hasAttribute('open')) {
                 popupRef.value.popupRef.setAttribute('open', true)
@@ -248,12 +261,14 @@
                         value: multiplyValues.value
                     })
                 } else {
-                    showContent(false)
-
                     emit('changeValue', {
                         key: props.item.key,
                         value: value
                     })
+
+                    setTimeout(() => {
+                        showContent(false)
+                    }, 10);
                 }
 
                 setActiveOptions(value)
@@ -287,6 +302,9 @@
                 await getOptions()
                 break;
 
+            case 'initShowContent':
+                initShowContent(data.event)
+                break;
             default:
                 break;
         }
@@ -346,10 +364,14 @@
     watch(() => props.item.focus, () => {
         setTimeout(() => {
             if (props.item.focus) {
+                inputRef.value.inputRef.inputRef.focus()
                 popupRef.value.popupRef.setAttribute('open', true)
-                PopupScripts.setDropdownPosition(popupRef.value.popupRef)
+
+                if (props.isFiltered) {
+                    PopupScripts.setDropdownPosition(popupRef.value.popupRef)
+                }
             }
         }, 10);
-    })
+    },)
 
 </script>

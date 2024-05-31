@@ -1,5 +1,5 @@
 <template>
-    <th class="table__item table-item" ref="tableItemRef">
+    <th class="table__item table-item" ref="tableItemRef" :class="isCanUseHeader ? '' : 'table__item_disabled'">
 
         <div class="table-item__content" v-if="props.item.key == 'isChoose'">
             <AppCheckbox 
@@ -26,14 +26,14 @@
                 @changeValue="(data) => selectAllRows(data)"
             />
             
-            <!-- <div 
+            <div 
                 class="table-item__drag-area"
                 :draggable="true"
                 @dragover.prevent
                 @dragenter.prevent
                 @dragstart="(event) => $emit('dragStart', event)"
                 @dragend="(event) => $emit('dragEnd', event)"
-            ></div> -->
+            ></div>
             <div class="table-item__border"></div>
         </div>
 
@@ -43,14 +43,14 @@
             </span>
             <IconSort v-if="sortItem.key == props.item.key" :class="sortItem.order == 'asc' ? 'icon__sort_up' : ''"/>
 
-            <!-- <div 
+            <div 
                 class="table-item__drag-area"
                 :draggable="props.headerRef != null && !props.headerRef.parentNode.classList.contains('table_resizing') && tableItemRef != null && !tableItemRef.classList.contains('table__item_sticky')"
                 @dragover.prevent
                 @dragenter.prevent
                 @dragstart="(event) => $emit('dragStart', event)"
                 @dragend="(event) => $emit('dragEnd', event)"
-            ></div> -->
+            ></div>
 
             <div class="table-item__border"></div>
         </div>
@@ -71,6 +71,8 @@
     const selectAll = inject('selectAll')
     const footerData = inject('footerData')
     const actionState = inject('actionState')
+    const isCanUseHeader = inject('isCanUseHeader')
+    const isCanSort = inject('isCanSort')
 
     let clickSetting = ref({
         id: -1,
@@ -117,7 +119,7 @@
             clickSetting.value.clicks = 0
             }, clickSetting.value.delay);
         } else {
-            if ((props.item.key != 'isChoose') && (props.item.key != 'actions')) {
+            if (isCanSort && (props.item.key != 'isChoose') && (props.item.key != 'actions')) {
                 sortItem.value = {
                     key: props.item.key,
                     order: sortItem.value.key == props.item.key ? (sortItem.value.order == 'desc' ? 'asc' : 'desc') : 'desc'

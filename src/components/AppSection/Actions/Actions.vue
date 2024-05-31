@@ -1,17 +1,21 @@
 <template>
-    <div class="actions" v-if="actionState != null">
+    <div class="actions" v-if="props.actionState != null || props.loaderState == 'actionLoad'">
         <ButtonsEdit 
-            v-if="actionState == 'editting'"
+            v-if="props.actionState == 'editting'"
+            :is_admin="props.is_admin"
+            :permissions="props.permissions"
             @callAction="(data) => emit('callAction', data)"
         />
 
         <ButtonsSave 
-            v-else-if="actionState == 'saving'"
+            v-else-if="props.actionState == 'saving' || props.loaderState == 'actionLoad'"
+            :loaderState="props.loaderState"
             @callAction="(data) => emit('callAction', data)"
         />
 
         <ButtonsRestore 
-            v-else-if="actionState == 'restoring'"
+            v-else-if="props.actionState == 'restoring' || props.loaderState == 'actionLoad'"
+            :loaderState="props.loaderState"
             @callAction="(data) => emit('callAction', data)"
         />
     </div>
@@ -32,6 +36,18 @@
         actionState: {
             default: null,
             type: String
+        },
+        loaderState: {
+            default: null,
+            type: String
+        },
+        is_admin: {
+            default: false,
+            type: Boolean
+        },
+        permissions: {
+            default: {},
+            type: Object
         }
     })
 </script>

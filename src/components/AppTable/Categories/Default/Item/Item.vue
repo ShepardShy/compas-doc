@@ -10,11 +10,11 @@
             @callAction="(data) => emit('callAction', data)"
         />
     </div>
-    <details class="table-categories__details" v-else>
-        <summary class="table-categories__header" :style="`--itemIndex: ${props.index}`" :class="props.item.id == props.activeCategory ? 'table-categories__header_active' : ''">
+    <details class="table-categories__details" ref="detailsRef" v-else>
+        <summary class="table-categories__header" @click="(event) => showSummary(event)" :style="`--itemIndex: ${props.index}`" :class="props.item.id == props.activeCategory ? 'table-categories__header_active' : ''">
             <div class="table-categories__title table-categories__title_summary">
                 <IconTriangle />
-                <span class="table-categories__title-text" @click="() => emit('callAction', {action: 'chooseCategory', value: props.item.id})">
+                <span class="table-categories__title-text" @click="() => props.item.id != props.activeCategory ? emit('callAction', {action: 'chooseCategory', value: props.item.id}) : ''">
                     {{ props.item.name }}
                 </span>
             </div>
@@ -47,6 +47,8 @@
     import ItemDetails from '../Details/Details.vue'
     import CategoryItem from "./ItemCopy/ItemCopy.vue";
 
+    const detailsRef = ref(null)
+
     const props = defineProps({
         item: {
             default: {
@@ -68,6 +70,12 @@
             type: String
         }
     })
+
+    const showSummary = (event) => {
+        if (event.target.closest('svg') == null && detailsRef.value.hasAttribute('open')) {
+            event.preventDefault()
+        }
+    }
 
     const emit = defineEmits([
         'callAction'

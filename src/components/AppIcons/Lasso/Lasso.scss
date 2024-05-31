@@ -3,7 +3,7 @@
 
 .icon__lasso {
     @include mixins.elemResolutionOptions(15px, 15px);
-    fill: variables.$color-settings;
+    fill: variables.$color-blue-grey;
     
     svg {
         @include mixins.elemResolutionOptions(15px, 15px);
@@ -11,10 +11,10 @@
 
     &:hover {
         cursor: pointer;
-        fill: variables.$color-blue-two
+        fill: variables.$color-active
     }
 }
 
 .icon__lasso_active {
-    fill: variables.$color-blue-two
+    fill: variables.$color-active
 }

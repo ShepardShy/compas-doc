@@ -6,7 +6,7 @@
         min-width: 15px;
         pointer-events: none;
         @include mixins.gridCenter();
-        @include mixins.borderOptions(1px, solid, variables.$color-border, 3px);
+        @include mixins.borderOptions(1px, solid, variables.$color-grey, 3px);
         @include mixins.elemResolutionOptions(15px, 15px);
 
         svg {
